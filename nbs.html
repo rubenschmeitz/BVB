@@ -70,13 +70,18 @@
                     <p class="site-tagline">Bonsai uit het zuiden</p>
                 </div>
             </div>
-            <nav class="main-nav">
+            <nav class="main-nav" id="main-nav">
                 <a href="index.html">Home</a>
                 <a href="nbs.html" class="active">NBS 2026</a>
                 <a href="galerij.html">Galerij</a>
                 <a href="agenda.html">Agenda</a>
                 <a href="contact.html">Contact & Locatie</a>
             </nav>
+            <div class="mobile-toggle" id="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </header>
 
@@ -171,5 +176,14 @@
         </div>
     </footer>
 
+    <script>
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mainNav = document.getElementById('main-nav');
+
+        mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('active');
+            mainNav.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
