@@ -302,6 +302,122 @@ a:hover {
     object-fit: cover;
 }
 
+/* Gallery Specific Styles */
+.gallery-section {
+    padding: 4rem 2rem;
+    background-color: var(--color-white);
+    border-radius: 20px;
+    box-shadow: inset 0 0 50px rgba(156, 169, 153, 0.1);
+    margin-bottom: 4rem;
+}
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.gallery-header h2 {
+    font-size: 2.5rem;
+    color: var(--color-bark);
+    margin-bottom: 1rem;
+}
+
+.gallery-header p {
+    color: var(--color-sage);
+    font-style: italic;
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+}
+
+.tree-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(156, 169, 153, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.tree-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(122, 91, 73, 0.15);
+    border-color: var(--color-bark);
+}
+
+.tree-card img {
+    width: 100%;
+    height: 450px;
+    object-fit: contain;
+    border-radius: 12px;
+    margin-bottom: 0;
+    background-color: #ffffff;
+    transition: transform 0.5s ease;
+}
+
+.tree-card:hover img {
+    transform: scale(1.05);
+}
+
+.tree-info {
+    text-align: center;
+    background: var(--color-sand);
+    padding: 1.8rem;
+    width: calc(100% + 3rem);
+    margin: 1.5rem -1.5rem -1.5rem -1.5rem;
+    border-top: 2px solid var(--color-sage);
+}
+
+.tree-info h5 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.4rem;
+    color: var(--color-charcoal);
+    margin: 0;
+    font-weight: 600;
+}
+
+.tree-info p {
+    font-size: 1rem;
+    color: var(--color-sage);
+    margin: 0.5rem 0 0;
+}
+
+.gallery-nav {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.gallery-nav button {
+    background: none;
+    border: none;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-sage);
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.gallery-nav button.active {
+    color: var(--color-bark);
+    border-bottom-color: var(--color-bark);
+}
+
 /* Demonstrators & Interactive Blocks */
 .demonstrator-grid {
     display: grid;
