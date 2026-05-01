@@ -87,6 +87,34 @@
             color: var(--color-sage);
             margin: 0.5rem 0 0;
         }
+        .gallery-nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        .gallery-nav button {
+            background: none;
+            border: none;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--color-sage);
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .gallery-nav button.active {
+            color: var(--color-bark);
+            border-bottom-color: var(--color-bark);
+        }
+        .gallery-category {
+            display: none;
+        }
+        .gallery-category.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -128,9 +156,15 @@
     <main class="content-area">
         <div class="content-container">
             
-            <section class="gallery-section">
+            <div class="gallery-nav">
+                <button class="active" onclick="showCategory('leden')">Bomen van de Leden</button>
+                <button onclick="showCategory('club')">Clubavonden</button>
+            </div>
+
+            <!-- Bomen van de Leden -->
+            <section id="leden-section" class="gallery-category active">
                 <div class="gallery-header">
-                    <h2>Bomen van onze Leden</h2>
+                    <h2>Bomen van de Leden</h2>
                     <p>Trots presenteren wij een selectie van de mooiste bomen uit de collecties van onze leden. Deze bomen zijn het resultaat van jarenlange toewijding en passie.</p>
                 </div>
                 
@@ -140,6 +174,22 @@
                     <div class="tree-card"><img src="images/trees/tree_3.png" alt="Bonsai 3"><div class="tree-info"><h5>Acer Palmatum</h5><p>Lid: Pieter van Uden</p></div></div>
                 </div>
             </section>
+
+            <!-- Clubavonden -->
+            <section id="club-section" class="gallery-category">
+                <div class="gallery-header">
+                    <h2>Impressie Clubavonden</h2>
+                    <p>Onze maandelijkse bijeenkomsten zijn een bron van inspiratie en gezelligheid. Bekijk hier een sfeerimpressie van onze activiteiten.</p>
+                </div>
+                
+                <div class="activity-grid">
+                    <div class="activity-item"><img src="images/club/club_feb.jpg" alt="Clubavond Februari"></div>
+                    <div class="activity-item"><img src="images/club/club_mar.jpg" alt="Clubavond Maart"></div>
+                    <div class="activity-item"><img src="images/club/club_mei.jpg" alt="Clubavond Mei"></div>
+                    <div class="activity-item"><img src="images/club/club_aug.jpg" alt="Clubavond Augustus"></div>
+                    <div class="activity-item"><img src="images/club/club_sep.jpg" alt="Clubavond September"></div>
+                    <div class="activity-item"><img src="images/club/club_okt.jpg" alt="Clubavond Oktober"></div>
+                </div>
             </section>
 
         </div>
@@ -161,6 +211,22 @@
             mobileToggle.classList.toggle('active');
             mainNav.classList.toggle('active');
         });
+
+        function showCategory(categoryId) {
+            // Hide all categories
+            document.querySelectorAll('.gallery-category').forEach(cat => {
+                cat.classList.remove('active');
+            });
+            // Deactivate all buttons
+            document.querySelectorAll('.gallery-nav button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected category
+            document.getElementById(categoryId + '-section').classList.add('active');
+            // Activate clicked button
+            event.currentTarget.classList.add('active');
+        }
     </script>
 </body>
 </html>
