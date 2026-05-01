@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & Locatie - Bonsai Vereniging Brabant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-container">
+            <div class="site-branding">
+                <img src="images/logo.gif" alt="BVB Logo" class="main-logo">
+                <div class="site-title-box">
+                    <h1>Bonsai Vereniging Brabant</h1>
+                    <p class="site-tagline">Bonsai uit het zuiden</p>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="nbs.html">NBS 2026</a>
+                <a href="galerij.html">Galerij</a>
+                <a href="agenda.html">Agenda</a>
+                <a href="contact.html" class="active">Contact & Locatie</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Slideshow -->
+    <div class="hero-slideshow">
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="hero-overlay"></div>
+    </div>
+
+    <main class="content-area">
+        <div class="content-container">
+            <div class="text-content">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 4rem;">
+                    <!-- Contact Form -->
+                    <div>
+                        <h2>Contact</h2>
+                        <p>Heb je vragen, opmerkingen of wil je een keertje langskomen bij een van onze bijeenkomsten?</p>
+                        <p>Je kunt ons een bericht sturen via onderstaand formulier. We reageren zo snel mogelijk!</p>
+                        
+                        <form action="#" method="post" style="display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem;">
+                            <div>
+                                <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Naam *</label>
+                                <input type="text" id="name" name="name" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px; font-family: inherit;">
+                            </div>
+                            <div>
+                                <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">E-mail *</label>
+                                <input type="email" id="email" name="email" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px; font-family: inherit;">
+                            </div>
+                            <div>
+                                <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Bericht *</label>
+                                <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; resize: vertical;"></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" style="background-color: var(--color-bark); color: white; border: none; padding: 1rem 2rem; border-radius: 50px; font-weight: 600; cursor: pointer;">Bericht Versturen</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Location Info -->
+                    <div>
+                        <h2>Locatie</h2>
+                        <div style="background: var(--color-sand); padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
+                            <p style="margin-bottom: 1rem;"><strong>Stichting de Moerkoal</strong><br>
+                            Driezeeg 20<br>
+                            5258 LE Berlicum</p>
+                            <p style="font-size: 0.95rem; color: var(--color-bark);">Onze clubavonden en de NBS 2026 vinden allemaal plaats op deze locatie.</p>
+                        </div>
+                        
+                        <div class="map-container" style="border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-soft); height: 300px;">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2472.3384218671444!2d5.418464376916558!3d51.653655100067644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c6eec49e491717%3A0xe78a63116d97c7b8!2sDe%20Moerkoal!5e0!3m2!1snl!2snl!4v1714571935000!5m2!1snl!2snl" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                        <div style="margin-top: 1.5rem; text-align: center;">
+                            <a href="https://maps.app.goo.gl/B38eYyT6e9X572yZ8" target="_blank" class="ig-follow-btn" style="background: var(--color-bark); display: inline-block; width: auto; padding: 0.8rem 2rem;">Routebeschrijving</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | Nieuw Concept Ontwerp</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

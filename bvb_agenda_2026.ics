@@ -1,0 +1,54 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Bonsai Vereniging Brabant//Agenda 2026//NL
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+SUMMARY:Clubavond: Werken aan eigen bomen
+DTSTART;TZID=Europe/Amsterdam:20260520T193000
+DTEND;TZID=Europe/Amsterdam:20260520T223000
+LOCATION:De Moerkoal, Driezeeg 20, 5258 LE Berlicum
+DESCRIPTION:Clubavond Bonsai Vereniging Brabant. Werkavond voor eigen bomen onder begeleiding.
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:NBS Voorbereiding: Bomen selecteren
+DTSTART;TZID=Europe/Amsterdam:20260617T193000
+DTEND;TZID=Europe/Amsterdam:20260617T223000
+LOCATION:De Moerkoal, Driezeeg 20, 5258 LE Berlicum
+DESCRIPTION:Bomen selecteren voor de Nederlandse Bonsai Show 2026.
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Clubavond: Werken aan eigen bomen
+DTSTART;TZID=Europe/Amsterdam:20260819T193000
+DTEND;TZID=Europe/Amsterdam:20260819T223000
+LOCATION:De Moerkoal, Driezeeg 20, 5258 LE Berlicum
+DESCRIPTION:Clubavond Bonsai Vereniging Brabant. Werkavond voor eigen bomen onder begeleiding.
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Nederlandse Bonsai Show (NBS) 2026 - Dag 1
+DTSTART;TZID=Europe/Amsterdam:20260926T090000
+DTEND;TZID=Europe/Amsterdam:20260926T170000
+LOCATION:De Moerkoal, Driezeeg 20, 5258 LE Berlicum
+DESCRIPTION:Hét landelijke topevenement van de Nederlandse Bonsai Vereniging. Georganiseerd door BVB.
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Nederlandse Bonsai Show (NBS) 2026 - Dag 2
+DTSTART;TZID=Europe/Amsterdam:20260927T090000
+DTEND;TZID=Europe/Amsterdam:20260927T170000
+LOCATION:De Moerkoal, Driezeeg 20, 5258 LE Berlicum
+DESCRIPTION:Hét landelijke topevenement van de Nederlandse Bonsai Vereniging. Georganiseerd door BVB.
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Lezing: Herfst & Bonsai (Bart Verstappen)
+DTSTART;TZID=Europe/Amsterdam:20261021T193000
+DTEND;TZID=Europe/Amsterdam:20261021T223000
+LOCATION:De Moerkoal, Driezeeg 20, 5258 LE Berlicum
+DESCRIPTION:Lezing door Bart Verstappen over bonsai-verzorging in de herfst.
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:BVB Ruilbeurs 2026
+DTSTART;TZID=Europe/Amsterdam:20261118T193000
+DTEND;TZID=Europe/Amsterdam:20261118T223000
+LOCATION:De Moerkoal, Driezeeg 20, 5258 LE Berlicum
+DESCRIPTION:Jaarlijkse ruilbeurs van de Bonsai Vereniging Brabant.
+END:VEVENT
+END:VCALENDAR

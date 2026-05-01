@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerij - Bonsai Vereniging Brabant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .gallery-section {
+            padding: 4rem 2rem;
+            background-color: var(--color-white);
+            border-radius: 20px;
+            box-shadow: inset 0 0 50px rgba(156, 169, 153, 0.1);
+            margin-bottom: 4rem;
+        }
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .gallery-header h2 {
+            font-size: 2.5rem;
+            color: var(--color-bark);
+            margin-bottom: 1rem;
+        }
+        .gallery-header p {
+            color: var(--color-sage);
+            font-style: italic;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+        .tree-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(156, 169, 153, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .tree-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(122, 91, 73, 0.15);
+            border-color: var(--color-bark);
+        }
+        .tree-card img {
+            width: 100%;
+            height: 450px;
+            object-fit: contain;
+            border-radius: 12px;
+            margin-bottom: 0;
+            background-color: #ffffff;
+            transition: transform 0.5s ease;
+        }
+        .tree-card:hover img {
+            transform: scale(1.05);
+        }
+        .tree-info {
+            text-align: center;
+            background: var(--color-sand);
+            padding: 1.8rem;
+            width: calc(100% + 3rem);
+            margin: 1.5rem -1.5rem -1.5rem -1.5rem;
+            border-top: 2px solid var(--color-sage);
+        }
+        .tree-info h5 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            color: var(--color-charcoal);
+            margin: 0;
+            font-weight: 600;
+        }
+        .tree-info p {
+            font-size: 1rem;
+            color: var(--color-sage);
+            margin: 0.5rem 0 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-container">
+            <div class="site-branding">
+                <img src="images/logo.gif" alt="BVB Logo" class="main-logo">
+                <div class="site-title-box">
+                    <h1>Bonsai Vereniging Brabant</h1>
+                    <p class="site-tagline">Bonsai uit het zuiden</p>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="nbs.html">NBS 2026</a>
+                <a href="galerij.html" class="active">Galerij</a>
+                <a href="agenda.html">Agenda</a>
+                <a href="contact.html">Contact & Locatie</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Slideshow -->
+    <div class="hero-slideshow">
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="hero-overlay"></div>
+    </div>
+
+    <main class="content-area">
+        <div class="content-container">
+            
+            <section class="gallery-section">
+                <div class="gallery-header">
+                    <h2>Bomen van onze Leden</h2>
+                    <p>Trots presenteren wij een selectie van de mooiste bomen uit de collecties van onze leden. Deze bomen zijn het resultaat van jarenlange toewijding en passie.</p>
+                </div>
+                
+                <div class="gallery-grid">
+                    <div class="tree-card"><img src="images/trees/tree_1.png" alt="Bonsai 1"><div class="tree-info"><h5>Wisteria</h5><p>Lid: Pieter van Uden</p></div></div>
+                    <div class="tree-card"><img src="images/trees/tree_2.png" alt="Bonsai 2"><div class="tree-info"><h5>Bonsai op Rots</h5><p>Lid: Pieter van Uden</p></div></div>
+                    <div class="tree-card"><img src="images/trees/tree_3.png" alt="Bonsai 3"><div class="tree-info"><h5>Acer Palmatum</h5><p>Lid: Pieter van Uden</p></div></div>
+                    <div class="tree-card"><img src="images/trees/tree_4.jpg" alt="Bonsai 4"><div class="tree-info"><h5>Naaldbonsai</h5><p>Collectie BVB</p></div></div>
+                    <div class="tree-card"><img src="images/trees/tree_5.jpg" alt="Bonsai 5"><div class="tree-info"><h5>Juniperus</h5><p>Collectie BVB</p></div></div>
+                    <div class="tree-card"><img src="images/trees/tree_6.jpg" alt="Bonsai 6"><div class="tree-info"><h5>Larix</h5><p>Collectie BVB</p></div></div>
+                    <div class="tree-card"><img src="images/trees/tree_7.jpg" alt="Bonsai 7"><div class="tree-info"><h5>September Topstuk</h5><p>Collectie BVB</p></div></div>
+                    <div class="tree-card"><img src="images/trees/tree_8.jpg" alt="Bonsai 8"><div class="tree-info"><h5>Loofbonsai</h5><p>Collectie BVB</p></div></div>
+                    <div class="tree-card"><img src="images/trees/tree_9.jpg" alt="Bonsai 9"><div class="tree-info"><h5>September Topstuk</h5><p>Expositie 2024</p></div></div>
+                    <div class="tree-card"><img src="images/trees/tree_10.jpg" alt="Bonsai 10"><div class="tree-info"><h5>Stijlvorming</h5><p>Expositie 2024</p></div></div>
+                    <div class="tree-card"><img src="images/trees/tree_11.jpg" alt="Bonsai 11"><div class="tree-info"><h5>Winterbeeld</h5><p>Expositie Februari</p></div></div>
+                    <div class="tree-card"><img src="images/trees/tree_12.jpg" alt="Bonsai 12"><div class="tree-info"><h5>Vormgeving</h5><p>Lidmaatschap BVB</p></div></div>
+                    <div class="tree-card"><img src="images/trees/tree_13.jpg" alt="Bonsai 13"><div class="tree-info"><h5>Voorjaarsgroei</h5><p>Collectie Maart</p></div></div>
+                    <div class="tree-card"><img src="images/trees/tree_14.jpg" alt="Bonsai 14"><div class="tree-info"><h5>Showstuk</h5><p>NBS Voorbereiding</p></div></div>
+                    <div class="tree-card"><img src="images/trees/tree_15.jpg" alt="Bonsai 15"><div class="tree-info"><h5>Japanse Esdoorn</h5><p>Seizoen 2024</p></div></div>
+                </div>
+            </section>
+
+            <!-- Tokonoma Section -->
+            <section class="gallery-section" style="margin-top: 6rem; background: var(--color-white-pure); padding: 4rem 2rem; border-radius: 12px; box-shadow: var(--shadow-soft);">
+                <div class="gallery-header" style="margin-bottom: 4rem;">
+                    <h2 style="font-size: 2.2rem; color: var(--color-bark);">Tokonoma & Opstellingen</h2>
+                    <p style="font-style: italic; color: var(--color-sage);">De kunst van het presenteren: harmonie tussen boom, scroll en accent.</p>
+                </div>
+                <div class="gallery-grid">
+                    <div class="tree-card"><img src="images/tokonoma/tokonoma_1.jpg" alt="Tokonoma 1"><div class="tree-info"><h5>Winter Tokonoma</h5><p>Februari 2024</p></div></div>
+                    <div class="tree-card"><img src="images/tokonoma/tokonoma_2.jpg" alt="Tokonoma 2"><div class="tree-info"><h5>Klassieke Presentatie</h5><p>Februari 2024</p></div></div>
+                    <div class="tree-card"><img src="images/tokonoma/tokonoma_3.jpg" alt="Tokonoma 3"><div class="tree-info"><h5>Harmonie</h5><p>Februari 2024</p></div></div>
+                    <div class="tree-card"><img src="images/tokonoma/opstelling_1.jpg" alt="Opstelling 1"><div class="tree-info"><h5>Lente Opstelling</h5><p>Maart 2024</p></div></div>
+                    <div class="tree-card"><img src="images/tokonoma/opstelling_2.jpg" alt="Opstelling 2"><div class="tree-info"><h5>Expositie Layout</h5><p>Maart 2024</p></div></div>
+                    <div class="tree-card"><img src="images/tokonoma/opstelling_3.jpg" alt="Opstelling 3"><div class="tree-info"><h5>Bonsai in Focus</h5><p>Maart 2024</p></div></div>
+                </div>
+            </section>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | Nieuw Concept Ontwerp</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
