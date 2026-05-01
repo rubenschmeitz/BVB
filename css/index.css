@@ -126,24 +126,22 @@ a:hover {
     background-size: cover;
     background-position: center;
     opacity: 0;
-    animation: slideShow 45s infinite;
+    animation: slideShow 35s infinite;
 }
 
-.hero-slideshow .slide:nth-child(1) { background-image: url('../images/tokonoma/01_tokonoma_jan_2024.jpg'); animation-delay: 0s; background-position: center 40%; }
-.hero-slideshow .slide:nth-child(2) { background-image: url('../images/tokonoma/02_tokonoma_feb_2024.jpg'); animation-delay: 5s; background-position: center 40%; }
-.hero-slideshow .slide:nth-child(3) { background-image: url('../images/tokonoma/03_tokonoma_mar_2024.jpg'); animation-delay: 10s; background-position: center 40%; }
-.hero-slideshow .slide:nth-child(4) { background-image: url('../images/tokonoma/04_tokonoma_apr_2024.jpg'); animation-delay: 15s; background-position: center 40%; }
-.hero-slideshow .slide:nth-child(5) { background-image: url('../images/tokonoma/05_tokonoma_mei_2024.jpg'); animation-delay: 20s; background-position: center 40%; }
-.hero-slideshow .slide:nth-child(6) { background-image: url('../images/tokonoma/06_tokonoma_jun_2024.jpg'); animation-delay: 25s; background-position: center 40%; }
-.hero-slideshow .slide:nth-child(7) { background-image: url('../images/tokonoma/08_tokonoma_aug_2024.jpg'); animation-delay: 30s; background-position: center 40%; }
-.hero-slideshow .slide:nth-child(8) { background-image: url('../images/tokonoma/10_tokonoma_okt_2024.jpg'); animation-delay: 35s; background-position: center 40%; }
-.hero-slideshow .slide:nth-child(9) { background-image: url('../images/tokonoma/12_tokonoma_dec_2024.jpg'); animation-delay: 40s; background-position: center 40%; }
+.hero-slideshow .slide:nth-child(1) { background-image: url('../images/tokonoma/01_tokonoma_jan_2024.jpg'); animation-delay: 0s; background-position: center center; }
+.hero-slideshow .slide:nth-child(2) { background-image: url('../images/tokonoma/02_tokonoma_feb_2024.jpg'); animation-delay: 5s; background-position: center center; }
+.hero-slideshow .slide:nth-child(3) { background-image: url('../images/tokonoma/04_tokonoma_apr_2024.jpg'); animation-delay: 10s; background-position: center center; }
+.hero-slideshow .slide:nth-child(4) { background-image: url('../images/tokonoma/05_tokonoma_mei_2024.jpg'); animation-delay: 15s; background-position: center center; }
+.hero-slideshow .slide:nth-child(5) { background-image: url('../images/tokonoma/08_tokonoma_aug_2024.jpg'); animation-delay: 20s; background-position: center center; }
+.hero-slideshow .slide:nth-child(6) { background-image: url('../images/tokonoma/10_tokonoma_okt_2024.jpg'); animation-delay: 25s; background-position: center center; }
+.hero-slideshow .slide:nth-child(7) { background-image: url('../images/tokonoma/12_tokonoma_dec_2024.jpg'); animation-delay: 30s; background-position: center center; }
 
 @keyframes slideShow {
     0% { opacity: 0; transform: scale(1.08); }
-    2.22% { opacity: 1; transform: scale(1.02); }
-    11.11% { opacity: 1; transform: scale(1.0); }
-    13.33% { opacity: 0; transform: scale(1.0); }
+    2.85% { opacity: 1; transform: scale(1.02); }
+    14.28% { opacity: 1; transform: scale(1.0); }
+    17.13% { opacity: 0; transform: scale(1.0); }
     100% { opacity: 0; }
 }
 
