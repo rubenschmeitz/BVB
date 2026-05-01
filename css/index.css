@@ -129,17 +129,17 @@ a:hover {
     animation: slideShow 25s infinite;
 }
 
-.hero-slideshow .slide:nth-child(1) { background-image: url('../images/hero/hero_1.jpg'); animation-delay: 0s; background-position: center 70%; }
-.hero-slideshow .slide:nth-child(2) { background-image: url('../images/hero/hero_2.jpg'); animation-delay: 5s; background-position: center 70%; }
-.hero-slideshow .slide:nth-child(3) { background-image: url('../images/hero/hero_3.jpg'); animation-delay: 10s; background-position: center 70%; }
-.hero-slideshow .slide:nth-child(4) { background-image: url('../images/hero/hero_4.jpg'); animation-delay: 15s; background-position: center 70%; }
-.hero-slideshow .slide:nth-child(5) { background-image: url('../images/hero/hero_5.jpg'); animation-delay: 20s; background-position: center 70%; }
+.hero-slideshow .slide:nth-child(1) { background-image: url('../images/hero/hero_1.jpg'); animation-delay: 0s; background-position: center 40%; }
+.hero-slideshow .slide:nth-child(2) { background-image: url('../images/hero/hero_2.jpg'); animation-delay: 5s; background-position: center 40%; }
+.hero-slideshow .slide:nth-child(3) { background-image: url('../images/hero/hero_3.jpg'); animation-delay: 10s; background-position: center 40%; }
+.hero-slideshow .slide:nth-child(4) { background-image: url('../images/hero/hero_4.jpg'); animation-delay: 15s; background-position: center 40%; }
+.hero-slideshow .slide:nth-child(5) { background-image: url('../images/hero/hero_5.jpg'); animation-delay: 20s; background-position: center 40%; }
 
 @keyframes slideShow {
-    0% { opacity: 0; transform: scale(1.1); }
-    4% { opacity: 1; transform: scale(1.0); }
-    20% { opacity: 1; }
-    24% { opacity: 0; }
+    0% { opacity: 0; transform: scale(1.08); }
+    4% { opacity: 1; transform: scale(1.02); }
+    20% { opacity: 1; transform: scale(1.0); }
+    24% { opacity: 0; transform: scale(1.0); }
     100% { opacity: 0; }
 }
 
