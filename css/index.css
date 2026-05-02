@@ -103,6 +103,31 @@ a:hover {
     border-radius: 4px;
 }
 
+.main-nav a:hover::after,
+.main-nav a.active::after {
+    width: 100%;
+}
+
+.main-nav a.nav-special {
+    color: var(--color-bark) !important;
+    border: 1.5px solid var(--color-bark);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    margin: -0.4rem 0; /* Offset padding to keep alignment */
+    transition: all 0.3s ease;
+}
+
+.main-nav a.nav-special::after {
+    display: none; /* Remove underline for the button style */
+}
+
+.main-nav a.nav-special:hover {
+    background-color: var(--color-bark);
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(142, 108, 89, 0.2);
+}
+
 .main-nav a:hover, .main-nav a.active {
     background-color: var(--color-sand);
     color: var(--color-bark);
