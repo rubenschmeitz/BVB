@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
+    <script src="js/seasons.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
     <style>
         .program-schedule {
@@ -64,7 +65,7 @@
     <header class="site-header">
         <div class="header-container">
             <div class="site-branding">
-                <img src="images/logo.gif" alt="BVB Logo" class="main-logo">
+                <img src="images/logo_main.png" alt="BVB Logo" class="main-logo">
                 <div class="site-title-box">
                     <h1>Bonsai Vereniging Brabant</h1>
                     <p class="site-tagline">Bonsai uit het zuiden</p>
@@ -142,7 +143,14 @@
                                 <div class="timeline-dot"></div>
                                 <div class="timeline-content">
                                     <span class="timeline-time">14:00 - 17:00</span>
-                                    <p class="timeline-title">Demonstraties: Yannick Kiggen & Alain de Vroo</p>
+                                    <p class="timeline-title">Demonstratie: Alain de Vroo</p>
+                                    <div class="timeline-demo-box">
+                                        <img src="images/Alain_demo.jpg" alt="Alain de Vroo" class="timeline-demo-portrait">
+                                        <div class="timeline-demo-info">
+                                            <h5>Alain de Vroo</h5>
+                                            <p>Bonsai Master & Artist</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -164,11 +172,18 @@
                                 </div>
                             </div>
 
-                            <div class="timeline-item">
+                            <div class="timeline-item highlighted">
                                 <div class="timeline-dot"></div>
                                 <div class="timeline-content">
-                                    <span class="timeline-time">10:00 - 17:00</span>
-                                    <p class="timeline-title">Presentatie Wedstrijdbomen & Demonstraties</p>
+                                    <span class="timeline-time">14:00 - 17:00</span>
+                                    <p class="timeline-title">Demonstratie: Yannick Kiggen</p>
+                                    <div class="timeline-demo-box">
+                                        <img src="images/Yannick_demo.jpg" alt="Yannick Kiggen" class="timeline-demo-portrait">
+                                        <div class="timeline-demo-info">
+                                            <h5>Yannick Kiggen</h5>
+                                            <p>Bonsai Master & Designer</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -247,26 +262,6 @@
                             </iframe>
                         </div>
 
-                        <!-- Demonstrators in Sidebar -->
-                        <div style="margin-top: 3rem; border-top: 1px solid var(--color-sand); padding-top: 2rem;">
-                            <h3 style="font-size: 1.2rem; color: var(--color-bark); margin-bottom: 1.5rem;">Demonstrateurs</h3>
-                            <div class="demonstrator-grid sidebar-demos">
-                                <div class="demonstrator-item">
-                                    <div class="demo-portrait">
-                                        <img src="images/Yannick_demo.jpg" alt="Yannick Kiggen">
-                                    </div>
-                                    <h4>Yannick Kiggen</h4>
-                                    <p>Expert</p>
-                                </div>
-                                <div class="demonstrator-item">
-                                    <div class="demo-portrait">
-                                        <img src="images/Alain_demo.jpg" alt="Alain de Vroo">
-                                    </div>
-                                    <h4>Alain de Vroo</h4>
-                                    <p>Expert</p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </aside>
 

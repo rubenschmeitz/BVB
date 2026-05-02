@@ -8,13 +8,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
+    <script src="js/seasons.js" defer></script>
 </head>
 <body>
 
     <header class="site-header">
         <div class="header-container">
             <div class="site-branding">
-                <img src="images/logo.gif" alt="BVB Logo" class="main-logo">
+                <img src="images/logo_main.png" alt="BVB Logo" class="main-logo">
                 <div class="site-title-box">
                     <h1>Bonsai Vereniging Brabant</h1>
                     <p class="site-tagline">Bonsai uit het zuiden</p>
@@ -89,6 +90,33 @@
             mobileToggle.classList.toggle('active');
             mainNav.classList.toggle('active');
         });
+
+        // Contact Form Handling
+        const contactForm = document.querySelector('form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Simple feedback instead of actual sending (static site)
+                const originalContent = contactForm.innerHTML;
+                contactForm.style.transition = 'opacity 0.4s ease';
+                contactForm.style.opacity = '0';
+                
+                setTimeout(() => {
+                    contactForm.innerHTML = `
+                        <div style="text-align: center; padding: 2rem 0;">
+                            <div style="width: 80px; height: 80px; background: var(--color-sage); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                            <h3 style="color: var(--color-bark); margin-bottom: 1rem;">Bericht Verzonden!</h3>
+                            <p style="color: var(--color-charcoal); line-height: 1.6;">Bedankt voor je bericht. We nemen zo snel mogelijk contact met je op.</p>
+                            <button onclick="location.reload()" style="margin-top: 2rem; background: transparent; border: 1px solid var(--color-bark); color: var(--color-bark); padding: 0.8rem 1.5rem; border-radius: 50px; cursor: pointer; font-weight: 600;">Nieuw bericht</button>
+                        </div>
+                    `;
+                    contactForm.style.opacity = '1';
+                }, 400);
+            });
+        }
     </script>
 </body>
 </html>
