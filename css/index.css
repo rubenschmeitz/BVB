@@ -93,6 +93,7 @@ a:hover {
     gap: 2rem;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center; /* Ensure all items are vertically aligned */
 }
 
 .main-nav a {
@@ -110,10 +111,13 @@ a:hover {
 
 .main-nav a.nav-special {
     color: var(--color-bark) !important;
-    border: 1.5px solid var(--color-bark);
-    padding: 0.4rem 1rem;
+    border: 2px solid var(--color-bark); /* Slightly thicker border for emphasis */
+    padding: 0.5rem 1.2rem; /* Match vertical padding of other links */
     border-radius: 50px;
-    margin: -0.4rem 0; /* Offset padding to keep alignment */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1; /* Remove line-height interference */
     transition: all 0.3s ease;
 }
 
