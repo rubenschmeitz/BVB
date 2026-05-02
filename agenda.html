@@ -9,11 +9,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
     <script src="js/seasons.js" defer></script>
+    
+    <!-- Meta Tags & SEO -->
+    <meta name="description" content="Blijf op de hoogte van de clubavonden, workshops en evenementen van Bonsai Vereniging Brabant. Bekijk onze agenda voor 2026.">
+    <meta name="theme-color" content="#7A5B49">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Agenda 2026 - Bonsai Vereniging Brabant">
+    <meta property="og:description" content="Mis geen enkele clubavond of workshop. Bekijk de volledige BVB agenda.">
+    <meta property="og:image" content="images/logo_main.png">
+    
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <link rel="manifest" href="site.webmanifest">
+
     <script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
     <style>
         .agenda-container {
             position: relative;
-            margin-top: 3rem;
+            margin-top: 1.5rem;
             padding-left: 30px;
         }
         .agenda-container::before {
@@ -29,10 +45,10 @@
         .agenda-item {
             position: relative;
             background: white;
-            padding: 1.5rem 2rem;
+            padding: 1rem 1.5rem;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.03);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             border: 1px solid rgba(0,0,0,0.03);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
@@ -150,10 +166,13 @@
     <header class="site-header">
         <div class="header-container">
             <div class="site-branding">
-                <img src="images/logo_main.png" alt="BVB Logo" class="main-logo">
+                <div class="logo-wrapper">
+                    <img src="images/logo_main.png" alt="BVB Logo" class="main-logo">
+                    <div class="logo-overlay"></div>
+                </div>
                 <div class="site-title-box">
                     <h1>Bonsai Vereniging Brabant</h1>
-                    <p class="site-tagline">Bonsai uit het zuiden</p>
+                    <p class="site-tagline" onclick="cycleSeason()">Bonsai uit het zuiden</p>
                 </div>
             </div>
             <nav class="main-nav" id="main-nav">
@@ -183,6 +202,14 @@
     <main class="content-area">
         <div class="content-container">
             <div class="text-content">
+                <div class="sync-bar" style="margin-top: 0; margin-bottom: 1.5rem;">
+                    <div>
+                        <h4 style="margin: 0; color: var(--color-bark);">Volledige Agenda Synchroniseren</h4>
+                        <p style="margin: 0; font-size: 0.9rem;">Zet alle activiteiten van 2026 in één keer in je agenda.</p>
+                    </div>
+                    <a href="docs/bvb_agenda_2026.ics" class="ig-follow-btn" style="background: var(--color-sage); margin: 0; padding: 0.8rem 1.5rem; width: auto;">Sync Volledige Agenda (.ics)</a>
+                </div>
+
                 <p>Onze clubavonden vinden plaats in <strong>De Moerkoal in Berlicum</strong>. Iedereen is welkom om kennis te maken met onze vereniging.</p>
                 
                 
@@ -467,19 +494,13 @@
 
                 </div>
 
-                <div class="sync-bar">
-                    <div>
-                        <h4 style="margin: 0; color: var(--color-bark);">Volledige Agenda Synchroniseren</h4>
-                        <p style="margin: 0; font-size: 0.9rem;">Zet alle activiteiten van 2026 in één keer in je agenda.</p>
-                    </div>
-                    <a href="docs/bvb_agenda_2026.ics" class="ig-follow-btn" style="background: var(--color-sage); margin: 0; padding: 0.8rem 1.5rem; width: auto;">Sync Volledige Agenda (.ics)</a>
-                </div>
+
 
                 <!-- Location Info -->
-                <div style="margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--color-sand);">
+                <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--color-sand);">
                     <h2 style="text-align: center; margin-bottom: 2rem;">Locatie & Bereikbaarheid</h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: center;">
-                        <div style="background: var(--color-white-pure); padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.03);">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; align-items: center;">
+                        <div style="background: var(--color-white-pure); padding: 1.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.03);">
                             <h3 style="color: var(--color-bark); margin-bottom: 1.5rem;">Stichting de Moerkoal</h3>
                             <p style="font-size: 1.1rem; margin-bottom: 2rem; line-height: 1.6;">
                                 Driezeeg 20<br>

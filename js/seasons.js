@@ -1,7 +1,7 @@
 /**
  * BVB Seasons Theme Logic
  * Handles automatic season detection, the hidden easter egg,
- * and high-fidelity seasonal effects on the original logo.
+ * and high-fidelity seasonal logo variations.
  */
 
 const Seasons = {
@@ -9,6 +9,13 @@ const Seasons = {
     SUMMER: 'theme-summer',
     AUTUMN: 'theme-autumn',
     WINTER: 'theme-winter'
+};
+
+const SeasonLogos = {
+    [Seasons.SPRING]: 'images/logo_spring.png',
+    [Seasons.SUMMER]: 'images/logo_main.png',
+    [Seasons.AUTUMN]: 'images/logo_autumn.png',
+    [Seasons.WINTER]: 'images/logo_winter.png'
 };
 
 function getCurrentSeason() {
@@ -24,34 +31,44 @@ function applyTheme(theme) {
     document.body.classList.add(theme);
     localStorage.setItem('bvb-theme', theme);
     
+    // Update Logo Source
+    const logo = document.querySelector('.main-logo');
+    if (logo) {
+        logo.src = SeasonLogos[theme];
+    }
+    
     // Reset any JS-based effects
-    stopAutumnEffects();
+    stopSeasonalEffects();
     
     if (theme === Seasons.AUTUMN) {
-        startAutumnEffects();
+        startSeasonalEffects('falling-leaf');
+    } else if (theme === Seasons.WINTER) {
+        startSeasonalEffects('falling-snow');
+    } else if (theme === Seasons.SPRING) {
+        startSeasonalEffects('falling-bud');
     }
 }
 
-let autumnInterval = null;
-function startAutumnEffects() {
+let seasonalInterval = null;
+function startSeasonalEffects(className) {
     const wrapper = document.querySelector('.logo-wrapper');
     if (!wrapper) return;
     
-    autumnInterval = setInterval(() => {
-        const leaf = document.createElement('div');
-        leaf.className = 'falling-leaf';
-        leaf.style.left = Math.random() * 80 + 10 + '%';
-        leaf.style.top = Math.random() * 20 + '%';
-        wrapper.appendChild(leaf);
+    seasonalInterval = setInterval(() => {
+        const particle = document.createElement('div');
+        particle.className = className;
+        particle.style.left = Math.random() * 80 + 10 + '%';
+        particle.style.top = Math.random() * 20 + '%';
+        wrapper.appendChild(particle);
         
-        setTimeout(() => leaf.remove(), 3000);
-    }, 1000);
+        setTimeout(() => particle.remove(), 4000);
+    }, 1500);
 }
 
-function stopAutumnEffects() {
-    if (autumnInterval) {
-        clearInterval(autumnInterval);
-        autumnInterval = null;
+function stopSeasonalEffects() {
+    if (seasonalInterval) {
+        clearInterval(seasonalInterval);
+        seasonalInterval = null;
     }
 }
 

@@ -12,10 +12,17 @@
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
     --spacing-md: 2rem;
-    --spacing-lg: 4rem;
-    --spacing-xl: 8rem;
+    --spacing-lg: 2.5rem;
+    --spacing-xl: 4rem;
+    
+    /* Warm Premium Tones */
+    --color-clay: #9B7B61;
+    --color-gold-dust: #D4AF37;
+    --color-warm-shadow: rgba(155, 123, 97, 0.1);
+    --color-glass-warm: rgba(255, 250, 248, 0.85);
     
     --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
+    --shadow-premium: 0 20px 50px rgba(122, 91, 73, 0.15);
     --transition-smooth: all 0.3s ease;
 }
 
@@ -50,6 +57,34 @@ body.theme-winter {
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+::selection {
+    background-color: var(--color-sand);
+    color: var(--color-bark);
+}
+
+/* Branded Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-white);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-sand);
+    border-radius: 5px;
+    border: 2px solid var(--color-white);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-sage);
+}
+
 body {
     font-family: var(--font-main);
     background-color: var(--color-white);
@@ -57,6 +92,7 @@ body {
     line-height: 1.8;
     font-size: 1.1rem;
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.8s ease, color 0.8s ease;
 }
 
 a {
@@ -69,11 +105,23 @@ a:hover {
     color: var(--color-charcoal);
 }
 
+/* Accessible Focus States */
+:focus-visible {
+    outline: 2px solid var(--color-sage);
+    outline-offset: 4px;
+}
+
+button:focus-visible, 
+a:focus-visible {
+    border-radius: 4px;
+}
+
 /* --- Header & Navigation --- */
 .site-header {
     background-color: var(--color-white-pure);
     border-bottom: 2px solid var(--color-sand);
-    padding: 1.5rem 0;
+    padding: 0.8rem 0;
+    transition: background-color 0.8s ease, border-color 0.8s ease;
 }
 
 .header-container {
@@ -113,6 +161,9 @@ a:hover {
     text-transform: uppercase;
     letter-spacing: 2px;
     transition: var(--transition-smooth);
+    cursor: pointer;
+    padding: 10px 0; /* Increased click area */
+    margin: -10px 0; /* Compensate for padding */
 }
 
 .logo-wrapper {
@@ -182,19 +233,66 @@ body.theme-autumn .main-logo {
 
 .falling-leaf {
     position: absolute;
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     background: #D9A066;
     border-radius: 2px 10px;
     pointer-events: none;
     z-index: 3;
-    animation: leafFall 3s linear forwards;
+    opacity: 0;
+    animation: leafFall 3.5s ease-in-out forwards;
+}
+
+.falling-leaf:nth-child(even) {
+    background: #7A5B49;
+    width: 6px;
+    height: 10px;
+    animation-duration: 4s;
 }
 
 @keyframes leafFall {
     0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-    10% { opacity: 1; }
-    100% { transform: translate(20px, 40px) rotate(360deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translate(30px, 120px) rotate(720deg); opacity: 0; }
+}
+
+.falling-snow {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0;
+    animation: snowFall 4s linear forwards;
+    filter: blur(0.5px);
+}
+
+@keyframes snowFall {
+    0% { transform: translate(0, 0); opacity: 0; }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.7; }
+    100% { transform: translate(10px, 100px); opacity: 0; }
+}
+
+.falling-bud {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #a8e063;
+    border-radius: 50% 50% 50% 0;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0;
+    animation: budFloat 4s ease-in-out forwards;
+}
+
+@keyframes budFloat {
+    0% { transform: translate(0, 0) scale(0); opacity: 0; }
+    20% { opacity: 0.6; transform: translate(5px, -10px) scale(1); }
+    100% { transform: translate(15px, 20px) scale(0.8); opacity: 0; }
 }
 
 .main-nav {
@@ -250,7 +348,7 @@ body.theme-autumn .main-logo {
 
 /* --- Hero Slideshow --- */
 .hero-slideshow {
-    height: 450px;
+    height: 320px;
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -284,7 +382,7 @@ body.theme-autumn .main-logo {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);
+    background: linear-gradient(to bottom, rgba(122, 91, 73, 0.3) 0%, rgba(54, 51, 48, 0.6) 100%);
     z-index: 2;
 }
 
@@ -309,7 +407,7 @@ body.theme-autumn .main-logo {
 }
 
 .hero-slideshow-content h1 {
-    font-size: 4rem;
+    font-size: 3.5rem;
     color: white;
     margin: 0;
     line-height: 1.1;
@@ -327,8 +425,30 @@ body.theme-autumn .main-logo {
 
 /* --- Content Area --- */
 .content-area {
-    padding: 5rem 0;
-    background-color: var(--color-white-pure);
+    padding: 3rem 0;
+    background-color: var(--color-white);
+    position: relative;
+}
+
+.premium-section {
+    background-color: var(--color-sand);
+    padding: 4rem 5%;
+    margin: 2rem 0;
+    border-radius: 40px;
+    box-shadow: inset 0 0 100px rgba(155, 123, 97, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.premium-section::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--color-warm-shadow) 0%, transparent 70%);
+    pointer-events: none;
 }
 
 .content-container, .content-container-wide {
@@ -370,7 +490,7 @@ body.theme-autumn .main-logo {
 /* --- Instagram Widget --- */
 .instagram-widget {
     max-width: 450px;
-    margin: 0 auto 4rem;
+    margin: 0 auto 2rem;
     background: white;
     border-radius: 12px;
     overflow: hidden;
@@ -552,16 +672,41 @@ body.theme-autumn .main-logo {
     width: 100%;
     margin: 3rem 0;
     overflow: hidden;
-    background: #ffffff;
-    padding: 4rem 0;
+    background: #f8f6f3;
+    padding: 4rem 0 5rem 0;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Fade edges for a clean scroll effect */
+.exhibition-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 120px; height: 100%;
+    background: linear-gradient(to right, #f8f6f3, transparent);
+    z-index: 10;
+    pointer-events: none;
+}
+
+.exhibition-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 120px; height: 100%;
+    background: linear-gradient(to left, #f8f6f3, transparent);
+    z-index: 10;
+    pointer-events: none;
 }
 
 .exhibition-container {
     display: flex;
-    gap: 12rem;
+    gap: 6rem;
     width: max-content;
     animation: infiniteScroll 120s linear infinite;
     will-change: transform;
+    align-items: flex-end;
+    padding: 0 3rem;
 }
 
 .exhibition-container:hover {
@@ -575,49 +720,56 @@ body.theme-autumn .main-logo {
 
 .exhibition-card {
     flex: 0 0 auto;
-    width: 500px;
-    background: transparent;
+    width: 320px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1.5rem;
 }
 
 .exhibition-image-box {
     width: 100%;
-    height: 450px;
+    height: 420px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
-    position: relative;
 }
 
 .exhibition-image-box img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    mix-blend-mode: multiply;
-    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.08));
+    filter: drop-shadow(0 12px 24px rgba(0,0,0,0.15));
+    transition: transform 0.5s ease;
+}
+
+.exhibition-card:hover .exhibition-image-box img {
+    transform: translateY(-12px);
 }
 
 .exhibition-details {
-    padding: 2.5rem 0;
     text-align: center;
 }
 
 .exhibition-species {
-    font-size: 2rem;
-    color: var(--color-charcoal);
+    font-size: 1.2rem;
+    color: var(--color-bark);
     margin: 0;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .exhibition-style {
-    font-size: 1.1rem;
+    font-size: 0.78rem;
     color: var(--color-sage);
     font-weight: 500;
-    margin-top: 0.5rem;
+    margin-top: 0.3rem;
     text-transform: uppercase;
     letter-spacing: 2px;
+}
+
+/* Pause marquee on hover */
+.exhibition-wrapper:hover .exhibition-container {
+    animation-play-state: paused;
 }
 
 .tree-info {
@@ -647,7 +799,7 @@ body.theme-autumn .main-logo {
     display: flex;
     justify-content: center;
     gap: 2rem;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 }
 
 .gallery-nav button {
@@ -672,13 +824,13 @@ body.theme-autumn .main-logo {
 .demonstrator-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2.5rem;
-    margin: 4rem 0;
+    gap: 2rem;
+    margin: 2rem 0;
 }
 
 .demonstrator-item {
     background: var(--color-sand);
-    padding: 2.5rem;
+    padding: 1.5rem;
     border-radius: 20px;
     text-align: center;
     transition: transform 0.3s ease;
@@ -814,7 +966,7 @@ body.theme-autumn .main-logo {
     .mobile-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
     .hero-slideshow {
-        height: 380px;
+        height: 320px;
     }
 }
 
@@ -846,7 +998,7 @@ body.theme-autumn .main-logo {
     }
     
     .hero-slideshow {
-        height: 280px; /* Reduced from 320px */
+        height: 240px; /* Reduced further for compactness */
     }
 
     .activity-grid {
@@ -950,7 +1102,7 @@ body.theme-autumn .main-logo {
 
 /* --- Page Hero Styles (Reusable) --- */
 .page-hero {
-    height: 300px;
+    height: 170px;
     width: 100%;
     position: relative;
     display: flex;
@@ -958,7 +1110,7 @@ body.theme-autumn .main-logo {
     justify-content: center;
     color: white;
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
     overflow: hidden;
 }
 
@@ -995,14 +1147,14 @@ body.theme-autumn .main-logo {
 .page-hero-content {
     position: relative;
     z-index: 2;
-    padding: 2rem 5%;
+    padding: 1rem 5%;
     max-width: 1300px;
     width: 100%;
     text-align: left;
 }
 
 .page-hero-content h1 {
-    font-size: 3.5rem; /* Slightly smaller h1 */
+    font-size: 2.8rem;
     margin: 0;
     text-shadow: 0 4px 40px rgba(0,0,0,0.6);
     color: white;
@@ -1020,8 +1172,8 @@ body.theme-autumn .main-logo {
 
 .nbs-grid-layout {
     display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 6rem;
+    grid-template-columns: 1fr 350px;
+    gap: 4rem;
     align-items: flex-start;
     max-width: 1300px; /* Overriding any narrow containers */
     margin: 0 auto;
@@ -1030,7 +1182,7 @@ body.theme-autumn .main-logo {
 
 .event-sidebar-card {
     background: var(--color-white-pure);
-    padding: 2.5rem;
+    padding: 1.5rem;
     border-radius: 20px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.05);
     border: 1px solid rgba(0,0,0,0.02);
@@ -1038,14 +1190,14 @@ body.theme-autumn .main-logo {
 
 .event-sidebar-card h3 {
     color: var(--color-bark);
-    margin-bottom: 1.5rem;
-    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
 }
 
 .fact-item {
     display: flex;
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.8rem;
     align-items: flex-start;
 }
 
@@ -1072,7 +1224,7 @@ body.theme-autumn .main-logo {
 .nbs-timeline {
     position: relative;
     padding-left: 40px;
-    margin: 3rem 0;
+    margin: 1rem 0;
 }
 
 .nbs-timeline::before {
@@ -1098,7 +1250,7 @@ body.theme-autumn .main-logo {
 
 .timeline-item {
     position: relative;
-    margin-bottom: 2rem;
+    margin-bottom: 1.2rem;
 }
 
 .timeline-dot {
@@ -1120,7 +1272,7 @@ body.theme-autumn .main-logo {
 
 .timeline-content {
     background: white;
-    padding: 1.2rem 1.5rem;
+    padding: 0.8rem 1.2rem;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.03);
     border: 1px solid rgba(0,0,0,0.02);
@@ -1145,8 +1297,8 @@ body.theme-autumn .main-logo {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-top: 1rem;
-    padding-top: 1rem;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
     border-top: 1px dashed var(--color-sand);
 }
 
@@ -1200,12 +1352,12 @@ body.theme-autumn .main-logo {
 @media (max-width: 1100px) {
     .nbs-grid-layout {
         grid-template-columns: 1fr;
-        gap: 3rem;
+        gap: 2rem;
         max-width: 100%;
     }
     
     .page-hero {
-        height: 220px;
+        height: 180px;
     }
     
     .nbs-sidebar {
@@ -1227,12 +1379,12 @@ body.theme-autumn .main-logo {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2.5rem;
-    margin: 4rem 0;
+    margin: 2rem 0;
 }
 
 .feature-card {
     background: var(--color-white-pure);
-    padding: 3rem 2rem;
+    padding: 2rem 1.5rem;
     border-radius: 16px;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.03);
@@ -1276,14 +1428,21 @@ body.theme-autumn .main-logo {
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
-    margin: 6rem 0;
+    margin: 3rem 0;
 }
 
 .split-text h2 {
-    font-size: 2.2rem; /* Reduced from 2.8rem */
+    font-size: 2rem; /* Subtler heading */
     line-height: 1.1;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
     color: var(--color-bark);
+}
+
+.split-text .lead {
+    font-size: 1.1rem !important; /* Smaller intro text */
+    color: var(--color-charcoal);
+    margin-bottom: 1.5rem !important;
+    line-height: 1.5;
 }
 
 .split-image img {
@@ -1296,10 +1455,10 @@ body.theme-autumn .main-logo {
 .cta-banner {
     background: var(--color-bark);
     color: white;
-    padding: 5rem 3rem;
+    padding: 3rem 2rem;
     border-radius: 24px;
     text-align: center;
-    margin: 6rem 0;
+    margin: 3rem 0;
     position: relative;
     overflow: hidden;
 }
@@ -1330,5 +1489,13 @@ body.theme-autumn .main-logo {
     
     .split-text h2 {
         font-size: 2.2rem;
+    }
+
+    .nbs-sidebar {
+        order: 1; /* Move entire sidebar to bottom on mobile */
+    }
+
+    .hero-slideshow {
+        height: 220px; /* Reduced further for compactness */
     }
 }

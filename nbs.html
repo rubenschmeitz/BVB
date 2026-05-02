@@ -9,6 +9,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
     <script src="js/seasons.js" defer></script>
+    
+    <!-- Meta Tags & SEO -->
+    <meta name="description" content="Alles over de Nationale Bonsai Show (NBS) 2026, gehost door Bonsai Vereniging Brabant. Programma, demonstraties door Alain de Vroo en Yannick Kiggen, en meer.">
+    <meta name="theme-color" content="#7A5B49">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="NBS 2026 - Bonsai Vereniging Brabant">
+    <meta property="og:description" content="Bezoek de Nationale Bonsai Show 2026 in Berlicum. Bekijk het volledige programma.">
+    <meta property="og:image" content="images/logo_main.png">
+    
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <link rel="manifest" href="site.webmanifest">
+
     <script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
     <style>
         .program-schedule {
@@ -65,10 +81,13 @@
     <header class="site-header">
         <div class="header-container">
             <div class="site-branding">
-                <img src="images/logo_main.png" alt="BVB Logo" class="main-logo">
+                <div class="logo-wrapper">
+                    <img src="images/logo_main.png" alt="BVB Logo" class="main-logo">
+                    <div class="logo-overlay"></div>
+                </div>
                 <div class="site-title-box">
                     <h1>Bonsai Vereniging Brabant</h1>
-                    <p class="site-tagline">Bonsai uit het zuiden</p>
+                    <p class="site-tagline" onclick="cycleSeason()">Bonsai uit het zuiden</p>
                 </div>
             </div>
             <nav class="main-nav" id="main-nav">
@@ -102,15 +121,15 @@
                 <!-- Main Content -->
                 <div class="nbs-main-column">
                     <section>
-                        <h2 style="margin-bottom: 1.5rem;">Hét Bonsai Evenement van het Jaar</h2>
+                        <h2 style="margin-bottom: 1rem;">Hét Bonsai Evenement van het Jaar</h2>
                         <p style="font-size: 1.1rem; line-height: 1.7; color: var(--color-charcoal);">
                             Op 26 en 27 september 2026 is dorpshuis De Moerkoal in Berlicum het middelpunt van de Nederlandse bonsai-wereld. Als Bonsai Vereniging Brabant zijn we er trots op dit jaar de host te zijn voor de NBS 2026. Bezoekers kunnen rekenen op een indrukwekkende tentoonstelling, een uitgebreide markt en live demonstraties.
                         </p>
                     </section>
 
 
-                    <section style="margin-top: 4rem;">
-                        <h3 style="color: var(--color-bark); margin-bottom: 2rem;">Programma & Tijdschema</h3>
+                    <section style="margin-top: 2.5rem;">
+                        <h3 style="color: var(--color-bark); margin-bottom: 1.5rem;">Programma & Tijdschema</h3>
                         <div class="nbs-timeline">
                             
                             <div class="timeline-day-label">Zaterdag 26 September</div>
@@ -162,7 +181,7 @@
                                 </div>
                             </div>
 
-                            <div class="timeline-day-label" style="margin-top: 4rem;">Zondag 27 September</div>
+                            <div class="timeline-day-label" style="margin-top: 2.5rem;">Zondag 27 September</div>
 
                             <div class="timeline-item highlighted">
                                 <div class="timeline-dot"></div>
@@ -234,7 +253,7 @@
                             </div>
                         </div>
 
-                        <div style="margin: 2rem 0;">
+                        <div style="margin: 1rem 0;">
                             <add-to-calendar-button
                                 name="Nederlandse Bonsai Show (NBS) 2026"
                                 description="Hét landelijke topevenement van de Nederlandse Bonsai Vereniging."
@@ -250,7 +269,7 @@
                             ></add-to-calendar-button>
                         </div>
 
-                        <div style="border-radius: 12px; overflow: hidden; height: 200px; margin-top: 2rem;">
+                        <div style="border-radius: 12px; overflow: hidden; height: 200px; margin-top: 1rem;">
                             <iframe 
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2472.3384218671444!2d5.418464376916558!3d51.653655100067644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c6eec49e491717%3A0xe78a63116d97c7b8!2sDe%20Moerkoal!5e0!3m2!1snl!2snl!4v1714571935000!5m2!1snl!2snl" 
                                 width="100%" 
@@ -261,6 +280,7 @@
                                 referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
+                        <a href="https://www.google.com/maps/dir//Stichting+De+Moerkoal,+Driezeeg+20,+5258+KE+Berlicum/" target="_blank" class="nav-special" style="display: block; text-align: center; text-decoration: none; margin-top: 1rem; padding: 10px; font-size: 0.9rem;">Route plannen</a>
 
                     </div>
                 </aside>

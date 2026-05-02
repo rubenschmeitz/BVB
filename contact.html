@@ -9,16 +9,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
     <script src="js/seasons.js" defer></script>
+    
+    <!-- Meta Tags & SEO -->
+    <meta name="description" content="Neem contact op met Bonsai Vereniging Brabant. Heeft u vragen over onze club, lidmaatschap of bonsai in het algemeen? Wij helpen u graag verder.">
+    <meta name="theme-color" content="#7A5B49">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Contact - Bonsai Vereniging Brabant">
+    <meta property="og:description" content="Vragen over bonsai? Neem direct contact op met onze vereniging.">
+    <meta property="og:image" content="images/logo_main.png">
+    
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <link rel="manifest" href="site.webmanifest">
 </head>
 <body>
 
     <header class="site-header">
         <div class="header-container">
             <div class="site-branding">
-                <img src="images/logo_main.png" alt="BVB Logo" class="main-logo">
+                <div class="logo-wrapper">
+                    <img src="images/logo_main.png" alt="BVB Logo" class="main-logo">
+                    <div class="logo-overlay"></div>
+                </div>
                 <div class="site-title-box">
                     <h1>Bonsai Vereniging Brabant</h1>
-                    <p class="site-tagline">Bonsai uit het zuiden</p>
+                    <p class="site-tagline" onclick="cycleSeason()">Bonsai uit het zuiden</p>
                 </div>
             </div>
             <nav class="main-nav" id="main-nav">
@@ -40,7 +58,7 @@
     <div class="page-hero">
         <div class="page-hero-bg" style="background-image: url('images/tokonoma/02_tokonoma_feb_2024.jpg');"></div>
         <div class="page-hero-content">
-            <p>Berlicum</p>
+            <p>Bezoek onze club</p>
             <h1>Contact</h1>
         </div>
     </div>
@@ -52,7 +70,7 @@
                     <p>Heb je vragen, opmerkingen of wil je een keertje langskomen bij een van onze bijeenkomsten?</p>
                     <p>Je kunt ons een bericht sturen via onderstaand formulier. We reageren zo snel mogelijk!</p>
                     
-                    <form action="#" method="post" style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2.5rem; background: var(--color-sand); padding: 2.5rem; border-radius: 20px;">
+                    <form action="#" method="post" style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; background: var(--color-sand); padding: 1.5rem; border-radius: 20px;">
                         <div>
                             <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--color-bark);">Naam *</label>
                             <input type="text" id="name" name="name" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-family: inherit;">

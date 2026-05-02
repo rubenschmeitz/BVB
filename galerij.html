@@ -9,6 +9,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
     <script src="js/seasons.js" defer></script>
+    
+    <!-- Meta Tags & SEO -->
+    <meta name="description" content="Bekijk de prachtige bonsai collecties van onze leden en krijg een impressie van onze clubavonden bij Bonsai Vereniging Brabant.">
+    <meta name="theme-color" content="#7A5B49">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Galerij - Bonsai Vereniging Brabant">
+    <meta property="og:description" content="Een digitale expositie van passie en vakmanschap. Bekijk onze bonsai galerij.">
+    <meta property="og:image" content="images/logo_main.png">
+    
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <link rel="manifest" href="site.webmanifest">
     <style>
         .gallery-category {
             display: none;
@@ -23,10 +38,13 @@
     <header class="site-header">
         <div class="header-container">
             <div class="site-branding">
-                <img src="images/logo_main.png" alt="BVB Logo" class="main-logo">
+                <div class="logo-wrapper">
+                    <img src="images/logo_main.png" alt="BVB Logo" class="main-logo">
+                    <div class="logo-overlay"></div>
+                </div>
                 <div class="site-title-box">
                     <h1>Bonsai Vereniging Brabant</h1>
-                    <p class="site-tagline">Bonsai uit het zuiden</p>
+                    <p class="site-tagline" onclick="cycleSeason()">Bonsai uit het zuiden</p>
                 </div>
             </div>
             <nav class="main-nav" id="main-nav">
@@ -87,16 +105,16 @@
             <!-- Bomen van de Leden -->
             <section id="leden-section" class="gallery-category">
                 <div class="gallery-header">
-                    <h2>Bomen van de Leden</h2>
-                    <p>Onze digitale expositie. Een oneindige stroom van passie en vakmanschap, direct uit de collecties van onze leden.</p>
+                    <h2>Digitale Expositie <span style="font-size: 0.7em; opacity: 0.8; display: block; margin-top: 0.5rem; font-weight: 500;">(Bomen van de Leden)</span></h2>
+                    <p>Welkom bij onze online tentoonstelling. Een oneindige stroom van passie en vakmanschap, direct uit de collecties van onze leden.</p>
                 </div>
                 
                 <div class="exhibition-wrapper">
                     <div class="exhibition-container">
-                        <!-- Unique Set of Trees (20) -->
+                        <!-- Unique Set of Trees (18) -->
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_1.png" alt="Acer Palmatum">
+                                <img src="images/trees/transparent_backgrounds/tree_member_1.png" alt="Acer Palmatum">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Acer Palmatum</h3>
@@ -106,17 +124,37 @@
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_2.png" alt="Juniperus">
+                                <img src="images/trees/transparent_backgrounds/tree_member_3.png" alt="Acer Palmatum">
+                            </div>
+                            <div class="exhibition-details">
+                                <h3 class="exhibition-species">Acer Palmatum</h3>
+                                <p class="exhibition-style">Moyogi (Informal Upright)</p>
+                            </div>
+                        </div>
+
+                        <div class="exhibition-card">
+                            <div class="exhibition-image-box">
+                                <img src="images/trees/transparent_backgrounds/tree_member_6.png" alt="Juniperus">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Juniperus</h3>
-                                <p class="exhibition-style">Shakan (Slanting)</p>
+                                <p class="exhibition-style">Moyogi (Informal Upright)</p>
                             </div>
                         </div>
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_3.png" alt="Acer Palmatum">
+                                <img src="images/trees/transparent_backgrounds/tree_member_7.png" alt="Pinus">
+                            </div>
+                            <div class="exhibition-details">
+                                <h3 class="exhibition-species">Pinus</h3>
+                                <p class="exhibition-style">Literati</p>
+                            </div>
+                        </div>
+
+                        <div class="exhibition-card">
+                            <div class="exhibition-image-box">
+                                <img src="images/trees/transparent_backgrounds/tree_member_8.png" alt="Acer Palmatum">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Acer Palmatum</h3>
@@ -126,87 +164,37 @@
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_4.png" alt="Pinus Sylvestris">
+                                <img src="images/trees/transparent_backgrounds/tree_member_9.png" alt="Acer Palmatum">
                             </div>
                             <div class="exhibition-details">
-                                <h3 class="exhibition-species">Pinus Sylvestris</h3>
-                                <p class="exhibition-style">Bunjin (Literati)</p>
+                                <h3 class="exhibition-species">Acer Palmatum</h3>
+                                <p class="exhibition-style">Moyogi (Informal Upright)</p>
                             </div>
                         </div>
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_5.png" alt="Bonsai Collectie">
+                                <img src="images/trees/transparent_backgrounds/tree_member_10.png" alt="Prunus">
                             </div>
                             <div class="exhibition-details">
-                                <h3 class="exhibition-species">Leden Collectie</h3>
-                                <p class="exhibition-style">Diverse Stijlen</p>
+                                <h3 class="exhibition-species">Prunus</h3>
+                                <p class="exhibition-style">Literati</p>
                             </div>
                         </div>
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_6.png" alt="Bonsai Collectie">
+                                <img src="images/trees/transparent_backgrounds/tree_member_11.png" alt="Ulmus Parvifolia">
                             </div>
                             <div class="exhibition-details">
-                                <h3 class="exhibition-species">Leden Collectie</h3>
-                                <p class="exhibition-style">Diverse Stijlen</p>
+                                <h3 class="exhibition-species">Ulmus Parvifolia</h3>
+                                <p class="exhibition-style">Moyogi (Informal Upright)</p>
                             </div>
                         </div>
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_7.png" alt="Bonsai Collectie">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Leden Collectie</h3>
-                                <p class="exhibition-style">Diverse Stijlen</p>
-                            </div>
-                        </div>
-
-                        <div class="exhibition-card">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_8.png" alt="Bonsai Collectie">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Leden Collectie</h3>
-                                <p class="exhibition-style">Diverse Stijlen</p>
-                            </div>
-                        </div>
-
-                        <div class="exhibition-card">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_9.png" alt="Bonsai Collectie">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Leden Collectie</h3>
-                                <p class="exhibition-style">Diverse Stijlen</p>
-                            </div>
-                        </div>
-
-                        <div class="exhibition-card">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_10.png" alt="Bonsai Collectie">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Leden Collectie</h3>
-                                <p class="exhibition-style">Diverse Stijlen</p>
-                            </div>
-                        </div>
-
-                        <div class="exhibition-card">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_11.png" alt="Bonsai Collectie">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Leden Collectie</h3>
-                                <p class="exhibition-style">Diverse Stijlen</p>
-                            </div>
-                        </div>
-
-                        <div class="exhibition-card">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_12.png" alt="Taxus Baccata">
+                                <img src="images/trees/transparent_backgrounds/tree_member_12.png" alt="Taxus Baccata">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Taxus Baccata</h3>
@@ -216,7 +204,7 @@
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_13.png" alt="Cotoneaster">
+                                <img src="images/trees/transparent_backgrounds/tree_member_13.png" alt="Cotoneaster">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Cotoneaster</h3>
@@ -226,7 +214,7 @@
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_14.png" alt="Acer Palmatum">
+                                <img src="images/trees/transparent_backgrounds/tree_member_14.png" alt="Acer Palmatum">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Acer Palmatum</h3>
@@ -236,7 +224,7 @@
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_15.png" alt="Acer Palmatum">
+                                <img src="images/trees/transparent_backgrounds/tree_member_15.png" alt="Acer Palmatum">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Acer Palmatum</h3>
@@ -246,27 +234,27 @@
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_16.png" alt="Bonsai Collectie">
+                                <img src="images/trees/transparent_backgrounds/tree_member_16.png" alt="Malus">
                             </div>
                             <div class="exhibition-details">
-                                <h3 class="exhibition-species">Leden Collectie</h3>
-                                <p class="exhibition-style">Diverse Stijlen</p>
+                                <h3 class="exhibition-species">Malus</h3>
+                                <p class="exhibition-style">Moyogi (Informal Upright)</p>
                             </div>
                         </div>
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_17.png" alt="Bonsai Collectie">
+                                <img src="images/trees/transparent_backgrounds/tree_member_17.png" alt="Larix">
                             </div>
                             <div class="exhibition-details">
-                                <h3 class="exhibition-species">Leden Collectie</h3>
-                                <p class="exhibition-style">Diverse Stijlen</p>
+                                <h3 class="exhibition-species">Larix</h3>
+                                <p class="exhibition-style">Moyogi (Informal Upright)</p>
                             </div>
                         </div>
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_pieter_1.png" alt="Wisteria">
+                                <img src="images/trees/transparent_backgrounds/tree_pieter_1.png" alt="Wisteria">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Wisteria</h3>
@@ -276,7 +264,7 @@
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_pieter_2.png" alt="Acer Palmatum">
+                                <img src="images/trees/transparent_backgrounds/tree_pieter_2.png" alt="Acer Palmatum">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Acer Palmatum</h3>
@@ -286,7 +274,7 @@
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_pieter_3.png" alt="Acer Palmatum">
+                                <img src="images/trees/transparent_backgrounds/tree_pieter_3.png" alt="Acer Palmatum">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Acer Palmatum</h3>
@@ -294,10 +282,10 @@
                             </div>
                         </div>
 
-                        <!-- Duplicate Set for Seamless Looping (20) -->
+                        <!-- Duplicate Set for Seamless Looping (18) -->
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_1.png" alt="Acer Palmatum">
+                                <img src="images/trees/transparent_backgrounds/tree_member_1.png" alt="Acer Palmatum">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Acer Palmatum</h3>
@@ -307,17 +295,37 @@
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_2.png" alt="Juniperus">
+                                <img src="images/trees/transparent_backgrounds/tree_member_3.png" alt="Acer Palmatum">
+                            </div>
+                            <div class="exhibition-details">
+                                <h3 class="exhibition-species">Acer Palmatum</h3>
+                                <p class="exhibition-style">Moyogi (Informal Upright)</p>
+                            </div>
+                        </div>
+
+                        <div class="exhibition-card">
+                            <div class="exhibition-image-box">
+                                <img src="images/trees/transparent_backgrounds/tree_member_6.png" alt="Juniperus">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Juniperus</h3>
-                                <p class="exhibition-style">Shakan (Slanting)</p>
+                                <p class="exhibition-style">Moyogi (Informal Upright)</p>
                             </div>
                         </div>
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_3.png" alt="Acer Palmatum">
+                                <img src="images/trees/transparent_backgrounds/tree_member_7.png" alt="Pinus">
+                            </div>
+                            <div class="exhibition-details">
+                                <h3 class="exhibition-species">Pinus</h3>
+                                <p class="exhibition-style">Literati</p>
+                            </div>
+                        </div>
+
+                        <div class="exhibition-card">
+                            <div class="exhibition-image-box">
+                                <img src="images/trees/transparent_backgrounds/tree_member_8.png" alt="Acer Palmatum">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Acer Palmatum</h3>
@@ -327,87 +335,37 @@
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_4.png" alt="Pinus Sylvestris">
+                                <img src="images/trees/transparent_backgrounds/tree_member_9.png" alt="Acer Palmatum">
                             </div>
                             <div class="exhibition-details">
-                                <h3 class="exhibition-species">Pinus Sylvestris</h3>
-                                <p class="exhibition-style">Bunjin (Literati)</p>
+                                <h3 class="exhibition-species">Acer Palmatum</h3>
+                                <p class="exhibition-style">Moyogi (Informal Upright)</p>
                             </div>
                         </div>
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_5.png" alt="Bonsai Collectie">
+                                <img src="images/trees/transparent_backgrounds/tree_member_10.png" alt="Prunus">
                             </div>
                             <div class="exhibition-details">
-                                <h3 class="exhibition-species">Leden Collectie</h3>
-                                <p class="exhibition-style">Diverse Stijlen</p>
+                                <h3 class="exhibition-species">Prunus</h3>
+                                <p class="exhibition-style">Literati</p>
                             </div>
                         </div>
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_6.png" alt="Bonsai Collectie">
+                                <img src="images/trees/transparent_backgrounds/tree_member_11.png" alt="Ulmus Parvifolia">
                             </div>
                             <div class="exhibition-details">
-                                <h3 class="exhibition-species">Leden Collectie</h3>
-                                <p class="exhibition-style">Diverse Stijlen</p>
+                                <h3 class="exhibition-species">Ulmus Parvifolia</h3>
+                                <p class="exhibition-style">Moyogi (Informal Upright)</p>
                             </div>
                         </div>
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_7.png" alt="Bonsai Collectie">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Leden Collectie</h3>
-                                <p class="exhibition-style">Diverse Stijlen</p>
-                            </div>
-                        </div>
-
-                        <div class="exhibition-card">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_8.png" alt="Bonsai Collectie">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Leden Collectie</h3>
-                                <p class="exhibition-style">Diverse Stijlen</p>
-                            </div>
-                        </div>
-
-                        <div class="exhibition-card">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_9.png" alt="Bonsai Collectie">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Leden Collectie</h3>
-                                <p class="exhibition-style">Diverse Stijlen</p>
-                            </div>
-                        </div>
-
-                        <div class="exhibition-card">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_10.png" alt="Bonsai Collectie">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Leden Collectie</h3>
-                                <p class="exhibition-style">Diverse Stijlen</p>
-                            </div>
-                        </div>
-
-                        <div class="exhibition-card">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_11.png" alt="Bonsai Collectie">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Leden Collectie</h3>
-                                <p class="exhibition-style">Diverse Stijlen</p>
-                            </div>
-                        </div>
-
-                        <div class="exhibition-card">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_12.png" alt="Taxus Baccata">
+                                <img src="images/trees/transparent_backgrounds/tree_member_12.png" alt="Taxus Baccata">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Taxus Baccata</h3>
@@ -417,7 +375,7 @@
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_13.png" alt="Cotoneaster">
+                                <img src="images/trees/transparent_backgrounds/tree_member_13.png" alt="Cotoneaster">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Cotoneaster</h3>
@@ -427,7 +385,7 @@
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_14.png" alt="Acer Palmatum">
+                                <img src="images/trees/transparent_backgrounds/tree_member_14.png" alt="Acer Palmatum">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Acer Palmatum</h3>
@@ -437,7 +395,7 @@
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_15.png" alt="Acer Palmatum">
+                                <img src="images/trees/transparent_backgrounds/tree_member_15.png" alt="Acer Palmatum">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Acer Palmatum</h3>
@@ -447,27 +405,27 @@
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_16.png" alt="Bonsai Collectie">
+                                <img src="images/trees/transparent_backgrounds/tree_member_16.png" alt="Malus">
                             </div>
                             <div class="exhibition-details">
-                                <h3 class="exhibition-species">Leden Collectie</h3>
-                                <p class="exhibition-style">Diverse Stijlen</p>
+                                <h3 class="exhibition-species">Malus</h3>
+                                <p class="exhibition-style">Moyogi (Informal Upright)</p>
                             </div>
                         </div>
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_member_17.png" alt="Bonsai Collectie">
+                                <img src="images/trees/transparent_backgrounds/tree_member_17.png" alt="Larix">
                             </div>
                             <div class="exhibition-details">
-                                <h3 class="exhibition-species">Leden Collectie</h3>
-                                <p class="exhibition-style">Diverse Stijlen</p>
+                                <h3 class="exhibition-species">Larix</h3>
+                                <p class="exhibition-style">Moyogi (Informal Upright)</p>
                             </div>
                         </div>
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_pieter_1.png" alt="Wisteria">
+                                <img src="images/trees/transparent_backgrounds/tree_pieter_1.png" alt="Wisteria">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Wisteria</h3>
@@ -477,7 +435,7 @@
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_pieter_2.png" alt="Acer Palmatum">
+                                <img src="images/trees/transparent_backgrounds/tree_pieter_2.png" alt="Acer Palmatum">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Acer Palmatum</h3>
@@ -487,7 +445,7 @@
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
-                                <img src="images/trees/processed/tree_pieter_3.png" alt="Acer Palmatum">
+                                <img src="images/trees/transparent_backgrounds/tree_pieter_3.png" alt="Acer Palmatum">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Acer Palmatum</h3>
@@ -519,20 +477,31 @@
         });
 
         function showCategory(categoryId) {
-            // Hide all categories
             document.querySelectorAll('.gallery-category').forEach(cat => {
                 cat.classList.remove('active');
             });
-            // Deactivate all buttons
             document.querySelectorAll('.gallery-nav button').forEach(btn => {
                 btn.classList.remove('active');
             });
-            
-            // Show selected category
             document.getElementById(categoryId + '-section').classList.add('active');
-            // Activate clicked button
             event.currentTarget.classList.add('active');
         }
+
+        function toggleTree(card) {
+            // Remove active class from all other cards
+            document.querySelectorAll('.exhibition-card').forEach(c => {
+                if (c !== card) c.classList.remove('active');
+            });
+            // Toggle active class on clicked card
+            card.classList.toggle('active');
+        }
+
+        // Close nameplate when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.exhibition-card')) {
+                document.querySelectorAll('.exhibition-card').forEach(c => c.classList.remove('active'));
+            }
+        });
     </script>
 </body>
 </html>

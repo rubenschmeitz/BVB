@@ -9,6 +9,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
     <script src="js/seasons.js" defer></script>
+    
+    <!-- Meta Tags & SEO -->
+    <meta name="description" content="Bonsai Vereniging Brabant - Dé vereniging voor bonsai liefhebbers in Brabant. Ontdek onze passie, bekijk onze galerij en sluit je aan bij onze clubavonden.">
+    <meta name="theme-color" content="#7A5B49">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Bonsai Vereniging Brabant">
+    <meta property="og:description" content="Dé vereniging voor bonsai liefhebbers in Brabant. Passie, vakmanschap en gezelligheid.">
+    <meta property="og:image" content="images/logo_main.png">
+    
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <link rel="manifest" href="site.webmanifest">
+
     <!-- Preload first hero image for speed -->
     <link rel="preload" as="image" href="images/tokonoma/01_tokonoma_jan_2024.jpg">
 </head>
@@ -18,10 +34,13 @@
     <header class="site-header">
         <div class="header-container">
             <div class="site-branding">
-                <img src="images/logo_main.png" alt="BVB Logo" class="main-logo">
+                <div class="logo-wrapper">
+                    <img src="images/logo_main.png" alt="BVB Logo" class="main-logo">
+                    <div class="logo-overlay"></div>
+                </div>
                 <div class="site-title-box">
                     <h1>Bonsai Vereniging Brabant</h1>
-                    <p class="site-tagline">Bonsai uit het zuiden</p>
+                    <p class="site-tagline" onclick="cycleSeason()">Bonsai uit het zuiden</p>
                 </div>
             </div>
             <nav class="main-nav" id="main-nav">
@@ -39,7 +58,6 @@
         </div>
     </header>
 
-    <!-- Hero Slideshow with Lazy Loading -->
     <div class="hero-slideshow" id="hero-slider">
         <div class="slide active" style="background-image: url('images/tokonoma/01_tokonoma_jan_2024.jpg');"></div>
         <div class="slide" data-src="images/tokonoma/02_tokonoma_feb_2024.jpg"></div>
@@ -51,99 +69,140 @@
         <div class="hero-overlay"></div>
         <div class="hero-slideshow-content">
             <div class="text-overlay">
-                <p>Welkom bij</p>
-                <h1>Bonsai Vereniging Brabant</h1>
+                <h1 style="font-size: 5rem; letter-spacing: -2px;">Welkom bij <span style="color: var(--color-sand);">BVB</span></h1>
+                <p style="font-size: 1.25rem; opacity: 0.9; margin-top: 1rem;">Een actieve club liefhebbers in het hart van Brabant</p>
             </div>
         </div>
-    </div>
-
-    <!-- Main Content Area -->
-    <main class="content-area">
-        <div class="content-container-wide">
-            
-            <!-- Introduction Split -->
-            <section class="split-layout">
-                <div class="split-text">
-                    <h2>Passie voor Bonsai in Brabant</h2>
-                    <p class="lead" style="font-size: 1.15rem; color: var(--color-charcoal); margin-bottom: 2rem; line-height: 1.5;">BVB is een levendige vereniging van liefhebbers die zich toelegt op de vormgeving, verzorging en bewondering van levende kunstwerken.</p>
-                    <p>Of je nu een beginnende liefhebber bent of al jarenlange ervaring hebt, bij de BVB vind je een inspirerende omgeving om je kennis te vergroten en je vaardigheden te verfijnen. We delen onze passie in een typisch Brabantse, gezellige sfeer.</p>
-                    <div style="margin-top: 3rem;">
-                        <a href="contact.html" class="nav-special" style="text-decoration: none; padding: 15px 35px; font-size: 1.1rem;">Kom een keer langs</a>
+    </div>            <!-- Actueel: NBS 2026 -->
+            <section class="cta-banner" style="background: var(--color-charcoal); padding: 2.5rem 2rem; margin-top: -60px; position: relative; z-index: 15; border-radius: 12px; box-shadow: var(--shadow-premium); border: 1px solid rgba(255,255,255,0.1);">
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('images/tokonoma/10_tokonoma_okt_2024.jpg'); background-size: cover; background-position: center; opacity: 0.15; filter: grayscale(1); border-radius: 12px;"></div>
+                <div style="position: relative; z-index: 2; max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <span style="background: var(--color-clay); color: white; padding: 4px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 700; margin-bottom: 1rem; display: inline-block;">Nieuws</span>
+                        <h2 style="font-size: 2.5rem; color: white; margin-bottom: 0.5rem;">Nationale Bonsai Show 2026</h2>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 1.1rem;">BVB is dit jaar de trotse gastheer van de NBS. Noteer 26 & 27 september alvast in de agenda!</p>
                     </div>
-                </div>
-                <div class="split-image">
-                    <img src="images/tokonoma/05_tokonoma_mei_2024.jpg" alt="Bonsai Presentatie">
+                    <a href="nbs.html" class="nav-special" style="text-decoration: none; padding: 18px 35px; font-size: 1rem; background: var(--color-sand); color: var(--color-bark); border: none; font-weight: 700; border-radius: 4px; transition: transform 0.3s ease;">Alles over de NBS 2026</a>
                 </div>
             </section>
 
-            <!-- Feature Cards Section -->
-            <section class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <!-- Over de club -->
+            <section class="premium-section" style="margin-top: 2.5rem; z-index: 10;">
+                <div class="split-layout">
+                    <div class="split-text">
+                        <span style="color: var(--color-clay); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; margin-bottom: 1rem; display: block;">Wie zijn we?</span>
+                        <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Op zijn Brabants: Gezellig en ongedwongen</h2>
+                        <p class="lead" style="font-style: normal; color: var(--color-bark);">Wij zijn een actieve vereniging van bonsai-liefhebbers. Bij ons draait het om meer dan alleen bomen; we vinden het sociale aspect minstens zo belangrijk.</p>
+                        <p>Tijdens onze maandelijkse bijeenkomsten in Berlicum werken we samen aan onze bomen. Of je nu een beginner bent die net zijn eerste boom heeft gekocht, of een ervaren rot in het vak: iedereen is welkom om kennis en ervaring te delen. Geen gedoe, gewoon samen bezig zijn met onze hobby.</p>
+                        <div style="margin-top: 2.5rem; display: flex; gap: 1.5rem;">
+                            <a href="contact.html" class="nav-special" style="text-decoration: none; padding: 15px 35px; background: var(--color-bark); color: white; border-radius: 4px; font-weight: 600;">Kom een keer kijken</a>
+                            <a href="galerij.html" style="text-decoration: none; padding: 15px 35px; border: 1px solid var(--color-bark); color: var(--color-bark); border-radius: 4px; font-weight: 600;">Bekijk onze bomen</a>
+                        </div>
                     </div>
-                    <h3>Clubavonden</h3>
-                    <p>Maandelijkse bijeenkomsten in Berlicum waar we samen aan onze bomen werken en advies delen.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h9z"/></svg>
+                    <div class="split-image">
+                        <img src="images/tokonoma/12_tokonoma_dec_2024.jpg" alt="Clubavond sfeerimpressie" style="border-radius: 12px; box-shadow: var(--shadow-premium);">
                     </div>
-                    <h3>Workshops</h3>
-                    <p>Leren van experts en ervaren leden. Van basisvormgeving tot gespecialiseerde technieken.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                    </div>
-                    <h3>Evenementen</h3>
-                    <p>Deelname aan tentoonstellingen en natuurlijk onze eigen evenementen zoals de NBS 2026.</p>
                 </div>
             </section>
 
-            <!-- NBS CTA Banner -->
-            <section class="cta-banner">
-                <div style="position: relative; z-index: 2; max-width: 800px; margin: 0 auto;">
-                    <p style="text-transform: uppercase; letter-spacing: 4px; font-weight: 600; margin-bottom: 1rem; color: var(--color-sand);">Hoogtepunt van 2026</p>
-                    <h2>Nederlandse Bonsai Show</h2>
-                    <p>Op 26 en 27 september organiseert BVB hét landelijke topevenement in De Moerkoal. Mis de indrukwekkende tentoonstelling en demonstraties niet!</p>
-                    <a href="nbs.html" class="nav-special" style="text-decoration: none; padding: 15px 40px; font-size: 1.1rem; background: white; color: var(--color-bark);">Bekijk het NBS Programma</a>
+            <!-- Wat doen we? -->
+            <section class="reveal-on-scroll" style="padding: 3rem 0; background: radial-gradient(circle at 10% 10%, var(--color-warm-shadow) 0%, transparent 40%);">
+                <div class="section-header" style="text-align: center; margin-bottom: 2rem;">
+                    <h2 style="font-size: 2.5rem; color: var(--color-bark);">Wat doen we zoal?</h2>
+                    <p style="max-width: 600px; margin: 1rem auto; color: #666;">Onze activiteiten zijn er op gericht om zoveel mogelijk kennis en ervaring te delen, maar wel op een gemoedelijke manier.</p>
                 </div>
-                <!-- Subtle background decoration -->
-                <div style="position: absolute; right: -50px; top: -50px; width: 300px; height: 300px; background: rgba(255,255,255,0.05); border-radius: 50%; z-index: 1;"></div>
-                <div style="position: absolute; left: -100px; bottom: -100px; width: 400px; height: 400px; background: rgba(0,0,0,0.1); border-radius: 50%; z-index: 1;"></div>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon" style="background: var(--color-clay); color: white;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <h3>Maandelijkse bijeenkomsten</h3>
+                        <p>Iedere maand komen we samen in Berlicum. We werken dan aan onze eigen bomen en helpen elkaar waar nodig.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" style="background: var(--color-clay); color: white;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h9z"/></svg>
+                        </div>
+                        <h3>Workshops & Masterclasses</h3>
+                        <p>Regelmatig nodigen we (inter)nationale bonsaimeesters uit om hun kennis te delen tijdens masterclasses en demonstraties.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" style="background: var(--color-clay); color: white;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <h3>New Talent Contest</h3>
+                        <p>We stimuleren nieuw talent! Jaarlijks selecteren we een afgevaardigde voor de landelijke NTC-wedstrijd.</p>
+                    </div>
+                </div>
             </section>
 
-            <!-- Instagram Section -->
-            <section style="margin: 8rem 0; text-align: center;">
-                <h2 style="font-size: 2.2rem; margin-bottom: 1rem;">Volg onze reis</h2>
-                <p style="margin-bottom: 4rem; color: var(--color-charcoal);">Dagelijkse inspiratie en updates via onze Instagram community.</p>
-                
-                <div class="instagram-widget" style="box-shadow: 0 30px 60px rgba(0,0,0,0.1); border-radius: 20px;">
-                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/bonsai_vereniging_brabant/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:20px; margin: 1px; max-width:450px; min-width:326px; padding:0; width:99.375%;"></blockquote>
-                    <script async src="https://www.instagram.com/embed.js"></script>
-                </div>
 
-                <div style="margin-top: 3rem;">
-                    <a href="https://www.instagram.com/bonsai_vereniging_brabant/" target="_blank" style="color: var(--color-sage); font-weight: 600; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                        @bonsai_vereniging_brabant
-                    </a>
-                </div>
-            </section>
 
+        <div class="content-container reveal-on-scroll">
+            <!-- Instagram Widget Prototype -->
+            <div class="instagram-widget">
+                <div class="ig-post-header">
+                    <div class="ig-avatar"><div class="ig-avatar-inner">BVB</div></div>
+                    <div class="ig-username">bonsai_brabant</div>
+                </div>
+                <div class="ig-post-image"></div>
+                <div class="ig-post-content">
+                    <div class="ig-post-caption">
+                        <strong>bonsai_brabant</strong> Een prachtige impressie van onze laatste clubavond. De lente is begonnen! #bonsai #brabant #nature
+                    </div>
+                    <a href="https://www.instagram.com/bonsai_brabant/" target="_blank" class="ig-follow-btn">Volg ons op Instagram</a>
+                </div>
+            </div>
+
+            <div class="text-content">
+                <p>Wil je meer weten over onze vereniging? Neem dan gerust <a href="contact.html">contact</a> met ons op of kom eens langs op een van onze clubavonden!</p>
+            </div>
         </div>
     </main>
 
     <footer class="site-footer">
         <div class="footer-container">
-            <div class="footer-bottom" style="border: none; padding-top: 0;">
-                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="contact.html" style="color: inherit; text-decoration: none; opacity: 0.7;">Contact</a></p>
+            <div class="footer-bottom">
+                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="contact.html">Contact</a></p>
             </div>
         </div>
     </footer>
 
     <script>
+        // Simple slideshow logic
+        const slides = document.querySelectorAll('.hero-slideshow .slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        if (slides.length > 0) {
+            setInterval(nextSlide, 5000);
+        }
+
+        // Scroll Reveal Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle
         const mobileToggle = document.getElementById('mobile-toggle');
         const mainNav = document.getElementById('main-nav');
 
@@ -151,35 +210,6 @@
             mobileToggle.classList.toggle('active');
             mainNav.classList.toggle('active');
         });
-
-        // Hero Slider Logic with Lazy Loading
-        const slides = document.querySelectorAll('#hero-slider .slide');
-        let currentSlide = 0;
-
-        function nextSlide() {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            
-            const nextSlideEl = slides[currentSlide];
-            
-            if (nextSlideEl.hasAttribute('data-src')) {
-                const src = nextSlideEl.getAttribute('data-src');
-                nextSlideEl.style.backgroundImage = `url('${src}')`;
-                nextSlideEl.removeAttribute('data-src');
-                
-                const futureSlide = slides[(currentSlide + 1) % slides.length];
-                if (futureSlide && futureSlide.hasAttribute('data-src')) {
-                    const img = new Image();
-                    img.src = futureSlide.getAttribute('data-src');
-                }
-            }
-            
-            nextSlideEl.classList.add('active');
-        }
-
-        if (slides.length > 0) {
-            setInterval(nextSlide, 5000);
-        }
     </script>
 </body>
 </html>
