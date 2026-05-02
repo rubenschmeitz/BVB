@@ -997,3 +997,114 @@ a:hover {
         margin-bottom: 2rem;
     }
 }
+
+/* --- Feature Grid & Cards --- */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    margin: 4rem 0;
+}
+
+.feature-card {
+    background: var(--color-white-pure);
+    padding: 3rem 2rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    border: 1px solid rgba(0,0,0,0.02);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--color-sand);
+    color: var(--color-bark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+}
+
+.feature-card h3 {
+    font-size: 1.4rem;
+    color: var(--color-bark);
+    margin-bottom: 1rem;
+}
+
+.feature-card p {
+    font-size: 1rem;
+    color: var(--color-charcoal);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* --- Layout Splits --- */
+.split-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin: 6rem 0;
+}
+
+.split-text h2 {
+    font-size: 2.8rem;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    color: var(--color-bark);
+}
+
+.split-image img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+/* --- CTA Section --- */
+.cta-banner {
+    background: var(--color-bark);
+    color: white;
+    padding: 5rem 3rem;
+    border-radius: 24px;
+    text-align: center;
+    margin: 6rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-banner h2 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.cta-banner p {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+}
+
+@media (max-width: 900px) {
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .split-layout {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 3rem;
+    }
+    
+    .split-text h2 {
+        font-size: 2.2rem;
+    }
+}
