@@ -782,7 +782,7 @@ a:hover {
     right: 0;
     bottom: 0;
     background-size: cover;
-    background-position: center 20%; /* Default: show crown, hide tip tip */
+    background-position: center 42%; /* Show crown, hide the very tip for balance */
     z-index: 0;
 }
 
@@ -791,7 +791,7 @@ a:hover {
 }
 
 .page-hero.show-tip .page-hero-bg {
-    background-position: center 0% !important; /* Show the very top */
+    background-position: center 22% !important; /* Revealing the top point of the bonsai */
 }
 
 .page-hero::after {
