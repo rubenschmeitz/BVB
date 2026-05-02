@@ -139,7 +139,7 @@ a:hover {
 
 /* --- Hero Slideshow --- */
 .hero-slideshow {
-    height: 550px;
+    height: 450px;
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -158,13 +158,13 @@ a:hover {
     animation: slideShow 35s infinite;
 }
 
-.hero-slideshow .slide:nth-child(1) { background-image: url('../images/tokonoma/01_tokonoma_jan_2024.jpg'); animation-delay: 0s; background-position: center center; }
-.hero-slideshow .slide:nth-child(2) { background-image: url('../images/tokonoma/02_tokonoma_feb_2024.jpg'); animation-delay: 5s; background-position: center center; }
-.hero-slideshow .slide:nth-child(3) { background-image: url('../images/tokonoma/04_tokonoma_apr_2024.jpg'); animation-delay: 10s; background-position: center center; }
-.hero-slideshow .slide:nth-child(4) { background-image: url('../images/tokonoma/05_tokonoma_mei_2024.jpg'); animation-delay: 15s; background-position: center center; }
-.hero-slideshow .slide:nth-child(5) { background-image: url('../images/tokonoma/08_tokonoma_aug_2024.jpg'); animation-delay: 20s; background-position: center center; }
-.hero-slideshow .slide:nth-child(6) { background-image: url('../images/tokonoma/10_tokonoma_okt_2024.jpg'); animation-delay: 25s; background-position: center center; }
-.hero-slideshow .slide:nth-child(7) { background-image: url('../images/tokonoma/12_tokonoma_dec_2024.jpg'); animation-delay: 30s; background-position: center center; }
+.hero-slideshow .slide:nth-child(1) { background-image: url('../images/tokonoma/01_tokonoma_jan_2024.jpg'); animation-delay: 0s; background-position: center 35%; }
+.hero-slideshow .slide:nth-child(2) { background-image: url('../images/tokonoma/02_tokonoma_feb_2024.jpg'); animation-delay: 5s; background-position: center 35%; }
+.hero-slideshow .slide:nth-child(3) { background-image: url('../images/tokonoma/04_tokonoma_apr_2024.jpg'); animation-delay: 10s; background-position: center 35%; }
+.hero-slideshow .slide:nth-child(4) { background-image: url('../images/tokonoma/05_tokonoma_mei_2024.jpg'); animation-delay: 15s; background-position: center 35%; }
+.hero-slideshow .slide:nth-child(5) { background-image: url('../images/tokonoma/08_tokonoma_aug_2024.jpg'); animation-delay: 20s; background-position: center 35%; }
+.hero-slideshow .slide:nth-child(6) { background-image: url('../images/tokonoma/10_tokonoma_okt_2024.jpg'); animation-delay: 25s; background-position: center 35%; }
+.hero-slideshow .slide:nth-child(7) { background-image: url('../images/tokonoma/12_tokonoma_dec_2024.jpg'); animation-delay: 30s; background-position: center 35%; }
 
 @keyframes slideShow {
     0% { opacity: 0; transform: scale(1.08); }
@@ -181,8 +181,45 @@ a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);
     z-index: 2;
+}
+
+.hero-slideshow-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 5%;
+    max-width: 1300px;
+    margin: 0 auto;
+    pointer-events: none;
+}
+
+.hero-slideshow-content .text-overlay {
+    max-width: 800px;
+}
+
+.hero-slideshow-content h1 {
+    font-size: 4rem;
+    color: white;
+    margin: 0;
+    line-height: 1.1;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+}
+
+.hero-slideshow-content p {
+    font-size: 1.2rem;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 0.5rem;
 }
 
 /* --- Content Area --- */
@@ -729,7 +766,7 @@ a:hover {
     height: 300px; /* Reduced height as requested */
     width: 100%;
     background-size: cover;
-    background-position: center;
+    background-position: center 35%; /* Show more of the tree top */
     position: relative;
     display: flex;
     align-items: center;
