@@ -191,10 +191,17 @@ a:hover {
     background-color: var(--color-white-pure);
 }
 
-.content-container {
-    max-width: 800px;
+.content-container, .content-container-wide {
     margin: 0 auto;
     padding: 0 5%;
+}
+
+.content-container {
+    max-width: 800px;
+}
+
+.content-container-wide {
+    max-width: 1300px;
 }
 
 .text-content p {
@@ -714,5 +721,232 @@ a:hover {
     .main-logo {
         height: 60px;
         margin-bottom: 0;
+    }
+}
+
+/* --- Page Hero Styles (Reusable) --- */
+.page-hero {
+    height: 300px; /* Reduced height as requested */
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.page-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+    z-index: 1;
+}
+
+.page-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem 5%;
+    max-width: 1300px;
+    width: 100%;
+    text-align: left;
+}
+
+.page-hero-content h1 {
+    font-size: 3.5rem; /* Slightly smaller h1 */
+    margin: 0;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+    color: white;
+    line-height: 1.1;
+}
+
+.page-hero-content p {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.9);
+}
+
+.nbs-grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 6rem;
+    align-items: flex-start;
+    max-width: 1300px; /* Overriding any narrow containers */
+    margin: 0 auto;
+    width: 100%;
+}
+
+.event-sidebar-card {
+    background: var(--color-white-pure);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+.event-sidebar-card h3 {
+    color: var(--color-bark);
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+}
+
+.fact-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+}
+
+.fact-icon {
+    color: var(--color-sage);
+    flex-shrink: 0;
+}
+
+.fact-text strong {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--color-sage);
+    letter-spacing: 1px;
+}
+
+.fact-text span {
+    font-size: 1rem;
+    color: var(--color-charcoal);
+    font-weight: 500;
+}
+
+/* Timeline Styles */
+.nbs-timeline {
+    position: relative;
+    padding-left: 40px;
+    margin: 3rem 0;
+}
+
+.nbs-timeline::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-sand);
+}
+
+.timeline-day-label {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    color: var(--color-bark);
+    margin-bottom: 2rem;
+    font-size: 1.3rem;
+    position: relative;
+    margin-left: -40px;
+    padding-left: 40px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -33px;
+    top: 5px;
+    width: 14px;
+    height: 14px;
+    background: var(--color-white-pure);
+    border: 3px solid var(--color-sage);
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.timeline-item.highlighted .timeline-dot {
+    border-color: var(--color-bark);
+    background: var(--color-bark);
+}
+
+.timeline-content {
+    background: white;
+    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+.timeline-time {
+    font-weight: 700;
+    color: var(--color-sage);
+    font-size: 0.85rem;
+    margin-bottom: 0.2rem;
+    display: block;
+    text-transform: uppercase;
+}
+
+.timeline-title {
+    font-weight: 600;
+    color: var(--color-bark);
+    margin: 0;
+}
+
+/* Sidebar Demonstrators */
+.sidebar-demos {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+}
+
+.sidebar-demos .demonstrator-item {
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    text-align: center;
+}
+
+.sidebar-demos .demo-portrait {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1rem;
+}
+
+.sidebar-demos h4 {
+    font-size: 1.1rem;
+}
+
+.sidebar-demos p {
+    font-size: 0.85rem;
+}
+
+@media (max-width: 1100px) {
+    .nbs-grid-layout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        max-width: 100%;
+    }
+    
+    .page-hero {
+        height: 220px;
+    }
+    
+    .nbs-sidebar {
+        order: -1; /* Move entire sidebar to top on mobile */
+    }
+
+    .page-hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .event-sidebar-card {
+        position: static;
+        margin-bottom: 2rem;
     }
 }
