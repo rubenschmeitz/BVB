@@ -763,10 +763,8 @@ a:hover {
 
 /* --- Page Hero Styles (Reusable) --- */
 .page-hero {
-    height: 300px; /* Reduced height as requested */
+    height: 300px;
     width: 100%;
-    background-size: cover;
-    background-position: center 35%; /* Show more of the tree top */
     position: relative;
     display: flex;
     align-items: center;
@@ -774,9 +772,29 @@ a:hover {
     color: white;
     text-align: center;
     margin-bottom: 3rem;
+    overflow: hidden;
 }
 
-.page-hero::before {
+.page-hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center 20%; /* Default: show crown, hide tip tip */
+    z-index: 0;
+}
+
+.page-hero.flipped .page-hero-bg {
+    transform: scaleX(-1);
+}
+
+.page-hero.show-tip .page-hero-bg {
+    background-position: center 0% !important; /* Show the very top */
+}
+
+.page-hero::after {
     content: '';
     position: absolute;
     top: 0;
