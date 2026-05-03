@@ -87,22 +87,22 @@
                 </div>
                 
                 <div class="activity-grid">
-                    <div class="activity-item"><img src="images/club/club_1.jpg" alt="Clubavond - Gezamenlijk werken aan bonsai"></div>
-                    <div class="activity-item"><img src="images/club/club_2.jpg" alt="Clubavond - Drukke workshop sfeer"></div>
-                    <div class="activity-item"><img src="images/club/club_3.jpg" alt="Clubavond - Gezellige buitenbijeenkomst"></div>
-                    <div class="activity-item"><img src="images/club/club_4.jpg" alt="Clubavond - Uitleg en begeleiding"></div>
-                    <div class="activity-item"><img src="images/club/club_5.jpg" alt="Clubavond - Sociale interactie en koffie"></div>
-                    <div class="activity-item"><img src="images/club/club_6.jpg" alt="Clubavond - Concentratie tijdens het vormen"></div>
-                    <div class="activity-item"><img src="images/club/club_7.jpg" alt="Clubavond - Een ludieke bonsai presentatie"></div>
-                    <div class="activity-item"><img src="images/club/club_8.jpg" alt="Clubavond - Detail van verpotten op rots"></div>
-                    <div class="activity-item"><img src="images/club/club_9.jpg" alt="Clubavond - Passie voor bonsai"></div>
-                    <div class="activity-item"><img src="images/club/club_10.jpg" alt="Clubavond - Gezelligheid en vakmanschap"></div>
-                    <div class="activity-item"><img src="images/club/club_11.jpg" alt="Clubavond - Werken aan de toekomst"></div>
-                    <div class="activity-item"><img src="images/club/club_12.jpg" alt="Clubavond - Diverse bonsai activiteiten"></div>
-                    <!-- New Photos -->
-                    <div class="activity-item"><img src="club_evening_more_1_1777794562622.png" alt="BVB Clubavond - Sociale sfeer"></div>
-                    <div class="activity-item"><img src="club_evening_more_2_1777794576963.png" alt="BVB Workshop - Bedrading detail"></div>
-                    <div class="activity-item"><img src="club_evening_more_3_1777794594224.png" alt="BVB Discussie - Gezamenlijk advies"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_maart_2024_1.jpg"><img src="images/club_diverse/club_maart_2024_1.jpg" alt="Clubavond Maart 2024 - Werktafel overzicht"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_feb_2024_1.jpg"><img src="images/club_diverse/club_feb_2024_1.jpg" alt="Clubavond Februari 2024 - Concentratie bij het bedraden"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_sept_2024_1.jpg"><img src="images/club_diverse/club_sept_2024_1.jpg" alt="Clubavond September 2024 - Nazomerse bonsai sfeer"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_juni_2024_1.jpg"><img src="images/club_diverse/club_juni_2024_1.jpg" alt="Clubavond Juni 2024 - Gezamenlijk advies over vormgeving"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_cursus_2023_1.jpg"><img src="images/club_diverse/club_cursus_2023_1.jpg" alt="Cursusavond 2023 - Leren over bonsai technieken"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_nov_2022_1.jpg"><img src="images/club_diverse/club_nov_2022_1.jpg" alt="Clubavond November 2022 - Herfstwerkzaamheden"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_juni_2022_1.jpg"><img src="images/club_diverse/club_juni_2022_1.jpg" alt="Clubavond Juni 2022 - Een prachtige zomeravond"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_nov_2021_1.jpg"><img src="images/club_diverse/club_nov_2021_1.jpg" alt="Clubavond November 2021 - Passie voor bonsai blijft"></div>
+                    <div class="activity-item" data-full="images/club/club_okt.jpg"><img src="images/club/club_okt.jpg" alt="Clubavond Oktober - Voorbereiding op de winter"></div>
+                    <div class="activity-item" data-full="images/club/club_aug.jpg"><img src="images/club/club_aug.jpg" alt="Clubavond Augustus - Volop in het groeiseizoen"></div>
+                    <div class="activity-item" data-full="images/club/club_1.jpg"><img src="images/club/club_1.jpg" alt="BVB Clubavond - Gezamenlijk werken aan bonsai"></div>
+                    <div class="activity-item" data-full="images/club/club_2.jpg"><img src="images/club/club_2.jpg" alt="BVB Workshop - Drukke en gezellige sfeer"></div>
+                    <div class="activity-item" data-full="images/club/club_3.jpg"><img src="images/club/club_3.jpg" alt="BVB Clubavond - Buitenbijeenkomst op locatie"></div>
+                    <div class="activity-item" data-full="images/club/club_4.jpg"><img src="images/club/club_4.jpg" alt="BVB Workshop - Deskundige uitleg en begeleiding"></div>
+                    <div class="activity-item" data-full="images/club/club_5.jpg"><img src="images/club/club_5.jpg" alt="BVB Clubavond - Sociale interactie en koffiepauze"></div>
+                    <div class="activity-item" data-full="images/club/club_6.jpg"><img src="images/club/club_6.jpg" alt="BVB Clubavond - Focus op de kleinste details"></div>
                 </div>
             </section>
 
@@ -513,9 +513,11 @@
         const lightboxCaption = document.getElementById('lightbox-caption');
         const lightboxClose = document.querySelector('.lightbox-close');
 
-        document.querySelectorAll('.activity-item img').forEach(img => {
-            img.addEventListener('click', () => {
-                lightboxImg.src = img.src;
+        document.querySelectorAll('.activity-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                const fullSrc = item.getAttribute('data-full') || img.src;
+                lightboxImg.src = fullSrc;
                 lightboxCaption.textContent = img.alt || "BVB Clubavond";
                 lightbox.classList.add('active');
                 document.body.style.overflow = 'hidden'; // Prevent scrolling
