@@ -44,7 +44,7 @@
                 </div>
                 <div class="site-title-box">
                     <h1>Bonsai Vereniging Brabant</h1>
-                    <p class="site-tagline" onclick="cycleSeason()">Bonsai uit het zuiden</p>
+                    <p class="site-tagline">Bonsai uit het zuiden</p>
                 </div>
             </div>
             <nav class="main-nav" id="main-nav">
@@ -99,6 +99,10 @@
                     <div class="activity-item"><img src="images/club/club_10.jpg" alt="Clubavond - Gezelligheid en vakmanschap"></div>
                     <div class="activity-item"><img src="images/club/club_11.jpg" alt="Clubavond - Werken aan de toekomst"></div>
                     <div class="activity-item"><img src="images/club/club_12.jpg" alt="Clubavond - Diverse bonsai activiteiten"></div>
+                    <!-- New Photos -->
+                    <div class="activity-item"><img src="club_evening_more_1_1777794562622.png" alt="BVB Clubavond - Sociale sfeer"></div>
+                    <div class="activity-item"><img src="club_evening_more_2_1777794576963.png" alt="BVB Workshop - Bedrading detail"></div>
+                    <div class="activity-item"><img src="club_evening_more_3_1777794594224.png" alt="BVB Discussie - Gezamenlijk advies"></div>
                 </div>
             </section>
 
@@ -112,15 +116,6 @@
                 <div class="exhibition-wrapper">
                     <div class="exhibition-container">
                         <!-- Unique Set of Trees (18) -->
-                        <div class="exhibition-card">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/transparent_backgrounds/tree_member_1.png" alt="Acer Palmatum">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Acer Palmatum</h3>
-                                <p class="exhibition-style">Moyogi (Informal Upright)</p>
-                            </div>
-                        </div>
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
@@ -282,16 +277,6 @@
                             </div>
                         </div>
 
-                        <!-- Duplicate Set for Seamless Looping (18) -->
-                        <div class="exhibition-card">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/transparent_backgrounds/tree_member_1.png" alt="Acer Palmatum">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Acer Palmatum</h3>
-                                <p class="exhibition-style">Moyogi (Informal Upright)</p>
-                            </div>
-                        </div>
 
                         <div class="exhibition-card">
                             <div class="exhibition-image-box">
@@ -453,11 +438,21 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Scroll Indicator -->
+                    <div style="text-align: center; margin-top: 2rem; color: var(--color-sage); font-size: 0.9rem; opacity: 0.6; font-style: italic;">
+                        &larr; Scroll horizontaal om meer bomen te zien &rarr;
+                    </div>
                 </div>
             </section>
 
         </div>
     </main>
+
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Enlarged view">
+        <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
 
     <footer class="site-footer">
         <div class="footer-container">
@@ -500,6 +495,40 @@
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.exhibition-card')) {
                 document.querySelectorAll('.exhibition-card').forEach(c => c.classList.remove('active'));
+            }
+        });
+
+        // Lightbox Logic
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const lightboxClose = document.querySelector('.lightbox-close');
+
+        document.querySelectorAll('.activity-item img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxCaption.textContent = img.alt || "BVB Clubavond";
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            });
+        });
+
+        const closeLightbox = () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        };
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target === lightboxClose) {
+                closeLightbox();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
             }
         });
     </script>
