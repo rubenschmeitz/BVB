@@ -362,7 +362,7 @@ body.theme-autumn .main-logo {
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-position: center 35%;
+    background-position: center center;
     opacity: 0;
     transition: opacity 2s ease-in-out, transform 8s linear;
     z-index: 1;
@@ -1436,7 +1436,7 @@ body.theme-autumn .main-logo {
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
-    margin: 3rem 0;
+    margin: 1.5rem 0;
 }
 
 .split-text h2 {
