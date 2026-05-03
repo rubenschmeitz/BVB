@@ -36,6 +36,7 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 ::selection {
@@ -70,6 +71,8 @@ body {
     font-size: 1.2rem;
     -webkit-font-smoothing: antialiased;
     transition: background-color 0.8s ease, color 0.8s ease;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 a {
@@ -359,6 +362,7 @@ a:focus-visible {
 
 /* --- Instagram Widget --- */
 .instagram-widget {
+    width: 100%;
     max-width: 450px;
     margin: 0 auto 2rem;
     background: white;
@@ -918,7 +922,7 @@ a:focus-visible {
     }
 
     .main-logo {
-        height: 60px;
+        height: 55px;
     }
     
     .site-title-box h1 {
@@ -941,6 +945,7 @@ a:focus-visible {
         position: absolute;
         top: 100%;
         left: 0;
+        right: 0;
         z-index: 100;
         box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         border-bottom: 2px solid var(--color-sand);
@@ -987,11 +992,11 @@ a:focus-visible {
 
 @media (max-width: 600px) {
     .main-logo {
-        height: 70px;
+        height: 50px;
     }
     
     .site-title-box h1 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
     
     .site-tagline {
@@ -1637,4 +1642,45 @@ a:focus-visible {
     font-family: 'Outfit', sans-serif;
     font-size: 1.2rem;
     letter-spacing: 1px;
+}
+
+/* --- Social Block --- */
+.social-block {
+    background: white;
+    padding: 4rem;
+    border-radius: 30px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.04);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.social-block .ig-intro h2 {
+    font-size: 2.5rem;
+    color: var(--color-bark);
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+.social-block .ig-intro p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+    .social-block {
+        grid-template-columns: 1fr;
+        padding: 3rem 1.5rem;
+        gap: 3rem;
+        text-align: center;
+    }
+    .social-block .ig-intro {
+        text-align: center !important;
+    }
+    .social-block .ig-intro h2 {
+        font-size: 2rem;
+    }
 }
