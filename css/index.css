@@ -66,8 +66,8 @@ body {
     font-family: var(--font-main);
     background-color: var(--color-white);
     color: var(--color-charcoal);
-    line-height: 1.8;
-    font-size: 1.1rem;
+    line-height: 1.7;
+    font-size: 1.2rem;
     -webkit-font-smoothing: antialiased;
     transition: background-color 0.8s ease, color 0.8s ease;
 }
@@ -123,7 +123,7 @@ a:focus-visible {
 /* Logo height handled in .main-logo below */
 
 .site-title-box h1 {
-    font-size: 1.8rem;
+    font-size: clamp(1.4rem, 4vw, 1.8rem);
     font-weight: 700;
     color: var(--color-charcoal);
     margin-bottom: 0;
@@ -132,11 +132,11 @@ a:focus-visible {
 }
 
 .site-tagline {
-    font-size: 0.9rem;
+    font-size: clamp(0.7rem, 2vw, 0.9rem);
     color: var(--color-sage);
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: clamp(1px, 1vw, 2px);
     transition: var(--transition-smooth);
 }
 
@@ -218,7 +218,7 @@ a:focus-visible {
 
 /* --- Hero Slideshow --- */
 .hero-slideshow {
-    height: 320px;
+    height: 240px;
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -277,7 +277,7 @@ a:focus-visible {
 }
 
 .hero-slideshow-content h1 {
-    font-size: 3.5rem;
+    font-size: clamp(2.2rem, 8vw, 3.5rem);
     color: white;
     margin: 0;
     line-height: 1.1;
@@ -302,10 +302,10 @@ a:focus-visible {
 
 .premium-section {
     background-color: var(--color-sand);
-    padding: 4rem 5%;
-    margin: 2rem 0;
-    border-radius: 40px;
-    box-shadow: inset 0 0 100px rgba(155, 123, 97, 0.05);
+    padding: 3rem 5%;
+    margin: 1.5rem 0;
+    border-radius: 30px;
+    box-shadow: inset 0 0 80px rgba(155, 123, 97, 0.03);
     position: relative;
     overflow: hidden;
 }
@@ -370,19 +370,33 @@ a:focus-visible {
 }
 
 .ig-post-header {
-    padding: 1rem;
+    padding: 0.85rem 1rem;
     display: flex;
     align-items: center;
     gap: 0.8rem;
     border-bottom: 1px solid #f0f0f0;
 }
 
+.ig-header-link {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+    flex: 1;
+    color: inherit;
+}
+
+.ig-header-link:hover {
+    opacity: 0.85;
+}
+
 .ig-avatar {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     padding: 2px;
+    flex-shrink: 0;
 }
 
 .ig-avatar-inner {
@@ -395,29 +409,135 @@ a:focus-visible {
     justify-content: center;
     font-size: 0.6rem;
     font-weight: 800;
+    overflow: hidden;
 }
 
 .ig-username {
-    font-weight: 600;
-    font-size: 0.9rem;
+    font-weight: 700;
+    font-size: 0.88rem;
+    line-height: 1.2;
 }
 
-.ig-post-image {
+.ig-account-label {
+    font-size: 0.75rem;
+    color: #999;
+    line-height: 1.2;
+}
+
+.ig-insta-icon {
+    color: #E1306C;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    transition: var(--transition-smooth);
+}
+
+.ig-insta-icon:hover {
+    color: #bc1888;
+    transform: scale(1.1);
+}
+
+/* Carousel */
+.ig-carousel-wrapper {
+    position: relative;
     width: 100%;
-    aspect-ratio: 1/1;
-    background-size: cover;
-    background-position: center;
-    background-image: url('../images/hero/hero_1.jpg'); /* Default image */
+    overflow: hidden;
+}
+
+.ig-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.ig-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.ig-post-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    display: block;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.ig-post-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    display: block;
+}
+
+.ig-post-slide:hover img {
+    transform: scale(1.03);
+}
+
+/* Nav buttons */
+.ig-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.88);
+    border: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: background 0.2s, transform 0.2s;
+    color: var(--color-charcoal);
+}
+
+.ig-nav:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.ig-nav-prev { left: 8px; }
+.ig-nav-next { right: 8px; }
+
+/* Dots */
+.ig-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 0 4px;
+    background: white;
+}
+
+.ig-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ddd;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.ig-dot.active {
+    background: #E1306C;
+    transform: scale(1.3);
 }
 
 .ig-post-content {
-    padding: 1rem;
+    padding: 0.9rem 1rem 1rem;
 }
 
 .ig-post-caption {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     line-height: 1.5;
-    margin-bottom: 1rem;
+    margin-bottom: 0.9rem;
+    color: var(--color-charcoal);
 }
 
 .ig-post-caption strong {
@@ -430,8 +550,10 @@ a:focus-visible {
     background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     color: white;
     text-align: center;
-    padding: 0.8rem;
+    padding: 0.75rem;
+    border-radius: 6px;
     font-weight: 600;
+    font-size: 0.9rem;
     text-decoration: none;
     transition: var(--transition-smooth);
 }
@@ -439,7 +561,10 @@ a:focus-visible {
 .ig-follow-btn:hover {
     filter: brightness(1.1);
     color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(220, 39, 67, 0.3);
 }
+
 
 /* --- Activity Grid --- */
 .activity-grid {
@@ -856,7 +981,7 @@ a:focus-visible {
     .mobile-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
     .hero-slideshow {
-        height: 320px;
+        height: 240px;
     }
 }
 
@@ -888,7 +1013,7 @@ a:focus-visible {
     }
     
     .hero-slideshow {
-        height: 240px; /* Reduced further for compactness */
+        height: 200px; /* Reduced further for compactness */
     }
 
     .activity-grid {
@@ -1008,7 +1133,7 @@ a:focus-visible {
     justify-content: center;
     color: white;
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
     overflow: hidden;
 }
 
@@ -1052,7 +1177,7 @@ a:focus-visible {
 }
 
 .page-hero-content h1 {
-    font-size: 2.8rem;
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
     margin: 0;
     text-shadow: 0 4px 40px rgba(0,0,0,0.6);
     color: white;
@@ -1200,12 +1325,26 @@ a:focus-visible {
     border-top: 1px dashed var(--color-sand);
 }
 
+@media (max-width: 450px) {
+    .timeline-demo-box {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .timeline-demo-portrait {
+        width: 50px;
+        height: 50px;
+    }
+}
+
 .timeline-demo-portrait {
     width: 60px;
     height: 60px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid var(--color-bark);
+    flex-shrink: 0;
 }
 
 .timeline-demo-info h5 {
@@ -1216,7 +1355,7 @@ a:focus-visible {
 
 .timeline-demo-info p {
     margin: 0;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--color-sage);
 }
 
@@ -1340,13 +1479,13 @@ a:focus-visible {
 }
 
 .feature-card h3 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: var(--color-bark);
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
 }
 
 .feature-card p {
-    font-size: 1rem;
+    font-size: 1.05rem;
     color: var(--color-charcoal);
     line-height: 1.6;
     margin: 0;
@@ -1369,10 +1508,10 @@ a:focus-visible {
 }
 
 .split-text .lead {
-    font-size: 1.1rem !important; /* Smaller intro text */
+    font-size: 1.25rem !important; /* Larger intro text for seniors */
     color: var(--color-charcoal);
     margin-bottom: 1.5rem !important;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 .split-image img {
@@ -1426,7 +1565,7 @@ a:focus-visible {
     }
 
     .hero-slideshow {
-        height: 220px; /* Reduced further for compactness */
+        height: 180px; /* Reduced further for compactness */
     }
 
     .exhibition-container {

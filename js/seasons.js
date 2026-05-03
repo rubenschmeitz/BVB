@@ -8,3 +8,5 @@ document.addEventListener('DOMContentLoaded', () => {
         logo.src = 'images/logo_main.png';
     }
 });
+
+
