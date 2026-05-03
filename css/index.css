@@ -1061,6 +1061,14 @@ body.theme-autumn .main-logo {
         font-size: 0.9rem !important;
         padding: 0.7rem !important;
     }
+
+    /* NBS News Bar mobile */
+    .nbs-news-bar {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.5rem !important;
+        padding: 0.8rem 5% !important;
+    }
 }
 
 /* Very Small Mobile (iPhone SE etc) */
