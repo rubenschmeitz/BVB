@@ -120,7 +120,8 @@ a:focus-visible {
     align-items: center;
     text-align: left;
     gap: 1.2rem;
-    flex-shrink: 0;
+    flex-shrink: 1;
+    min-width: 0;
 }
 
 /* Logo height handled in .main-logo below */
@@ -970,6 +971,7 @@ a:focus-visible {
         cursor: pointer;
         padding: 10px;
         z-index: 101;
+        flex-shrink: 0;
     }
     
     .mobile-toggle span {
