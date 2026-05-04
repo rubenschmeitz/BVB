@@ -1,0 +1,26 @@
+# Windows image thumbnails
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+
+# Folder config file
+desktop.ini
+
+# Recycled bin folder on a secondary drive
+$RECYCLE.BIN/
+
+# Mac OS junk
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDEs
+.vscode/
+.idea/
+
+# Node (if used)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
