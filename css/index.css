@@ -2,11 +2,12 @@
 :root {
     /* Summer Colors (default) */
     --color-sage: #5D7B51;
-    --color-sand: #F2E8D5;
+    --color-sand: #E8E1D1; /* Tatami Zand */
     --color-bark: #966B4E;
     --color-charcoal: #363330;
-    --color-white: #FAFAF8;
+    --color-white: #F9F7F2; /* Washi Papier */
     --color-white-pure: #FFFFFF;
+    --color-tokonoma-wood: #2D1E17; /* Donker hout accent */
     
     --font-main: 'Outfit', sans-serif;
     --spacing-xs: 0.5rem;
@@ -36,7 +37,7 @@
 
 html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    scrollbar-gutter: stable; /* Prevents layout shift when scrollbar appears/disappears */
 }
 
 ::selection {
@@ -66,12 +67,14 @@ html {
 body {
     font-family: var(--font-main);
     background-color: var(--color-white);
+    background-image: url('../images/textures/washi_texture.jpg');
+    background-repeat: repeat;
+    background-size: 800px;
+    background-attachment: scroll; /* Beweegt mee met de content */
     color: var(--color-charcoal);
-    line-height: 1.7;
-    font-size: 1.2rem;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     transition: background-color 0.8s ease, color 0.8s ease;
-    overflow-x: hidden;
     width: 100%;
 }
 
@@ -99,10 +102,22 @@ a:focus-visible {
 /* --- Header & Navigation --- */
 .site-header {
     background-color: var(--color-white-pure);
-    border-bottom: 2px solid var(--color-sand);
-    padding: 0.8rem 0;
-    transition: background-color 0.8s ease, border-color 0.8s ease;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding: 0.7rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: var(--transition-smooth);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.05);
 }
+
+.site-header.scrolled {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
 
 .header-container {
     max-width: 1300px;
@@ -126,22 +141,23 @@ a:focus-visible {
 
 /* Logo height handled in .main-logo below */
 
-.site-title-box h1 {
+.site-title {
     font-size: clamp(1.4rem, 4vw, 1.8rem);
     font-weight: 700;
-    color: var(--color-charcoal);
+    color: var(--color-bark);
     margin-bottom: 0;
     letter-spacing: -0.5px;
     line-height: 1.1;
 }
 
 .site-tagline {
-    font-size: clamp(0.7rem, 2vw, 0.9rem);
+    font-size: clamp(0.7rem, 2vw, 0.85rem);
     color: var(--color-sage);
-    font-weight: 500;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: clamp(1px, 1vw, 2px);
+    letter-spacing: 2px;
     transition: var(--transition-smooth);
+    margin-top: 2px;
 }
 
 .logo-wrapper {
@@ -216,8 +232,8 @@ a:focus-visible {
 }
 
 .main-nav a:hover, .main-nav a.active {
-    background-color: var(--color-sand);
-    color: var(--color-bark);
+    background-color: var(--color-sage);
+    color: white;
 }
 
 /* --- Hero Slideshow --- */
@@ -306,7 +322,7 @@ a:focus-visible {
 
 .premium-section {
     background-color: var(--color-sand);
-    padding: 3rem 5%;
+    padding: 3rem;
     margin: 1.5rem 0;
     border-radius: 30px;
     box-shadow: inset 0 0 80px rgba(155, 123, 97, 0.03);
@@ -926,7 +942,7 @@ a:focus-visible {
         height: 55px;
     }
     
-    .site-title-box h1 {
+    .site-title {
         font-size: 1.5rem;
         line-height: 1.2;
     }
@@ -997,7 +1013,7 @@ a:focus-visible {
         height: 50px;
     }
     
-    .site-title-box h1 {
+    .site-title {
         font-size: 1.3rem;
     }
     
@@ -1095,7 +1111,7 @@ a:focus-visible {
 
 /* Very Small Mobile (iPhone SE etc) */
 @media (max-width: 360px) {
-    .site-title-box h1 {
+    .site-title {
         font-size: 1.3rem;
     }
     
@@ -1170,7 +1186,10 @@ a:focus-visible {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+    background: linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(0,0,0,0.4));
+    background-image: url('../images/textures/light_wood_texture.png');
+    background-blend-mode: overlay;
+    opacity: 0.4;
     z-index: 1;
 }
 
@@ -1684,5 +1703,84 @@ a:focus-visible {
     }
     .social-block .ig-intro h2 {
         font-size: 2rem;
+    }
+}
+
+/* --- Grid Layouts (Agenda & NBS) --- */
+.agenda-grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 3rem;
+    align-items: flex-start;
+    max-width: 1300px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.agenda-main-column {
+    min-width: 0;
+}
+
+.agenda-sidebar {
+    position: sticky;
+    top: 120px;
+}
+
+.sidebar-card {
+    background: var(--color-sand);
+    background-image: url('../images/textures/washi_texture.jpg');
+    background-blend-mode: multiply;
+    padding: 2rem;
+    border-radius: 30px;
+    border: 1px solid rgba(155, 123, 97, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.sidebar-card h3 {
+    color: var(--color-bark);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.sidebar-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    color: var(--color-charcoal);
+}
+
+.sync-btn {
+    background-color: var(--color-bark);
+    color: white !important;
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    border: 2px solid var(--color-bark);
+}
+
+.sync-btn:hover {
+    background-color: transparent;
+    color: var(--color-bark) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(150, 107, 78, 0.1);
+}
+
+@media (max-width: 1024px) {
+    .agenda-grid-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .agenda-sidebar {
+        position: static;
+        order: 2;
     }
 }

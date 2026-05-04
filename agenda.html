@@ -8,22 +8,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
-    <script src="js/seasons.js" defer></script>
+    
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com; frame-src https://*.instagram.com https://www.google.com;">
+
     
     <!-- Meta Tags & SEO -->
-    <meta name="description" content="Blijf op de hoogte van de clubavonden, workshops en evenementen van Bonsai Vereniging Brabant. Bekijk onze agenda voor 2026.">
-    <meta name="theme-color" content="#7A5B49">
+    <meta name="description" content="Bekijk de jaaragenda van Bonsai Vereniging Brabant. Clubavonden, workshops, demonstraties en de Nationale Bonsai Show.">
+    <meta name="theme-color" content="#5D7B51">
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Agenda 2026 - Bonsai Vereniging Brabant">
-    <meta property="og:description" content="Mis geen enkele clubavond of workshop. Bekijk de volledige BVB agenda.">
-    <meta property="og:image" content="images/logo_main.png">
+    <meta property="og:description" content="Blijf op de hoogte van alle bonsai activiteiten in Brabant.">
+    <meta property="og:image" content="images/tokonoma/05_tokonoma_mei_2024.jpg">
     
     <!-- Favicon & Icons -->
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="apple-touch-icon" href="images/favicon.png">
-    <link rel="manifest" href="site.webmanifest">
+    
 
     <script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
     <style>
@@ -44,14 +46,16 @@
         }
         .agenda-item {
             position: relative;
-            background: white;
-            padding: 1rem 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
-            margin-bottom: 1rem;
-            border: 1px solid rgba(0,0,0,0.03);
+            background: #fdfaf5;
+            background-image: url('images/textures/washi_texture.jpg');
+            background-blend-mode: multiply;
+            padding: 1.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(155, 123, 97, 0.1);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            z-index: 1; /* Base z-index */
+            z-index: 1;
         }
         .agenda-item::before {
             content: '';
@@ -137,15 +141,6 @@
             height: 18px;
             color: var(--color-sage);
         }
-        .sync-bar {
-            background: var(--color-sand);
-            border-radius: 15px;
-            padding: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 2rem 0 4rem;
-        }
         @media (max-width: 768px) {
             .agenda-header-flex {
                 flex-direction: column;
@@ -154,11 +149,6 @@
             .event-meta {
                 flex-direction: column;
                 gap: 0.8rem;
-            }
-            .sync-bar {
-                flex-direction: column;
-                gap: 1.5rem;
-                text-align: center;
             }
         }
     </style>
@@ -173,7 +163,7 @@
                     <div class="logo-overlay"></div>
                 </div>
                 <div class="site-title-box">
-                    <h1>Bonsai Vereniging Brabant</h1>
+                    <div class="site-title">Bonsai Vereniging Brabant</div>
                     <p class="site-tagline">Bonsai van het zuiden</p>
                 </div>
             </div>
@@ -184,11 +174,12 @@
                 <a href="agenda.html" class="active">Agenda</a>
                 <a href="contact.html">Contact</a>
             </nav>
-            <div class="mobile-toggle" id="mobile-toggle">
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu openen/sluiten" aria-expanded="false" aria-controls="main-nav">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
+
         </div>
     </header>
 
@@ -202,23 +193,19 @@
     </div>
 
     <main class="content-area">
-        <div class="content-container">
-            <div class="text-content">
-                <div class="sync-bar" style="margin-top: 0; margin-bottom: 1.5rem;">
-                    <div>
-                        <h4 style="margin: 0; color: var(--color-bark);">Volledige Agenda Synchroniseren</h4>
-                        <p style="margin: 0; font-size: 0.9rem;">Zet alle activiteiten van 2026 in één keer in je agenda.</p>
-                    </div>
-                    <a href="docs/bvb_agenda_2026.ics" class="ig-follow-btn" style="background: var(--color-sage); margin: 0; padding: 0.8rem 1.5rem; width: auto;">Sync Volledige Agenda (.ics)</a>
-                </div>
-
-                <p>Onze clubavonden vinden plaats in <strong>De Moerkoal in Berlicum</strong>. Iedereen is welkom om kennis te maken met onze vereniging.</p>
+        <div class="content-container-wide">
+            <div class="agenda-grid-layout">
                 
-                
-                <div class="agenda-container">
+                <!-- Main Agenda Column -->
+                <div class="agenda-main-column">
+                    <p class="large-text" style="margin-bottom: 2rem;">
+                        Onze clubavonden vinden plaats in <strong>De Moerkoal in Berlicum</strong>. Iedereen is welkom om kennis te maken met onze vereniging.
+                    </p>
                     
-                    <!-- Mei -->
-                    <div class="agenda-item">
+                    <div class="agenda-container">
+                        
+                        <!-- Mei -->
+                        <div class="agenda-item">
                         <div class="agenda-header-flex">
                             <div class="date-box">
                                 <span class="day-num">18</span>
@@ -492,29 +479,21 @@
                                 ></add-to-calendar-button>
                             </div>
                         </div>
-                    </div>
+                    </div> <!-- End of agenda-item -->
+                </div> <!-- End of agenda-container -->
 
-                </div>
+                </div> <!-- End of agenda-main-column -->
 
-
-
-                <!-- Location Info -->
-                <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--color-sand);">
-                    <h2 style="text-align: center; margin-bottom: 2rem;">Locatie & Bereikbaarheid</h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; align-items: center;">
-                        <div style="background: var(--color-white-pure); padding: 1.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.03);">
-                            <h3 style="color: var(--color-bark); margin-bottom: 1.5rem;">Stichting de Moerkoal</h3>
-                            <p style="font-size: 1.1rem; margin-bottom: 2rem; line-height: 1.6;">
-                                Driezeeg 20<br>
-                                5258 KE Berlicum
-                            </p>
-                            <p style="font-size: 0.95rem; color: var(--color-charcoal); margin-bottom: 2rem;">
-                                Al onze clubavonden en ook de NBS 2026 vinden plaats op deze sfeervolle locatie in Berlicum. Er is ruim voldoende gratis parkeergelegenheid aanwezig.
-                            </p>
-                            <a href="https://maps.app.goo.gl/CxBm92C7UXm5WZvj8" target="_blank" class="ig-follow-btn" style="background: var(--color-bark); display: inline-block; width: auto; padding: 0.8rem 2rem;">Route plannen</a>
-                        </div>
+                <!-- Sidebar -->
+                <aside class="agenda-sidebar">
+                    <!-- Location Info Sidebar Card -->
+                    <div class="sidebar-card">
+                        <h3>Locatie & Bereikbaarheid</h3>
+                        <p><strong>De Moerkoal</strong><br>Driezeeg 20, 5258 KE Berlicum</p>
+                        <p style="font-size: 0.9rem;">Ruime gratis parkeergelegenheid aanwezig.</p>
+                        <a href="https://maps.app.goo.gl/CxBm92C7UXm5WZvj8" target="_blank" rel="noopener noreferrer" class="sync-btn" style="margin-bottom: 1rem;">Route plannen</a>
                         
-                        <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); height: 400px; border: 1px solid var(--color-sand);">
+                        <div class="map-iframe-wrapper" style="height: 150px; border-radius: 12px; overflow: hidden; margin-top: 1rem;">
                             <iframe 
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2474.8251411929564!2d5.4156872761828785!3d51.66303779932199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c6e5ca14c47fcd%3A0x6740ba1b23b26f1e!2sStichting%20De%20Moerkoal!5e0!3m2!1snl!2snl!4v1777793012084!5m2!1snl!2snl" 
                                 width="100%" 
@@ -526,28 +505,33 @@
                             </iframe>
                         </div>
                     </div>
-                </div>
-            </div>
+
+                    <div class="sidebar-card" style="margin-top: 2rem;">
+                        <h3>Agenda Sync</h3>
+                        <p>Zet alle BVB activiteiten van 2026 direct in je persoonlijke agenda (Apple, Google, Outlook) zodat je nooit een clubavond mist.</p>
+                        <a href="docs/bvb_agenda_2026.ics" class="sync-btn">Sync Agenda (.ics)</a>
+                    </div>
+
+                    <div class="sidebar-card" style="margin-top: 2rem;">
+                        <h3>Bezoekers</h3>
+                        <p>Ben je geen lid maar wel geïnteresseerd? Je bent van harte welkom om een keer sfeer te proeven tijdens een clubavond.</p>
+                        <a href="contact.html" style="color: var(--color-bark); font-weight: 600; text-decoration: none;">Stel een vraag &rarr;</a>
+                    </div>
+                </aside>
+
+            </div> <!-- End of agenda-grid-layout -->
         </div>
     </main>
 
     <footer class="site-footer">
         <div class="footer-container">
-            <div class="footer-bottom" style="border: none; padding-top: 0;">
-                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="contact.html" style="color: inherit; text-decoration: none; opacity: 0.7;">Contact</a></p>
+            <div class="footer-bottom no-border">
+                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="contact.html" class="contact-link">Contact</a></p>
             </div>
         </div>
-    </footer>
+    </footer><button id="back-to-top" class="back-to-top" aria-label="Terug naar boven"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
 
-    <script>
-        const mobileToggle = document.getElementById('mobile-toggle');
-        const mainNav = document.getElementById('main-nav');
-
-        mobileToggle.addEventListener('click', () => {
-            mobileToggle.classList.toggle('active');
-            mainNav.classList.toggle('active');
-        });
-    </script>
+    <script src="js/app.js"></script>
 </body>
 </html>
 

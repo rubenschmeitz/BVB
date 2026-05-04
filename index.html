@@ -8,25 +8,54 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
-    <script src="js/seasons.js" defer></script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com; frame-src https://*.instagram.com;">
+
     
     <!-- Meta Tags & SEO -->
-    <meta name="description" content="Bonsai Vereniging Brabant - Dé vereniging voor bonsai liefhebbers in Brabant. Ontdek onze passie, bekijk onze galerij en sluit je aan bij onze clubavonden.">
-    <meta name="theme-color" content="#7A5B49">
+    <meta name="description" content="Bonsai Vereniging Brabant (BVB) is dé vereniging voor bonsai-liefhebbers in Brabant. Workshops, cursussen, clubavonden en meer. Ontdek de kunst van bonsai bij ons.">
+    <meta name="keywords" content="Bonsai, Brabant, Bonsai Vereniging, Boomverzorging, Japanse kunst, Berlicum, Bonsai cursus">
+    <meta name="author" content="Bonsai Vereniging Brabant">
+    <meta name="theme-color" content="#5D7B51">
     
-    <!-- Open Graph / Social Media -->
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Bonsai Vereniging Brabant">
-    <meta property="og:description" content="Dé vereniging voor bonsai liefhebbers in Brabant. Passie, vakmanschap en gezelligheid.">
-    <meta property="og:image" content="images/logo_main.png">
+    <meta property="og:url" content="https://www.bonsaiverenigingbrabant.nl/">
+    <meta property="og:title" content="Bonsai Vereniging Brabant - Passie voor de Kunst van Bonsai">
+    <meta property="og:description" content="Dé vereniging voor bonsai liefhebbers in Brabant. Workshops, cursussen en een levendige community.">
+    <meta property="og:image" content="images/tokonoma/01_tokonoma_jan_2024.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.bonsaiverenigingbrabant.nl/">
+    <meta property="twitter:title" content="Bonsai Vereniging Brabant">
+    <meta property="twitter:description" content="Dé vereniging voor bonsai liefhebbers in Brabant. Ontdek onze passie en vakmanschap.">
+    <meta property="twitter:image" content="images/tokonoma/01_tokonoma_jan_2024.jpg">
     
     <!-- Favicon & Icons -->
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="apple-touch-icon" href="images/favicon.png">
-    <link rel="manifest" href="site.webmanifest">
+    
 
-    <!-- Preload first hero image for speed -->
-    <link rel="preload" as="image" href="images/tokonoma/01_tokonoma_jan_2024.jpg">
+    <!-- Preload critical assets -->
+    <link rel="preload" as="image" href="images/logo_main.png">
+    <link rel="preload" as="image" href="images/tokonoma/04_tokonoma_apr_2024.jpg">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Bonsai Vereniging Brabant",
+      "alternateName": "BVB",
+      "url": "https://www.bonsaiverenigingbrabant.nl/",
+      "logo": "https://www.bonsaiverenigingbrabant.nl/images/logo_main.png",
+      "sameAs": [
+        "https://www.instagram.com/bonsaiverenigingbrabant/"
+      ],
+      "description": "Bonsai vereniging voor liefhebbers in de regio Noord-Brabant."
+    }
+    </script>
+
 </head>
 <body>
 
@@ -39,7 +68,7 @@
                     <div class="logo-overlay"></div>
                 </div>
                 <div class="site-title-box">
-                    <h1>Bonsai Vereniging Brabant</h1>
+                    <div class="site-title">Bonsai Vereniging Brabant</div>
                     <p class="site-tagline">Bonsai van het zuiden</p>
                 </div>
             </div>
@@ -50,46 +79,40 @@
                 <a href="agenda.html">Agenda</a>
                 <a href="contact.html">Contact</a>
             </nav>
-            <div class="mobile-toggle" id="mobile-toggle">
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu openen/sluiten" aria-expanded="false" aria-controls="main-nav">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
+
         </div>
     </header>
 
     <div class="page-hero">
         <div class="page-hero-bg" style="background-image: url('images/tokonoma/04_tokonoma_apr_2024.jpg');"></div>
         <div class="page-hero-content">
-            <h1>Welkom bij <span style="color: var(--color-sand);">BVB</span></h1>
+            <p>Welkom bij BVB</p>
+            <h1>Gezellig dat je er bent!</h1>
         </div>
-    </div>
-
-    <!-- News Bar -->
-    <div class="news-ticker-bar" style="background: rgba(122, 91, 73, 0.04); padding: 0.8rem 5%; display: flex; align-items: center; justify-content: center; gap: 1rem; border-bottom: 1px solid rgba(122, 91, 73, 0.1); position: relative; z-index: 5;">
-        <div style="display: flex; align-items: center; gap: 0.8rem;">
-            <span style="color: var(--color-clay); font-weight: 700; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; opacity: 0.8;">Nieuws</span>
-            <span style="color: var(--color-bark); font-weight: 500; font-size: 0.9rem;">Nationale Bonsai Show — 26 &amp; 27 september 2026 in Berlicum</span>
-        </div>
-        <a href="nbs.html" style="text-decoration: none; color: var(--color-clay); font-weight: 700; font-size: 0.8rem; border-bottom: 1px solid var(--color-clay); opacity: 0.9;">Bekijk details</a>
     </div>
 
     <!-- Content Area -->
-    <main class="content-area" style="padding-top: 1rem;">
+    <main class="content-area">
+        <div class="content-container-wide">
 
             <!-- Over de club -->
-            <section class="premium-section" style="margin-top: 1.5rem; z-index: 10; padding: 1.5rem 5%;">
-                <div class="split-layout" style="margin: 0;">
+            <section class="premium-section">
+                <div class="split-layout">
                     <div class="split-text">
-                        <h2 style="font-size: 2.2rem; margin-bottom: 1.2rem;">Een vereniging voor iedereen</h2>
-                        <p class="lead" style="font-style: normal; color: var(--color-bark); margin-bottom: 1.5rem !important;">Houd je van bonsai of wil je er meer over leren? Bij BVB ben je van harte welkom. We zijn een actieve en gemoedelijke club waar we onze passie voor bomen delen. Of je nu net begint of al jaren ervaring hebt, er is altijd plek voor een praatje en goed advies.</p>
-                        <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
-                            <a href="contact.html" class="nav-special" style="text-decoration: none; padding: 12px 25px; background: var(--color-bark); color: white; border-radius: 4px; font-weight: 600; font-size: 0.9rem;">Kom een keer kijken</a>
-                            <a href="galerij.html" style="text-decoration: none; padding: 12px 25px; border: 1px solid var(--color-bark); color: var(--color-bark); border-radius: 4px; font-weight: 600; font-size: 0.9rem;">Bekijk onze bomen</a>
+                        <h2 style="font-size: 2.2rem; margin-bottom: 1.2rem;">Echt Brabants, écht Bonsai</h2>
+                        <p class="lead" style="font-style: normal; color: var(--color-bark); margin-bottom: 1.5rem !important;">Bij BVB houden we van aanpakken, maar vooral van de passie voor onze bomen. Of je nu net begint of al jaren bezig bent, bij ons schuif je gewoon aan voor een goei gesprek en wat extra kennis.</p>
+                        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <a href="contact.html" style="text-decoration: none; padding: 12px 25px; background: var(--color-bark); color: white; border-radius: 4px; font-weight: 600; font-size: 0.9rem;">Bezoek een clubavond</a>
+                            <a href="galerij.html" style="text-decoration: none; padding: 12px 25px; border: 1px solid var(--color-bark); color: var(--color-bark); border-radius: 4px; font-weight: 600; font-size: 0.9rem;">Onze collectie</a>
                         </div>
                     </div>
                     <div class="split-image">
-                        <div class="hero-slideshow" id="club-slideshow" style="height: 350px; border-radius: 20px; border-bottom: none; box-shadow: var(--shadow-premium);">
+                        <div class="hero-slideshow club-slideshow-wrapper" id="club-slideshow">
                             <div class="slide active" style="background-image: url('images/tokonoma/12_tokonoma_dec_2024.jpg');"></div>
                             <div class="slide" data-src="images/tokonoma/01_tokonoma_jan_2024.jpg"></div>
                             <div class="slide" data-src="images/tokonoma/02_tokonoma_feb_2024.jpg"></div>
@@ -101,250 +124,154 @@
                 </div>
             </section>
 
-            <section class="reveal-on-scroll" style="padding: 1rem 0; background: radial-gradient(circle at 10% 10%, var(--color-warm-shadow) 0%, transparent 40%);">
-                <div class="section-header" style="text-align: center; margin-bottom: 1.5rem;">
-                    <h2 style="font-size: 2.2rem; color: var(--color-bark);">Ontdek onze club</h2>
-                    <p style="max-width: 600px; margin: 0.5rem auto; color: #555;">Samen werken aan bomen in een ontspannen sfeer.</p>
+            <!-- Wat we doen -->
+            <section class="reveal-on-scroll premium-section">
+                <div style="text-align: center; margin-bottom: 2.5rem;">
+                    <h2 style="font-size: 2.2rem; color: var(--color-bark);">Wat we doen</h2>
+                    <p style="max-width: 600px; margin: 0.5rem auto; color: #555;">Van de eerste knip tot het echte vakmanschap.</p>
                 </div>
                 <div class="feature-grid">
-                    <div class="feature-card">
+                    <div class="feature-card" style="background: white;">
                         <div style="position: relative;">
                             <div class="feature-image-wrapper">
-                                <img src="images/bijeenkomst.jpeg" alt="Maandelijkse bijeenkomst">
+                                <img src="images/bijeenkomst.jpeg" alt="Maandelijkse bijeenkomst bij BVB" loading="lazy">
                             </div>
                             <div class="feature-icon-badge">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                             </div>
                         </div>
                         <div class="feature-card-body">
-                            <h3>Maandelijkse bijeenkomsten</h3>
-                            <p>Iedere maand komen we samen voor onze verenigingsavond. We krijgen informatieve presentaties, praten gezellig bij en laten onze bomen aan elkaar zien om van elkaar te leren. <br><a href="agenda.html" style="color: var(--color-clay); font-weight: 600; text-decoration: none; display: inline-block; margin-top: 0.5rem;">Bekijk de agenda &rarr;</a></p>
+                            <h3>Buurten &amp; Bomen</h3>
+                            <p>Één keer per maand komen we samen. Bomen kijken, tips uitwisselen en vooral veel gezelligheid. Zo leer je 't best. <br><a href="agenda.html" style="color: var(--color-clay); font-weight: 600; text-decoration: none; display: inline-block; margin-top: 0.5rem;">Bekijk de agenda &rarr;</a></p>
                         </div>
                     </div>
-                    <div class="feature-card">
+                    <div class="feature-card" style="background: white;">
                         <div style="position: relative;">
                             <div class="feature-image-wrapper">
-                                <img src="images/workshop.jpg" alt="Workshop & Masterclass">
+                                <img src="images/workshop.jpg" alt="Bonsai workshop en masterclass" loading="lazy">
                             </div>
                             <div class="feature-icon-badge">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h9z"/></svg>
                             </div>
                         </div>
                         <div class="feature-card-body">
-                            <h3>Workshops & Masterclasses</h3>
-                            <p>Voor beginners is er een speciale beginnerscursus om de basis te leggen. Gevorderden kunnen nog verder leren tijdens masterclasses van (inter)nationale bonsaimeesters.</p>
+                            <h3>Leren door te doen</h3>
+                            <p>Beginnerscursus of masterclass; we hebben voor ieder wat wils. Gewoon de mouwen opstropen en aan de slag.</p>
                         </div>
                     </div>
-                    <div class="feature-card">
+                    <div class="feature-card" style="background: white;">
                         <div style="position: relative;">
                             <div class="feature-image-wrapper">
-                                <img src="images/ntc.jpeg" alt="New Talent Contest">
+                                <img src="images/ntc.jpeg" alt="New Talent Contest voor jonge bonsailiefhebbers" loading="lazy">
                             </div>
                             <div class="feature-icon-badge">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                             </div>
                         </div>
                         <div class="feature-card-body">
-                            <h3>New Talent Contest</h3>
-                            <p>We stimuleren nieuw talent! Jaarlijks selecteren we een afgevaardigde voor de landelijke NTC-wedstrijd waar we vaak hoge ogen gooien.</p>
+                            <h3>Jong Talent</h3>
+                            <p>We hebben flink wat talent in huis en dat laten we graag zien tijdens de landelijke wedstrijden. Brabant op z'n best!</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-
-
-
-    </main>
-
             <!-- Instagram Section -->
-            <section class="reveal-on-scroll" style="padding: 3rem 0 5rem 0; background-color: #fcfbf9; border-top: 1px solid rgba(150, 107, 78, 0.1);">
-                <div class="content-container-wide">
-                    <div class="social-block">
-                        <div class="ig-intro">
-                            <span style="color: var(--color-clay); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; margin-bottom: 1rem; display: block;">BVB Social</span>
-                            <h2 style="font-size: 2.5rem; color: var(--color-bark); margin-bottom: 1.5rem; line-height: 1.1;">Blijf verbonden via Instagram</h2>
-                            <p style="font-size: 1.2rem; color: #555; margin-bottom: 2rem; line-height: 1.6;">Volg onze dagelijkse avonturen, bekijk prachtige bomen van onze leden en blijf op de hoogte van alle clubavonden en evenementen.</p>
-                            <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" class="nav-special" style="text-decoration: none; padding: 15px 35px; background: var(--color-bark); color: white; border-radius: 50px; font-weight: 700; font-size: 1.1rem; display: inline-block;">Volg ons @bvb</a>
-                        </div>
-                        <div style="display: flex; justify-content: center;">
-                            <!-- Instagram Widget - bonsaiverenigingbrabant -->
-                            <div class="instagram-widget" style="margin: 0; box-shadow: var(--shadow-premium);">
-                                <!-- Header -->
-                                <div class="ig-post-header">
-                                    <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" class="ig-header-link">
-                                        <div class="ig-avatar">
-                                            <div class="ig-avatar-inner">
-                                                <img src="images/logo_main.png" alt="BVB" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
-                                            </div>
+            <section class="reveal-on-scroll premium-section">
+                <div class="social-block">
+                    <div class="ig-intro">
+                        <span class="label">BVB Social</span>
+                        <h2 style="font-size: 2.5rem; color: var(--color-bark); margin-bottom: 1.5rem; line-height: 1.1;">Volg ons op Insta</h2>
+                        <p style="font-size: 1.1rem; color: #555; margin-bottom: 2rem; line-height: 1.6;">Kijk mee met wat we uitspoken op de club en zie de mooiste bomen van onze leden voorbijkomen.</p>
+                        <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" rel="noopener noreferrer" class="cta-btn">Volg ons @bvb</a>
+                    </div>
+                    <div style="display: flex; justify-content: center;">
+                        <!-- Instagram Widget - bonsaiverenigingbrabant -->
+                        <div class="instagram-widget" style="margin: 0; box-shadow: var(--shadow-premium);">
+                            <!-- Header -->
+                            <div class="ig-post-header">
+                                <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" rel="noopener noreferrer" class="ig-header-link">
+                                    <div class="ig-avatar">
+                                        <div class="ig-avatar-inner">
+                                        <img src="images/logo_main.png" alt="BVB" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" loading="lazy">
                                         </div>
-                                        <div>
-                                            <div class="ig-username">bonsaiverenigingbrabant</div>
-                                            <div class="ig-account-label">Bonsai Vereniging Brabant</div>
-                                        </div>
-                                    </a>
-                                    <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" class="ig-insta-icon" aria-label="Ga naar Instagram">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                                    </a>
-                                </div>
-                                <!-- Carousel -->
-                                <div class="ig-carousel-wrapper">
-                                    <button class="ig-nav ig-nav-prev" id="ig-prev" aria-label="Vorige post">&#8249;</button>
-                                    <div class="ig-carousel" id="ig-carousel">
-                                        <a href="https://www.instagram.com/p/C4FUfF0NOrZ/" target="_blank" class="ig-post-slide">
-                                            <img src="images/tokonoma/08_tokonoma_aug_2024.jpg" alt="BVB clubavond augustus 2024">
-                                        </a>
-                                        <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" class="ig-post-slide">
-                                            <img src="images/bijeenkomst.jpeg" alt="BVB clubbijeenkomst">
-                                        </a>
-                                        <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" class="ig-post-slide">
-                                            <img src="images/tokonoma/05_tokonoma_mei_2024.jpg" alt="Tokonoma mei 2024">
-                                        </a>
-                                        <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" class="ig-post-slide">
-                                            <img src="images/ntc.jpeg" alt="New Talent Contest">
-                                        </a>
-                                        <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" class="ig-post-slide">
-                                            <img src="images/tokonoma/01_tokonoma_jan_2024.jpg" alt="Tokonoma januari 2024">
-                                        </a>
-                                        <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" class="ig-post-slide">
-                                            <img src="images/tokonoma/12_tokonoma_dec_2024.jpg" alt="Tokonoma december 2024">
-                                        </a>
                                     </div>
-                                    <button class="ig-nav ig-nav-next" id="ig-next" aria-label="Volgende post">&#8250;</button>
-                                </div>
-                                <!-- Dots -->
-                                <div class="ig-dots" id="ig-dots">
-                                    <span class="ig-dot active"></span>
-                                    <span class="ig-dot"></span>
-                                    <span class="ig-dot"></span>
-                                    <span class="ig-dot"></span>
-                                    <span class="ig-dot"></span>
-                                    <span class="ig-dot"></span>
-                                </div>
-                                <!-- Caption & CTA -->
-                                <div class="ig-post-content">
-                                    <div class="ig-post-caption">
-                                        <strong>bonsaiverenigingbrabant</strong> Bonsai is meer dan een hobby — het is een levensstijl 🌿 Volg ons voor de laatste updates!
+                                    <div>
+                                        <div class="ig-username">bonsaiverenigingbrabant</div>
+                                        <div class="ig-account-label">Bonsai Vereniging Brabant</div>
                                     </div>
-                                    <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" class="ig-follow-btn">Volg ons op Instagram</a>
+                                </a>
+                                <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" rel="noopener noreferrer" class="ig-insta-icon" aria-label="Ga naar Instagram">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                                </a>
+                            </div>
+                            <!-- Carousel -->
+                            <div class="ig-carousel-wrapper">
+                                <button class="ig-nav ig-nav-prev" id="ig-prev" aria-label="Vorige post">&#8249;</button>
+                                <div class="ig-carousel" id="ig-carousel">
+                                    <a href="https://www.instagram.com/p/C4FUfF0NOrZ/" target="_blank" rel="noopener noreferrer" class="ig-post-slide skeleton">
+                                        <img src="images/tokonoma/08_tokonoma_aug_2024.jpg" alt="BVB clubavond augustus 2024" loading="lazy">
+                                    </a>
+                                    <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" rel="noopener noreferrer" class="ig-post-slide skeleton">
+                                        <img src="images/bijeenkomst.jpeg" alt="BVB clubbijeenkomst" loading="lazy">
+                                    </a>
+                                    <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" rel="noopener noreferrer" class="ig-post-slide skeleton">
+                                        <img src="images/tokonoma/05_tokonoma_mei_2024.jpg" alt="Tokonoma mei 2024" loading="lazy">
+                                    </a>
+                                    <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" rel="noopener noreferrer" class="ig-post-slide skeleton">
+                                        <img src="images/ntc.jpeg" alt="New Talent Contest" loading="lazy">
+                                    </a>
+                                    <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" rel="noopener noreferrer" class="ig-post-slide skeleton">
+                                        <img src="images/tokonoma/01_tokonoma_jan_2024.jpg" alt="Tokonoma januari 2024" loading="lazy">
+                                    </a>
+                                    <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" rel="noopener noreferrer" class="ig-post-slide skeleton">
+                                        <img src="images/tokonoma/12_tokonoma_dec_2024.jpg" alt="Tokonoma december 2024" loading="lazy">
+                                    </a>
                                 </div>
+                                <button class="ig-nav ig-nav-next" id="ig-next" aria-label="Volgende post">&#8250;</button>
+                            </div>
+                            <!-- Dots -->
+                            <div class="ig-dots" id="ig-dots">
+                                <span class="ig-dot active"></span>
+                                <span class="ig-dot"></span>
+                                <span class="ig-dot"></span>
+                                <span class="ig-dot"></span>
+                                <span class="ig-dot"></span>
+                                <span class="ig-dot"></span>
+                            </div>
+                            <!-- Caption & CTA -->
+                            <div class="ig-post-content">
+                                <div class="ig-post-caption">
+                                    <strong>bonsaiverenigingbrabant</strong> Bonsai is meer dan een hobby — het is een levensstijl 🌿 Volg ons voor de laatste updates!
+                                </div>
+                                <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" rel="noopener noreferrer" class="ig-follow-btn">Volg ons op Instagram</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
+        </div><!-- End content-container-wide -->
+    </main>
+
     <footer class="site-footer">
         <div class="footer-container">
-            <div class="footer-bottom">
-                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="contact.html">Contact</a></p>
+            <div class="footer-bottom no-border">
+                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="contact.html" class="contact-link">Contact</a></p>
             </div>
         </div>
     </footer>
 
+    <button id="back-to-top" class="back-to-top" aria-label="Terug naar boven">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="js/app.js"></script>
     <script>
-        // Slideshow logic for the "Over de club" section
-        const slides = document.querySelectorAll('#club-slideshow .slide');
-        let currentSlide = 0;
-
-        function initSlides() {
-            // Preload second slide immediately
-            if (slides.length > 1) {
-                const next = slides[1];
-                if (next.dataset.src) {
-                    next.style.backgroundImage = `url('${next.dataset.src}')`;
-                }
-            }
-        }
-
-        function nextSlide() {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            
-            const activeSlide = slides[currentSlide];
-            if (activeSlide.dataset.src && !activeSlide.style.backgroundImage) {
-                activeSlide.style.backgroundImage = `url('${activeSlide.dataset.src}')`;
-            }
-            
-            // Pre-load the slide after this one too
-            const nextIdx = (currentSlide + 1) % slides.length;
-            const nextSlideEl = slides[nextIdx];
-            if (nextSlideEl.dataset.src && !nextSlideEl.style.backgroundImage) {
-                nextSlideEl.style.backgroundImage = `url('${nextSlideEl.dataset.src}')`;
-            }
-
-            activeSlide.classList.add('active');
-        }
-
-        if (slides.length > 0) {
-            initSlides();
-            setInterval(nextSlide, 5000);
-        }
-
-        // Scroll Reveal Observer
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Mobile menu toggle
-        const mobileToggle = document.getElementById('mobile-toggle');
-        const mainNav = document.getElementById('main-nav');
-
-        mobileToggle.addEventListener('click', () => {
-            mobileToggle.classList.toggle('active');
-            mainNav.classList.toggle('active');
-        });
-
-        // Instagram Carousel
-        const igCarousel = document.getElementById('ig-carousel');
-        const igDots = document.querySelectorAll('.ig-dot');
-        const igPrev = document.getElementById('ig-prev');
-        const igNext = document.getElementById('ig-next');
-        let igCurrentSlide = 0;
-        const igSlideCount = document.querySelectorAll('.ig-post-slide').length;
-
-        function igGoTo(index) {
-            igCurrentSlide = (index + igSlideCount) % igSlideCount;
-            if (igCarousel) {
-                const slideWidth = igCarousel.offsetWidth;
-                igCarousel.scrollTo({ left: igCurrentSlide * slideWidth, behavior: 'smooth' });
-            }
-            igDots.forEach((d, i) => d.classList.toggle('active', i === igCurrentSlide));
-        }
-
-        if (igPrev) igPrev.addEventListener('click', () => igGoTo(igCurrentSlide - 1));
-        if (igNext) igNext.addEventListener('click', () => igGoTo(igCurrentSlide + 1));
-
-        // Sync dots on native scroll
-        if (igCarousel) {
-            igCarousel.addEventListener('scroll', () => {
-                const slideWidth = igCarousel.offsetWidth;
-                const newIndex = Math.round(igCarousel.scrollLeft / slideWidth);
-                if (newIndex !== igCurrentSlide) {
-                    igCurrentSlide = newIndex;
-                    igDots.forEach((d, i) => d.classList.toggle('active', i === igCurrentSlide));
-                }
-            });
-        }
-
-        // Click on dots
-        igDots.forEach((dot, i) => dot.addEventListener('click', () => igGoTo(i)));
+        initSimpleSlideshow('club-slideshow');
+        initIGCarousel('ig-carousel', 'ig-prev', 'ig-next', '.ig-dot');
     </script>
 </body>
 </html>
-
-

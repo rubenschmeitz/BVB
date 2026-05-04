@@ -1,0 +1,15 @@
+{
+  "name": "Bonsai Vereniging Brabant",
+  "short_name": "BVB",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#FAFAF8",
+  "theme_color": "#5D7B51",
+  "icons": [
+    {
+      "src": "images/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

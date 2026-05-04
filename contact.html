@@ -8,22 +8,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
-    <script src="js/seasons.js" defer></script>
+    
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com; frame-src https://*.instagram.com;">
+
     
     <!-- Meta Tags & SEO -->
-    <meta name="description" content="Neem contact op met Bonsai Vereniging Brabant. Heeft u vragen over onze club, lidmaatschap of bonsai in het algemeen? Wij helpen u graag verder.">
-    <meta name="theme-color" content="#7A5B49">
+    <meta name="description" content="Neem contact op met Bonsai Vereniging Brabant. Vragen over lidmaatschap, workshops of de vereniging? Wij staan voor je klaar.">
+    <meta name="theme-color" content="#5D7B51">
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Contact - Bonsai Vereniging Brabant">
-    <meta property="og:description" content="Vragen over bonsai? Neem direct contact op met onze vereniging.">
-    <meta property="og:image" content="images/logo_main.png">
+    <meta property="og:description" content="Vragen over bonsai? Neem direct contact op met onze vereniging in Berlicum.">
+    <meta property="og:image" content="images/tokonoma/02_tokonoma_feb_2024.jpg">
     
     <!-- Favicon & Icons -->
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="apple-touch-icon" href="images/favicon.png">
-    <link rel="manifest" href="site.webmanifest">
+    
 </head>
 <body>
 
@@ -35,7 +37,7 @@
                     <div class="logo-overlay"></div>
                 </div>
                 <div class="site-title-box">
-                    <h1>Bonsai Vereniging Brabant</h1>
+                    <div class="site-title">Bonsai Vereniging Brabant</div>
                     <p class="site-tagline">Bonsai van het zuiden</p>
                 </div>
             </div>
@@ -46,11 +48,12 @@
                 <a href="agenda.html">Agenda</a>
                 <a href="contact.html" class="active">Contact</a>
             </nav>
-            <div class="mobile-toggle" id="mobile-toggle">
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu openen/sluiten" aria-expanded="false" aria-controls="main-nav">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
+
         </div>
     </header>
 
@@ -66,25 +69,31 @@
     <main class="content-area">
         <div class="content-container">
             <div class="text-content">
-                <div style="max-width: 600px; margin: 0 auto;">
+                <div class="contact-form-wrapper">
                     <p>Heb je vragen, opmerkingen of wil je een keertje langskomen bij een van onze bijeenkomsten?</p>
                     <p>Je kunt ons een bericht sturen via onderstaand formulier. We reageren zo snel mogelijk!</p>
                     
-                    <form action="#" method="post" style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; background: var(--color-sand); padding: 1.5rem; border-radius: 20px;">
-                        <div>
-                            <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--color-bark);">Naam *</label>
-                            <input type="text" id="name" name="name" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-family: inherit;">
+                    <form action="#" method="post" class="contact-form">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Naam *</label>
+                            <input type="text" id="name" name="name" required class="form-input">
                         </div>
-                        <div>
-                            <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--color-bark);">E-mail *</label>
-                            <input type="email" id="email" name="email" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-family: inherit;">
+                        <div class="form-group">
+                            <label for="email" class="form-label">E-mail *</label>
+                            <input type="email" id="email" name="email" required class="form-input">
                         </div>
-                        <div>
-                            <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--color-bark);">Bericht *</label>
-                            <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; resize: vertical;"></textarea>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Bericht *</label>
+                            <textarea id="message" name="message" rows="5" required class="form-textarea"></textarea>
                         </div>
-                        <div style="margin-top: 1rem;">
-                            <button type="submit" style="background-color: var(--color-bark); color: white; border: none; padding: 1.2rem 2.5rem; border-radius: 50px; font-weight: 600; cursor: pointer; width: 100%; transition: var(--transition-smooth);">Bericht Versturen</button>
+                        <!-- Honeypot Field (Anti-spam) -->
+                        <div class="hp-field">
+                            <label for="website">Website (laat dit veld leeg)</label>
+                            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <div class="form-submit">
+                            <button type="submit" class="submit-btn">Bericht Versturen</button>
                         </div>
                     </form>
                 </div>
@@ -94,26 +103,27 @@
 
     <footer class="site-footer">
         <div class="footer-container">
-            <div class="footer-bottom" style="border: none; padding-top: 0;">
-                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="contact.html" style="color: inherit; text-decoration: none; opacity: 0.7;">Contact</a></p>
+            <div class="footer-bottom no-border">
+                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="contact.html" class="contact-link">Contact</a></p>
             </div>
         </div>
-    </footer>
+    </footer><button id="back-to-top" class="back-to-top" aria-label="Terug naar boven"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></button><button id="back-to-top" class="back-to-top" aria-label="Terug naar boven"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
 
+    <script src="js/app.js"></script>
     <script>
-        const mobileToggle = document.getElementById('mobile-toggle');
-        const mainNav = document.getElementById('main-nav');
-
-        mobileToggle.addEventListener('click', () => {
-            mobileToggle.classList.toggle('active');
-            mainNav.classList.toggle('active');
-        });
-
         // Contact Form Handling
         const contactForm = document.querySelector('form');
         if (contactForm) {
             contactForm.addEventListener('submit', (e) => {
                 e.preventDefault();
+
+                // Simple Honeypot Check
+                const honeypot = contactForm.querySelector('input[name="website"]').value;
+                if (honeypot) {
+                    console.log("Spam detected!");
+                    return;
+                }
+
                 
                 // Simple feedback instead of actual sending (static site)
                 const originalContent = contactForm.innerHTML;

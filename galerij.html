@@ -8,22 +8,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
-    <script src="js/seasons.js" defer></script>
+    
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com; frame-src https://*.instagram.com;">
+
     
     <!-- Meta Tags & SEO -->
-    <meta name="description" content="Bekijk de prachtige bonsai collecties van onze leden en krijg een impressie van onze clubavonden bij Bonsai Vereniging Brabant.">
-    <meta name="theme-color" content="#7A5B49">
+    <meta name="description" content="Ontdek de digitale bonsai expositie van Bonsai Vereniging Brabant. Prachtige collecties van onze leden en sfeervolle impressies van onze clubavonden.">
+    <meta name="theme-color" content="#5D7B51">
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Galerij - Bonsai Vereniging Brabant">
-    <meta property="og:description" content="Een digitale expositie van passie en vakmanschap. Bekijk onze bonsai galerij.">
-    <meta property="og:image" content="images/logo_main.png">
+    <meta property="og:title" content="Galerij & Expositie - Bonsai Vereniging Brabant">
+    <meta property="og:description" content="Een visuele reis door onze bonsai passie. Bekijk de bomen van onze leden.">
+    <meta property="og:image" content="images/tokonoma/08_tokonoma_aug_2024.jpg">
     
     <!-- Favicon & Icons -->
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="apple-touch-icon" href="images/favicon.png">
-    <link rel="manifest" href="site.webmanifest">
+    
     <style>
         .gallery-category {
             display: none;
@@ -43,7 +45,7 @@
                     <div class="logo-overlay"></div>
                 </div>
                 <div class="site-title-box">
-                    <h1>Bonsai Vereniging Brabant</h1>
+                    <div class="site-title">Bonsai Vereniging Brabant</div>
                     <p class="site-tagline">Bonsai van het zuiden</p>
                 </div>
             </div>
@@ -54,11 +56,12 @@
                 <a href="agenda.html">Agenda</a>
                 <a href="contact.html">Contact</a>
             </nav>
-            <div class="mobile-toggle" id="mobile-toggle">
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu openen/sluiten" aria-expanded="false" aria-controls="main-nav">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
+
         </div>
     </header>
 
@@ -87,34 +90,34 @@
                 </div>
                 
                 <div class="activity-grid">
-                    <div class="activity-item" data-full="images/club_diverse/club_maart_2024_1.jpg"><img src="images/club_diverse/club_maart_2024_1.jpg" alt="Sfeerimpressie van een goedgevulde werktafel tijdens de maart-bijeenkomst."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_feb_2024_1.jpg"><img src="images/club_diverse/club_feb_2024_1.jpg" alt="Focus en vakmanschap: het zorgvuldig bedraden van een jeneverbes."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_sept_2024_1.jpg"><img src="images/club_diverse/club_sept_2024_1.jpg" alt="Nazomer bij BVB: we bespreken de voorbereiding op de herfstperiode."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_juni_2024_1.jpg"><img src="images/club_diverse/club_juni_2024_1.jpg" alt="Kennis delen: leden adviseren elkaar over de vormgeving van een loofboom."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_cursus_2023_1.jpg"><img src="images/club_diverse/club_cursus_2023_1.jpg" alt="Leren van de meesters: een leerzame cursusavond over wortelvoet-technieken."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_nov_2022_1.jpg"><img src="images/club_diverse/club_nov_2022_1.jpg" alt="Winterklaar maken: herfstwerkzaamheden in een gezellige clubsetting."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_juni_2022_1.jpg"><img src="images/club_diverse/club_juni_2022_1.jpg" alt="Zomeravond in Berlicum: bonsai-passie onder een stralende zon."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_nov_2021_1.jpg"><img src="images/club_diverse/club_nov_2021_1.jpg" alt="Traditie en continuïteit: al jarenlang komen we samen voor onze gedeelde hobby."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_cursus_2023_2.jpg"><img src="images/club_diverse/club_cursus_2023_2.jpg" alt="Basiscursus: we leggen de fundamenten voor een leven lang bonsai-plezier."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_wa_03.jpg"><img src="images/club_diverse/club_wa_03.jpg" alt="Handwerk in detail: iedere tak telt bij de vorming van een meesterwerk."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_wa_04.jpg"><img src="images/club_diverse/club_wa_04.jpg" alt="Interactieve workshop: intensieve begeleiding voor zowel beginners als gevorderden."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_wa_05.jpg"><img src="images/club_diverse/club_wa_05.jpg" alt="Gezamenlijk aan de slag: de kracht van onze vereniging is de onderlinge hulp."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_wa_06.jpg"><img src="images/club_diverse/club_wa_06.jpg" alt="Vormgeving in praktijk: een demonstratie van technieken die je direct kunt toepassen."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_wa_07.jpg"><img src="images/club_diverse/club_wa_07.jpg" alt="Sociaal aspect: de koffiepauze is hét moment voor sterke verhalen en advies."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_wa_08.jpg"><img src="images/club_diverse/club_wa_08.jpg" alt="Gefocust werken: rust en concentratie leiden tot de mooiste resultaten."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_wa_09.jpg"><img src="images/club_diverse/club_wa_09.jpg" alt="Karakter vormen: we werken aan de natuurlijke uitstraling van onze bomen."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_wa_10.jpg"><img src="images/club_diverse/club_wa_10.jpg" alt="Lidmaatschap bij BVB: passie, vakmanschap en Brabantse gezelligheid."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_wa_11.jpg"><img src="images/club_diverse/club_wa_11.jpg" alt="Fijne kneepjes van het vak: precisie bij het uitdunnen van de loofmassa."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_wa_12.jpg"><img src="images/club_diverse/club_wa_12.jpg" alt="Oog voor detail: samen kijken we naar de beste 'voorkant' van een nieuwe boom."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_wa_13.jpg"><img src="images/club_diverse/club_wa_13.jpg" alt="Zorg voor de boom: onderhoud is essentieel voor een gezonde bonsai."></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_wa_14.jpg"><img src="images/club_diverse/club_wa_14.jpg" alt="Clubavond sfeer: een inspirerende omgeving voor iedere bonsai-liefhebber."></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_maart_2024_1.jpg"><img src="images/club_diverse/club_maart_2024_1.jpg" alt="Sfeerimpressie van een goedgevulde werktafel tijdens de maart-bijeenkomst." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_feb_2024_1.jpg"><img src="images/club_diverse/club_feb_2024_1.jpg" alt="Focus en vakmanschap: het zorgvuldig bedraden van een jeneverbes." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_sept_2024_1.jpg"><img src="images/club_diverse/club_sept_2024_1.jpg" alt="Nazomer bij BVB: we bespreken de voorbereiding op de herfstperiode." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_juni_2024_1.jpg"><img src="images/club_diverse/club_juni_2024_1.jpg" alt="Kennis delen: leden adviseren elkaar over de vormgeving van een loofboom." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_cursus_2023_1.jpg"><img src="images/club_diverse/club_cursus_2023_1.jpg" alt="Leren van de meesters: een leerzame cursusavond over wortelvoet-technieken." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_nov_2022_1.jpg"><img src="images/club_diverse/club_nov_2022_1.jpg" alt="Winterklaar maken: herfstwerkzaamheden in een gezellige clubsetting." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_juni_2022_1.jpg"><img src="images/club_diverse/club_juni_2022_1.jpg" alt="Zomeravond in Berlicum: bonsai-passie onder een stralende zon." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_nov_2021_1.jpg"><img src="images/club_diverse/club_nov_2021_1.jpg" alt="Traditie en continuïteit: al jarenlang komen we samen voor onze gedeelde hobby." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_cursus_2023_2.jpg"><img src="images/club_diverse/club_cursus_2023_2.jpg" alt="Basiscursus: we leggen de fundamenten voor een leven lang bonsai-plezier." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_wa_03.jpg"><img src="images/club_diverse/club_wa_03.jpg" alt="Handwerk in detail: iedere tak telt bij de vorming van een meesterwerk." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_wa_04.jpg"><img src="images/club_diverse/club_wa_04.jpg" alt="Interactieve workshop: intensieve begeleiding voor zowel beginners als gevorderden." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_wa_05.jpg"><img src="images/club_diverse/club_wa_05.jpg" alt="Gezamenlijk aan de slag: de kracht van onze vereniging is de onderlinge hulp." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_wa_06.jpg"><img src="images/club_diverse/club_wa_06.jpg" alt="Vormgeving in praktijk: een demonstratie van technieken die je direct kunt toepassen." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_wa_07.jpg"><img src="images/club_diverse/club_wa_07.jpg" alt="Sociaal aspect: de koffiepauze is hét moment voor sterke verhalen en advies." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_wa_08.jpg"><img src="images/club_diverse/club_wa_08.jpg" alt="Gefocust werken: rust en concentratie leiden tot de mooiste resultaten." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_wa_09.jpg"><img src="images/club_diverse/club_wa_09.jpg" alt="Karakter vormen: we werken aan de natuurlijke uitstraling van onze bomen." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_wa_10.jpg"><img src="images/club_diverse/club_wa_10.jpg" alt="Lidmaatschap bij BVB: passie, vakmanschap en Brabantse gezelligheid." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_wa_11.jpg"><img src="images/club_diverse/club_wa_11.jpg" alt="Fijne kneepjes van het vak: precisie bij het uitdunnen van de loofmassa." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_wa_12.jpg"><img src="images/club_diverse/club_wa_12.jpg" alt="Oog voor detail: samen kijken we naar de beste 'voorkant' van een nieuwe boom." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_wa_13.jpg"><img src="images/club_diverse/club_wa_13.jpg" alt="Zorg voor de boom: onderhoud is essentieel voor een gezonde bonsai." loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_wa_14.jpg"><img src="images/club_diverse/club_wa_14.jpg" alt="Clubavond sfeer: een inspirerende omgeving voor iedere bonsai-liefhebber." loading="lazy"></div>
                 </div>
             </section>
 
             <!-- Bomen van de Leden -->
             <section id="leden-section" class="gallery-category">
                 <div class="gallery-header">
-                    <h2>Digitale Expositie <span style="font-size: 0.7em; opacity: 0.8; display: block; margin-top: 0.5rem; font-weight: 500;">(Bomen van de Leden)</span></h2>
+                    <h2>Digitale Expositie <span class="sub-title-block">(Bomen van de Leden)</span></h2>
                     <p>Welkom bij onze online tentoonstelling. Een oneindige stroom van passie en vakmanschap, direct uit de collecties van onze leden.</p>
                 </div>
                 
@@ -122,18 +125,18 @@
                     <div class="exhibition-container">
                         <!-- Unique Set of Trees (18) -->
                         <div class="exhibition-card" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/transparent_backgrounds/tree_member_1.png" alt="Carpinus Betulus (Haagbeuk)">
+                            <div class="exhibition-image-box skeleton">
+                                <img src="images/trees/transparent_backgrounds/tree_member_1.png" alt="Acer Palmatum (Japanse Esdoorn)" loading="lazy">
                             </div>
                             <div class="exhibition-details">
-                                <h3 class="exhibition-species">Carpinus Betulus (Haagbeuk)</h3>
+                                <h3 class="exhibition-species">Acer Palmatum (Japanse Esdoorn)</h3>
                                 <p class="exhibition-style">Hokidachi (Bezemstijl)</p>
                             </div>
                         </div>
 
                         <div class="exhibition-card" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/transparent_backgrounds/tree_member_3.png" alt="Acer Palmatum (Japanse Esdoorn)">
+                            <div class="exhibition-image-box skeleton">
+                                <img src="images/trees/transparent_backgrounds/tree_member_3.png" alt="Acer Palmatum (Japanse Esdoorn)" loading="lazy">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Acer Palmatum (Japanse Esdoorn)</h3>
@@ -142,18 +145,18 @@
                         </div>
 
                         <div class="exhibition-card" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/transparent_backgrounds/tree_member_6.png" alt="Larix Kaempferi (Japanse Larix)">
+                            <div class="exhibition-image-box skeleton">
+                                <img src="images/trees/transparent_backgrounds/tree_member_6.png" alt="Acer Palmatum (Japanse Esdoorn)" loading="lazy">
                             </div>
                             <div class="exhibition-details">
-                                <h3 class="exhibition-species">Larix Kaempferi (Japanse Larix)</h3>
+                                <h3 class="exhibition-species">Acer Palmatum (Japanse Esdoorn)</h3>
                                 <p class="exhibition-style">Moyogi (Informele Rechtopgaande Stijl)</p>
                             </div>
                         </div>
 
                         <div class="exhibition-card" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/transparent_backgrounds/tree_member_7.png" alt="Juniperus Chinensis 'Itoigawa'">
+                            <div class="exhibition-image-box skeleton">
+                                <img src="images/trees/transparent_backgrounds/tree_member_7.png" alt="Juniperus Chinensis 'Itoigawa'" loading="lazy">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Juniperus 'Itoigawa'</h3>
@@ -162,8 +165,8 @@
                         </div>
 
                         <div class="exhibition-card" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/transparent_backgrounds/tree_member_8.png" alt="Larix Kaempferi (Japanse Larix)">
+                            <div class="exhibition-image-box skeleton">
+                                <img src="images/trees/transparent_backgrounds/tree_member_8.png" alt="Larix Kaempferi (Japanse Larix)" loading="lazy">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Larix Kaempferi (Japanse Larix)</h3>
@@ -172,18 +175,18 @@
                         </div>
 
                         <div class="exhibition-card" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/transparent_backgrounds/tree_member_9.png" alt="Pinus Sylvestris (Grove Den)">
+                            <div class="exhibition-image-box skeleton">
+                                <img src="images/trees/transparent_backgrounds/tree_member_9.png" alt="Prunus spec. (Sierkers)" loading="lazy">
                             </div>
                             <div class="exhibition-details">
-                                <h3 class="exhibition-species">Pinus Sylvestris (Grove Den)</h3>
+                                <h3 class="exhibition-species">Prunus spec. (Sierkers)</h3>
                                 <p class="exhibition-style">Bunjin (Literati Stijl)</p>
                             </div>
                         </div>
 
                         <div class="exhibition-card" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/transparent_backgrounds/tree_member_10.png" alt="Juniperus Chinensis 'Itoigawa'">
+                            <div class="exhibition-image-box skeleton">
+                                <img src="images/trees/transparent_backgrounds/tree_member_10.png" alt="Juniperus Chinensis 'Itoigawa'" loading="lazy">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Juniperus 'Itoigawa'</h3>
@@ -192,8 +195,8 @@
                         </div>
 
                         <div class="exhibition-card" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/transparent_backgrounds/tree_member_11.png" alt="Juniperus Chinensis 'Itoigawa'">
+                            <div class="exhibition-image-box skeleton">
+                                <img src="images/trees/transparent_backgrounds/tree_member_11.png" alt="Juniperus Chinensis 'Itoigawa'" loading="lazy">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Juniperus 'Itoigawa'</h3>
@@ -202,18 +205,18 @@
                         </div>
 
                         <div class="exhibition-card" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/transparent_backgrounds/tree_member_12.png" alt="Ulmus Parvifolia (Chinese Iep)">
+                            <div class="exhibition-image-box skeleton">
+                                <img src="images/trees/transparent_backgrounds/tree_member_12.png" alt="Olea Europaea (Olijfboom)" loading="lazy">
                             </div>
                             <div class="exhibition-details">
-                                <h3 class="exhibition-species">Ulmus Parvifolia (Chinese Iep)</h3>
+                                <h3 class="exhibition-species">Olea Europaea (Olijfboom)</h3>
                                 <p class="exhibition-style">Moyogi (Informele Rechtopgaande Stijl)</p>
                             </div>
                         </div>
 
                         <div class="exhibition-card" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/transparent_backgrounds/tree_member_13.png" alt="Acer Campestre (Veldesdoorn)">
+                            <div class="exhibition-image-box skeleton">
+                                <img src="images/trees/transparent_backgrounds/tree_member_13.png" alt="Acer Campestre (Veldesdoorn)" loading="lazy">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Acer Campestre (Veldesdoorn)</h3>
@@ -222,18 +225,18 @@
                         </div>
 
                         <div class="exhibition-card" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/transparent_backgrounds/tree_member_14.png" alt="Larix Decidua (Europese Larix)">
+                            <div class="exhibition-image-box skeleton">
+                                <img src="images/trees/transparent_backgrounds/tree_member_14.png" alt="Pinus Thunbergii (Japanse Zwarte Den)" loading="lazy">
                             </div>
                             <div class="exhibition-details">
-                                <h3 class="exhibition-species">Larix Decidua (Europese Larix)</h3>
+                                <h3 class="exhibition-species">Pinus Thunbergii (Japanse Zwarte Den)</h3>
                                 <p class="exhibition-style">Shakan (Hellende Stijl)</p>
                             </div>
                         </div>
 
                         <div class="exhibition-card" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/transparent_backgrounds/tree_member_15.png" alt="Acer Palmatum (Japanse Esdoorn)">
+                            <div class="exhibition-image-box skeleton">
+                                <img src="images/trees/transparent_backgrounds/tree_member_15.png" alt="Acer Palmatum (Japanse Esdoorn)" loading="lazy">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Acer Palmatum (Japanse Esdoorn)</h3>
@@ -242,18 +245,18 @@
                         </div>
 
                         <div class="exhibition-card" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/transparent_backgrounds/tree_member_16.png" alt="Acer Palmatum (Japanse Esdoorn)">
+                            <div class="exhibition-image-box skeleton">
+                                <img src="images/trees/transparent_backgrounds/tree_member_16.png" alt="Acer Palmatum (Japanse Esdoorn)" loading="lazy">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Acer Palmatum (Japanse Esdoorn)</h3>
-                                <p class="exhibition-style">Moyogi (Informele Rechtopgaande Stijl)</p>
+                                <p class="exhibition-style">Moyogi (Winter-silhouet)</p>
                             </div>
                         </div>
 
                         <div class="exhibition-card" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/transparent_backgrounds/tree_member_17.png" alt="Malus Halliana (Sierappel)">
+                            <div class="exhibition-image-box skeleton">
+                                <img src="images/trees/transparent_backgrounds/tree_member_17.png" alt="Malus Halliana (Sierappel)" loading="lazy">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Malus Halliana (Sierappel)</h3>
@@ -262,18 +265,18 @@
                         </div>
 
                         <div class="exhibition-card" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/transparent_backgrounds/tree_pieter_1.png" alt="Wisteria Sinensis">
+                            <div class="exhibition-image-box skeleton">
+                                <img src="images/trees/transparent_backgrounds/tree_member_2.png" alt="Wisteria Sinensis (Blauwe Regen)" loading="lazy">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Wisteria Sinensis (Blauwe Regen)</h3>
-                                <p class="exhibition-style">Kengai (Bloeiende Cascade)</p>
+                                <p class="exhibition-style">Bunjin (Literati Stijl)</p>
                             </div>
                         </div>
 
                         <div class="exhibition-card" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/transparent_backgrounds/tree_pieter_2.png" alt="Juniperus Chinensis (Jeneverbes)">
+                            <div class="exhibition-image-box skeleton">
+                                <img src="images/trees/transparent_backgrounds/tree_member_4.png" alt="Juniperus Chinensis (Jeneverbes)" loading="lazy">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Juniperus Chinensis (Jeneverbes)</h3>
@@ -282,8 +285,9 @@
                         </div>
 
                         <div class="exhibition-card" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box">
-                                <img src="images/trees/transparent_backgrounds/tree_pieter_3.png" alt="Acer Palmatum (Japanse Esdoorn)">
+                            <div class="exhibition-image-box skeleton">
+                                <img src="images/trees/transparent_backgrounds/tree_member_5.png" alt="Acer Palmatum (Japanse Esdoorn)" loading="lazy">
+
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Acer Palmatum (Japanse Esdoorn)</h3>
@@ -291,9 +295,10 @@
                             </div>
                         </div>
 
+
                     </div>
                 </div>      <!-- Scroll Indicator -->
-                    <div style="text-align: center; margin-top: 2rem; color: var(--color-sage); font-size: 0.9rem; opacity: 0.6; font-style: italic;">
+                    <div class="scroll-indicator">
                         &larr; Scroll horizontaal om meer bomen te zien &rarr;
                     </div>
                 </div>
@@ -310,21 +315,14 @@
 
     <footer class="site-footer">
         <div class="footer-container">
-            <div class="footer-bottom" style="border: none; padding-top: 0;">
-                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="contact.html" style="color: inherit; text-decoration: none; opacity: 0.7;">Contact</a></p>
+            <div class="footer-bottom no-border">
+                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="contact.html" class="contact-link">Contact</a></p>
             </div>
         </div>
-    </footer>
+    </footer><button id="back-to-top" class="back-to-top" aria-label="Terug naar boven"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></button><button id="back-to-top" class="back-to-top" aria-label="Terug naar boven"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
 
+    <script src="js/app.js"></script>
     <script>
-        const mobileToggle = document.getElementById('mobile-toggle');
-        const mainNav = document.getElementById('main-nav');
-
-        mobileToggle.addEventListener('click', () => {
-            mobileToggle.classList.toggle('active');
-            mainNav.classList.toggle('active');
-        });
-
         function showCategory(categoryId) {
             document.querySelectorAll('.gallery-category').forEach(cat => {
                 cat.classList.remove('active');
@@ -374,12 +372,14 @@
             document.body.style.overflow = 'auto'; // Restore scrolling
         };
 
-        lightboxClose.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox || e.target === lightboxClose) {
-                closeLightbox();
-            }
-        });
+        if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+        if (lightbox) {
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox || e.target === lightboxClose) {
+                    closeLightbox();
+                }
+            });
+        }
 
         // Close on Escape key
         document.addEventListener('keydown', (e) => {

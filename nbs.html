@@ -8,22 +8,58 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
-    <script src="js/seasons.js" defer></script>
+    
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com; frame-src https://*.instagram.com https://www.google.com;">
+
     
     <!-- Meta Tags & SEO -->
-    <meta name="description" content="Alles over de Nationale Bonsai Show (NBS) 2026, gehost door Bonsai Vereniging Brabant. Programma, demonstraties door Alain de Vroo en Yannick Kiggen, en meer.">
-    <meta name="theme-color" content="#7A5B49">
+    <meta name="description" content="Alles over de Nationale Bonsai Show (NBS) 2026 in Berlicum. Programma, demonstraties door Alain Alivon en Yannick Kiggen, en een grote bonsaimarkt.">
+    <meta name="theme-color" content="#5D7B51">
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="NBS 2026 - Bonsai Vereniging Brabant">
-    <meta property="og:description" content="Bezoek de Nationale Bonsai Show 2026 in Berlicum. Bekijk het volledige programma.">
-    <meta property="og:image" content="images/logo_main.png">
+    <meta property="og:title" content="NBS 2026 - Nationale Bonsai Show Berlicum">
+    <meta property="og:description" content="Bezoek de Nationale Bonsai Show 2026. Top-bonsai, internationale demonstraties en een gezellige markt.">
+    <meta property="og:image" content="images/tokonoma/10_tokonoma_okt_2024.jpg">
     
     <!-- Favicon & Icons -->
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="apple-touch-icon" href="images/favicon.png">
-    <link rel="manifest" href="site.webmanifest">
+    
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "Nationale Bonsai Show 2026",
+      "startDate": "2026-09-26T10:00",
+      "endDate": "2026-09-27T17:00",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place",
+        "name": "Den Durpsherd",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Kerkwijk 61",
+          "addressLocality": "Berlicum",
+          "postalCode": "5258 KB",
+          "addressRegion": "Noord-Brabant",
+          "addressCountry": "NL"
+        }
+      },
+      "image": [
+        "https://www.bonsaiverenigingbrabant.nl/images/tokonoma/10_tokonoma_okt_2024.jpg"
+      ],
+      "description": "De Nationale Bonsai Show 2026 in Berlicum. Met demonstraties, expositie en bonsaimarkt.",
+      "organizer": {
+        "@type": "Organization",
+        "name": "Bonsai Vereniging Brabant",
+        "url": "https://www.bonsaiverenigingbrabant.nl/"
+      }
+    }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
     <style>
@@ -86,7 +122,7 @@
                     <div class="logo-overlay"></div>
                 </div>
                 <div class="site-title-box">
-                    <h1>Bonsai Vereniging Brabant</h1>
+                    <div class="site-title">Bonsai Vereniging Brabant</div>
                     <p class="site-tagline">Bonsai van het zuiden</p>
                 </div>
             </div>
@@ -97,11 +133,12 @@
                 <a href="agenda.html">Agenda</a>
                 <a href="contact.html">Contact</a>
             </nav>
-            <div class="mobile-toggle" id="mobile-toggle">
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu openen/sluiten" aria-expanded="false" aria-controls="main-nav">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
+
         </div>
     </header>
 
@@ -121,20 +158,20 @@
                 <!-- Main Content -->
                 <div class="nbs-main-column">
                     <section>
-                        <h2 style="margin-bottom: 1.5rem;">Hét Bonsai Evenement van het Jaar</h2>
-                        <p style="font-size: 1.1rem; line-height: 1.7; color: var(--color-charcoal); margin-bottom: 2rem;">
+                        <h2 class="mb-1-5">Hét Bonsai Evenement van het Jaar</h2>
+                        <p class="large-text">
                             Op 26 en 27 september 2026 verwelkomt Bonsai Vereniging Brabant u in dorpshuis De Moerkoal voor de NBS 2026. Het hele weekend lang geniet u van een indrukwekkende expositie van ruim 90 meter aan showtafels en een uitgebreide markt met o.a. Holland Bonsai, Philip Haese & Carlos van der Vaart. 
                         </p>
-                        <p style="font-size: 1.1rem; line-height: 1.7; color: var(--color-charcoal); margin-bottom: 3rem;">
+                        <p class="large-text mb-3">
                             Maak kans op schitterende prijzen bij onze grote loterij of laat u inspireren bij de BVB info-stand over het traject 'Van startboom tot bonsai'. Naast dit doorlopende programma zijn er diverse spectaculaire highlights die u hieronder in het tijdschema vindt.
                         </p>
                     </section>
 
                     <!-- Tijdschema & Highlights -->
-                    <section style="margin-bottom: 4rem;">
-                        <h3 style="color: var(--color-bark); margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;">
-                            <span style="background: var(--color-sage); width: 40px; height: 3px;"></span>
-                            Tijdschema & Highlights
+                    <section class="mb-4">
+                        <h3 class="timeline-header" style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--color-bark); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem;">
+                            <span class="decorative-line"></span>
+                            Tijdschema &amp; Highlights
                         </h3>
                         <div class="nbs-timeline">
                             
@@ -163,7 +200,8 @@
                                     <span class="timeline-time">14:00 - 17:00</span>
                                     <p class="timeline-title">Demonstratie: Alain de Vroo</p>
                                     <div class="timeline-demo-box">
-                                        <img src="images/Alain_demo.jpg" alt="Alain de Vroo" class="timeline-demo-portrait">
+                                        <img src="images/Alain_demo.jpg" alt="Alain de Vroo" class="timeline-demo-portrait skeleton" loading="lazy">
+
                                         <div class="timeline-demo-info">
                                             <h5>Alain de Vroo</h5>
                                             <p>Bonsai Master & Artist</p>
@@ -196,7 +234,8 @@
                                     <span class="timeline-time">14:00 - 16:30</span>
                                     <p class="timeline-title">Demonstratie: Yannick Kiggen</p>
                                     <div class="timeline-demo-box">
-                                        <img src="images/Yannick_demo.jpg" alt="Yannick Kiggen" class="timeline-demo-portrait">
+                                        <img src="images/Yannick_demo.jpg" alt="Yannick Kiggen" class="timeline-demo-portrait skeleton" loading="lazy">
+
                                         <div class="timeline-demo-info">
                                             <h5>Yannick Kiggen</h5>
                                             <p>Bonsai Master & Designer</p>
@@ -278,7 +317,7 @@
                             ></add-to-calendar-button>
                         </div>
 
-                        <div style="border-radius: 12px; overflow: hidden; height: 200px; margin-top: 1rem;">
+                        <div class="map-wrapper">
                             <iframe 
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2474.8251411929564!2d5.4156872761828785!3d51.66303779932199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c6e5ca14c47fcd%3A0x6740ba1b23b26f1e!2sStichting%20De%20Moerkoal!5e0!3m2!1snl!2snl!4v1777793012084!5m2!1snl!2snl" 
                                 width="100%" 
@@ -289,7 +328,7 @@
                                 referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
-                        <a href="https://maps.app.goo.gl/CxBm92C7UXm5WZvj8" target="_blank" class="nav-special" style="display: block; text-align: center; text-decoration: none; margin-top: 1rem; padding: 10px; font-size: 0.9rem;">Route plannen</a>
+                        <a href="https://maps.app.goo.gl/CxBm92C7UXm5WZvj8" target="_blank" rel="noopener noreferrer" class="nav-special route-btn">Route plannen</a>
 
                     </div>
                 </aside>
@@ -301,21 +340,13 @@
 
     <footer class="site-footer">
         <div class="footer-container">
-            <div class="footer-bottom" style="border: none; padding-top: 0;">
-                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="contact.html" style="color: inherit; text-decoration: none; opacity: 0.7;">Contact</a></p>
+            <div class="footer-bottom no-border">
+                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="contact.html" class="contact-link">Contact</a></p>
             </div>
         </div>
-    </footer>
+    </footer><button id="back-to-top" class="back-to-top" aria-label="Terug naar boven"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
 
-    <script>
-        const mobileToggle = document.getElementById('mobile-toggle');
-        const mainNav = document.getElementById('main-nav');
-
-        mobileToggle.addEventListener('click', () => {
-            mobileToggle.classList.toggle('active');
-            mainNav.classList.toggle('active');
-        });
-    </script>
+    <script src="js/app.js"></script>
 </body>
 </html>
 
