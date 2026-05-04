@@ -233,7 +233,19 @@ a:focus-visible {
 
 .main-nav a:hover, .main-nav a.active {
     background-color: var(--color-sage);
-    color: white;
+    color: white !important;
+}
+
+/* NBS special button when active */
+.main-nav a.nav-special.active {
+    background-color: var(--color-bark);
+    color: white !important;
+    border-color: var(--color-bark);
+}
+
+.main-nav a.nav-special.active:hover {
+    background-color: var(--color-charcoal);
+    border-color: var(--color-charcoal);
 }
 
 /* --- Hero Slideshow --- */
@@ -920,10 +932,27 @@ a:focus-visible {
     box-shadow: var(--shadow-soft);
 }
 
+.site-footer {
+    padding: 4rem 0 2rem;
+    background-color: var(--color-white);
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
 .footer-bottom {
     text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(0,0,0,0.06);
     padding-top: 2rem;
+}
+
+.contact-link {
+    color: var(--color-sage);
+    font-weight: 600;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+    color: var(--color-bark);
 }
 
 /* --- Responsive & Mobile Optimization --- */
@@ -948,8 +977,8 @@ a:focus-visible {
     }
     
     .site-tagline {
-        font-size: 0.75rem;
-        letter-spacing: 0.05em;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
     }
     
     .main-nav {
@@ -1224,8 +1253,6 @@ a:focus-visible {
     grid-template-columns: 1fr 350px;
     gap: 4rem;
     align-items: flex-start;
-    max-width: 1300px; /* Overriding any narrow containers */
-    margin: 0 auto;
     width: 100%;
 }
 
@@ -1345,10 +1372,12 @@ a:focus-visible {
 .timeline-demo-box {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-top: 0.8rem;
-    padding-top: 0.8rem;
-    border-top: 1px dashed var(--color-sand);
+    gap: 1.5rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #fdfcfb;
+    border-radius: 12px;
+    border: 1px solid rgba(150, 107, 78, 0.1);
 }
 
 @media (max-width: 450px) {
@@ -1359,24 +1388,27 @@ a:focus-visible {
     }
     
     .timeline-demo-portrait {
-        width: 50px;
-        height: 50px;
+        width: 80px;
+        height: 80px;
     }
 }
 
 .timeline-demo-portrait {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
     object-fit: cover;
+    object-position: top center; /* Focus on faces */
     border: 2px solid var(--color-bark);
     flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .timeline-demo-info h5 {
     margin: 0;
     color: var(--color-bark);
-    font-size: 1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
 }
 
 .timeline-demo-info p {
@@ -1783,4 +1815,64 @@ a:focus-visible {
         position: static;
         order: 2;
     }
+}
+
+/* --- Contact Form --- */
+.contact-form-wrapper {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    margin-top: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--color-charcoal);
+}
+
+.form-input, .form-textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--color-sand);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus, .form-textarea:focus {
+    outline: none;
+    border-color: var(--color-bark);
+}
+
+.hp-field {
+    display: none;
+}
+
+.form-submit {
+    margin-top: 2rem;
+}
+
+.submit-btn {
+    background-color: var(--color-bark);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: var(--color-charcoal);
+    transform: translateY(-2px);
 }
