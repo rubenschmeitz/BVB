@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.gstatic.com/s/outfit/v11/QGYsz_X_197X3vYpCqU.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/index.css">
     
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com; frame-src https://*.instagram.com https://www.google.com;">
@@ -28,130 +29,7 @@
     
 
     <script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
-    <style>
-        .agenda-container {
-            position: relative;
-            margin-top: 1.5rem;
-            padding-left: 30px;
-        }
-        .agenda-container::before {
-            content: '';
-            position: absolute;
-            left: 5px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--color-sage), var(--color-sand));
-            border-radius: 2px;
-        }
-        .agenda-item {
-            position: relative;
-            background: #fdfaf5;
-            background-image: url('images/textures/washi_texture.jpg');
-            background-blend-mode: multiply;
-            padding: 1.5rem 2rem;
-            border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(155, 123, 97, 0.1);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            z-index: 1;
-        }
-        .agenda-item::before {
-            content: '';
-            position: absolute;
-            left: -32px;
-            top: 35px;
-            width: 12px;
-            height: 12px;
-            background: white;
-            border: 3px solid var(--color-sage);
-            border-radius: 50%;
-            z-index: 2;
-        }
-        .agenda-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-            z-index: 10; /* Ensure hovered item is on top */
-        }
-        .agenda-header-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1.5rem;
-            gap: 2rem;
-        }
-        .date-box {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-        .day-num {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--color-bark);
-            line-height: 1;
-        }
-        .month-year {
-            display: flex;
-            flex-direction: column;
-        }
-        .month-year .month {
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: var(--color-charcoal);
-        }
-        .month-year .weekday {
-            font-size: 0.9rem;
-            color: var(--color-sage);
-            font-weight: 500;
-        }
-        .event-details {
-            flex: 1;
-        }
-        .event-tag {
-            display: inline-block;
-            background: rgba(130, 148, 126, 0.1);
-            color: var(--color-sage);
-            padding: 0.4rem 1rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .event-meta {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--color-sand);
-            font-size: 0.9rem;
-            color: var(--color-charcoal);
-        }
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .meta-item svg {
-            width: 18px;
-            height: 18px;
-            color: var(--color-sage);
-        }
-        @media (max-width: 768px) {
-            .agenda-header-flex {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .event-meta {
-                flex-direction: column;
-                gap: 0.8rem;
-            }
-        }
-    </style>
+
 </head>
 <body>
 

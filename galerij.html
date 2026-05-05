@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.gstatic.com/s/outfit/v11/QGYsz_X_197X3vYpCqU.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/index.css">
     
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com; frame-src https://*.instagram.com;">
@@ -26,14 +27,7 @@
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="apple-touch-icon" href="images/favicon.png">
     
-    <style>
-        .gallery-category {
-            display: none;
-        }
-        .gallery-category.active {
-            display: block;
-        }
-    </style>
+
 </head>
 <body>
 
@@ -319,74 +313,17 @@
                 <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="contact.html" class="contact-link">Contact</a></p>
             </div>
         </div>
-    </footer><button id="back-to-top" class="back-to-top" aria-label="Terug naar boven"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></button><button id="back-to-top" class="back-to-top" aria-label="Terug naar boven"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></button>
+    </footer>
+
+    <button id="back-to-top" class="back-to-top" aria-label="Terug naar boven">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
 
     <script src="js/app.js"></script>
     <script>
-        function showCategory(categoryId) {
-            document.querySelectorAll('.gallery-category').forEach(cat => {
-                cat.classList.remove('active');
-            });
-            document.querySelectorAll('.gallery-nav button').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.getElementById(categoryId + '-section').classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-
-        function toggleTree(card) {
-            // Remove active class from all other cards
-            document.querySelectorAll('.exhibition-card').forEach(c => {
-                if (c !== card) c.classList.remove('active');
-            });
-            // Toggle active class on clicked card
-            card.classList.toggle('active');
-        }
-
-        // Close nameplate when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.exhibition-card')) {
-                document.querySelectorAll('.exhibition-card').forEach(c => c.classList.remove('active'));
-            }
-        });
-
-        // Lightbox Logic
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxCaption = document.getElementById('lightbox-caption');
-        const lightboxClose = document.querySelector('.lightbox-close');
-
-        document.querySelectorAll('.activity-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const img = item.querySelector('img');
-                const fullSrc = item.getAttribute('data-full') || img.src;
-                lightboxImg.src = fullSrc;
-                lightboxCaption.textContent = img.alt || "BVB Clubavond";
-                lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling
-            });
-        });
-
-        const closeLightbox = () => {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = 'auto'; // Restore scrolling
-        };
-
-        if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
-        if (lightbox) {
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox || e.target === lightboxClose) {
-                    closeLightbox();
-                }
-            });
-        }
-
-        // Close on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                closeLightbox();
-            }
-        });
+        initLightbox('lightbox', 'lightbox-img', 'lightbox-caption', 'lightbox-close', 'activity-item');
     </script>
 </body>
 </html>

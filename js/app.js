@@ -156,3 +156,82 @@ function initIGCarousel(carouselId, prevId, nextId, dotClass) {
 
     dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
 }
+
+/**
+ * Helper to show gallery category
+ */
+function showCategory(categoryId) {
+    document.querySelectorAll('.gallery-category').forEach(cat => {
+        cat.classList.remove('active');
+    });
+    document.querySelectorAll('.gallery-nav button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    const section = document.getElementById(categoryId + '-section');
+    if (section) section.classList.add('active');
+    
+    // The button highlight is handled by the onclick in HTML for now, 
+    // or we can find it here:
+    const clickedBtn = Array.from(document.querySelectorAll('.gallery-nav button')).find(b => b.getAttribute('onclick')?.includes(categoryId));
+    if (clickedBtn) clickedBtn.classList.add('active');
+}
+
+/**
+ * Toggle tree details on click (Exhibition Gallery)
+ */
+function toggleTree(card) {
+    document.querySelectorAll('.exhibition-card').forEach(c => {
+        if (c !== card) c.classList.remove('active');
+    });
+    card.classList.toggle('active');
+}
+
+/**
+ * Lightbox initialization
+ */
+function initLightbox(lightboxId, imgId, captionId, closeClass, itemClass) {
+    const lightbox = document.getElementById(lightboxId);
+    const lightboxImg = document.getElementById(imgId);
+    const lightboxCaption = document.getElementById(captionId);
+    const lightboxClose = document.querySelector('.' + closeClass);
+
+    if (!lightbox || !lightboxImg) return;
+
+    document.querySelectorAll('.' + itemClass).forEach(item => {
+        item.addEventListener('click', () => {
+            const img = item.querySelector('img');
+            const fullSrc = item.getAttribute('data-full') || img.src;
+            lightboxImg.src = fullSrc;
+            if (lightboxCaption) lightboxCaption.textContent = img.alt || "BVB Clubavond";
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    const closeLightbox = () => {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    };
+
+    if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox || e.target === lightboxClose) {
+            closeLightbox();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+}
+
+// Close tree nameplate when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.exhibition-card')) {
+        document.querySelectorAll('.exhibition-card').forEach(c => c.classList.remove('active'));
+    }
+});
+
