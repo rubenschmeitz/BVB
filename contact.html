@@ -7,7 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="preload" href="https://fonts.gstatic.com/s/outfit/v11/QGYsz_X_197X3vYpCqU.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/index.css">
     
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com; frame-src https://*.instagram.com;">
@@ -84,6 +83,10 @@
                             <input type="email" id="email" name="email" required class="form-input">
                         </div>
                         <div class="form-group">
+                            <label for="subject" class="form-label">Onderwerp *</label>
+                            <input type="text" id="subject" name="subject" required class="form-input">
+                        </div>
+                        <div class="form-group">
                             <label for="message" class="form-label">Bericht *</label>
                             <textarea id="message" name="message" rows="5" required class="form-textarea"></textarea>
                         </div>
@@ -117,38 +120,89 @@
     <script src="js/app.js"></script>
     <script>
         // Contact Form Handling
-        const contactForm = document.querySelector('form');
-        if (contactForm) {
+        const contactForm = document.querySelector('.contact-form');
+        const submitBtn = contactForm ? contactForm.querySelector('.submit-btn') : null;
+        
+        // REPLACE THIS URL with your Google Apps Script Web App URL after deployment
+        const SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+
+        if (contactForm && submitBtn) {
             contactForm.addEventListener('submit', (e) => {
                 e.preventDefault();
 
-                // Simple Honeypot Check
-                const honeypot = contactForm.querySelector('input[name="website"]').value;
-                if (honeypot) {
-                    console.log("Spam detected!");
+                // 1. Client-side Validation (Basic)
+                if (!contactForm.checkValidity()) {
+                    contactForm.reportValidity();
                     return;
                 }
 
+                // 2. Honeypot Check
+                const honeypot = contactForm.querySelector('input[name="website"]').value;
+                if (honeypot) {
+                    console.log("Spam detected!");
+                    showFeedback(true, "Bericht verzonden!"); // Silent fail for spam
+                    return;
+                }
+
+                // 3. Prepare Submission
+                submitBtn.disabled = true;
+                const originalBtnText = submitBtn.innerText;
+                submitBtn.innerText = 'Verzenden...';
+
+                const formData = new FormData(contactForm);
                 
-                // Simple feedback instead of actual sending (static site)
-                const originalContent = contactForm.innerHTML;
-                contactForm.style.transition = 'opacity 0.4s ease';
-                contactForm.style.opacity = '0';
-                
-                setTimeout(() => {
-                    contactForm.innerHTML = `
-                        <div style="text-align: center; padding: 2rem 0;">
-                            <div style="width: 80px; height: 80px; background: var(--color-sage); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            </div>
-                            <h3 style="color: var(--color-bark); margin-bottom: 1rem;">Bericht Verzonden!</h3>
-                            <p style="color: var(--color-charcoal); line-height: 1.6;">Bedankt voor je bericht. We nemen zo snel mogelijk contact met je op.</p>
-                            <button onclick="location.reload()" style="margin-top: 2rem; background: transparent; border: 1px solid var(--color-bark); color: var(--color-bark); padding: 0.8rem 1.5rem; border-radius: 50px; cursor: pointer; font-weight: 600;">Nieuw bericht</button>
-                        </div>
-                    `;
-                    contactForm.style.opacity = '1';
-                }, 400);
+                // Convert FormData to URLSearchParams for a "simple" request (avoiding CORS preflight)
+                const params = new URLSearchParams();
+                for (const pair of formData) {
+                    params.append(pair[0], pair[1]);
+                }
+
+                // 4. Submit via Fetch
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // We use no-cors because GAS redirect logic can be tricky with standard fetch
+                    body: params
+                })
+                .then(() => {
+                    // With 'no-cors', we can't read the response body, but we know it sent.
+                    // For a simple association site, this is the most reliable way to avoid CORS headaches.
+                    showFeedback(true, "Bericht verzonden! Bedankt voor je bericht.");
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showFeedback(false, "Er is iets misgegaan. Probeer het later opnieuw of mail ons direct.");
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = originalBtnText;
+                });
             });
+        }
+
+        function showFeedback(isSuccess, message) {
+            contactForm.style.transition = 'opacity 0.4s ease';
+            contactForm.style.opacity = '0';
+            
+            setTimeout(() => {
+                const icon = isSuccess 
+                    ? '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>'
+                    : '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
+                
+                const bgColor = isSuccess ? 'var(--color-sage)' : '#d9534f';
+
+                contactForm.innerHTML = `
+                    <div style="text-align: center; padding: 2rem 0;">
+                        <div style="width: 80px; height: 80px; background: ${bgColor}; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                            ${icon}
+                        </div>
+                        <h3 style="color: var(--color-bark); margin-bottom: 1rem;">${isSuccess ? 'Bedankt!' : 'Oeps!'}</h3>
+                        <p style="color: var(--color-charcoal); line-height: 1.6;">${message}</p>
+                        ${isSuccess 
+                            ? '<button onclick="location.reload()" style="margin-top: 2rem; background: transparent; border: 1px solid var(--color-bark); color: var(--color-bark); padding: 0.8rem 1.5rem; border-radius: 50px; cursor: pointer; font-weight: 600;">Nieuw bericht</button>'
+                            : '<button onclick="location.reload()" style="margin-top: 2rem; background: transparent; border: 1px solid var(--color-bark); color: var(--color-bark); padding: 0.8rem 1.5rem; border-radius: 50px; cursor: pointer; font-weight: 600;">Opnieuw proberen</button>'
+                        }
+                    </div>
+                `;
+                contactForm.style.opacity = '1';
+            }, 400);
         }
     </script>
 </body>

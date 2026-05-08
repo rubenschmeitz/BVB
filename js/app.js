@@ -80,6 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
+
+    // 5. Calendar Library Safety (Mobile Return)
+    // Ensure the site remains interactive after returning from a calendar app
+    window.addEventListener('focus', () => {
+        document.body.classList.remove('atcb-modal-open');
+    });
 });
 
 /**

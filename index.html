@@ -7,7 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="preload" href="https://fonts.gstatic.com/s/outfit/v11/QGYsz_X_197X3vYpCqU.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/index.css">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com; frame-src https://*.instagram.com;">
 
@@ -113,13 +112,11 @@
                         </div>
                     </div>
                     <div class="split-image">
-                        <div class="hero-slideshow club-slideshow-wrapper" id="club-slideshow">
-                            <div class="slide active" style="background-image: url('images/tokonoma/12_tokonoma_dec_2024.jpg');"></div>
-                            <div class="slide" data-src="images/tokonoma/01_tokonoma_jan_2024.jpg"></div>
-                            <div class="slide" data-src="images/tokonoma/02_tokonoma_feb_2024.jpg"></div>
-                            <div class="slide" data-src="images/tokonoma/05_tokonoma_mei_2024.jpg"></div>
-                            <div class="slide" data-src="images/tokonoma/08_tokonoma_aug_2024.jpg"></div>
-                            <div class="slide" data-src="images/tokonoma/10_tokonoma_okt_2024.jpg"></div>
+                        <div class="bento-collage">
+                            <div class="bento-item large" style="background-image: url('images/tokonoma/12_tokonoma_dec_2024.jpg');"></div>
+                            <div class="bento-item medium" style="background-image: url('images/tokonoma/05_tokonoma_mei_2024.jpg');"></div>
+                            <div class="bento-item" style="background-image: url('images/tokonoma/01_tokonoma_jan_2024.jpg');"></div>
+                            <div class="bento-item accent" style="background-image: url('images/tokonoma/08_tokonoma_aug_2024.jpg');"></div>
                         </div>
                     </div>
                 </div>
@@ -271,7 +268,6 @@
 
     <script src="js/app.js"></script>
     <script>
-        initSimpleSlideshow('club-slideshow');
         initIGCarousel('ig-carousel', 'ig-prev', 'ig-next', '.ig-dot');
     </script>
 </body>
