@@ -15,6 +15,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 1b. Full Screen Menu Logic
+    const fsMenuTrigger = document.getElementById('fs-menu-trigger');
+    const fsMenu = document.getElementById('full-screen-menu');
+    const fsMenuClose = document.getElementById('fs-menu-close');
+
+    if (fsMenuTrigger && fsMenu) {
+        fsMenuTrigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            fsMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+
+    if (fsMenuClose && fsMenu) {
+        fsMenuClose.addEventListener('click', () => {
+            fsMenu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+    }
+
+    // Close FS menu on link click
+    document.querySelectorAll('.fs-menu-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            fsMenu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+    });
+
+    // 1c. Bottom Nav Active State Sync
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.bottom-nav-item').forEach(item => {
+        const href = item.getAttribute('href');
+        if (href === currentPath) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+
     // 2. Scroll Reveal Observer
     const observerOptions = {
         threshold: 0.1,
