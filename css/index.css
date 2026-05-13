@@ -72,9 +72,9 @@ html {
 body {
     font-family: var(--font-main);
     background-color: var(--color-white);
-    background-image: url('../images/textures/washi_texture.jpg');
+    background-image: url('../images/textures/tokonoma.jpg');
     background-repeat: repeat;
-    background-size: 800px;
+    background-size: 1200px;
     background-attachment: scroll; /* Beweegt mee met de content */
     color: var(--color-charcoal);
     line-height: 1.6;
@@ -1806,14 +1806,21 @@ a:focus-visible {
 
 .lightbox-caption {
     position: absolute;
-    bottom: 40px;
+    bottom: 0;
     left: 0;
     width: 100%;
+    padding: 40px 20px;
     text-align: center;
     color: white;
     font-family: 'Outfit', sans-serif;
-    font-size: 1.2rem;
-    letter-spacing: 1px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    z-index: 10;
+}
+
+@media (max-width: 600px) {
+    .lightbox-caption {
+        padding: 30px 15px;
+    }
 }
 
 /* --- Social Block --- */
@@ -1879,7 +1886,7 @@ a:focus-visible {
 
 .sidebar-card {
     background: var(--color-sand);
-    background-image: url('../images/textures/washi_texture.jpg');
+    background-image: url('../images/textures/tokonoma.jpg');
     background-blend-mode: multiply;
     padding: 2rem;
     border-radius: 30px;
@@ -2022,7 +2029,7 @@ a:focus-visible {
 .agenda-item {
     position: relative;
     background: #fdfaf5;
-    background-image: url('../images/textures/washi_texture.jpg');
+    background-image: url('../images/textures/tokonoma.jpg');
     background-blend-mode: multiply;
     padding: 1.5rem 2rem;
     border-radius: 20px;
