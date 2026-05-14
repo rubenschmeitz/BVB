@@ -1812,21 +1812,23 @@ a:focus-visible {
     background-size: cover;
     background-position: center bottom;
     backdrop-filter: none;
+    align-items: flex-end; /* Anchor to floor */
+    justify-content: center;
 }
 
 .lightbox.tokonoma-mode img {
     max-width: 80%;
-    max-height: 65vh;
+    max-height: 70vh;
     box-shadow: none;
     filter: drop-shadow(0 20px 40px rgba(0,0,0,0.7));
-    margin-bottom: 8vh;
+    margin-bottom: 15vh; /* Sits on the wooden floor */
 }
 
 @media (max-width: 768px) {
     .lightbox.tokonoma-mode img {
         max-width: 90%;
-        max-height: 50vh;
-        margin-bottom: 12vh;
+        max-height: 55vh;
+        margin-bottom: 20vh; /* Higher offset for mobile perspectives */
     }
 }
 
