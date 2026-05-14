@@ -72,7 +72,7 @@ html {
 body {
     font-family: var(--font-main);
     background-color: var(--color-white);
-    background-image: url('../images/textures/tokonoma.jpg');
+    background-image: url('../images/textures/washi_texture.jpg');
     background-repeat: repeat;
     background-size: 1200px;
     background-attachment: scroll; /* Beweegt mee met de content */
@@ -1913,7 +1913,7 @@ a:focus-visible {
 
 .sidebar-card {
     background: var(--color-sand);
-    background-image: url('../images/textures/tokonoma.jpg');
+    background-image: url('../images/textures/washi_texture.jpg');
     background-blend-mode: multiply;
     padding: 2rem;
     border-radius: 30px;
@@ -2056,7 +2056,7 @@ a:focus-visible {
 .agenda-item {
     position: relative;
     background: #fdfaf5;
-    background-image: url('../images/textures/tokonoma.jpg');
+    background-image: url('../images/textures/washi_texture.jpg');
     background-blend-mode: multiply;
     padding: 1.5rem 2rem;
     border-radius: 20px;
@@ -2453,7 +2453,7 @@ body.atcb-modal-open {
 .honorary-section {
     padding: 5rem 0;
     background-color: var(--color-white-pure);
-    background-image: url('../images/textures/tokonoma.jpg');
+    background-image: url('../images/textures/washi_texture.jpg');
     background-blend-mode: multiply;
     position: relative;
     border-radius: 30px;
