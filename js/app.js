@@ -235,12 +235,13 @@ function toggleTree(card) {
     const lightboxCaption = document.getElementById('lightbox-caption');
     
     if (lightbox && lightboxImg) {
+        lightbox.classList.add('tokonoma-mode'); // Enable Tokonoma effect
         lightboxImg.src = img.src;
         if (lightboxCaption) {
             lightboxCaption.innerHTML = `
                 <div style="padding: 0 20px;">
-                    <span style="display:block; font-weight:700; font-size:1.5rem; margin-bottom: 5px;">${species}</span>
-                    <span style="display:block; font-size:0.85rem; opacity:0.8; text-transform:uppercase; letter-spacing:2px;">${style}</span>
+                    <span style="display:block; font-weight:700; font-size:1.5rem; margin-bottom: 5px; color: white;">${species}</span>
+                    <span style="display:block; font-size:0.85rem; opacity:0.8; text-transform:uppercase; letter-spacing:2px; color: var(--color-sand);">${style}</span>
                 </div>
             `;
         }
@@ -273,6 +274,7 @@ function initLightbox(lightboxId, imgId, captionId, closeClass, itemClass) {
 
     const closeLightbox = () => {
         lightbox.classList.remove('active');
+        lightbox.classList.remove('tokonoma-mode'); // Reset mode
         document.body.style.overflow = 'auto';
     };
 

@@ -1805,6 +1805,31 @@ a:focus-visible {
     transform: scale(1);
 }
 
+/* Tokonoma Mode for Exhibition Trees */
+.lightbox.tokonoma-mode {
+    background-color: #1a1a1a;
+    background-image: url('../images/tokonoma_display_base.png');
+    background-size: cover;
+    background-position: center bottom;
+    backdrop-filter: none;
+}
+
+.lightbox.tokonoma-mode img {
+    max-width: 80%;
+    max-height: 65vh;
+    box-shadow: none;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.7));
+    margin-bottom: 8vh;
+}
+
+@media (max-width: 768px) {
+    .lightbox.tokonoma-mode img {
+        max-width: 90%;
+        max-height: 50vh;
+        margin-bottom: 12vh;
+    }
+}
+
 .lightbox-close {
     position: absolute;
     top: 30px;
@@ -2529,5 +2554,30 @@ body.atcb-modal-open {
     .honorary-portrait {
         width: 140px;
         height: 140px;
+    }
+}
+
+.honorary-portrait-placeholder {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background-color: var(--color-sand);
+    border: 2px dashed var(--color-bark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-bark);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    padding: 1rem;
+}
+
+@media (max-width: 600px) {
+    .honorary-portrait-placeholder {
+        width: 140px;
+        height: 140px;
+        font-size: 0.8rem;
     }
 }
