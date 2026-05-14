@@ -406,13 +406,15 @@ a:focus-visible {
 .instagram-widget {
     width: 100%;
     max-width: 450px;
-    margin: 0 auto 2rem;
+    margin: 0 auto 1rem;
     background: white;
     border-radius: 12px;
     overflow: hidden;
     color: var(--color-charcoal);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: var(--shadow-premium);
     text-align: left;
+    display: flex;
+    flex-direction: column;
 }
 
 .ig-post-header {
@@ -592,6 +594,8 @@ a:focus-visible {
     line-height: 1.5;
     margin-bottom: 0.9rem;
     color: var(--color-charcoal);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .ig-post-caption strong {
@@ -1868,7 +1872,17 @@ a:focus-visible {
         padding: 1.5rem 1rem;
         gap: 2rem;
         text-align: center;
+        overflow: hidden; /* Prevent overflow of internal widgets */
     }
+}
+
+@media (max-width: 400px) {
+    .social-block {
+        padding: 1rem 0.5rem;
+    }
+}
+
+@media (max-width: 900px) {
     .social-block .ig-intro {
         text-align: center !important;
     }
@@ -2433,4 +2447,87 @@ body.atcb-modal-open {
 
 .reveal-image.active img {
     transform: scale(1);
+}
+
+/* --- Honorary Members (Ereleden) --- */
+.honorary-section {
+    padding: 5rem 0;
+    background-color: var(--color-white-pure);
+    background-image: url('../images/textures/tokonoma.jpg');
+    background-blend-mode: multiply;
+    position: relative;
+    border-radius: 30px;
+    margin: 2rem 0;
+}
+
+.honorary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.honorary-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.06);
+    text-align: center;
+    border: 1px solid var(--color-sand);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.honorary-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 60px rgba(122, 91, 73, 0.12);
+}
+
+.honorary-portrait {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+    border: 5px solid var(--color-sand);
+    box-shadow: var(--shadow-soft);
+}
+
+.honorary-card h3 {
+    color: var(--color-bark);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.honorary-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-sage);
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.honorary-bio {
+    font-style: italic;
+    color: var(--color-charcoal);
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+@media (max-width: 600px) {
+    .honorary-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .honorary-card {
+        padding: 1.5rem;
+    }
+    .honorary-portrait {
+        width: 140px;
+        height: 140px;
+    }
 }
