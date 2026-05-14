@@ -1089,7 +1089,8 @@ a:focus-visible {
     }
 
     .activity-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
     }
 
     /* Agenda & Gallery Specific Mobile Fixes */
@@ -1106,16 +1107,16 @@ a:focus-visible {
     }
     
     .gallery-nav button {
-        width: 100%;
-        padding: 0.75rem !important;
-        font-size: 0.95rem !important;
+        width: auto;
+        flex: 1;
+        padding: 0.6rem !important;
+        font-size: 0.85rem !important;
     }
 
     .gallery-grid {
-        grid-template-columns: 1fr !important;
-        gap: 1.5rem !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 1rem !important;
     }
-
     .tree-card img {
         height: 250px !important;
     }
@@ -1472,7 +1473,7 @@ a:focus-visible {
     }
     
     .page-hero {
-        height: 180px;
+        height: 140px;
     }
     
     .nbs-sidebar {
@@ -1736,18 +1737,30 @@ a:focus-visible {
     }
     
     .exhibition-container {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         width: 100%;
-        gap: 4rem;
+        gap: 1rem;
         padding: 0;
-        align-items: center;
-        width: 100% !important; /* Force override of max-content */
+        align-items: start;
+        width: 100% !important;
     }
 
     .exhibition-card {
         width: 100%;
-        max-width: 320px;
+        max-width: none;
+    }
+
+    .exhibition-image-box {
+        height: 180px !important;
+    }
+    
+    .exhibition-species {
+        font-size: 0.9rem !important;
+    }
+    
+    .exhibition-style {
+        font-size: 0.75rem !important;
     }
 }
 
