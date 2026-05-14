@@ -85,7 +85,16 @@
                         </div>
                         <div class="form-group">
                             <label for="subject" class="form-label">Onderwerp *</label>
-                            <input type="text" id="subject" name="subject" required class="form-input">
+                            <select id="subject" name="subject" required class="form-select">
+                                <option value="" disabled selected>Kies een onderwerp...</option>
+                                <option value="Komen kijken">Komen kijken bij een bijeenkomst</option>
+                                <option value="Eenmalig bezoek (andere vereniging)">Eenmalig bezoek (aangesloten bij andere vereniging)</option>
+                                <option value="Lid worden">Lid worden van BVB</option>
+                                <option value="De NBS">De Nationale Bonsai Show (NBS 2026)</option>
+                                <option value="Workshop informatie">Informatie over workshops</option>
+                                <option value="Sponsoring / Samenwerking">Sponsoring of samenwerking</option>
+                                <option value="Overige vragen">Overige vragen</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="message" class="form-label">Bericht *</label>
