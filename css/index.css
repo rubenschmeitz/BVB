@@ -2105,8 +2105,18 @@ a:focus-visible {
     margin-bottom: 1.5rem;
     border: 1px solid rgba(155, 123, 97, 0.1);
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    z-index: 1;
 }
+.agenda-item:nth-child(1) { z-index: 20; }
+.agenda-item:nth-child(2) { z-index: 19; }
+.agenda-item:nth-child(3) { z-index: 18; }
+.agenda-item:nth-child(4) { z-index: 17; }
+.agenda-item:nth-child(5) { z-index: 16; }
+.agenda-item:nth-child(6) { z-index: 15; }
+.agenda-item:nth-child(7) { z-index: 14; }
+.agenda-item:nth-child(8) { z-index: 13; }
+.agenda-item:nth-child(9) { z-index: 12; }
+.agenda-item:nth-child(10) { z-index: 11; }
+.agenda-item:nth-child(n+11) { z-index: 10; }
 .agenda-item::before {
     content: '';
     position: absolute;
@@ -2119,10 +2129,10 @@ a:focus-visible {
     border-radius: 50%;
     z-index: 2;
 }
-.agenda-item:hover {
+.agenda-item:hover,
+.agenda-item:focus-within {
     transform: translateY(-5px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-    z-index: 10;
 }
 .agenda-header-flex {
     display: flex;
