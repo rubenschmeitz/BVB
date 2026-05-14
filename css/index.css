@@ -71,7 +71,11 @@ html {
 
 body {
     font-family: var(--font-main);
-    background-color: var(--color-white-pure);
+    background-color: var(--color-white);
+    background-image: url('../images/textures/tokonoma.jpg');
+    background-repeat: repeat;
+    background-size: 1200px;
+    background-attachment: scroll; /* Beweegt mee met de content */
     color: var(--color-charcoal);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
@@ -329,14 +333,12 @@ a:focus-visible {
 /* --- Content Area --- */
 .content-area {
     padding: 3rem 0;
-    background-color: transparent;
+    background-color: var(--color-white);
     position: relative;
 }
 
 .premium-section {
-    background-color: var(--color-white-pure);
-    background-image: url('../images/textures/tokonoma.jpg');
-    background-blend-mode: multiply;
+    background-color: var(--color-sand);
     padding: 3rem;
     margin: 1.5rem 0;
     border-radius: 30px;
@@ -649,9 +651,7 @@ a:focus-visible {
 /* Gallery Specific Styles */
 .gallery-section {
     padding: 4rem 2rem;
-    background-color: var(--color-white-pure);
-    background-image: url('../images/textures/tokonoma.jpg');
-    background-blend-mode: multiply;
+    background-color: var(--color-white);
     border-radius: 20px;
     box-shadow: inset 0 0 50px rgba(156, 169, 153, 0.1);
     margin-bottom: 4rem;
@@ -1825,9 +1825,7 @@ a:focus-visible {
 
 /* --- Social Block --- */
 .social-block {
-    background-color: var(--color-white-pure);
-    background-image: url('../images/textures/tokonoma.jpg');
-    background-blend-mode: multiply;
+    background: white;
     padding: 4rem;
     border-radius: 30px;
     box-shadow: 0 15px 45px rgba(0,0,0,0.04);
@@ -1947,9 +1945,9 @@ a:focus-visible {
 
 /* --- Contact Form --- */
 .contact-form-wrapper {
-    background-color: var(--color-white-pure);
-    background-image: url('../images/textures/tokonoma.jpg');
-    background-blend-mode: multiply;
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.05);
     margin-top: 2rem;
 }
