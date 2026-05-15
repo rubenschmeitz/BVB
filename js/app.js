@@ -2,6 +2,9 @@
  * BVB Website - Consolidated App Logic
  */
 
+// Global function to (re)initialize reveal observers
+let initRevealObservers;
+
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Mobile Menu Toggle
     const mobileToggle = document.getElementById('mobile-toggle');
@@ -54,10 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 2. Scroll Reveal Observer
+    // 2. Scroll Reveal Observer - Refined for performance
     const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.05,
+        rootMargin: '0px 0px 50px 0px' // Reveal slightly before entering
     };
 
     const revealObserver = new IntersectionObserver((entries) => {
@@ -69,50 +72,75 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    document.querySelectorAll('.reveal-on-scroll').forEach(el => {
-        revealObserver.observe(el);
-    });
+    // Specialized observer for horizontal containers
+    const horizontalObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                horizontalObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 100px 0px 100px' });
+
+    initRevealObservers = () => {
+        document.querySelectorAll('.reveal-on-scroll:not(.active)').forEach(el => {
+            // Horizontal check
+            if (el.closest('.exhibition-container')) {
+                horizontalObserver.observe(el);
+            } else {
+                revealObserver.observe(el);
+            }
+        });
+    };
+
+    initRevealObservers();
 
     // 3. Lazy Image Loading Enhancement & Skeleton Removal
     const lazyImages = document.querySelectorAll('img[loading="lazy"]');
     lazyImages.forEach(img => {
         const handleLoad = () => {
             img.classList.add('loaded');
-            // If the parent is a skeleton, mark it as loaded too
             if (img.parentElement && img.parentElement.classList.contains('skeleton')) {
                 img.parentElement.classList.add('loaded');
+                // Optional: remove skeleton class after fade
+                setTimeout(() => img.parentElement.classList.remove('skeleton'), 600);
             }
         };
 
         img.addEventListener('load', handleLoad);
         if (img.complete) handleLoad();
+        
+        // Safety timeout to remove skeletons if loading fails or is too slow
+        setTimeout(() => {
+            if (img.parentElement && img.parentElement.classList.contains('skeleton') && !img.parentElement.classList.contains('loaded')) {
+                handleLoad();
+            }
+        }, 2500);
     });
 
-    // 4. Header & Back-to-Top Scroll Effect
+    // 4. Header & Back-to-Top Scroll Effect (Throttled)
     const header = document.querySelector('.site-header');
     const backToTop = document.getElementById('back-to-top');
+    let isScrolling = false;
+    const scrollHandler = () => {
+        if (!isScrolling) {
+            window.requestAnimationFrame(() => {
+                const scrollPos = window.scrollY;
 
-    window.addEventListener('scroll', () => {
-        const scrollPos = window.scrollY;
+                if (header) {
+                    header.classList.toggle('scrolled', scrollPos > 50);
+                }
 
-        // Header
-        if (header) {
-            if (scrollPos > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+                if (backToTop) {
+                    backToTop.classList.toggle('visible', scrollPos > 400);
+                }
+                isScrolling = false;
+            });
+            isScrolling = true;
         }
+    };
 
-        // Back to top visibility
-        if (backToTop) {
-            if (scrollPos > 400) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        }
-    });
+    window.addEventListener('scroll', scrollHandler, { passive: true });
 
     if (backToTop) {
         backToTop.addEventListener('click', () => {
@@ -120,25 +148,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5. Calendar Library Safety (Mobile Return)
-    // Ensure the site remains interactive after returning from a calendar app
+    // 5. Calendar Library Safety
     window.addEventListener('focus', () => {
         document.body.classList.remove('atcb-modal-open');
     });
 
-    // 6. Init Instagram Carousel (if present)
+    // 6. Init Instagram Carousel
     initIGCarousel('ig-carousel', 'ig-prev', 'ig-next', '.ig-dot');
 
     // 7. Contact Form Handling
     const contactForm = document.querySelector('.contact-form');
     const submitBtn = contactForm ? contactForm.querySelector('.submit-btn') : null;
-    
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz4yuS1qGTa4AqVABmqRfnDE45LU-8HlpGCU97fnQ9ZuanJmXI6YZtQ0_E49b5txMz9/exec';
 
     if (contactForm && submitBtn) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-
             if (!contactForm.checkValidity()) {
                 contactForm.reportValidity();
                 return;
@@ -146,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const honeypot = contactForm.querySelector('input[name="website"]').value;
             if (honeypot) {
-                console.log("Spam detected!");
                 showFeedback(true, "Bericht verzonden!"); 
                 return;
             }
@@ -171,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(error => {
                 console.error('Error:', error);
-                showFeedback(false, "Er is iets misgegaan. Probeer het later opnieuw of mail ons direct.");
+                showFeedback(false, "Er is iets misgegaan. Probeer het later opnieuw.");
                 submitBtn.disabled = false;
                 submitBtn.innerText = originalBtnText;
             });
@@ -188,68 +212,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 ? '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>'
                 : '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
             
-            const bgColor = isSuccess ? 'var(--color-sage)' : '#d9534f';
-            const btnText = isSuccess ? 'Nieuw bericht' : 'Opnieuw proberen';
-
             contactForm.innerHTML = `
                 <div style="text-align: center; padding: 2rem 0;">
-                    <div style="width: 80px; height: 80px; background: ${bgColor}; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                    <div style="width: 80px; height: 80px; background: ${isSuccess ? 'var(--color-sage)' : '#d9534f'}; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
                         ${icon}
                     </div>
                     <h3 style="color: var(--color-bark); margin-bottom: 1rem;">${isSuccess ? 'Bedankt!' : 'Oeps!'}</h3>
                     <p style="color: var(--color-charcoal); line-height: 1.6;">${message}</p>
-                    <button id="cf-reload-btn" type="button" style="margin-top: 2rem; background: transparent; border: 1px solid var(--color-bark); color: var(--color-bark); padding: 0.8rem 1.5rem; border-radius: 50px; cursor: pointer; font-weight: 600;">${btnText}</button>
+                    <button id="cf-reload-btn" type="button" style="margin-top: 2rem; background: transparent; border: 1px solid var(--color-bark); color: var(--color-bark); padding: 0.8rem 1.5rem; border-radius: 50px; cursor: pointer; font-weight: 600;">${isSuccess ? 'Nieuw bericht' : 'Opnieuw proberen'}</button>
                 </div>
             `;
             contactForm.style.opacity = '1';
-            
             const reloadBtn = document.getElementById('cf-reload-btn');
-            if (reloadBtn) {
-                reloadBtn.addEventListener('click', () => location.reload());
-            }
+            if (reloadBtn) reloadBtn.addEventListener('click', () => location.reload());
         }, 400);
     }
+
+    // 8. Initialize Lightbox (Moved here to ensure function is defined)
+    if (document.getElementById('lightbox')) {
+        initLightbox('lightbox', 'lightbox-img', 'lightbox-caption', 'lightbox-close', 'activity-item');
+    }
 });
-
-/**
- * Helper to initialize a simple slideshow
- */
-function initSimpleSlideshow(containerId, interval = 5000) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-
-    const slides = container.querySelectorAll('.slide');
-    if (slides.length <= 1) return;
-
-    let currentSlide = 0;
-
-    // Preload first two slides
-    [0, 1].forEach(idx => {
-        const s = slides[idx];
-        if (s && s.dataset.src) {
-            s.style.backgroundImage = `url('${s.dataset.src}')`;
-        }
-    });
-
-    setInterval(() => {
-        slides[currentSlide].classList.remove('active');
-        currentSlide = (currentSlide + 1) % slides.length;
-        
-        const activeSlide = slides[currentSlide];
-        if (activeSlide.dataset.src && !activeSlide.style.backgroundImage) {
-            activeSlide.style.backgroundImage = `url('${activeSlide.dataset.src}')`;
-        }
-        
-        // Pre-load next
-        const nextIdx = (currentSlide + 1) % slides.length;
-        const nextSlide = slides[nextIdx];
-        if (nextSlide.dataset.src && !nextSlide.style.backgroundImage) {
-            nextSlide.style.backgroundImage = `url('${nextSlide.dataset.src}')`;
-        }
-
-        activeSlide.classList.add('active');
-    }, interval);
-}
 
 /**
  * Helper to initialize Instagram-style carousel
@@ -281,7 +264,7 @@ function initIGCarousel(carouselId, prevId, nextId, dotClass) {
             currentSlide = newIndex;
             dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
         }
-    });
+    }, { passive: true });
 
     dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
 }
@@ -300,16 +283,17 @@ function showCategory(categoryId) {
     const section = document.getElementById(categoryId + '-section');
     if (section) {
         section.classList.add('active');
-        // Trigger reveal animations immediately for items in the newly visible section
+        // Re-init reveal observers for the newly visible section
+        if (typeof initRevealObservers === 'function') initRevealObservers();
+        
+        // Force reveal first items for snappiness
         setTimeout(() => {
-            section.querySelectorAll('.reveal-on-scroll, .reveal-staggered').forEach(el => {
-                el.classList.add('active');
+            section.querySelectorAll('.reveal-on-scroll').forEach((el, i) => {
+                if (i < 6) el.classList.add('active');
             });
-        }, 50);
+        }, 100);
     }
     
-    // The button highlight is handled by the onclick in HTML for now, 
-    // or we can find it here:
     const clickedBtn = Array.from(document.querySelectorAll('.gallery-nav button')).find(b => b.getAttribute('onclick')?.includes(categoryId));
     if (clickedBtn) clickedBtn.classList.add('active');
 }
@@ -321,13 +305,13 @@ function toggleTree(card) {
     const img = card.querySelector('img');
     const species = card.querySelector('.exhibition-species').textContent;
     const style = card.querySelector('.exhibition-style').textContent;
-    
+
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxCaption = document.getElementById('lightbox-caption');
-    
+
     if (lightbox && lightboxImg) {
-        lightbox.classList.add('tokonoma-mode'); // Enable Tokonoma effect
+        lightbox.classList.add('tokonoma-mode');
         lightboxImg.src = img.src;
         if (lightboxCaption) {
             lightboxCaption.innerHTML = `
@@ -339,6 +323,29 @@ function toggleTree(card) {
         }
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
+
+        // Dynamically place the tree so its bottom lands on the tokonoma wooden floor.
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const scaledImgH = (vw >= vh) ? vw : vh; 
+
+        // Vertical offset of the image top relative to viewport top
+        const imgTop = (vh - scaledImgH) / 2;
+
+        // Floor top edge is at ~73% of the scaled image height from the image top
+        const floorTopPx = imgTop + (scaledImgH * 0.73);
+
+        // Distance from the BOTTOM of the viewport up to the floor
+        const floorFromBottom = vh - floorTopPx;
+
+        // Apply as absolute bottom position. 
+        // Compensation: tree images have significant transparent padding at the bottom.
+        // Increasing to ~15.5% based on verification tests.
+        const compensation = scaledImgH * 0.155;
+        const finalBottom = floorFromBottom - compensation;
+
+        lightboxImg.style.setProperty('bottom', finalBottom + 'px', 'important');
+        lightbox.style.paddingBottom = '0';
     }
 }
 
@@ -366,28 +373,33 @@ function initLightbox(lightboxId, imgId, captionId, closeClass, itemClass) {
 
     const closeLightbox = () => {
         lightbox.classList.remove('active');
-        lightbox.classList.remove('tokonoma-mode'); // Reset mode
+        lightbox.classList.remove('tokonoma-mode');
+        // Reset inline styles
+        lightbox.style.paddingBottom = '';
+        lightbox.style.display = '';
+        lightbox.style.position = '';
+        lightboxImg.style.bottom = '';
         document.body.style.overflow = 'auto';
     };
 
     if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+    
+    // Close on background click
     lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox || e.target === lightboxClose) {
+        // If the user clicks on the backdrop itself (not the children)
+        if (e.target === lightbox) {
             closeLightbox();
         }
     });
 
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-            closeLightbox();
+        if (lightbox.classList.contains('active')) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            } else if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                // Future enhancement: navigation between images
+            }
         }
     });
 }
-
-// Close tree nameplate when clicking outside
-document.addEventListener('click', (e) => {
-    if (!e.target.closest('.exhibition-card')) {
-        document.querySelectorAll('.exhibition-card').forEach(c => c.classList.remove('active'));
-    }
-});
 

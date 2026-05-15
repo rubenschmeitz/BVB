@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="preload" href="https://fonts.gstatic.com/s/outfit/v11/QkhMSyveCf7ncZX7WjXCF3vW7L6Gr_p-V_qG.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" as="image" href="images/logo_main.webp" fetchpriority="high">
     
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com; frame-src https://*.instagram.com https://www.google.com; frame-ancestors 'none';">
 
@@ -20,11 +22,11 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Agenda 2026 - Bonsai Vereniging Brabant">
     <meta property="og:description" content="Blijf op de hoogte van alle bonsai activiteiten in Brabant.">
-    <meta property="og:image" content="images/tokonoma/05_tokonoma_mei_2024.jpg">
+    <meta property="og:image" content="images/tokonoma/05_tokonoma_mei_2024.webp">
     
     <!-- Favicon & Icons -->
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="apple-touch-icon" href="images/favicon.png">
+    <link rel="icon" type="image/webp" href="images/logo_main.webp">
+    <link rel="apple-touch-icon" href="images/logo_main.webp">
     
 
     <script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
@@ -36,7 +38,7 @@
         <div class="header-container">
             <div class="site-branding">
                 <div class="logo-wrapper">
-                    <img src="images/logo_main.png" alt="BVB Logo" class="main-logo">
+                    <img src="images/logo_main.webp" alt="BVB Logo" class="main-logo">
                     <div class="logo-overlay"></div>
                 </div>
                 <div class="site-title-box">
@@ -63,7 +65,7 @@
 
 
     <div class="page-hero flipped show-tip">
-        <div class="page-hero-bg" style="background-image: url('images/tokonoma/05_tokonoma_mei_2024.jpg');"></div>
+        <div class="page-hero-bg hero-over-ons"></div>
         <div class="page-hero-content">
             <p>Evenementen 2026</p>
             <h1>Onze Agenda</h1>
@@ -76,7 +78,7 @@
                 
                 <!-- Main Agenda Column -->
                 <div class="agenda-main-column">
-                    <p class="large-text" style="margin-bottom: 2rem;">
+                    <p class="large-text mb-2">
                         Onze clubavonden vinden plaats in <strong>De Moerkoal in Berlicum</strong>. Iedereen is welkom om kennis te maken met onze vereniging.
                     </p>
                     
@@ -95,7 +97,7 @@
                             <span class="event-tag">Werkavond</span>
                         </div>
                         <div class="event-details">
-                            <h3 style="font-size: 1.25rem; margin-bottom: 0.3rem;">Werken aan eigen bomen</h3>
+                            <h3 class="agenda-title">Werken aan eigen bomen</h3>
                             <p style="font-size: 0.95rem; line-height: 1.5; color: var(--color-bark); font-weight: 600; margin-bottom: 0.5rem;">Let op: Deze bijeenkomst is op 18 mei i.v.m. tweede Pinksterdag.</p>
                             <p style="font-size: 0.95rem; line-height: 1.5;">Onder deskundige begeleiding werken aan je eigen bonsai. De ideale gelegenheid voor advies over vormgeving of verzorging.</p>
                             
@@ -106,7 +108,7 @@
                                 </div>
                             </div>
 
-                            <div style="margin-top: 1.5rem;">
+                            <div class="mt-1">
                                 <add-to-calendar-button hideBackground
                                     name="Clubavond: Werken aan eigen bomen"
                                     startDate="2026-05-18"
@@ -401,6 +403,15 @@
         </div>
     </main>
 
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <img src="images/logo_main.webp" alt="BVB Logo" class="footer-logo" loading="lazy">
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="contact.html" class="contact-link">Contact</a> | Design door <a href="https://www.linkedin.com/in/rubenschmeitz/" target="_blank" class="contact-link">Ruben Schmeitz</a></p>
+            </div>
+        </div>
     </footer>
     
     <button id="back-to-top" class="back-to-top" aria-label="Terug naar boven">
@@ -420,7 +431,13 @@
             <span>Galerij</span>
         </a>
         <a href="nbs.html" class="bottom-nav-item special">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 19v-6"></path>
+                <path d="M12 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+                <path d="M8 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"></path>
+                <path d="M16 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"></path>
+                <path d="M7 19h10v2H7z"></path>
+            </svg>
             <span>NBS</span>
         </a>
         <a href="agenda.html" class="bottom-nav-item">
@@ -450,11 +467,14 @@
 
         <div class="fs-menu-footer">
             <div class="fs-menu-social">
-                <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.facebook.com/bonsaiverenigingbrabantt" target="_blank" rel="noopener noreferrer" aria-label="Volg ons op Facebook">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+                <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" rel="noopener noreferrer" aria-label="Volg ons op Instagram">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                 </a>
             </div>
-            <p style="font-size: 0.9rem; color: var(--color-sage);">Bonsai Vereniging Brabant</p>
+            <p class="color-sage" style="font-size: 0.9rem;">Bonsai Vereniging Brabant</p>
         </div>
     </div>
 

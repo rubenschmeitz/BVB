@@ -72,10 +72,6 @@ html {
 body {
     font-family: var(--font-main);
     background-color: var(--color-white);
-    background-image: url('../images/textures/washi_texture.webp');
-    background-repeat: repeat;
-    background-size: 1200px;
-    background-attachment: scroll; /* Beweegt mee met de content */
     color: var(--color-charcoal);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
@@ -952,26 +948,79 @@ a:focus-visible {
 }
 
 .site-footer {
-    padding: 4rem 0 2rem;
-    background-color: var(--color-white);
-    border-top: 1px solid rgba(0,0,0,0.05);
+    padding: 5rem 0 3rem;
+    background-color: var(--color-charcoal);
+    color: var(--color-white);
+    border-top: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle pattern for footer */
+.site-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/textures/washi_texture.jpg');
+    opacity: 0.03;
+    pointer-events: none;
+}
+
+.footer-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 5%;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.footer-logo {
+    height: 60px;
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
 }
 
 .footer-bottom {
     text-align: center;
-    border-top: 1px solid rgba(0,0,0,0.06);
-    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 2.5rem;
 }
 
-.contact-link {
-    color: var(--color-sage);
+.footer-bottom p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+.footer-bottom .contact-link {
+    color: var(--color-sand);
     font-weight: 600;
-    text-decoration: underline;
-    transition: color 0.3s ease;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(232, 225, 209, 0.2);
+    padding-bottom: 2px;
+    transition: all 0.3s ease;
 }
 
-.contact-link:hover {
-    color: var(--color-bark);
+.footer-bottom .contact-link:hover {
+    color: white;
+    border-bottom-color: white;
+}
+
+@media (max-width: 600px) {
+    .site-footer {
+        padding: 4rem 0 6rem; /* Extra bottom padding for mobile navigation */
+    }
 }
 
 /* --- Responsive & Mobile Optimization --- */
@@ -1814,25 +1863,49 @@ a:focus-visible {
     background-color: #1a1a1a;
     background-image: url('../images/tokonoma_display_base.webp');
     background-size: cover;
-    background-position: center bottom;
+    background-position: center center;
     backdrop-filter: none;
-    align-items: flex-end; /* Anchor to floor */
-    justify-content: center;
+    display: block; /* Overrides flex */
+    position: fixed; /* Keep fixed like the base lightbox */
 }
 
 .lightbox.tokonoma-mode img {
-    max-width: 80%;
-    max-height: 70vh;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scale(1);
+    bottom: 20vh; /* Fallback */
+    max-width: 55%;
+    max-height: 75vh;
     box-shadow: none;
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.7));
-    margin-bottom: 15vh; /* Sits on the wooden floor */
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.75));
+    object-fit: contain;
+    object-position: bottom center;
+    transition: bottom 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.4s ease;
+}
+
+.lightbox.active.tokonoma-mode img {
+    transform: translateX(-50%) scale(1);
 }
 
 @media (max-width: 768px) {
+    .lightbox.tokonoma-mode {
+        /* On portrait mobile, the image is scaled by height so the floor
+           sits higher relative to viewport bottom */
+        padding-bottom: 28vh;
+    }
     .lightbox.tokonoma-mode img {
-        max-width: 90%;
-        max-height: 55vh;
-        margin-bottom: 20vh; /* Higher offset for mobile perspectives */
+        max-width: 75%;
+        max-height: 48vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .lightbox.tokonoma-mode {
+        padding-bottom: 30vh;
+    }
+    .lightbox.tokonoma-mode img {
+        max-width: 82%;
+        max-height: 44vh;
     }
 }
 
@@ -1863,6 +1936,12 @@ a:focus-visible {
     font-family: 'Outfit', sans-serif;
     background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
     z-index: 10;
+}
+
+/* In tokonoma mode the caption sits at the very bottom (below the floor area) */
+.lightbox.tokonoma-mode .lightbox-caption {
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 40%, transparent);
+    padding: 20px 20px 16px;
 }
 
 @media (max-width: 600px) {
@@ -1944,8 +2023,6 @@ a:focus-visible {
 
 .sidebar-card {
     background: var(--color-sand);
-    background-image: url('../images/textures/washi_texture.webp');
-    background-blend-mode: multiply;
     padding: 2rem;
     border-radius: 30px;
     border: 1px solid rgba(155, 123, 97, 0.1);
@@ -2101,8 +2178,6 @@ a:focus-visible {
 .agenda-item {
     position: relative;
     background: #fdfaf5;
-    background-image: url('../images/textures/washi_texture.webp');
-    background-blend-mode: multiply;
     padding: 1.5rem 2rem;
     border-radius: 20px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.02);
@@ -2522,8 +2597,6 @@ body.atcb-modal-open {
 .honorary-section {
     padding: 5rem 0;
     background-color: var(--color-white-pure);
-    background-image: url('../images/textures/washi_texture.webp');
-    background-blend-mode: multiply;
     position: relative;
     border-radius: 30px;
     margin: 2rem 0;
@@ -2608,6 +2681,19 @@ body.atcb-modal-open {
     }
 }
 
+.honorary-portrait--no-photo {
+    background: linear-gradient(135deg, var(--color-sand) 0%, #e8ddd3 100%);
+    color: var(--color-bark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.honorary-portrait--no-photo svg {
+    width: 70%;
+    height: 70%;
+}
+
 .honorary-portrait-placeholder {
     width: 180px;
     height: 180px;
@@ -2631,4 +2717,165 @@ body.atcb-modal-open {
         height: 140px;
         font-size: 0.8rem;
     }
+}
+
+/* --- Utility Classes & Performance Helpers --- */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.m-auto { margin-left: auto; margin-right: auto; }
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 2rem; }
+.mt-3 { margin-top: 3rem; }
+.mb-1 { margin-bottom: 1rem; }
+.mb-2 { margin-bottom: 2rem; }
+.mb-3 { margin-bottom: 3rem; }
+
+.max-w-700 { max-width: 700px; }
+.max-w-600 { max-width: 600px; }
+
+.flex-center { display: flex; justify-content: center; align-items: center; }
+.flex-wrap { flex-wrap: wrap; }
+.gap-1 { gap: 1rem; }
+
+.w-full { width: 100%; }
+.d-block { display: block; }
+
+.color-bark { color: var(--color-bark); }
+.color-sage { color: var(--color-sage); }
+.font-bold { font-weight: 700; }
+
+.heading-lg { font-size: 2.2rem; margin-bottom: 1.2rem; }
+.heading-xl { font-size: 2.5rem; }
+
+.lead-alt { font-style: normal; color: var(--color-bark); margin-bottom: 1.5rem !important; }
+
+.instagram-widget {
+    margin: 0;
+    box-shadow: var(--shadow-premium);
+}
+
+.instagram-profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.color-white { color: white !important; }
+.color-white-90 { color: rgba(255, 255, 255, 0.9) !important; }
+
+.event-sidebar-download {
+    margin-top: 2rem;
+    background: var(--color-sage) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.flyer-download-btn {
+    background: white !important;
+    color: var(--color-sage) !important;
+    text-decoration: none;
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.hero-home { background-image: url('../images/tokonoma/04_tokonoma_apr_2024.webp'); }
+.hero-bijeenkomst { background-image: url('../images/tokonoma/12_tokonoma_dec_2024.webp'); }
+.hero-over-ons { background-image: url('../images/tokonoma/05_tokonoma_mei_2024.webp'); }
+.hero-nbs { background-image: url('../images/tokonoma/10_tokonoma_okt_2024.webp'); }
+.hero-contact { background-image: url('../images/tokonoma/02_tokonoma_feb_2024.webp'); }
+
+.contact-mail-link {
+    color: var(--color-bark);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-bark);
+}
+
+.contact-mail-link:hover {
+    color: var(--color-clay);
+    border-bottom-color: var(--color-clay);
+}
+
+.agenda-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.3rem;
+}
+
+
+
+
+/* --- Sponsors Section --- */
+.nbs-sponsors {
+    background: var(--color-white-pure);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    margin-top: 3rem;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.sponsor-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    min-height: 100px;
+}
+
+.sponsor-item {
+    padding: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.sponsor-item img {
+    max-width: 250px;
+    height: auto;
+    display: block;
+    filter: grayscale(20%);
+    transition: filter 0.3s ease;
+}
+
+.sponsor-item:hover {
+    transform: translateY(-5px);
+}
+
+.sponsor-item:hover img {
+    filter: grayscale(0%);
+}
+
+.sponsor-cta {
+    border-top: 1px solid rgba(0,0,0,0.08);
+    padding-top: 1.5rem;
+}
+
+.sponsor-cta p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--color-charcoal);
+    margin-bottom: 0.5rem;
+}
+
+.sponsor-cta .contact-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-sand);
+    color: var(--color-bark) !important;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.sponsor-cta .contact-link:hover {
+    background-color: var(--color-bark);
+    color: white !important;
+    transform: scale(1.05);
 }

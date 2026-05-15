@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="preload" href="https://fonts.gstatic.com/s/outfit/v11/QkhMSyveCf7ncZX7WjXCF3vW7L6Gr_p-V_qG.woff2" as="font" type="font/woff2" crossorigin>
     
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com; frame-src https://*.instagram.com https://www.google.com; frame-ancestors 'none';">
 
@@ -20,11 +21,11 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="NBS 2026 - Nationale Bonsai Show Berlicum">
     <meta property="og:description" content="Bezoek de Nationale Bonsai Show 2026. Top-bonsai, internationale demonstraties en een gezellige markt.">
-    <meta property="og:image" content="images/tokonoma/10_tokonoma_okt_2024.jpg">
+    <meta property="og:image" content="images/tokonoma/10_tokonoma_okt_2024.webp">
     
     <!-- Favicon & Icons -->
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="apple-touch-icon" href="images/favicon.png">
+    <link rel="icon" type="image/webp" href="images/logo_main.webp">
+    <link rel="apple-touch-icon" href="images/logo_main.webp">
     
 
     <!-- JSON-LD Structured Data -->
@@ -50,7 +51,7 @@
         }
       },
       "image": [
-        "https://www.bonsaiverenigingbrabant.nl/images/tokonoma/10_tokonoma_okt_2024.jpg"
+        "https://www.bonsaiverenigingbrabant.nl/images/tokonoma/10_tokonoma_okt_2024.webp"
       ],
       "description": "De Nationale Bonsai Show 2026 in Berlicum. Met demonstraties, expositie en bonsaimarkt.",
       "organizer": {
@@ -70,7 +71,7 @@
         <div class="header-container">
             <div class="site-branding">
                 <div class="logo-wrapper">
-                    <img src="images/logo_main.png" alt="BVB Logo" class="main-logo">
+                    <img src="images/logo_main.webp" alt="BVB Logo" class="main-logo" width="47" height="55" decoding="async">
                     <div class="logo-overlay"></div>
                 </div>
                 <div class="site-title-box">
@@ -97,7 +98,7 @@
 
 
     <div class="page-hero">
-        <div class="page-hero-bg" style="background-image: url('images/tokonoma/10_tokonoma_okt_2024.jpg');"></div>
+        <div class="page-hero-bg" style="background-image: url('images/tokonoma/10_tokonoma_okt_2024.webp');"></div>
         <div class="page-hero-content">
             <p>26 & 27 September 2026</p>
             <h1>Nederlandse Bonsai Show</h1>
@@ -153,7 +154,7 @@
                                     <span class="timeline-time">14:00 - 17:00</span>
                                     <p class="timeline-title">Demonstratie: Alain de Vroo</p>
                                     <div class="timeline-demo-box">
-                                        <img src="images/Alain_demo.jpg" alt="Alain de Vroo" class="timeline-demo-portrait skeleton" loading="lazy">
+                                        <img src="images/Alain_demo.webp" alt="Alain de Vroo" class="timeline-demo-portrait skeleton" loading="lazy" decoding="async">
                                     </div>
                                 </div>
                             </div>
@@ -166,7 +167,7 @@
                                 </div>
                             </div>
 
-                            <div class="timeline-day-label" style="margin-top: 2.5rem;">Zondag 27 September</div>
+                            <div class="timeline-day-label mt-2">Zondag 27 September</div>
 
                             <div class="timeline-item">
                                 <div class="timeline-dot"></div>
@@ -182,7 +183,7 @@
                                     <span class="timeline-time">14:00 - 16:30</span>
                                     <p class="timeline-title">Demonstratie: Yannick Kiggen</p>
                                     <div class="timeline-demo-box">
-                                        <img src="images/Yannick_demo.jpg" alt="Yannick Kiggen" class="timeline-demo-portrait skeleton" loading="lazy">
+                                        <img src="images/Yannick_demo.webp" alt="Yannick Kiggen" class="timeline-demo-portrait skeleton" loading="lazy" decoding="async">
                                     </div>
                                 </div>
                             </div>
@@ -205,7 +206,21 @@
                             </div>
                         </div>
                     </section>
-
+                    
+                    <!-- Sponsors Section -->
+                    <section class="nbs-sponsors reveal-on-scroll">
+                        <h3 class="mb-2">Onze Sponsors</h3>
+                        <div class="sponsor-grid">
+                            <div class="sponsor-item">
+                                <img src="images/sponsors/logo-holland-bonsai.png" alt="Holland Bonsai & Landscaping" loading="lazy">
+                            </div>
+                            <!-- Meer sponsors kunnen hier worden toegevoegd -->
+                        </div>
+                        <div class="sponsor-cta">
+                            <p>Wilt u ook bijdragen aan de NBS 2026?</p>
+                            <a href="contact.html" class="contact-link">Wil jij ons sponsoren? Neem contact op!</a>
+                        </div>
+                    </section>
 
                 </div>
 
@@ -244,7 +259,7 @@
                             </div>
                         </div>
 
-                        <div style="margin: 1rem 0;">
+                        <div class="mb-1">
                             <add-to-calendar-button hideBackground
                                 name="Nederlandse Bonsai Show (NBS) 2026"
                                 description="Hét landelijke topevenement van de Nederlandse Bonsai Vereniging."
@@ -273,10 +288,10 @@
                         </div>
                         <a href="https://maps.app.goo.gl/CxBm92C7UXm5WZvj8" target="_blank" rel="noopener noreferrer" class="nav-special route-btn">Route plannen</a>
 
-                        <div class="event-sidebar-card" style="margin-top: 2rem; background: var(--color-sage); color: white; border: none;">
-                            <h3 style="color: white;">Download Flyer</h3>
-                            <p style="color: rgba(255,255,255,0.9);">Download de officiële poster/flyer van de NBS 2026 om te printen of te delen.</p>
-                            <a href="docs/NBS_Flyer_2026.pdf" target="_blank" class="nav-special" style="background: white; color: var(--color-sage); text-decoration: none; width: 100%; display: block; text-align: center; margin-top: 1rem;">Bekijk Flyer (PDF)</a>
+                        <div class="event-sidebar-card event-sidebar-download">
+                            <h3 class="color-white">Download Flyer</h3>
+                            <p class="color-white-90">Download de officiële poster/flyer van de NBS 2026 om te printen of te delen.</p>
+                            <a href="docs/NBS_Flyer_2026.pdf" target="_blank" class="nav-special flyer-download-btn">Bekijk Flyer (PDF)</a>
                         </div>
                     </div>
                 </aside>
@@ -286,6 +301,15 @@
     </main>
 
 
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <img src="images/logo_main.webp" alt="BVB Logo" class="footer-logo" loading="lazy">
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="contact.html" class="contact-link">Contact</a> | Design door <a href="https://www.linkedin.com/in/rubenschmeitz/" target="_blank" class="contact-link">Ruben Schmeitz</a></p>
+            </div>
+        </div>
     </footer>
     
     <button id="back-to-top" class="back-to-top" aria-label="Terug naar boven">
@@ -305,7 +329,13 @@
             <span>Galerij</span>
         </a>
         <a href="nbs.html" class="bottom-nav-item special">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 19v-6"></path>
+                <path d="M12 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+                <path d="M8 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"></path>
+                <path d="M16 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"></path>
+                <path d="M7 19h10v2H7z"></path>
+            </svg>
             <span>NBS</span>
         </a>
         <a href="agenda.html" class="bottom-nav-item">
@@ -335,7 +365,10 @@
 
         <div class="fs-menu-footer">
             <div class="fs-menu-social">
-                <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.facebook.com/bonsaiverenigingbrabantt" target="_blank" rel="noopener noreferrer" aria-label="Volg ons op Facebook">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+                <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" rel="noopener noreferrer" aria-label="Volg ons op Instagram">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                 </a>
             </div>
@@ -343,7 +376,7 @@
         </div>
     </div>
 
-    <script src="js/app.js"></script>
+    <script src="js/app.js" defer></script>
 </body>
 </html>
 

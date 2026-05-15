@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="preload" href="https://fonts.gstatic.com/s/outfit/v11/QkhMSyveCf7ncZX7WjXCF3vW7L6Gr_p-V_qG.woff2" as="font" type="font/woff2" crossorigin>
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com https://www.bonsainederland.nl https://cdn.hollandbonsai.nl https://bartverstappen.nl; frame-src https://*.instagram.com; frame-ancestors 'none';">
 
     <!-- Meta Tags & SEO -->
@@ -15,8 +16,8 @@
     <meta name="theme-color" content="#5D7B51">
     
     <!-- Favicon & Icons -->
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="apple-touch-icon" href="images/favicon.png">
+    <link rel="icon" type="image/webp" href="images/logo_main.webp">
+    <link rel="apple-touch-icon" href="images/logo_main.webp">
 </head>
 <body>
 
@@ -25,7 +26,7 @@
         <div class="header-container">
             <div class="site-branding">
                 <div class="logo-wrapper">
-                    <img src="images/logo_main.png" alt="BVB Logo" class="main-logo">
+                    <img src="images/logo_main.webp" alt="BVB Logo" class="main-logo" width="47" height="55" decoding="async">
                     <div class="logo-overlay"></div>
                 </div>
                 <div class="site-title-box">
@@ -50,7 +51,7 @@
     </header>
 
     <div class="page-hero">
-        <div class="page-hero-bg" style="background-image: url('images/tokonoma/05_tokonoma_mei_2024.jpg');"></div>
+        <div class="page-hero-bg" style="background-image: url('images/tokonoma/05_tokonoma_mei_2024.webp');"></div>
         <div class="page-hero-content">
             <p>Onze passie, onze mensen</p>
             <h1>Over BVB</h1>
@@ -64,30 +65,33 @@
             <section class="premium-section">
                 <div class="split-layout">
                     <div class="split-text">
-                        <h2 style="font-size: 2.2rem; margin-bottom: 1.2rem;">Een vereniging met wortels</h2>
-                        <p class="lead" style="font-style: normal; color: var(--color-bark); margin-bottom: 1.5rem !important;">Bonsai Vereniging Brabant (BVB) is dé plek waar de passie voor de kunst van bonsai en Brabantse gezelligheid samenkomen.</p>
+                        <h2 class="heading-lg">Een vereniging met wortels</h2>
+                        <p class="lead lead-alt">Bonsai Vereniging Brabant (BVB) is dé plek waar de passie voor de kunst van bonsai en Brabantse gezelligheid samenkomen.</p>
                         <p>Al jarenlang vormen we een hechte gemeenschap van liefhebbers in de regio. Onze clubavonden in Berlicum zijn de kern van de vereniging: hier delen we kennis, helpen we elkaar met het vormgeven van bomen en vieren we onze gedeelde hobby onder het genot van een goed gesprek.</p>
                         <p>Van beginners die hun eerste stappen zetten tot ervaren rotten in het vak; bij BVB schuif je gewoon aan. Onze missie is om de kunst van bonsai toegankelijk te maken en op een hoog niveau te beoefenen, zonder de Brabantse gemoedelijkheid uit het oog te verliezen.</p>
                     </div>
                     <div class="split-image">
-                        <div class="single-hero-image" style="background-image: url('images/bijeenkomst.jpeg');"></div>
+                        <div class="single-hero-image" style="background-image: url('images/bijeenkomst.webp');"></div>
                     </div>
                 </div>
             </section>
 
             <!-- Ereleden Section -->
             <section class="honorary-section">
-                <div style="text-align: center; margin-bottom: 3rem;">
-                    <span class="label" style="color: var(--color-bark); font-weight: 700;">Eregalerij</span>
-                    <h2 style="font-size: 2.5rem; color: var(--color-bark); margin-top: 0.5rem;">Onze Ereleden</h2>
-                    <p style="max-width: 700px; margin: 1rem auto; color: #555;">Zonder de inzet en visie van deze bijzondere mensen zou BVB niet zijn wat het vandaag is. Wij danken hen voor hun jarenlange toewijding.</p>
+                <div class="text-center mb-3">
+                    <span class="label color-bark font-bold">Eregalerij</span>
+                    <h2 class="heading-xl color-bark mt-1">Onze Ereleden</h2>
+                    <p class="max-w-700 m-auto mt-1" style="color: #555;">Zonder de inzet en visie van deze bijzondere mensen zou BVB niet zijn wat het vandaag is. Wij danken hen voor hun jarenlange toewijding.</p>
                 </div>
 
                 <div class="honorary-grid">
                     <!-- Gijs Meboer -->
                     <div class="honorary-card">
-                        <div class="honorary-portrait-placeholder">
-                            Foto volgt
+                        <div class="honorary-portrait honorary-portrait--no-photo">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+                                <circle cx="50" cy="38" r="22" fill="currentColor" opacity="0.25"/>
+                                <ellipse cx="50" cy="95" rx="35" ry="22" fill="currentColor" opacity="0.2"/>
+                            </svg>
                         </div>
                         <span class="honorary-label">Erelid & Oprichter</span>
                         <h3>Gijs Meboer</h3>
@@ -97,7 +101,7 @@
                     <!-- Pieter van Uden -->
                     <div class="honorary-card">
                         <div class="honorary-portrait">
-                            <img src="images/ere_leden/pieter_hq.png" alt="Pieter van Uden">
+                            <img src="images/ere_leden/pieter_hq.png" alt="Pieter van Uden" decoding="async" loading="lazy">
                         </div>
                         <span class="honorary-label">Erelid</span>
                         <h3>Pieter van Uden</h3>
@@ -107,7 +111,7 @@
                     <!-- Bart Verstappen -->
                     <div class="honorary-card">
                         <div class="honorary-portrait">
-                            <img src="images/ere_leden/bart_hq.png" alt="Bart Verstappen">
+                            <img src="images/ere_leden/bart_hq.png" alt="Bart Verstappen" decoding="async" loading="lazy">
                         </div>
                         <span class="honorary-label">Erelid</span>
                         <h3>Bart Verstappen</h3>
@@ -121,8 +125,11 @@
 
     <footer class="site-footer">
         <div class="footer-container">
-            <div class="footer-bottom no-border">
-                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="contact.html" class="contact-link">Contact</a></p>
+            <div class="footer-content">
+                <img src="images/logo_main.webp" alt="BVB Logo" class="footer-logo" loading="lazy">
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="contact.html" class="contact-link">Contact</a> | Design door <a href="https://www.linkedin.com/in/rubenschmeitz/" target="_blank" class="contact-link">Ruben Schmeitz</a></p>
             </div>
         </div>
     </footer>
@@ -138,7 +145,13 @@
             <span>Galerij</span>
         </a>
         <a href="nbs.html" class="bottom-nav-item special">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 19v-6"></path>
+                <path d="M12 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+                <path d="M8 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"></path>
+                <path d="M16 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"></path>
+                <path d="M7 19h10v2H7z"></path>
+            </svg>
             <span>NBS</span>
         </a>
         <a href="agenda.html" class="bottom-nav-item">
@@ -168,7 +181,10 @@
 
         <div class="fs-menu-footer">
             <div class="fs-menu-social">
-                <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.facebook.com/bonsaiverenigingbrabantt" target="_blank" rel="noopener noreferrer" aria-label="Volg ons op Facebook">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+                <a href="https://www.instagram.com/bonsaiverenigingbrabant/" target="_blank" rel="noopener noreferrer" aria-label="Volg ons op Instagram">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                 </a>
             </div>
@@ -176,6 +192,6 @@
         </div>
     </div>
 
-    <script src="js/app.js"></script>
+    <script src="js/app.js" defer></script>
 </body>
 </html>
