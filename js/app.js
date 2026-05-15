@@ -125,6 +125,90 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('focus', () => {
         document.body.classList.remove('atcb-modal-open');
     });
+
+    // 6. Init Instagram Carousel (if present)
+    initIGCarousel('ig-carousel', 'ig-prev', 'ig-next', '.ig-dot');
+
+    // 7. Contact Form Handling
+    const contactForm = document.querySelector('.contact-form');
+    const submitBtn = contactForm ? contactForm.querySelector('.submit-btn') : null;
+    
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz4yuS1qGTa4AqVABmqRfnDE45LU-8HlpGCU97fnQ9ZuanJmXI6YZtQ0_E49b5txMz9/exec';
+
+    if (contactForm && submitBtn) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            if (!contactForm.checkValidity()) {
+                contactForm.reportValidity();
+                return;
+            }
+
+            const honeypot = contactForm.querySelector('input[name="website"]').value;
+            if (honeypot) {
+                console.log("Spam detected!");
+                showFeedback(true, "Bericht verzonden!"); 
+                return;
+            }
+
+            submitBtn.disabled = true;
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = 'Verzenden...';
+
+            const formData = new FormData(contactForm);
+            const params = new URLSearchParams();
+            for (const pair of formData) {
+                params.append(pair[0], pair[1]);
+            }
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors', 
+                body: params
+            })
+            .then(() => {
+                showFeedback(true, "Bericht verzonden! Bedankt voor je bericht.");
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showFeedback(false, "Er is iets misgegaan. Probeer het later opnieuw of mail ons direct.");
+                submitBtn.disabled = false;
+                submitBtn.innerText = originalBtnText;
+            });
+        });
+    }
+
+    function showFeedback(isSuccess, message) {
+        if (!contactForm) return;
+        contactForm.style.transition = 'opacity 0.4s ease';
+        contactForm.style.opacity = '0';
+        
+        setTimeout(() => {
+            const icon = isSuccess 
+                ? '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>'
+                : '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
+            
+            const bgColor = isSuccess ? 'var(--color-sage)' : '#d9534f';
+            const btnText = isSuccess ? 'Nieuw bericht' : 'Opnieuw proberen';
+
+            contactForm.innerHTML = `
+                <div style="text-align: center; padding: 2rem 0;">
+                    <div style="width: 80px; height: 80px; background: ${bgColor}; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                        ${icon}
+                    </div>
+                    <h3 style="color: var(--color-bark); margin-bottom: 1rem;">${isSuccess ? 'Bedankt!' : 'Oeps!'}</h3>
+                    <p style="color: var(--color-charcoal); line-height: 1.6;">${message}</p>
+                    <button id="cf-reload-btn" type="button" style="margin-top: 2rem; background: transparent; border: 1px solid var(--color-bark); color: var(--color-bark); padding: 0.8rem 1.5rem; border-radius: 50px; cursor: pointer; font-weight: 600;">${btnText}</button>
+                </div>
+            `;
+            contactForm.style.opacity = '1';
+            
+            const reloadBtn = document.getElementById('cf-reload-btn');
+            if (reloadBtn) {
+                reloadBtn.addEventListener('click', () => location.reload());
+            }
+        }, 400);
+    }
 });
 
 /**
@@ -214,7 +298,15 @@ function showCategory(categoryId) {
     });
     
     const section = document.getElementById(categoryId + '-section');
-    if (section) section.classList.add('active');
+    if (section) {
+        section.classList.add('active');
+        // Trigger reveal animations immediately for items in the newly visible section
+        setTimeout(() => {
+            section.querySelectorAll('.reveal-on-scroll, .reveal-staggered').forEach(el => {
+                el.classList.add('active');
+            });
+        }, 50);
+    }
     
     // The button highlight is handled by the onclick in HTML for now, 
     // or we can find it here:
