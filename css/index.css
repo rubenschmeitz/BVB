@@ -72,7 +72,7 @@ html {
 body {
     font-family: var(--font-main);
     background-color: var(--color-white);
-    background-image: url('../images/textures/washi_texture.jpg');
+    background-image: url('../images/textures/washi_texture.webp');
     background-repeat: repeat;
     background-size: 1200px;
     background-attachment: scroll; /* Beweegt mee met de content */
@@ -197,6 +197,10 @@ a:focus-visible {
     justify-content: flex-end;
     align-items: center;
     flex-shrink: 1;
+}
+
+.mobile-toggle {
+    display: none;
 }
 
 .main-nav a {
@@ -1241,7 +1245,7 @@ a:focus-visible {
     right: 0;
     bottom: 0;
     background: linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(0,0,0,0.4));
-    background-image: url('../images/textures/light_wood_texture.png');
+    background-image: url('../images/textures/light_wood_texture.webp');
     background-blend-mode: overlay;
     opacity: 0.4;
     z-index: 1;
@@ -1808,7 +1812,7 @@ a:focus-visible {
 /* Tokonoma Mode for Exhibition Trees */
 .lightbox.tokonoma-mode {
     background-color: #1a1a1a;
-    background-image: url('../images/tokonoma_display_base.png');
+    background-image: url('../images/tokonoma_display_base.webp');
     background-size: cover;
     background-position: center bottom;
     backdrop-filter: none;
@@ -1940,7 +1944,7 @@ a:focus-visible {
 
 .sidebar-card {
     background: var(--color-sand);
-    background-image: url('../images/textures/washi_texture.jpg');
+    background-image: url('../images/textures/washi_texture.webp');
     background-blend-mode: multiply;
     padding: 2rem;
     border-radius: 30px;
@@ -2097,7 +2101,7 @@ a:focus-visible {
 .agenda-item {
     position: relative;
     background: #fdfaf5;
-    background-image: url('../images/textures/washi_texture.jpg');
+    background-image: url('../images/textures/washi_texture.webp');
     background-blend-mode: multiply;
     padding: 1.5rem 2rem;
     border-radius: 20px;
@@ -2340,20 +2344,34 @@ body.atcb-modal-open {
 
 .bottom-nav-item.special {
     position: relative;
-    top: -15px;
-    background: var(--color-bark);
+    top: -18px;
+    background: linear-gradient(145deg, var(--color-bark) 0%, #7A5B49 100%);
     color: white;
     width: 65px;
     height: 65px;
     border-radius: 50%;
-    box-shadow: 0 8px 20px rgba(150, 107, 78, 0.3);
+    box-shadow: 0 10px 25px rgba(150, 107, 78, 0.4), 
+                0 0 0 5px var(--color-white);
     opacity: 1;
-    border: 4px solid var(--color-white);
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 5;
+}
+
+.bottom-nav-item.special:active {
+    transform: scale(0.9) translateY(3px);
+    box-shadow: 0 5px 15px rgba(150, 107, 78, 0.3), 
+                0 0 0 5px var(--color-white);
 }
 
 .bottom-nav-item.special svg {
     width: 28px;
     height: 28px;
+    margin-bottom: 2px;
 }
 
 /* Full Screen Menu Overlay */
@@ -2504,7 +2522,7 @@ body.atcb-modal-open {
 .honorary-section {
     padding: 5rem 0;
     background-color: var(--color-white-pure);
-    background-image: url('../images/textures/washi_texture.jpg');
+    background-image: url('../images/textures/washi_texture.webp');
     background-blend-mode: multiply;
     position: relative;
     border-radius: 30px;
