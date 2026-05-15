@@ -333,14 +333,14 @@ function toggleTree(card) {
         const imgTop = (vh - scaledImgH) / 2;
 
         // Floor top edge is at ~73% of the scaled image height from the image top
-        const floorTopPx = imgTop + (scaledImgH * 0.73);
+        const floorTopPx = imgTop + (scaledImgH * 0.72);
 
         // Distance from the BOTTOM of the viewport up to the floor
         const floorFromBottom = vh - floorTopPx;
 
         // Apply as absolute bottom position. 
-        // Compensation: tree images have significant transparent padding at the bottom (~22%).
-        const compensation = scaledImgH * 0.22;
+        // Compensation: tree images have some transparent padding at the bottom (~10%).
+        const compensation = scaledImgH * 0.10;
         const finalBottom = floorFromBottom - compensation;
 
         lightboxImg.style.setProperty('bottom', finalBottom + 'px', 'important');

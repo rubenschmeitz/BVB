@@ -332,7 +332,7 @@ a:focus-visible {
 
 /* --- Content Area --- */
 .content-area {
-    padding: 3rem 0;
+    padding: 2rem 0;
     background-color: var(--color-white);
     position: relative;
 }
@@ -1019,7 +1019,7 @@ a:focus-visible {
 
 @media (max-width: 600px) {
     .site-footer {
-        padding: 4rem 0 6rem; /* Extra bottom padding for mobile navigation */
+        padding: 2rem 0 5.5rem; /* Extra bottom padding for mobile navigation */
     }
 }
 
@@ -2444,10 +2444,16 @@ body.atcb-modal-open {
                 0 0 0 5px var(--color-white);
 }
 
-.bottom-nav-item.special svg {
-    width: 28px;
-    height: 28px;
+.bottom-nav-item.special img {
+    height: 30px;
+    width: auto;
+    filter: brightness(0) invert(1);
     margin-bottom: 2px;
+    transition: transform 0.3s ease;
+}
+
+.bottom-nav-item.special:active img {
+    transform: scale(0.9);
 }
 
 /* Full Screen Menu Overlay */
