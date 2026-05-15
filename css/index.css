@@ -3117,3 +3117,152 @@ body.atcb-modal-open {
         gap: 1.5rem;
     }
 }
+
+/* --- Bonsai in Nederland Map Section --- */
+.nl-map-section {
+    margin: 5rem 0;
+    padding: 4rem;
+    background: #fdfaf5;
+    border-radius: 30px;
+    border: 1px solid var(--color-sand);
+}
+
+.nl-map-container {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.nl-map-visual {
+    position: relative;
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(122, 91, 73, 0.08);
+}
+
+.nl-map-svg {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.05));
+}
+
+.map-marker {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.map-marker:hover {
+    transform: scale(1.5);
+    filter: drop-shadow(0 0 10px var(--color-sage));
+}
+
+.map-marker circle {
+    fill: var(--color-sage);
+    stroke: white;
+    stroke-width: 2;
+}
+
+.map-marker.active circle {
+    fill: var(--color-bark);
+    r: 8;
+}
+
+.association-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.association-header h2 {
+    color: var(--color-bark);
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+}
+
+.nbv-highlight {
+    background: var(--color-charcoal);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.nbv-highlight:hover {
+    transform: scale(1.02);
+}
+
+.nbv-logo-mini {
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: var(--color-charcoal);
+    font-size: 0.8rem;
+}
+
+.nbv-text h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+}
+
+.nbv-text p {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+.assoc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.assoc-link {
+    background: white;
+    padding: 1rem;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--color-charcoal);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: 1px solid var(--color-sand);
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.assoc-link:hover {
+    border-color: var(--color-bark);
+    background: #fdfaf5;
+    transform: translateX(5px);
+}
+
+.assoc-link span {
+    font-size: 0.75rem;
+    color: var(--color-sage);
+    font-weight: 400;
+}
+
+@media (max-width: 1000px) {
+    .nl-map-section {
+        padding: 2rem;
+    }
+    .nl-map-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .assoc-grid {
+        grid-template-columns: 1fr;
+    }
+}

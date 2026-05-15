@@ -331,19 +331,21 @@ function toggleTree(card) {
 
         // Vertical offset of the image top relative to viewport top
         const imgTop = (vh - scaledImgH) / 2;
+        const floorTopPx = imgTop + (scaledImgH * 0.71);
+        const alcoveHeight = floorTopPx - imgTop;
 
-        // Floor top edge is at ~73% of the scaled image height from the image top
-        const floorTopPx = imgTop + (scaledImgH * 0.72);
-
-        // Distance from the BOTTOM of the viewport up to the floor
-        const floorFromBottom = vh - floorTopPx;
-
-        // Apply as absolute bottom position. 
-        // Compensation: tree images have some transparent padding at the bottom (~10%).
-        const compensation = scaledImgH * 0.10;
-        const finalBottom = floorFromBottom - compensation;
-
-        lightboxImg.style.setProperty('bottom', finalBottom + 'px', 'important');
+        lightboxImg.style.position = 'absolute';
+        lightboxImg.style.top = imgTop + 'px';
+        lightboxImg.style.left = '50%';
+        lightboxImg.style.transform = 'translateX(-50%)';
+        lightboxImg.style.width = '90%'; // Keep some margin
+        lightboxImg.style.height = alcoveHeight + 'px';
+        lightboxImg.style.objectFit = 'contain';
+        lightboxImg.style.objectPosition = 'bottom center';
+        
+        // Reset previous styles
+        lightboxImg.style.bottom = 'auto';
+        lightboxImg.style.setProperty('bottom', 'auto', 'important');
         lightbox.style.paddingBottom = '0';
     }
 }
@@ -400,5 +402,56 @@ function initLightbox(lightboxId, imgId, captionId, closeClass, itemClass) {
             }
         }
     });
+}
+
+// 7. Interactive NL Map
+const initMapInteractions = () => {
+    const assocLinks = document.querySelectorAll('.assoc-link');
+    const mapMarkers = document.querySelectorAll('.map-marker');
+
+    if (!assocLinks.length || !mapMarkers.length) return;
+
+    assocLinks.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            const markerId = link.getAttribute('data-marker');
+            
+            // Update Links
+            assocLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+
+            // Update Markers
+            mapMarkers.forEach(marker => {
+                if (marker.getAttribute('data-assoc') === markerId) {
+                    marker.classList.add('active');
+                } else {
+                    marker.classList.remove('active');
+                }
+            });
+        });
+    });
+
+    mapMarkers.forEach(marker => {
+        marker.addEventListener('mouseenter', () => {
+            const assocId = marker.getAttribute('data-assoc');
+            
+            // Update Markers
+            mapMarkers.forEach(m => m.classList.remove('active'));
+            marker.classList.add('active');
+
+            // Update Links
+            assocLinks.forEach(link => {
+                if (link.getAttribute('data-marker') === assocId) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    });
+};
+
+// Initialize if on the right page
+if (document.querySelector('.nl-map-section')) {
+    initMapInteractions();
 }
 
