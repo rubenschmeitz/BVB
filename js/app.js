@@ -309,23 +309,15 @@ function toggleTree(card) {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxCaption = document.getElementById('lightbox-caption');
-    const scrollImg = document.getElementById('tokonoma-scroll');
 
     if (lightbox && lightboxImg) {
         lightbox.classList.add('tokonoma-mode');
         lightboxImg.src = img.src;
 
-        // Randomize scroll background
-        if (scrollImg) {
-            const scrolls = [
-                'images/tokonoma/scrolls/scroll_mountain.png',
-                'images/tokonoma/scrolls/scroll_calligraphy.png',
-                'images/tokonoma/scrolls/scroll_blossom.png'
-            ];
-            const randomScroll = scrolls[Math.floor(Math.random() * scrolls.length)];
-            scrollImg.src = randomScroll;
-            scrollImg.style.display = 'block';
-        }
+        // Randomize Tokonoma Background Variation
+        const variationsCount = 10;
+        const randomVar = Math.floor(Math.random() * variationsCount) + 1;
+        lightbox.style.backgroundImage = `url('images/tokonoma/backgrounds/bg_var_${randomVar}.png')`;
 
         if (lightboxCaption) {
             lightboxCaption.innerHTML = `
@@ -361,7 +353,6 @@ function toggleTree(card) {
             const floorFromBottom = vh - floorTopPx;
 
             // Smart Compensation based on aspect ratio
-            // Wide images (wide pots) often have more bottom transparency in these assets
             const ratio = lightboxImg.naturalWidth / lightboxImg.naturalHeight;
             let compFactor = 0.165; // Base factor
             if (ratio > 1.2) compFactor = 0.21; // Wide
@@ -381,17 +372,6 @@ function toggleTree(card) {
             lightboxImg.style.setProperty('bottom', finalBottom + 'px', 'important');
             lightboxImg.style.top = 'auto';
             lightboxImg.style.zIndex = '5';
-            
-            // Position scroll
-            if (scrollImg) {
-                scrollImg.style.position = 'absolute';
-                scrollImg.style.left = '50%';
-                scrollImg.style.transform = 'translateX(-50%)';
-                scrollImg.style.top = (vh / 2) - (bgAspectRatio * 1024 * scale / 2) + (130 * scale) + 'px';
-                scrollImg.style.height = (400 * scale) + 'px';
-                scrollImg.style.width = 'auto';
-                scrollImg.style.zIndex = '1';
-            }
         };
 
         if (lightboxImg.complete) {
@@ -433,9 +413,8 @@ function initLightbox(lightboxId, imgId, captionId, closeClass, itemClass) {
         lightbox.style.paddingBottom = '';
         lightbox.style.display = '';
         lightbox.style.position = '';
+        lightbox.style.backgroundImage = '';
         lightboxImg.style.bottom = '';
-        const scrollImg = document.getElementById('tokonoma-scroll');
-        if (scrollImg) scrollImg.style.display = 'none';
         document.body.style.overflow = 'auto';
     };
 
