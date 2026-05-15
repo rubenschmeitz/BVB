@@ -411,46 +411,49 @@ function initLightbox(lightboxId, imgId, captionId, closeClass, itemClass) {
 const initMapInteractions = () => {
     const assocLinks = document.querySelectorAll('.assoc-link');
     const mapMarkers = document.querySelectorAll('.map-marker');
+    const provinces = document.querySelectorAll('.nl-province');
 
     if (!assocLinks.length || !mapMarkers.length) return;
+
+    const resetActive = () => {
+        assocLinks.forEach(l => l.classList.remove('active'));
+        mapMarkers.forEach(m => m.classList.remove('active'));
+        provinces.forEach(p => p.classList.remove('active-prov'));
+    };
+
+    const setActive = (id, prov) => {
+        resetActive();
+        
+        // Activate links
+        document.querySelectorAll(`.assoc-link[data-marker="${id}"]`).forEach(l => l.classList.add('active'));
+        
+        // Activate markers
+        document.querySelectorAll(`.map-marker[data-assoc="${id}"]`).forEach(m => m.classList.add('active'));
+        
+        // Activate province
+        if (prov) {
+            document.querySelectorAll(`.nl-province[data-prov="${prov}"]`).forEach(p => p.classList.add('active-prov'));
+        }
+    };
 
     assocLinks.forEach(link => {
         link.addEventListener('mouseenter', () => {
             const markerId = link.getAttribute('data-marker');
-            
-            // Update Links
-            assocLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-
-            // Update Markers
-            mapMarkers.forEach(marker => {
-                if (marker.getAttribute('data-assoc') === markerId) {
-                    marker.classList.add('active');
-                } else {
-                    marker.classList.remove('active');
-                }
-            });
+            const provId = link.getAttribute('data-prov');
+            setActive(markerId, provId);
         });
     });
 
     mapMarkers.forEach(marker => {
         marker.addEventListener('mouseenter', () => {
             const assocId = marker.getAttribute('data-assoc');
-            
-            // Update Markers
-            mapMarkers.forEach(m => m.classList.remove('active'));
-            marker.classList.add('active');
-
-            // Update Links
-            assocLinks.forEach(link => {
-                if (link.getAttribute('data-marker') === assocId) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
+            const provId = marker.getAttribute('data-prov');
+            setActive(assocId, provId);
         });
     });
+
+    // Reset to BVB (Brabant) on mouse leave of the whole section? 
+    // Or just keep last hovered. Let's keep last hovered for now.
 };
 
 // Initialize if on the right page
