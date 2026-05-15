@@ -339,9 +339,8 @@ function toggleTree(card) {
         const floorFromBottom = vh - floorTopPx;
 
         // Apply as absolute bottom position. 
-        // Compensation: tree images have significant transparent padding at the bottom.
-        // Increasing to ~15.5% based on verification tests.
-        const compensation = scaledImgH * 0.155;
+        // Compensation: tree images have significant transparent padding at the bottom (~22%).
+        const compensation = scaledImgH * 0.22;
         const finalBottom = floorFromBottom - compensation;
 
         lightboxImg.style.setProperty('bottom', finalBottom + 'px', 'important');
