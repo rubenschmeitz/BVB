@@ -948,7 +948,7 @@ a:focus-visible {
 }
 
 .site-footer {
-    padding: 3rem 0 2rem;
+    padding: 2rem 0 1.5rem;
     background-color: var(--color-charcoal);
     color: var(--color-white);
     border-top: none;
@@ -981,26 +981,26 @@ a:focus-visible {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.2rem;
-    margin-bottom: 1.5rem;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
 
 .footer-logo {
-    height: 45px;
+    height: 38px;
     filter: brightness(0) invert(1);
-    opacity: 0.7;
+    opacity: 0.6;
 }
 
 .footer-bottom {
     text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 1rem;
 }
 
 .footer-bottom p {
-    color: rgba(255,255,255,0.5);
-    font-size: 0.85rem;
-    letter-spacing: 0.3px;
+    color: rgba(255,255,255,0.45);
+    font-size: 0.8rem;
+    letter-spacing: 0.2px;
 }
 
 .footer-bottom .contact-link {
@@ -2885,4 +2885,229 @@ body.atcb-modal-open {
     background-color: var(--color-bark);
     color: white !important;
     transform: scale(1.05);
+}
+
+/* --- Hub Page (Vereniging) --- */
+.hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin: 3rem 0;
+}
+
+.hub-card {
+    background: white;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1px solid var(--color-sand);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--color-charcoal);
+}
+
+.hub-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(122, 91, 73, 0.12);
+    border-color: var(--color-bark);
+}
+
+.hub-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.hub-card h3 {
+    color: var(--color-bark);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.hub-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.hub-btn {
+    margin-top: auto;
+    padding: 0.8rem 1.5rem;
+    background: var(--color-sand);
+    color: var(--color-bark);
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.hub-card:hover .hub-btn {
+    background: var(--color-bark);
+    color: white;
+}
+
+/* Links List in Hub */
+.hub-links-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.hub-link-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #fdfaf5;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--color-charcoal);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.hub-link-item svg {
+    width: 20px;
+    height: 20px;
+    color: var(--color-sage);
+}
+
+.hub-link-item:hover {
+    background: white;
+    border-color: var(--color-bark);
+    transform: translateX(5px);
+}
+
+/* --- Sidebar Sponsors & Flyer --- */
+.sidebar-sponsor-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+    border: 1px solid var(--color-sand);
+    margin-bottom: 2rem;
+}
+
+.sidebar-sponsor-card h4 {
+    color: var(--color-bark);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.sidebar-sponsor-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.sidebar-sponsor-item img {
+    max-width: 100%;
+    height: auto;
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.sidebar-sponsor-item:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+/* Flyer Preview Card */
+.flyer-preview-card {
+    background: var(--color-charcoal);
+    color: white;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.flyer-thumbnail {
+    width: 100%;
+    height: 220px;
+    background-color: #333;
+    background-image: url('../images/textures/washi_texture.jpg');
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.flyer-thumbnail::after {
+    content: 'PDF';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    font-weight: 800;
+    opacity: 0.1;
+}
+
+.flyer-icon-overlay {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: var(--color-sage);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 2;
+}
+
+.flyer-info {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.flyer-info h4 {
+    margin-bottom: 0.5rem;
+}
+
+.flyer-info p {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-bottom: 1.2rem;
+}
+
+.flyer-view-btn {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    background: white;
+    color: var(--color-charcoal);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.flyer-view-btn:hover {
+    background: var(--color-sand);
+    transform: scale(1.03);
+}
+
+@media (max-width: 900px) {
+    .hub-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
 }
