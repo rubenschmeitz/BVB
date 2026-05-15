@@ -52,12 +52,20 @@ function doPost(e) {
     // 4. Store in Google Sheet
     const sheet = getOrCreateSheet();
     const timestamp = new Date();
+    
+    // Sanitize to prevent CSV Injection
+    const sanitize = (val) => {
+        if (!val) return '';
+        const str = String(val);
+        return /^[=\+\-@]/.test(str) ? "'" + str : str;
+    };
+
     sheet.appendRow([
       timestamp,
-      params.name,
-      params.email,
-      params.subject,
-      params.message
+      sanitize(params.name),
+      sanitize(params.email),
+      sanitize(params.subject),
+      sanitize(params.message)
     ]);
 
     // 5. Send Email Notification
