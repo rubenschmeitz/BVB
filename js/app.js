@@ -309,10 +309,24 @@ function toggleTree(card) {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxCaption = document.getElementById('lightbox-caption');
+    const scrollImg = document.getElementById('tokonoma-scroll');
 
     if (lightbox && lightboxImg) {
         lightbox.classList.add('tokonoma-mode');
         lightboxImg.src = img.src;
+
+        // Randomize scroll background
+        if (scrollImg) {
+            const scrolls = [
+                'images/tokonoma/scrolls/scroll_mountain.png',
+                'images/tokonoma/scrolls/scroll_calligraphy.png',
+                'images/tokonoma/scrolls/scroll_blossom.png'
+            ];
+            const randomScroll = scrolls[Math.floor(Math.random() * scrolls.length)];
+            scrollImg.src = randomScroll;
+            scrollImg.style.display = 'block';
+        }
+
         if (lightboxCaption) {
             lightboxCaption.innerHTML = `
                 <div style="padding: 0 20px;">
@@ -324,31 +338,68 @@ function toggleTree(card) {
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
 
-        // Dynamically place the tree so its bottom lands on the tokonoma wooden floor.
-        const vw = window.innerWidth;
-        const vh = window.innerHeight;
-        const scaledImgH = (vw >= vh) ? vw : vh; 
+        // Wait for image load to get natural dimensions for smart positioning
+        const updatePosition = () => {
+            const vw = window.innerWidth;
+            const vh = window.innerHeight;
+            
+            // The tokonoma base image is background-size: cover.
+            // We need to find the actual scale of that background image.
+            const bgAspectRatio = 1024 / 1024; // Base image is square (1024x1024)
+            const screenAspectRatio = vw / vh;
+            
+            let scale;
+            if (screenAspectRatio > bgAspectRatio) {
+                scale = vw / 1024; // Scaled by width
+            } else {
+                scale = vh / 1024; // Scaled by height
+            }
 
-        // Vertical offset of the image top relative to viewport top
-        const imgTop = (vh - scaledImgH) / 2;
-        const floorTopPx = imgTop + (scaledImgH * 0.71);
-        const floorFromBottom = vh - floorTopPx;
+            // The floor in the original 1024x1024 image is at ~728px from top (71.1%)
+            const originalFloorTop = 728;
+            const floorTopPx = (vh / 2) - (bgAspectRatio * 1024 * scale / 2) + (originalFloorTop * scale);
+            const floorFromBottom = vh - floorTopPx;
 
-        // Apply as absolute bottom position. 
-        // Compensation: trees have ~16% transparent padding at the bottom on average.
-        const compensation = scaledImgH * 0.16;
-        const finalBottom = floorFromBottom - compensation;
+            // Smart Compensation based on aspect ratio
+            // Wide images (wide pots) often have more bottom transparency in these assets
+            const ratio = lightboxImg.naturalWidth / lightboxImg.naturalHeight;
+            let compFactor = 0.165; // Base factor
+            if (ratio > 1.2) compFactor = 0.21; // Wide
+            if (ratio < 0.8) compFactor = 0.12; // Tall
 
-        lightboxImg.style.position = 'absolute';
-        lightboxImg.style.left = '50%';
-        lightboxImg.style.transform = 'translateX(-50%)';
-        lightboxImg.style.width = 'auto';
-        lightboxImg.style.height = 'auto';
-        lightboxImg.style.maxHeight = '70vh';
-        lightboxImg.style.objectFit = 'contain';
-        lightboxImg.style.setProperty('bottom', finalBottom + 'px', 'important');
-        lightboxImg.style.top = 'auto';
-        
+            const compensation = (vh > vw ? vh : vw) * compFactor;
+            const finalBottom = floorFromBottom - compensation;
+
+            lightboxImg.style.position = 'absolute';
+            lightboxImg.style.left = '50%';
+            lightboxImg.style.transform = 'translateX(-50%)';
+            lightboxImg.style.width = 'auto';
+            lightboxImg.style.height = 'auto';
+            lightboxImg.style.maxHeight = vw < 768 ? '45vh' : '65vh';
+            lightboxImg.style.maxWidth = vw < 768 ? '85%' : '55%';
+            lightboxImg.style.objectFit = 'contain';
+            lightboxImg.style.setProperty('bottom', finalBottom + 'px', 'important');
+            lightboxImg.style.top = 'auto';
+            lightboxImg.style.zIndex = '5';
+            
+            // Position scroll
+            if (scrollImg) {
+                scrollImg.style.position = 'absolute';
+                scrollImg.style.left = '50%';
+                scrollImg.style.transform = 'translateX(-50%)';
+                scrollImg.style.top = (vh / 2) - (bgAspectRatio * 1024 * scale / 2) + (130 * scale) + 'px';
+                scrollImg.style.height = (400 * scale) + 'px';
+                scrollImg.style.width = 'auto';
+                scrollImg.style.zIndex = '1';
+            }
+        };
+
+        if (lightboxImg.complete) {
+            updatePosition();
+        } else {
+            lightboxImg.onload = updatePosition;
+        }
+
         lightbox.style.paddingBottom = '0';
     }
 }
@@ -383,6 +434,8 @@ function initLightbox(lightboxId, imgId, captionId, closeClass, itemClass) {
         lightbox.style.display = '';
         lightbox.style.position = '';
         lightboxImg.style.bottom = '';
+        const scrollImg = document.getElementById('tokonoma-scroll');
+        if (scrollImg) scrollImg.style.display = 'none';
         document.body.style.overflow = 'auto';
     };
 
