@@ -2836,6 +2836,12 @@ body.atcb-modal-open {
     transition: transform 0.3s ease;
 }
 
+.sponsor-item a {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .sponsor-item img {
     max-width: 250px;
     height: auto;
