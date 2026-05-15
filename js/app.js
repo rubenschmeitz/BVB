@@ -332,20 +332,23 @@ function toggleTree(card) {
         // Vertical offset of the image top relative to viewport top
         const imgTop = (vh - scaledImgH) / 2;
         const floorTopPx = imgTop + (scaledImgH * 0.71);
-        const alcoveHeight = floorTopPx - imgTop;
+        const floorFromBottom = vh - floorTopPx;
+
+        // Apply as absolute bottom position. 
+        // Compensation: trees have ~16% transparent padding at the bottom on average.
+        const compensation = scaledImgH * 0.16;
+        const finalBottom = floorFromBottom - compensation;
 
         lightboxImg.style.position = 'absolute';
-        lightboxImg.style.top = imgTop + 'px';
         lightboxImg.style.left = '50%';
         lightboxImg.style.transform = 'translateX(-50%)';
-        lightboxImg.style.width = '90%'; // Keep some margin
-        lightboxImg.style.height = alcoveHeight + 'px';
+        lightboxImg.style.width = 'auto';
+        lightboxImg.style.height = 'auto';
+        lightboxImg.style.maxHeight = '70vh';
         lightboxImg.style.objectFit = 'contain';
-        lightboxImg.style.objectPosition = 'bottom center';
+        lightboxImg.style.setProperty('bottom', finalBottom + 'px', 'important');
+        lightboxImg.style.top = 'auto';
         
-        // Reset previous styles
-        lightboxImg.style.bottom = 'auto';
-        lightboxImg.style.setProperty('bottom', 'auto', 'important');
         lightbox.style.paddingBottom = '0';
     }
 }
