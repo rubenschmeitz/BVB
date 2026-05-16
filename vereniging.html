@@ -128,7 +128,7 @@
                         </div>
                         <div class="nl-map-container">
                             <div class="nl-map-visual">
-                                <svg class="nl-map-svg" viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="nl-map-svg" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
                                     <defs>
                                         <filter id="marker-glow" x="-50%" y="-50%" width="200%" height="200%">
                                             <feGaussianBlur stdDeviation="3" result="blur" />
@@ -136,54 +136,94 @@
                                         </filter>
                                     </defs>
                                     
-                                    <!-- Simplified Province Paths -->
+                                    <!-- Professional Province Paths -->
                                     <g class="provinces">
-                                        <!-- Noord-Brabant (BVB Context) -->
-                                        <path class="nl-province" data-prov="brabant" d="M150,400 L300,400 L350,450 L320,500 L180,500 L140,450 Z" />
-                                        <!-- Zeeland -->
-                                        <path class="nl-province" data-prov="zeeland" d="M50,420 L130,420 L140,480 L60,490 Z" />
-                                        <!-- Zuid-Holland -->
-                                        <path class="nl-province" data-prov="zh" d="M100,300 L180,300 L200,380 L120,390 Z" />
-                                        <!-- Utrecht -->
-                                        <path class="nl-province" data-prov="utrecht" d="M200,280 L260,280 L270,330 L210,340 Z" />
-                                        <!-- Gelderland -->
-                                        <path class="nl-province" data-prov="gelderland" d="M270,250 L380,250 L400,380 L320,380 L280,330 Z" />
-                                        <!-- Overijssel -->
-                                        <path class="nl-province" data-prov="overijssel" d="M300,150 L420,160 L430,240 L300,240 Z" />
-                                        <!-- Friesland -->
-                                        <path class="nl-province" data-prov="friesland" d="M200,50 L350,50 L380,120 L220,130 Z" />
-                                        <!-- Noord-Holland -->
-                                        <path class="nl-province" data-prov="nh" d="M110,150 L190,150 L200,280 L120,290 Z" />
-                                        <!-- Groningen/Drenthe/Limburg (Simplified fillers) -->
-                                        <path class="nl-province" d="M360,50 L450,50 L460,150 L360,140 Z" /> <!-- Groningen -->
-                                        <path class="nl-province" d="M330,480 L400,450 L420,580 L340,590 Z" /> <!-- Limburg -->
+                                        <path id="NLGR" class="nl-province" d="M856.7 282.8l-15.6-32.1-45.5-22.9-46.7 13.7-27.1-39.7-56.1 1.9-5.1 19.4 35.8 40.2 12.1 49.3 64.9 33.1 83.4-62.9z" />
+                                        <path id="NLFR" class="nl-province" d="M660.6 203.9l-35.8-40.2 5.1-19.4-44-32.1-35.1 6.5-68.8-37.4-47.8 45.4-1.2 50.1 57.3 83.5 131.7 16.7 38.6-73.1z" />
+                                        <path id="NLDR" class="nl-province" d="M856.7 282.8l-23.7 75.8-88.3 54.9-57.9-10.4-36.1-51-12.1-49.3 131.7-16.7 86.4-3.3z" />
+                                        <path id="NLOV" class="nl-province" d="M833 358.6l-21.2 135.2-120.3 32.1-105.9-40.2-22.4-124.2 36.1 51 57.9 10.4 88.3-54.9 87.5-9.4z" />
+                                        <path id="NLFL" class="nl-province" d="M545.7 330.4l-23.7 141.5-121.5 8.3-25-131.7 57.3-83.5 112.9 65.4z" />
+                                        <path id="NLGE" class="nl-province" d="M811.8 493.8l-52.3 125.4-142.1 48.3-157-124.2 23.7-141.5 105.9 40.2 120.3-32.1 101.5 83.9z" />
+                                        <path id="NLUT" class="nl-province" d="M460.5 480.2l-3.3 103.1-126.6 2.4-31.1-124.2 121.5-8.3 39.5 27z" />
+                                        <path id="NLNH" class="nl-province" d="M400.7 315.4l25 131.7-121.5 8.3-131.7-124.2 3.3-103.1 76.5-54.9 148.4 142.2z" />
+                                        <path id="NLZH" class="nl-province" d="M400.7 583.3l-121.5 8.3-112.9-157 131.7 124.2 102.7 24.5z" />
+                                        <path id="NLZE" class="nl-province" d="M279.2 591.6l-57.3 165.2-103.6-10.4-15.6-131.7 112.9 157 63.6-180.1z" />
+                                        <path id="NLNB" class="nl-province" d="M617.4 667.5l-105.9 165.2-310.8-21.2-57.3-165.2 157 124.2 142.1-48.3 174.9-54.7z" />
+                                        <path id="NLLI" class="nl-province" d="M617.4 667.5l91.9 282.8-105.9-165.2 14 117.6z" />
                                     </g>
 
-                                    <!-- Association Markers -->
-                                    <g class="map-marker" data-assoc="friesland" data-prov="friesland">
-                                        <circle cx="280" cy="90" r="7"/>
+                                    <!-- Association Clickable Markers -->
+                                    <!-- Club Noord -->
+                                    <a href="https://bonsaiclubnoord.nl/" target="_blank">
+                                        <g class="map-marker" data-assoc="clubnoord">
+                                            <circle cx="820" cy="250" r="12"/><text x="820" y="240" text-anchor="middle" class="map-label">Haren</text>
+                                        </g>
+                                    </a>
+                                    <!-- Friesland -->
+                                    <a href="https://www.bonsaiverenigingfriesland.nl/" target="_blank">
+                                        <g class="map-marker" data-assoc="friesland">
+                                            <circle cx="680" cy="180" r="12"/><text x="680" y="170" text-anchor="middle" class="map-label">Bakkeveen</text>
+                                        </g>
+                                    </a>
+                                    <!-- Apeldoorn -->
+                                    <a href="https://bonsaiverenigingapeldoorn.nl/" target="_blank">
+                                        <g class="map-marker" data-assoc="apeldoorn">
+                                            <circle cx="700" cy="450" r="12"/><text x="700" y="440" text-anchor="middle" class="map-label">Apeldoorn</text>
+                                        </g>
+                                    </a>
+                                    <!-- Overijssel -->
+                                    <a href="https://www.bonsaiverenigingoverijssel.nl/" target="_blank">
+                                        <g class="map-marker" data-assoc="overijssel">
+                                            <circle cx="800" cy="380" r="12"/><text x="800" y="370" text-anchor="middle" class="map-label">Oldenzaal</text>
+                                        </g>
+                                    </a>
+                                    <!-- Midden Nederland -->
+                                    <a href="https://www.bonsaimiddennederland.nl/" target="_blank">
+                                        <g class="map-marker" data-assoc="midden">
+                                            <circle cx="520" cy="480" r="12"/><text x="520" y="470" text-anchor="middle" class="map-label">Leersum</text>
+                                        </g>
+                                    </a>
+                                    <!-- Noord-Holland -->
+                                    <a href="https://www.bonsai-nh.nl/" target="_blank">
+                                        <g class="map-marker" data-assoc="nh">
+                                            <circle cx="340" cy="320" r="12"/><text x="340" y="310" text-anchor="middle" class="map-label">Haarlem</text>
+                                        </g>
+                                    </a>
+                                    <!-- Zuid-Holland -->
+                                    <a href="https://www.bonsaiverenigingzuidholland.nl/" target="_blank">
+                                        <g class="map-marker" data-assoc="zh">
+                                            <circle cx="360" cy="520" r="12"/><text x="360" y="510" text-anchor="middle" class="map-label">Boskoop</text>
+                                        </g>
+                                    </a>
+                                    <!-- Rijnmond -->
+                                    <a href="https://www.bonsai-vereniging-rijnmond.nl/" target="_blank">
+                                        <g class="map-marker" data-assoc="rijnmond">
+                                            <circle cx="300" cy="550" r="12"/><text x="300" y="540" text-anchor="middle" class="map-label">Spijkenisse</text>
+                                        </g>
+                                    </a>
+                                    <!-- Zuidwest -->
+                                    <a href="https://www.bonsaiwerkgroepzuidwest.nl/" target="_blank">
+                                        <g class="map-marker" data-assoc="zuidwest">
+                                            <circle cx="200" cy="700" r="12"/><text x="200" y="690" text-anchor="middle" class="map-label">Goes</text>
+                                        </g>
+                                    </a>
+                                    <!-- BVB (Current) -->
+                                    <g class="map-marker active pulse" data-assoc="brabant">
+                                        <circle cx="530" cy="620" r="18" filter="url(#marker-glow)"/>
+                                        <text x="530" y="600" text-anchor="middle" class="map-label active">BVB - Berlicum</text>
                                     </g>
-                                    <g class="map-marker" data-assoc="apeldoorn" data-prov="gelderland">
-                                        <circle cx="330" cy="280" r="7"/>
-                                    </g>
-                                    <g class="map-marker" data-assoc="midden" data-prov="utrecht">
-                                        <circle cx="235" cy="310" r="7"/>
-                                    </g>
-                                    <g class="map-marker" data-assoc="zh" data-prov="zh">
-                                        <circle cx="160" cy="340" r="7"/>
-                                    </g>
-                                    <g class="map-marker" data-assoc="rijnmond" data-prov="zh">
-                                        <circle cx="140" cy="370" r="7"/>
-                                    </g>
-                                    <g class="map-marker active" data-assoc="brabant" data-prov="brabant">
-                                        <circle cx="220" cy="440" r="10" filter="url(#marker-glow)"/>
-                                    </g>
-                                    <g class="map-marker" data-assoc="zuidwest" data-prov="zeeland">
-                                        <circle cx="90" cy="450" r="7"/>
-                                    </g>
-                                    <g class="map-marker" data-assoc="zn" data-prov="brabant">
-                                        <circle cx="260" cy="460" r="7"/>
-                                    </g>
+                                    <!-- Zuid-Nederland -->
+                                    <a href="https://www.bonsaiverenigingzuidnederland.nl/" target="_blank">
+                                        <g class="map-marker" data-assoc="zn">
+                                            <circle cx="450" cy="650" r="12"/><text x="450" y="640" text-anchor="middle" class="map-label">Moergestel</text>
+                                        </g>
+                                    </a>
+                                    <!-- Zuid-Limburg -->
+                                    <a href="https://www.bonsaiempire.nl/" target="_blank">
+                                        <g class="map-marker" data-assoc="limburg">
+                                            <circle cx="680" cy="850" r="12"/><text x="680" y="840" text-anchor="middle" class="map-label">Kerkrade</text>
+                                        </g>
+                                    </a>
                                 </svg>
                             </div>
                             <div class="association-info">
@@ -203,97 +243,6 @@
                                     </div>
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                                 </a>
-
-                                <div class="assoc-grid">
-                                    <!-- BVB (Current) -->
-                                    <div class="assoc-link active" data-marker="brabant" data-prov="brabant">
-                                        <div class="assoc-link-content">
-                                            <span class="assoc-name">Bonsai Vereniging Brabant</span>
-                                            <span class="assoc-loc">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                                Sint-Michielsgestel (De Moerkoal)
-                                            </span>
-                                        </div>
-                                        <div class="assoc-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
-                                    </div>
-
-                                    <a href="https://bonsaiverenigingapeldoorn.nl/" target="_blank" class="assoc-link" data-marker="apeldoorn" data-prov="gelderland">
-                                        <div class="assoc-link-content">
-                                            <span class="assoc-name">Bonsaivereniging Apeldoorn</span>
-                                            <span class="assoc-loc">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                                Apeldoorn (Wijkcentrum 't Boogje)
-                                            </span>
-                                        </div>
-                                        <div class="assoc-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
-                                    </a>
-
-                                    <a href="https://www.bonsaiverenigingfriesland.nl/" target="_blank" class="assoc-link" data-marker="friesland" data-prov="friesland">
-                                        <div class="assoc-link-content">
-                                            <span class="assoc-name">Bonsaivereniging Friesland</span>
-                                            <span class="assoc-loc">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                                Bakkeveen (Dúndelle)
-                                            </span>
-                                        </div>
-                                        <div class="assoc-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
-                                    </a>
-
-                                    <a href="https://www.bonsaimiddennederland.nl/" target="_blank" class="assoc-link" data-marker="midden" data-prov="utrecht">
-                                        <div class="assoc-link-content">
-                                            <span class="assoc-name">Bonsaivereniging Midden-Nederland</span>
-                                            <span class="assoc-loc">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                                Leersum (De Binder)
-                                            </span>
-                                        </div>
-                                        <div class="assoc-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
-                                    </a>
-
-                                    <a href="https://www.bonsaiverenigingzuidnederland.nl/" target="_blank" class="assoc-link" data-marker="zn" data-prov="brabant">
-                                        <div class="assoc-link-content">
-                                            <span class="assoc-name">Bonsaivereniging Zuid-Nederland</span>
-                                            <span class="assoc-loc">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                                Moergestel (Park Stanislaus)
-                                            </span>
-                                        </div>
-                                        <div class="assoc-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
-                                    </a>
-
-                                    <a href="https://www.bonsaiverenigingzuidholland.nl/" target="_blank" class="assoc-link" data-marker="zh" data-prov="zh">
-                                        <div class="assoc-link-content">
-                                            <span class="assoc-name">Bonsaivereniging Zuid-Holland</span>
-                                            <span class="assoc-loc">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                                Boskoop (Flora Boskoop)
-                                            </span>
-                                        </div>
-                                        <div class="assoc-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
-                                    </a>
-
-                                    <a href="https://www.bonsai-vereniging-rijnmond.nl/" target="_blank" class="assoc-link" data-marker="rijnmond" data-prov="zh">
-                                        <div class="assoc-link-content">
-                                            <span class="assoc-name">Bonsaivereniging Rijnmond</span>
-                                            <span class="assoc-loc">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                                Spijkenisse (De Meestoof)
-                                            </span>
-                                        </div>
-                                        <div class="assoc-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
-                                    </a>
-
-                                    <a href="https://www.bonsaiwerkgroepzuidwest.nl/" target="_blank" class="assoc-link" data-marker="zuidwest" data-prov="zeeland">
-                                        <div class="assoc-link-content">
-                                            <span class="assoc-name">Bonsaiwerkgroep Zuidwest-Nederland</span>
-                                            <span class="assoc-loc">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                                Goes (De Spinne)
-                                            </span>
-                                        </div>
-                                        <div class="assoc-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     </section>
