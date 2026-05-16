@@ -1416,14 +1416,99 @@ a:focus-visible {
     position: relative;
 }
 
+.mobile-sync-card {
+    display: none;
+}
+
 .day-calendar-btn {
     flex-shrink: 0;
     z-index: 10;
 }
 
 /* Hide Add to Calendar Pro branding */
-.atcb-credits {
+.atcb-credits, 
+.atcb-list-item[href*="add-to-calendar"], 
+[class*="atcb-credits"],
+.atcb-list-item-link[href*="add-to-calendar"] {
     display: none !important;
+    height: 0 !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+@media (max-width: 1280px) {
+    .mobile-sync-card {
+        display: block;
+        background: var(--color-sand);
+        border-radius: 0; /* Full width at the very top looks better */
+        padding: 1rem 1.5rem;
+        margin-bottom: 0;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        position: relative;
+        z-index: 100;
+    }
+    
+    .mobile-top-sync {
+        margin-top: 0;
+    }
+    
+    .sync-header {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .sync-icon {
+        width: 32px;
+        height: 32px;
+        background: var(--color-bark);
+        color: white;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    
+    .sync-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .sync-header h4 {
+        margin: 0;
+        font-size: 0.95rem;
+        color: var(--color-bark);
+        font-weight: 700;
+    }
+    
+    .sync-header p {
+        margin: 0;
+        font-size: 0.75rem;
+        opacity: 0.7;
+    }
+    
+    .sync-actions {
+        display: flex;
+        gap: 1rem;
+    }
+    
+    .sync-btn-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .sync-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--color-bark);
+        opacity: 0.6;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+    }
 }
 
 @media (max-width: 600px) {
@@ -1554,7 +1639,7 @@ a:focus-visible {
     font-size: 0.85rem;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1280px) {
     .nbs-grid-layout {
         grid-template-columns: 1fr;
         gap: 2rem;
@@ -2025,12 +2110,97 @@ a:focus-visible {
     }
 }
 
-@media (max-width: 900px) {
-    .social-block .ig-intro {
-        text-align: center !important;
-    }
     .social-block .ig-intro h2 {
         font-size: 2rem;
+    }
+}
+
+/* --- Social Hub Toggle --- */
+.social-toggle-wrapper {
+    display: flex;
+    background: var(--color-sand);
+    padding: 6px;
+    border-radius: 50px;
+    margin-bottom: 2rem;
+    gap: 4px;
+    width: fit-content;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.social-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border-radius: 50px;
+    border: none;
+    background: transparent;
+    color: var(--color-charcoal);
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-tab svg {
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.social-tab.active {
+    background: white;
+    color: var(--color-bark);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.social-tab.active svg {
+    opacity: 1;
+}
+
+.social-tab[data-target="facebook"].active {
+    color: #1877F2;
+}
+
+.social-content {
+    display: none;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.5s ease;
+}
+
+.social-content.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.social-links-flex {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.fb-color {
+    background: #1877F2 !important;
+    border-color: #1877F2 !important;
+}
+
+.fb-theme .ig-username {
+    color: #1877F2;
+}
+
+.fb-theme .ig-insta-icon {
+    color: #1877F2;
+}
+
+@media (max-width: 600px) {
+    .social-links-flex {
+        justify-content: center;
+    }
+    .social-toggle-wrapper {
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
@@ -2766,8 +2936,8 @@ body.atcb-modal-open {
 
 /* --- Interactive NL Map --- */
 .nl-map-container {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
     gap: 3rem;
     background: white;
     padding: 3rem;
@@ -2777,32 +2947,35 @@ body.atcb-modal-open {
 }
 
 .nl-map-visual {
+    flex: 1.2;
+    min-width: 350px;
     position: relative;
-    background: var(--color-sand);
+    background: #fdfaf5;
     border-radius: 15px;
-    padding: 2rem;
+    padding: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid var(--color-sand);
 }
 
 .nl-map-svg {
     width: 100%;
     height: auto;
     max-height: 550px;
-    filter: drop-shadow(0 10px 25px rgba(0,0,0,0.08));
+    filter: drop-shadow(0 10px 25px rgba(0,0,0,0.06));
 }
 
 .nl-province {
-    fill: #fff;
+    fill: #fcf9f4;
     stroke: var(--color-sage);
-    stroke-width: 1.5;
+    stroke-width: 1.2;
     transition: all 0.3s ease;
 }
 
 .nl-province:hover {
     fill: var(--color-sage);
-    opacity: 0.1;
+    opacity: 0.15;
 }
 
 .map-marker {
@@ -2857,9 +3030,10 @@ body.atcb-modal-open {
 }
 
 .association-info {
+    flex: 1;
+    min-width: 320px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 .association-header h2 {
@@ -2873,13 +3047,13 @@ body.atcb-modal-open {
     align-items: center;
     gap: 1.5rem;
     background: var(--color-sand);
-    padding: 1.5rem;
+    padding: 1.2rem;
     border-radius: 12px;
     text-decoration: none;
     color: inherit;
     transition: all 0.3s ease;
     border: 1px solid transparent;
-    margin-top: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .nbv-highlight:hover {
@@ -2892,12 +3066,12 @@ body.atcb-modal-open {
 .nbv-logo-mini {
     background: var(--color-sage);
     color: white;
-    padding: 1rem;
+    padding: 0.8rem;
     border-radius: 8px;
     font-weight: 900;
     text-align: center;
     line-height: 1;
-    min-width: 70px;
+    min-width: 65px;
 }
 
 .nbv-logo-mini span {
@@ -2909,23 +3083,64 @@ body.atcb-modal-open {
 
 .nbv-text h4 {
     margin-bottom: 0.2rem;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     color: var(--color-bark);
 }
 
 .nbv-text p {
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     line-height: 1.4;
     opacity: 0.75;
 }
 
+.assoc-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.assoc-link {
+    display: flex;
+    align-items: center;
+    padding: 0.7rem 1.2rem;
+    background: #fdfaf5;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--color-charcoal);
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border: 1px solid var(--color-sand);
+}
+
+.assoc-link:hover {
+    background: white;
+    border-color: var(--color-sage);
+    transform: translateX(5px);
+    color: var(--color-sage);
+}
+
+.assoc-link.active {
+    background: var(--color-sage);
+    color: white;
+    border: none;
+}
+
+.assoc-link-content .assoc-name {
+    display: block;
+}
+
+.assoc-link-content .assoc-loc {
+    display: block;
+    font-size: 0.72rem;
+    opacity: 0.8;
+    margin-top: 2px;
+}
+
 @media (max-width: 1100px) {
     .nl-map-container {
-        grid-template-columns: 1fr;
         padding: 2rem;
-    }
-    .community-map-section {
-        padding: 2rem;
+        gap: 2rem;
     }
 }
 

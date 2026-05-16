@@ -153,8 +153,28 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove('atcb-modal-open');
     });
 
-    // 6. Init Instagram Carousel
-    initIGCarousel('ig-carousel', 'ig-prev', 'ig-next', '.ig-dot');
+    // 6. Init Social Carousels
+    initIGCarousel('ig-carousel', 'ig-prev', 'ig-next', '#ig-dots .ig-dot');
+    initIGCarousel('fb-carousel', 'fb-prev', 'fb-next', '#fb-dots .ig-dot');
+
+    // 7. Social Tab Switching
+    const socialTabs = document.querySelectorAll('.social-tab');
+    socialTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = tab.getAttribute('data-target');
+            
+            // Update tabs
+            socialTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            
+            // Update content
+            document.querySelectorAll('.social-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            const targetContent = document.getElementById(`${target}-content`);
+            if (targetContent) targetContent.classList.add('active');
+        });
+    });
 
     // 7. Contact Form Handling
     const contactForm = document.querySelector('.contact-form');
