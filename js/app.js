@@ -390,13 +390,13 @@ function toggleTree(card) {
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
 
-        // Apply constant relative styling
-        // Floor starts at exactly 74.22% from the top (25.78% from bottom of the 1:1 backgrounds).
-        // Tree height is 55% of the frame.
-        // Tree transparent padding at the bottom is compensated using our exact ratios.
-        const treeHeightPercent = 55; // 55% of frame height
+        // Apply constant relative styling based on tree side (Shelf on left vs Floor on right)
+        // For bg_right_*, treeSide is 'left' (placed on shelf chigai-dana at exactly 50.00% from bottom).
+        // For bg_left_*, treeSide is 'right' (placed on the wooden floorboard at exactly 25.78% from bottom).
+        const baseBottomPercent = (treeSide === 'left') ? 50.00 : 25.78;
+        const treeHeightPercent = (treeSide === 'left') ? 45 : 55; // Trees on the shelf look more elegant slightly smaller (45%)
         const paddingCompensationPercent = treeHeightPercent * paddingRatio;
-        const finalBottomPercent = 25.78 - paddingCompensationPercent; // Places the pot exactly on the floor line
+        const finalBottomPercent = baseBottomPercent - paddingCompensationPercent;
 
         let finalLeft = (treeSide === 'left') ? '30%' : '70%';
 
