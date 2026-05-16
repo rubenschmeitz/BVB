@@ -173,6 +173,20 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             const targetContent = document.getElementById(`${target}-content`);
             if (targetContent) targetContent.classList.add('active');
+
+            // Update CTA Button dynamically
+            const socialCtaBtn = document.getElementById('social-cta-btn');
+            if (socialCtaBtn) {
+                if (target === 'instagram') {
+                    socialCtaBtn.textContent = 'Volg ons op Instagram';
+                    socialCtaBtn.href = 'https://www.instagram.com/bonsaiverenigingbrabant/';
+                    socialCtaBtn.className = 'cta-btn ig-btn';
+                } else {
+                    socialCtaBtn.textContent = 'Volg ons op Facebook';
+                    socialCtaBtn.href = 'https://www.facebook.com/bonsaiverenigingbrabantt';
+                    socialCtaBtn.className = 'cta-btn fb-btn';
+                }
+            }
         });
     });
 
@@ -347,29 +361,56 @@ function toggleTree(card) {
     const style = card.querySelector('.exhibition-style').textContent;
 
     const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
+    const tokonomaFrame = document.getElementById('tokonoma-frame');
+    const tokonomaImg = document.getElementById('tokonoma-img');
     const lightboxCaption = document.getElementById('lightbox-caption');
 
-    if (lightbox && lightboxImg) {
+    if (lightbox && tokonomaFrame && tokonomaImg) {
         lightbox.classList.add('tokonoma-mode');
-        lightboxImg.src = img.src;
+        tokonomaImg.src = img.src;
 
-        // Background Variations Metadata
+        // 1. Bottom Padding Compensation Map (Scientific alignment for all 17 trees)
+        const paddingMap = {
+            'tree_member_1.webp': 0.1914,
+            'tree_member_2.webp': 0.0332,
+            'tree_member_3.webp': 0.0381,
+            'tree_member_4.webp': 0.0000,
+            'tree_member_5.webp': 0.0254,
+            'tree_member_6.webp': 0.0244,
+            'tree_member_7.webp': 0.0518,
+            'tree_member_8.webp': 0.0361,
+            'tree_member_9.webp': 0.0371,
+            'tree_member_10.webp': 0.0986,
+            'tree_member_11.webp': 0.0332,
+            'tree_member_12.webp': 0.0215,
+            'tree_member_13.webp': 0.0488,
+            'tree_member_14.webp': 0.0518,
+            'tree_member_15.webp': 0.0352,
+            'tree_member_16.webp': 0.0342,
+            'tree_member_17.webp': 0.0605
+        };
+
+        const filename = img.src.split('/').pop();
+        const paddingRatio = paddingMap[filename] || 0.0;
+
+        // 2. Background Selection
         const backgrounds = [
-            { src: 'bg_left_mountain.png', side: 'left' },
-            { src: 'bg_right_calligraphy.png', side: 'right' },
-            { src: 'bg_left_enso.png', side: 'left' },
-            { src: 'bg_right_bamboo.png', side: 'right' },
-            { src: 'bg_left_autumn.png', side: 'left' },
-            { src: 'bg_right_moon_bird.png', side: 'right' },
-            { src: 'bg_left_crane.png', side: 'left' },
-            { src: 'bg_right_pine.png', side: 'right' },
-            { src: 'bg_left_plum_blossom.png', side: 'left' },
-            { src: 'bg_right_river.png', side: 'right' }
+            { src: 'bg_left_mountain.png', scrollSide: 'left' },
+            { src: 'bg_right_calligraphy.png', scrollSide: 'right' },
+            { src: 'bg_left_enso.png', scrollSide: 'left' },
+            { src: 'bg_right_bamboo.png', scrollSide: 'right' },
+            { src: 'bg_left_autumn.png', scrollSide: 'left' },
+            { src: 'bg_right_moon_bird.png', scrollSide: 'right' },
+            { src: 'bg_left_crane.png', scrollSide: 'left' },
+            { src: 'bg_right_pine.png', scrollSide: 'right' },
+            { src: 'bg_left_plum_blossom.png', scrollSide: 'left' },
+            { src: 'bg_right_river.png', scrollSide: 'right' }
         ];
 
         const selectedBg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
-        lightbox.style.backgroundImage = `url('images/tokonoma/backgrounds/${selectedBg.src}')`;
+        const treeSide = selectedBg.scrollSide === 'left' ? 'right' : 'left';
+        
+        tokonomaFrame.style.backgroundImage = `url('images/tokonoma/backgrounds/${selectedBg.src}')`;
 
         if (lightboxCaption) {
             lightboxCaption.innerHTML = `
@@ -379,68 +420,37 @@ function toggleTree(card) {
                 </div>
             `;
         }
+        
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
 
-        const updatePosition = () => {
-            const vw = window.innerWidth;
-            const vh = window.innerHeight;
-            
-            // All background variations are 1:1 (1024x1024)
-            const bgRatio = 1;
-            const screenRatio = vw / vh;
-            
-            let bgH, bgTop;
-            if (screenRatio > bgRatio) {
-                // Width-constrained: Top and bottom of the square BG are cropped
-                bgH = vw;
-                bgTop = (vh - vw) / 2;
-            } else {
-                // Height-constrained: Left and right of the square BG are cropped
-                bgH = vh;
-                bgTop = 0;
-            }
+        // Apply constant relative styling
+        // Floor is at 72% height from top (28% from bottom).
+        // Tree height is 55% of the frame.
+        // Tree transparent padding at the bottom is compensated using our exact ratios.
+        const treeHeightPercent = 55; // 55% of frame height
+        const paddingCompensationPercent = treeHeightPercent * paddingRatio;
+        const finalBottomPercent = 28 - paddingCompensationPercent; // Places the pot exact on floor
 
-            // High Precision Floor Line (72% from the top of the background image)
-            const floorY = bgTop + (bgH * 0.72);
-            const floorFromBottom = vh - floorY;
+        let finalLeft = (treeSide === 'left') ? '30%' : '70%';
 
-            // Tree Scaling Logic
-            const treeHeightVH = vw < 768 ? 0.48 : 0.62;
-            const treeHeightPx = vh * treeHeightVH;
-
-            // Precision Padding Compensation
-            // Bonsai image assets have approx 18.5% transparent padding at the bottom.
-            // We push the image down by this amount relative to its rendered height.
-            const paddingCompensation = treeHeightPx * 0.185;
-            const finalBottom = floorFromBottom - paddingCompensation;
-
-            // Horizontal Asymmetry
-            let finalLeft = '50%';
-            if (vw >= 768) {
-                finalLeft = (selectedBg.side === 'left') ? '68%' : '32%';
-            }
-
-            // Apply Styles
-            lightboxImg.style.position = 'absolute';
-            lightboxImg.style.left = finalLeft;
-            lightboxImg.style.transform = 'translateX(-50%)';
-            lightboxImg.style.width = 'auto';
-            lightboxImg.style.height = (treeHeightVH * 100) + 'vh';
-            lightboxImg.style.maxWidth = vw < 768 ? '88%' : '45%';
-            lightboxImg.style.objectFit = 'contain';
-            lightboxImg.style.setProperty('bottom', finalBottom + 'px', 'important');
-            lightboxImg.style.top = 'auto';
-            lightboxImg.style.zIndex = '5';
-        };
-
-        if (lightboxImg.complete) {
-            updatePosition();
-        } else {
-            lightboxImg.onload = updatePosition;
-        }
-
-        lightbox.style.paddingBottom = '0';
+        tokonomaImg.style.position = 'absolute';
+        tokonomaImg.style.left = finalLeft;
+        tokonomaImg.style.transform = 'translateX(-50%)';
+        tokonomaImg.style.width = 'auto';
+        tokonomaImg.style.height = treeHeightPercent + '%';
+        tokonomaImg.style.maxWidth = '50%';
+        tokonomaImg.style.objectFit = 'contain';
+        tokonomaImg.style.bottom = finalBottomPercent + '%';
+        tokonomaImg.style.top = 'auto';
+        tokonomaImg.style.zIndex = '5';
+        
+        // Add slight fade in for the tree itself
+        tokonomaImg.style.opacity = '0';
+        setTimeout(() => {
+            tokonomaImg.style.transition = 'opacity 0.8s ease';
+            tokonomaImg.style.opacity = '1';
+        }, 50);
     }
 }
 
@@ -475,6 +485,17 @@ function initLightbox(lightboxId, imgId, captionId, closeClass, itemClass) {
         lightbox.style.position = '';
         lightbox.style.backgroundImage = '';
         lightboxImg.style.bottom = '';
+        
+        // Reset tokonoma if present
+        const tokonomaFrame = document.getElementById('tokonoma-frame');
+        const tokonomaImg = document.getElementById('tokonoma-img');
+        if (tokonomaFrame) tokonomaFrame.style.backgroundImage = '';
+        if (tokonomaImg) {
+            tokonomaImg.src = '';
+            tokonomaImg.style.bottom = '';
+            tokonomaImg.style.left = '';
+        }
+
         document.body.style.overflow = 'auto';
     };
 

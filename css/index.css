@@ -1948,10 +1948,10 @@ a:focus-visible {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px);
     cursor: zoom-out;
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.5s ease;
 }
 
 .lightbox.active {
@@ -1967,8 +1967,8 @@ a:focus-visible {
     object-fit: contain;
     border-radius: 8px;
     box-shadow: 0 0 50px rgba(0,0,0,0.5);
-    transform: scale(0.9);
-    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transform: scale(0.95);
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .lightbox.active img {
@@ -1977,69 +1977,83 @@ a:focus-visible {
 
 /* Tokonoma Mode for Exhibition Trees */
 .lightbox.tokonoma-mode {
-    background-color: #1a1a1a;
+    background-color: #120e0c; /* Deeper, richer Japanese room background */
+    backdrop-filter: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+}
+
+.tokonoma-frame {
+    display: none;
+}
+
+.lightbox.tokonoma-mode .tokonoma-frame {
+    display: block;
+    position: relative;
+    width: 90vmin;
+    height: 90vmin;
+    max-width: 750px;
+    max-height: 750px;
     background-size: cover;
     background-position: center center;
-    backdrop-filter: none;
-    display: block;
-    position: fixed; /* Must be fixed to cover viewport */
-    z-index: 10000;
-}
-
-.lightbox.tokonoma-mode img {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%) scale(1);
-    bottom: 15vh; /* Fallback */
-    max-width: 55%;
-    max-height: 80vh;
-    box-shadow: none;
-    filter: drop-shadow(0 40px 80px rgba(0,0,0,0.85));
-    object-fit: contain;
-    object-position: bottom center;
-    transition: bottom 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.4s ease;
+    background-repeat: no-repeat;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.85);
+    border: 14px solid #231812; /* Premium rich dark-wood Tokonoma frame */
+    border-radius: 4px;
     z-index: 5;
+    overflow: hidden;
+    animation: tokonomaAppear 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
 
-.lightbox.active.tokonoma-mode img {
-    transform: translateX(-50%) scale(1);
-}
-
-@media (max-width: 768px) {
-    .lightbox.tokonoma-mode {
-        /* On portrait mobile, the image is scaled by height so the floor
-           sits higher relative to viewport bottom */
-        padding-bottom: 28vh;
+@keyframes tokonomaAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.96);
     }
-    .lightbox.tokonoma-mode img {
-        max-width: 75%;
-        max-height: 48vh;
+    100% {
+        opacity: 1;
+        transform: scale(1);
     }
 }
 
-@media (max-width: 480px) {
-    .lightbox.tokonoma-mode {
-        padding-bottom: 30vh;
-    }
-    .lightbox.tokonoma-mode img {
-        max-width: 82%;
-        max-height: 44vh;
-    }
+.lightbox.tokonoma-mode #tokonoma-img {
+    position: absolute;
+    /* Styles are mostly controlled by Javascript for precision position */
+    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.65));
+    border-radius: 0;
+    pointer-events: none;
 }
 
+/* Hide standard lightbox elements in Tokonoma mode */
+.lightbox.tokonoma-mode #lightbox-img {
+    display: none !important;
+}
+
+/* Lightbox UI Elements */
 .lightbox-close {
     position: absolute;
-    top: 30px;
-    right: 30px;
+    top: 25px;
+    right: 25px;
     color: white;
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 200;
     cursor: pointer;
     line-height: 1;
-    transition: transform 0.3s ease;
+    z-index: 1000;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.3);
+    border-radius: 50%;
+    transition: all 0.3s ease;
 }
 
 .lightbox-close:hover {
+    background: rgba(255,255,255,0.15);
     transform: scale(1.1) rotate(90deg);
 }
 
@@ -2048,23 +2062,32 @@ a:focus-visible {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 40px 20px;
+    padding: 60px 20px 30px;
     text-align: center;
     color: white;
-    font-family: 'Outfit', sans-serif;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    font-family: var(--font-main);
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
     z-index: 10;
+    pointer-events: none;
 }
 
-/* In tokonoma mode the caption sits at the very bottom (below the floor area) */
+/* Tokonoma Specific Caption */
 .lightbox.tokonoma-mode .lightbox-caption {
-    background: linear-gradient(to top, rgba(0,0,0,0.85) 40%, transparent);
-    padding: 20px 20px 16px;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 20%, transparent 100%);
+    padding-bottom: env(safe-area-inset-bottom, 25px);
 }
 
-@media (max-width: 600px) {
-    .lightbox-caption {
-        padding: 30px 15px;
+@media (max-width: 768px) {
+    .lightbox-close {
+        top: 20px;
+        right: 20px;
+    }
+    .lightbox.tokonoma-mode .tokonoma-frame {
+        width: 92vw;
+        height: 92vw;
+        max-width: none;
+        max-height: none;
+        border-width: 8px;
     }
 }
 
@@ -2178,7 +2201,48 @@ a:focus-visible {
 .social-links-flex {
     display: flex;
     gap: 1rem;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+}
+
+.cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 2px solid transparent;
+}
+
+.cta-btn.ig-btn {
+    background-color: var(--color-bark);
+    color: white !important;
+    border-color: var(--color-bark);
+    box-shadow: 0 4px 15px rgba(122, 91, 73, 0.15);
+}
+
+.cta-btn.ig-btn:hover {
+    background-color: transparent;
+    color: var(--color-bark) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(122, 91, 73, 0.25);
+}
+
+.cta-btn.fb-btn {
+    background-color: #1877F2;
+    color: white !important;
+    border-color: #1877F2;
+    box-shadow: 0 4px 15px rgba(24, 119, 242, 0.15);
+}
+
+.cta-btn.fb-btn:hover {
+    background-color: transparent;
+    color: #1877F2 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(24, 119, 242, 0.25);
 }
 
 .fb-color {
@@ -2197,6 +2261,11 @@ a:focus-visible {
 @media (max-width: 600px) {
     .social-links-flex {
         justify-content: center;
+        flex-wrap: nowrap;
+    }
+    .cta-btn {
+        padding: 10px 20px;
+        font-size: 0.85rem;
     }
     .social-toggle-wrapper {
         margin-left: auto;
@@ -2934,213 +3003,209 @@ body.atcb-modal-open {
     }
 }
 
-/* --- Interactive NL Map --- */
-.nl-map-container {
+/* --- Final Precision Interactive Map --- */
+.nl-interactive-map-wrapper {
     display: flex;
     flex-wrap: wrap;
-    gap: 3rem;
+    gap: 2rem;
     background: white;
-    padding: 3rem;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.05);
-    margin-top: 2rem;
-}
-
-.nl-map-visual {
-    flex: 1.2;
-    min-width: 350px;
-    position: relative;
-    background: #fdfaf5;
-    border-radius: 15px;
     padding: 2.5rem;
-    display: flex;
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+    margin-top: 2rem;
     align-items: center;
-    justify-content: center;
-    border: 1px solid var(--color-sand);
 }
 
-.nl-map-svg {
+.nl-map-container-new {
+    flex: 1.5;
+    min-width: 320px;
+    background: #fdfaf5;
+    border-radius: 20px;
+    padding: 1.5rem;
+    border: 1px solid var(--color-sand);
+    position: relative;
+    overflow: hidden;
+}
+
+.nl-svg-final {
     width: 100%;
     height: auto;
-    max-height: 550px;
-    filter: drop-shadow(0 10px 25px rgba(0,0,0,0.06));
+    filter: drop-shadow(0 10px 25px rgba(118,136,118,0.15));
 }
 
-.nl-province {
-    fill: #fcf9f4;
+.map-prov {
+    fill: #ffffff;
     stroke: var(--color-sage);
-    stroke-width: 1.2;
+    stroke-width: 0.25;
     transition: all 0.3s ease;
 }
 
-.nl-province:hover {
-    fill: var(--color-sage);
-    opacity: 0.15;
+.map-prov:hover {
+    fill: var(--color-sand);
+    stroke: var(--color-bark);
+    stroke-width: 0.4;
 }
 
-.map-marker {
+.club-marker {
     cursor: pointer;
 }
 
-.map-marker circle {
+.marker-dot {
     fill: var(--color-sage);
     stroke: white;
-    stroke-width: 2.5;
+    stroke-width: 0.6;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.map-marker:hover circle {
+.club-marker:hover .marker-dot {
     fill: var(--color-charcoal);
-    transform: scale(1.3);
+    r: 4.5;
+    stroke-width: 0.8;
 }
 
-.map-marker.active circle {
-    fill: #D97706; /* High contrast amber for BVB */
+/* Specific styling for the Active BVB marker */
+.club-marker.active .marker-dot {
+    fill: #D97706; /* Warm amber gold */
     stroke: white;
+    stroke-width: 0.8;
 }
 
-.map-label {
-    font-size: 14px;
-    font-weight: 700;
+.club-marker.active:hover .marker-dot {
     fill: var(--color-charcoal);
+}
+
+.marker-label {
     opacity: 0;
-    transition: all 0.3s ease;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
+}
+
+.club-marker:hover .marker-label,
+.club-marker.active .marker-label {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Tooltip Background Pill inside SVG */
+.label-bg {
+    fill: rgba(253, 250, 245, 0.95);
+    stroke: var(--color-sage);
+    stroke-width: 0.3;
+    rx: 2;
+    ry: 2;
+    transition: all 0.3s ease;
+}
+
+.club-marker:hover .label-bg {
+    fill: #ffffff;
+    stroke: var(--color-charcoal);
+    stroke-width: 0.4;
+}
+
+.label-town {
+    font-size: 5px;
+    font-weight: 800;
+    fill: var(--color-charcoal);
+    text-anchor: middle;
     font-family: 'Outfit', sans-serif;
+    transition: all 0.3s ease;
 }
 
-.map-marker:hover .map-label {
-    opacity: 1;
-    transform: translateY(-8px);
+.club-marker:hover .label-town {
+    font-size: 6px;
 }
 
-.map-label.active {
-    opacity: 1;
+.label-name {
+    font-size: 3.5px;
+    font-weight: 500;
+    fill: #666;
+    text-anchor: middle;
+    font-family: 'Outfit', sans-serif;
+    transition: all 0.3s ease;
 }
 
-/* Pulse Animation for BVB */
-@keyframes marker-pulse {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.15); opacity: 0.7; }
-    100% { transform: scale(1); opacity: 1; }
+.club-marker:hover .label-name {
+    font-size: 4px;
+    fill: var(--color-charcoal);
 }
 
-.pulse circle {
-    animation: marker-pulse 2.5s infinite ease-in-out;
+/* Elegant Pulsing Ripple Effect around active BVB marker */
+@keyframes markerPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
 }
 
-.association-info {
+.pulse-circle {
+    fill: none;
+    stroke: #D97706;
+    stroke-width: 0.5;
+    transform-origin: 105px 156px; /* Centered precisely on Berlicum translate coordinates */
+    animation: markerPulse 2s infinite ease-out;
+    pointer-events: none;
+}
+
+.map-sidebar {
     flex: 1;
-    min-width: 320px;
+    min-width: 280px;
     display: flex;
     flex-direction: column;
-}
-
-.association-header h2 {
-    font-size: 2.2rem;
-    margin-bottom: 0.5rem;
-    color: var(--color-charcoal);
-}
-
-.nbv-highlight {
-    display: flex;
-    align-items: center;
     gap: 1.5rem;
+}
+
+.nbv-card-modern {
     background: var(--color-sand);
-    padding: 1.2rem;
-    border-radius: 12px;
+    padding: 1.5rem;
+    border-radius: 15px;
     text-decoration: none;
     color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
     transition: all 0.3s ease;
-    border: 1px solid transparent;
-    margin-bottom: 1.5rem;
 }
 
-.nbv-highlight:hover {
+.nbv-card-modern:hover {
     background: white;
-    border-color: var(--color-sage);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
     transform: translateY(-3px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.06);
 }
 
-.nbv-logo-mini {
+.nbv-badge {
     background: var(--color-sage);
     color: white;
     padding: 0.8rem;
-    border-radius: 8px;
-    font-weight: 900;
-    text-align: center;
-    line-height: 1;
-    min-width: 65px;
-}
-
-.nbv-logo-mini span {
-    display: block;
-    font-size: 0.6rem;
-    margin-top: 4px;
-    opacity: 0.8;
-}
-
-.nbv-text h4 {
-    margin-bottom: 0.2rem;
-    font-size: 1.1rem;
-    color: var(--color-bark);
-}
-
-.nbv-text p {
-    font-size: 0.85rem;
-    line-height: 1.4;
-    opacity: 0.75;
-}
-
-.assoc-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-}
-
-.assoc-link {
-    display: flex;
-    align-items: center;
-    padding: 0.7rem 1.2rem;
-    background: #fdfaf5;
     border-radius: 10px;
-    text-decoration: none;
-    color: var(--color-charcoal);
-    font-size: 0.88rem;
-    font-weight: 600;
-    transition: all 0.2s ease;
-    border: 1px solid var(--color-sand);
+    font-weight: 900;
+    font-size: 1.1rem;
 }
 
-.assoc-link:hover {
-    background: white;
-    border-color: var(--color-sage);
-    transform: translateX(5px);
-    color: var(--color-sage);
+.nbv-card-text h4 {
+    font-size: 1.05rem;
+    margin-bottom: 0.2rem;
 }
 
-.assoc-link.active {
-    background: var(--color-sage);
-    color: white;
-    border: none;
+.nbv-card-text p {
+    font-size: 0.85rem;
+    opacity: 0.7;
 }
 
-.assoc-link-content .assoc-name {
-    display: block;
+.map-hint {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #888;
+    text-align: center;
 }
 
-.assoc-link-content .assoc-loc {
-    display: block;
-    font-size: 0.72rem;
-    opacity: 0.8;
-    margin-top: 2px;
-}
-
-@media (max-width: 1100px) {
-    .nl-map-container {
-        padding: 2rem;
-        gap: 2rem;
+@media (max-width: 800px) {
+    .nl-interactive-map-wrapper {
+        padding: 1.5rem;
     }
 }
 
