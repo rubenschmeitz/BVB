@@ -3133,26 +3133,7 @@ body.atcb-modal-open {
     line-height: 1.2;
 }
 
-/* Elegant Pulsing Ripple Effect around active BVB marker */
-@keyframes markerPulse {
-    0% {
-        transform: scale(1);
-        opacity: 0.8;
-    }
-    100% {
-        transform: scale(2.2);
-        opacity: 0;
-    }
-}
 
-.pulse-circle {
-    fill: none;
-    stroke: #D97706;
-    stroke-width: 0.5;
-    transform-origin: 105px 156px; /* Centered precisely on Berlicum translate coordinates */
-    animation: markerPulse 2s infinite ease-out;
-    pointer-events: none;
-}
 
 .map-sidebar {
     flex: 1;
