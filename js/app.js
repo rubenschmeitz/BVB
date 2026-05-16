@@ -232,6 +232,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('lightbox')) {
         initLightbox('lightbox', 'lightbox-img', 'lightbox-caption', 'lightbox-close', 'activity-item');
     }
+
+    // 9. Flyer Share Functionality
+    const shareFlyerBtn = document.getElementById('share-flyer-btn');
+    if (shareFlyerBtn) {
+        shareFlyerBtn.addEventListener('click', () => {
+            const shareData = {
+                title: 'NBS 2026 - Nationale Bonsai Show',
+                text: 'Kom je ook naar de Nationale Bonsai Show 2026? Bekijk de flyer en het programma!',
+                url: window.location.href
+            };
+
+            if (navigator.share) {
+                navigator.share(shareData).catch(err => console.log('Error sharing:', err));
+            } else {
+                // Fallback: WhatsApp share
+                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareData.text + ' ' + shareData.url)}`;
+                window.open(whatsappUrl, '_blank');
+            }
+        });
+    }
 });
 
 /**
@@ -314,10 +334,22 @@ function toggleTree(card) {
         lightbox.classList.add('tokonoma-mode');
         lightboxImg.src = img.src;
 
-        // Randomize Tokonoma Background Variation
-        const variationsCount = 10;
-        const randomVar = Math.floor(Math.random() * variationsCount) + 1;
-        lightbox.style.backgroundImage = `url('images/tokonoma/backgrounds/bg_var_${randomVar}.png')`;
+        // Background Variations Metadata
+        const backgrounds = [
+            { src: 'bg_left_mountain.png', side: 'left' },
+            { src: 'bg_right_calligraphy.png', side: 'right' },
+            { src: 'bg_left_enso.png', side: 'left' },
+            { src: 'bg_right_bamboo.png', side: 'right' },
+            { src: 'bg_left_autumn.png', side: 'left' },
+            { src: 'bg_right_moon_bird.png', side: 'right' },
+            { src: 'bg_left_crane.png', side: 'left' },
+            { src: 'bg_right_pine.png', side: 'right' },
+            { src: 'bg_left_plum_blossom.png', side: 'left' },
+            { src: 'bg_right_river.png', side: 'right' }
+        ];
+
+        const selectedBg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+        lightbox.style.backgroundImage = `url('images/tokonoma/backgrounds/${selectedBg.src}')`;
 
         if (lightboxCaption) {
             lightboxCaption.innerHTML = `
@@ -330,44 +362,52 @@ function toggleTree(card) {
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
 
-        // Wait for image load to get natural dimensions for smart positioning
         const updatePosition = () => {
             const vw = window.innerWidth;
             const vh = window.innerHeight;
             
-            // The tokonoma base image is background-size: cover.
-            // We need to find the actual scale of that background image.
-            const bgAspectRatio = 1024 / 1024; // Base image is square (1024x1024)
-            const screenAspectRatio = vw / vh;
+            // All background variations are 1:1 (1024x1024)
+            const bgRatio = 1;
+            const screenRatio = vw / vh;
             
-            let scale;
-            if (screenAspectRatio > bgAspectRatio) {
-                scale = vw / 1024; // Scaled by width
+            let bgH, bgTop;
+            if (screenRatio > bgRatio) {
+                // Width-constrained: Top and bottom of the square BG are cropped
+                bgH = vw;
+                bgTop = (vh - vw) / 2;
             } else {
-                scale = vh / 1024; // Scaled by height
+                // Height-constrained: Left and right of the square BG are cropped
+                bgH = vh;
+                bgTop = 0;
             }
 
-            // The floor in the original 1024x1024 image is at ~728px from top (71.1%)
-            const originalFloorTop = 728;
-            const floorTopPx = (vh / 2) - (bgAspectRatio * 1024 * scale / 2) + (originalFloorTop * scale);
-            const floorFromBottom = vh - floorTopPx;
+            // High Precision Floor Line (72% from the top of the background image)
+            const floorY = bgTop + (bgH * 0.72);
+            const floorFromBottom = vh - floorY;
 
-            // Smart Compensation based on aspect ratio
-            const ratio = lightboxImg.naturalWidth / lightboxImg.naturalHeight;
-            let compFactor = 0.165; // Base factor
-            if (ratio > 1.2) compFactor = 0.21; // Wide
-            if (ratio < 0.8) compFactor = 0.12; // Tall
+            // Tree Scaling Logic
+            const treeHeightVH = vw < 768 ? 0.48 : 0.62;
+            const treeHeightPx = vh * treeHeightVH;
 
-            const compensation = (vh > vw ? vh : vw) * compFactor;
-            const finalBottom = floorFromBottom - compensation;
+            // Precision Padding Compensation
+            // Bonsai image assets have approx 18.5% transparent padding at the bottom.
+            // We push the image down by this amount relative to its rendered height.
+            const paddingCompensation = treeHeightPx * 0.185;
+            const finalBottom = floorFromBottom - paddingCompensation;
 
+            // Horizontal Asymmetry
+            let finalLeft = '50%';
+            if (vw >= 768) {
+                finalLeft = (selectedBg.side === 'left') ? '68%' : '32%';
+            }
+
+            // Apply Styles
             lightboxImg.style.position = 'absolute';
-            lightboxImg.style.left = '50%';
+            lightboxImg.style.left = finalLeft;
             lightboxImg.style.transform = 'translateX(-50%)';
             lightboxImg.style.width = 'auto';
-            lightboxImg.style.height = 'auto';
-            lightboxImg.style.maxHeight = vw < 768 ? '45vh' : '65vh';
-            lightboxImg.style.maxWidth = vw < 768 ? '85%' : '55%';
+            lightboxImg.style.height = (treeHeightVH * 100) + 'vh';
+            lightboxImg.style.maxWidth = vw < 768 ? '88%' : '45%';
             lightboxImg.style.objectFit = 'contain';
             lightboxImg.style.setProperty('bottom', finalBottom + 'px', 'important');
             lightboxImg.style.top = 'auto';

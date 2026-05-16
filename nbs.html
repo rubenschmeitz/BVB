@@ -40,12 +40,12 @@
       "eventStatus": "https://schema.org/EventScheduled",
       "location": {
         "@type": "Place",
-        "name": "Den Durpsherd",
+        "name": "De Moerkoal",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Kerkwijk 61",
+          "streetAddress": "Driezeeg 20",
           "addressLocality": "Berlicum",
-          "postalCode": "5258 KB",
+          "postalCode": "5258 LE",
           "addressRegion": "Noord-Brabant",
           "addressCountry": "NL"
         }
@@ -69,7 +69,7 @@
 
     <header class="site-header">
         <div class="header-container">
-            <div class="site-branding">
+            <a href="index.html" class="site-branding" aria-label="BVB Home">
                 <div class="logo-wrapper">
                     <img src="images/logo_main.webp" alt="BVB Logo" class="main-logo" width="47" height="55" decoding="async">
                     <div class="logo-overlay"></div>
@@ -78,7 +78,7 @@
                     <div class="site-title">Bonsai Vereniging Brabant</div>
                     <p class="site-tagline">Bonsai van het zuiden</p>
                 </div>
-            </div>
+            </a>
             <nav class="main-nav" id="main-nav">
                 <a href="index.html">Home</a>
                 <a href="nbs.html" class="nav-special active">NBS 2026</a>
@@ -113,10 +113,7 @@
                     <section>
                         <h2 class="mb-1-5">Hét Bonsai Evenement van het Jaar</h2>
                         <p class="large-text">
-                            Op 26 en 27 september 2026 verwelkomt Bonsai Vereniging Brabant u in dorpshuis De Moerkoal voor de NBS 2026. Het hele weekend lang geniet u van een indrukwekkende expositie van ruim 90 meter aan showtafels en een uitgebreide markt met o.a. Holland Bonsai, Philip Haese & Carlos van der Vaart. 
-                        </p>
-                        <p class="large-text mb-3">
-                            Maak kans op schitterende prijzen bij onze grote loterij of laat u inspireren bij de BVB info-stand over het traject 'Van startboom tot bonsai'. Naast dit doorlopende programma zijn er diverse spectaculaire highlights die u hieronder in het tijdschema vindt.
+                            Bonsai Vereniging Brabant presenteert de NBS 2026 in dorpshuis De Moerkoal. Bewonder een indrukwekkende expositie van ruim 87 meter aan top-bonsai en Suiseki, en bezoek de uitgebreide markt met gespecialiseerde handelaren.
                         </p>
                     </section>
 
@@ -124,18 +121,33 @@
                     <section class="mb-4">
                         <h3 class="timeline-header" style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--color-bark); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem;">
                             <span class="decorative-line"></span>
-                            Tijdschema &amp; Highlights
+                            Tijdschema
                         </h3>
-                        <div class="nbs-timeline reveal-staggered reveal-on-scroll">
-                            
-                            <div class="timeline-day-label">Zaterdag 26 September</div>
-                            
-                            <div class="timeline-item highlighted">
+                            <div class="timeline-day-header">
+                                <div class="timeline-day-label">Zaterdag 26 September</div>
+                                <div class="day-calendar-btn">
+                                    <add-to-calendar-button 
+                                        hideBackground 
+                                        name="NBS 2026 - Zaterdag"
+                                        description="Nationale Bonsai Show 2026. Programma: Opening, NTC en Demo Alain de Vroo."
+                                        startDate="2026-09-26"
+                                        startTime="09:00"
+                                        endTime="18:00"
+                                        location="Driezeeg 20, 5258 LE Berlicum"
+                                        options="'Apple','Google','Outlook.com'"
+                                        label="Zet in agenda"
+                                        lightMode="light"
+                                        styleLight="--btn-background: var(--color-sand); --btn-text: var(--color-bark); --font: var(--font-main); --btn-padding-x: 12px; --btn-padding-y: 6px; --btn-font-size: 12px; --btn-shadow: none;"
+                                    ></add-to-calendar-button>
+                                </div>
+                            </div>
+                            <div class="nbs-timeline reveal-staggered reveal-on-scroll">
+                                                        <div class="timeline-item highlighted">
                                 <div class="timeline-dot"></div>
                                 <div class="timeline-content">
                                     <span class="timeline-time">10:00 - 10:45</span>
-                                    <p class="timeline-title">Opening & Tomodachi Taiko</p>
-                                    <p style="font-size: 0.9rem; color: var(--color-charcoal); margin-top: 0.5rem;">Officiële openingshandeling gevolgd door een spectaculair optreden van de Japanse drumgroep.</p>
+                                    <p class="timeline-title">Opening & Tomodachi Taiko (1)</p>
+                                    <p style="font-size: 0.9rem; color: var(--color-charcoal); margin-top: 0.5rem;">Officiële opening door Tom Rense en Kees, gevolgd door spectaculair Japans drummen.</p>
                                 </div>
                             </div>
                             
@@ -147,6 +159,15 @@
                                 </div>
                             </div>
 
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <span class="timeline-time">12:00</span>
+                                    <p class="timeline-title">Tomodachi Taiko (2)</p>
+                                    <p style="font-size: 0.9rem; color: var(--color-charcoal); margin-top: 0.5rem;">Tweede optreden van de Japanse drumgroep.</p>
+                                </div>
+                            </div>
+ 
                             <div class="timeline-item highlighted">
                                 <div class="timeline-dot"></div>
                                 <div class="timeline-content">
@@ -166,7 +187,27 @@
                                 </div>
                             </div>
 
-                            <div class="timeline-day-label mt-2">Zondag 27 September</div>
+                            </div> <!-- End Saturday Timeline -->
+
+                            <div class="timeline-day-header mt-4">
+                                <div class="timeline-day-label">Zondag 27 September</div>
+                                <div class="day-calendar-btn">
+                                    <add-to-calendar-button 
+                                        hideBackground 
+                                        name="NBS 2026 - Zondag"
+                                        description="Nationale Bonsai Show 2026. Programma: Demo Yannick Kiggen en Grote Loterij."
+                                        startDate="2026-09-27"
+                                        startTime="10:00"
+                                        endTime="17:00"
+                                        location="Driezeeg 20, 5258 LE Berlicum"
+                                        options="'Apple','Google','Outlook.com'"
+                                        label="Zet in agenda"
+                                        lightMode="light"
+                                        styleLight="--btn-background: var(--color-sand); --btn-text: var(--color-bark); --font: var(--font-main); --btn-padding-x: 12px; --btn-padding-y: 6px; --btn-font-size: 12px; --btn-shadow: none;"
+                                    ></add-to-calendar-button>
+                                </div>
+                            </div>
+                            <div class="nbs-timeline reveal-staggered reveal-on-scroll">
 
                             <div class="timeline-item">
                                 <div class="timeline-dot"></div>
@@ -233,32 +274,17 @@
                                 <span>09:00 - 17:00 uur</span>
                             </div>
                         </div>
-
                         <div class="fact-item">
                             <div class="fact-icon">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                             </div>
                             <div class="fact-text">
                                 <strong>Locatie</strong>
-                                <span>De Moerkoal, Berlicum</span>
+                                <span>Driezeeg 20, Berlicum</span>
                             </div>
                         </div>
-
-                        <div class="mb-1">
-                            <add-to-calendar-button hideBackground
-                                name="Nederlandse Bonsai Show (NBS) 2026"
-                                description="Hét landelijke topevenement van de Nederlandse Bonsai Vereniging."
-                                startDate="2026-09-26"
-                                endDate="2026-09-27"
-                                startTime="09:00"
-                                endTime="17:00"
-                                location="De Moerkoal, Berlicum"
-                                options="'Apple','Google','Outlook.com'"
-                                label="Zet in mijn Agenda"
-                                lightMode="light"
-                                styleLight="--btn-background: var(--color-bark); --btn-text: #fff; --font: var(--font-main); --btn-width: 100%;"
-                            ></add-to-calendar-button>
-                        </div>
+ 
+                        <div class="mb-2"></div>
 
                         <div class="map-wrapper">
                             <iframe 
@@ -273,19 +299,12 @@
                         </div>
                         <a href="https://maps.app.goo.gl/CxBm92C7UXm5WZvj8" target="_blank" rel="noopener noreferrer" class="nav-special route-btn">Route plannen</a>
 
-                        <!-- Flyer Preview Card -->
-                        <div class="flyer-preview-card reveal-on-scroll">
-                            <div class="flyer-thumbnail">
-                                <div class="flyer-icon-overlay">
-                                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                                </div>
-                            </div>
-                            <div class="flyer-info">
-                                <h4>Officiële Flyer</h4>
-                                <p>Bekijk de poster van de NBS 2026 voor alle info.</p>
-                                <a href="docs/NBS_Flyer_2026.pdf" target="_blank" class="flyer-view-btn">Bekijk Flyer (PDF)</a>
-                            </div>
-                        </div>
+                    </div><!-- /.event-sidebar-card -->
+
+                    <!-- Sidebar divider -->
+                    <div class="sidebar-divider">
+                        <span>Partners &amp; Materiaal</span>
+                    </div>
 
                         <!-- Sidebar Sponsors -->
                         <div class="sidebar-sponsor-card reveal-on-scroll">
@@ -301,6 +320,23 @@
                                 <a href="contact.html" class="contact-link" style="font-size: 0.85rem;">Sponsor worden?</a>
                             </div>
                         </div>
+
+                        <!-- Flyer Card -->
+                        <div class="flyer-card reveal-on-scroll">
+                            <a href="docs/NBS_Flyer_2026.pdf" target="_blank" class="flyer-card-preview" aria-label="Bekijk flyer">
+                                <img src="images/nbs_flyer_preview.png" alt="NBS 2026 Flyer" loading="lazy">
+                            </a>
+                            <div class="flyer-card-actions">
+                                <a href="docs/NBS_Flyer_2026.pdf" download="NBS_Flyer_2026.pdf" class="flyer-card-btn" title="Download flyer" aria-label="Download">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                    Download
+                                </a>
+                                <button id="share-flyer-btn" class="flyer-card-btn ghost" title="Deel flyer" aria-label="Delen">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                                    Deel
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </aside>
 
@@ -312,7 +348,9 @@
     <footer class="site-footer">
         <div class="footer-container">
             <div class="footer-content">
-                <img src="images/logo_main.webp" alt="BVB Logo" class="footer-logo" loading="lazy">
+                <a href="index.html" aria-label="Terug naar home">
+                    <img src="images/logo_main.webp" alt="BVB Logo" class="footer-logo" loading="lazy">
+                </a>
             </div>
             <div class="footer-bottom">
                 <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="vereniging.html" class="contact-link">Vereniging</a> | Design door <a href="https://www.linkedin.com/in/rubenschmeitz/" target="_blank" class="contact-link">Ruben Schmeitz</a></p>
