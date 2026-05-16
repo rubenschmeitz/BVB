@@ -157,38 +157,41 @@ document.addEventListener('DOMContentLoaded', () => {
     initIGCarousel('ig-carousel', 'ig-prev', 'ig-next', '#ig-dots .ig-dot');
     initIGCarousel('fb-carousel', 'fb-prev', 'fb-next', '#fb-dots .ig-dot');
 
-    // 7. Social Tab Switching
+    // 7. Social Tab Switching & Autoplay
     const socialTabs = document.querySelectorAll('.social-tab');
+    let socialAutoplayInterval;
+
+    const switchSocialTab = (target) => {
+        // Update tabs
+        socialTabs.forEach(t => t.classList.toggle('active', t.getAttribute('data-target') === target));
+        
+        // Update content
+        document.querySelectorAll('.social-content').forEach(content => {
+            content.classList.toggle('active', content.id === `${target}-content`);
+        });
+    };
+
     socialTabs.forEach(tab => {
         tab.addEventListener('click', () => {
-            const target = tab.getAttribute('data-target');
-            
-            // Update tabs
-            socialTabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            
-            // Update content
-            document.querySelectorAll('.social-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            const targetContent = document.getElementById(`${target}-content`);
-            if (targetContent) targetContent.classList.add('active');
-
-            // Update CTA Button dynamically
-            const socialCtaBtn = document.getElementById('social-cta-btn');
-            if (socialCtaBtn) {
-                if (target === 'instagram') {
-                    socialCtaBtn.textContent = 'Volg ons op Instagram';
-                    socialCtaBtn.href = 'https://www.instagram.com/bonsaiverenigingbrabant/';
-                    socialCtaBtn.className = 'cta-btn ig-btn';
-                } else {
-                    socialCtaBtn.textContent = 'Volg ons op Facebook';
-                    socialCtaBtn.href = 'https://www.facebook.com/bonsaiverenigingbrabantt';
-                    socialCtaBtn.className = 'cta-btn fb-btn';
-                }
+            // Stop autoplay on manual interaction
+            if (socialAutoplayInterval) {
+                clearInterval(socialAutoplayInterval);
+                socialAutoplayInterval = null;
             }
+            
+            const target = tab.getAttribute('data-target');
+            switchSocialTab(target);
         });
     });
+
+    // Start Autoplay (swaps between Instagram and Facebook every 8 seconds)
+    if (socialTabs.length > 0) {
+        let currentSocialPlatform = 'instagram';
+        socialAutoplayInterval = setInterval(() => {
+            currentSocialPlatform = (currentSocialPlatform === 'instagram') ? 'facebook' : 'instagram';
+            switchSocialTab(currentSocialPlatform);
+        }, 8000);
+    }
 
     // 7. Contact Form Handling
     const contactForm = document.querySelector('.contact-form');
@@ -425,12 +428,12 @@ function toggleTree(card) {
         document.body.style.overflow = 'hidden';
 
         // Apply constant relative styling
-        // Floor is at 72% height from top (28% from bottom).
+        // Floor starts at exactly 74.22% from the top (25.78% from bottom of the 1:1 backgrounds).
         // Tree height is 55% of the frame.
         // Tree transparent padding at the bottom is compensated using our exact ratios.
         const treeHeightPercent = 55; // 55% of frame height
         const paddingCompensationPercent = treeHeightPercent * paddingRatio;
-        const finalBottomPercent = 28 - paddingCompensationPercent; // Places the pot exact on floor
+        const finalBottomPercent = 25.78 - paddingCompensationPercent; // Places the pot exactly on the floor line
 
         let finalLeft = (treeSide === 'left') ? '30%' : '70%';
 

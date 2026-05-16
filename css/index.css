@@ -2020,10 +2020,12 @@ a:focus-visible {
 
 .lightbox.tokonoma-mode #tokonoma-img {
     position: absolute;
-    /* Styles are mostly controlled by Javascript for precision position */
-    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.65));
-    border-radius: 0;
+    box-shadow: none !important;
+    border-radius: 0 !important;
     pointer-events: none;
+    filter: drop-shadow(0 12px 25px rgba(0,0,0,0.65));
+    transform: translateX(-50%) !important;
+    transition: opacity 0.8s ease;
 }
 
 /* Hide standard lightbox elements in Tokonoma mode */
