@@ -155,43 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 6. Init Social Carousels
     initIGCarousel('ig-carousel', 'ig-prev', 'ig-next', '#ig-dots .ig-dot');
-    initIGCarousel('fb-carousel', 'fb-prev', 'fb-next', '#fb-dots .ig-dot');
-
-    // 7. Social Tab Switching & Autoplay
-    const socialTabs = document.querySelectorAll('.social-tab');
-    let socialAutoplayInterval;
-
-    const switchSocialTab = (target) => {
-        // Update tabs
-        socialTabs.forEach(t => t.classList.toggle('active', t.getAttribute('data-target') === target));
-        
-        // Update content
-        document.querySelectorAll('.social-content').forEach(content => {
-            content.classList.toggle('active', content.id === `${target}-content`);
-        });
-    };
-
-    socialTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            // Stop autoplay on manual interaction
-            if (socialAutoplayInterval) {
-                clearInterval(socialAutoplayInterval);
-                socialAutoplayInterval = null;
-            }
-            
-            const target = tab.getAttribute('data-target');
-            switchSocialTab(target);
-        });
-    });
-
-    // Start Autoplay (swaps between Instagram and Facebook every 8 seconds)
-    if (socialTabs.length > 0) {
-        let currentSocialPlatform = 'instagram';
-        socialAutoplayInterval = setInterval(() => {
-            currentSocialPlatform = (currentSocialPlatform === 'instagram') ? 'facebook' : 'instagram';
-            switchSocialTab(currentSocialPlatform);
-        }, 8000);
-    }
 
     // 7. Contact Form Handling
     const contactForm = document.querySelector('.contact-form');
@@ -440,9 +403,8 @@ function toggleTree(card) {
         tokonomaImg.style.position = 'absolute';
         tokonomaImg.style.left = finalLeft;
         tokonomaImg.style.transform = 'translateX(-50%)';
-        tokonomaImg.style.width = 'auto';
+        tokonomaImg.style.width = treeHeightPercent + '%';
         tokonomaImg.style.height = treeHeightPercent + '%';
-        tokonomaImg.style.maxWidth = '50%';
         tokonomaImg.style.objectFit = 'contain';
         tokonomaImg.style.bottom = finalBottomPercent + '%';
         tokonomaImg.style.top = 'auto';
@@ -523,57 +485,48 @@ function initLightbox(lightboxId, imgId, captionId, closeClass, itemClass) {
     });
 }
 
-// 7. Interactive NL Map
-const initMapInteractions = () => {
-    const assocLinks = document.querySelectorAll('.assoc-link');
-    const mapMarkers = document.querySelectorAll('.map-marker');
-    const provinces = document.querySelectorAll('.nl-province');
+// 7. Interactive NL Map with Premium HTML Tooltips
+const initPremiumMap = () => {
+    const container = document.querySelector('.nl-map-container-new');
+    const tooltip = document.getElementById('map-tooltip');
+    const markers = document.querySelectorAll('.club-marker');
 
-    if (!assocLinks.length || !mapMarkers.length) return;
+    if (!container || !tooltip || !markers.length) return;
 
-    const resetActive = () => {
-        assocLinks.forEach(l => l.classList.remove('active'));
-        mapMarkers.forEach(m => m.classList.remove('active'));
-        provinces.forEach(p => p.classList.remove('active-prov'));
-    };
+    markers.forEach(marker => {
+        const showTooltip = () => {
+            const town = marker.getAttribute('data-town');
+            const name = marker.getAttribute('data-name');
+            if (!town || !name) return;
 
-    const setActive = (id, prov) => {
-        resetActive();
-        
-        // Activate links
-        document.querySelectorAll(`.assoc-link[data-marker="${id}"]`).forEach(l => l.classList.add('active'));
-        
-        // Activate markers
-        document.querySelectorAll(`.map-marker[data-assoc="${id}"]`).forEach(m => m.classList.add('active'));
-        
-        // Activate province
-        if (prov) {
-            document.querySelectorAll(`.nl-province[data-prov="${prov}"]`).forEach(p => p.classList.add('active-prov'));
-        }
-    };
+            tooltip.querySelector('.tooltip-town').textContent = town;
+            tooltip.querySelector('.tooltip-name').textContent = name;
 
-    assocLinks.forEach(link => {
-        link.addEventListener('mouseenter', () => {
-            const markerId = link.getAttribute('data-marker');
-            const provId = link.getAttribute('data-prov');
-            setActive(markerId, provId);
-        });
+            const rect = marker.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+
+            // Find center of marker relative to container
+            const x = rect.left - containerRect.left + rect.width / 2;
+            const y = rect.top - containerRect.top;
+
+            tooltip.style.left = `${x}px`;
+            tooltip.style.top = `${y}px`;
+            tooltip.classList.add('visible');
+        };
+
+        const hideTooltip = () => {
+            tooltip.classList.remove('visible');
+        };
+
+        marker.addEventListener('mouseenter', showTooltip);
+        marker.addEventListener('mouseleave', hideTooltip);
+        marker.addEventListener('focus', showTooltip);
+        marker.addEventListener('blur', hideTooltip);
     });
-
-    mapMarkers.forEach(marker => {
-        marker.addEventListener('mouseenter', () => {
-            const assocId = marker.getAttribute('data-assoc');
-            const provId = marker.getAttribute('data-prov');
-            setActive(assocId, provId);
-        });
-    });
-
-    // Reset to BVB (Brabant) on mouse leave of the whole section? 
-    // Or just keep last hovered. Let's keep last hovered for now.
 };
 
 // Initialize if on the right page
-if (document.querySelector('.nl-map-section')) {
-    initMapInteractions();
+if (document.querySelector('.nl-map-container-new')) {
+    initPremiumMap();
 }
 
