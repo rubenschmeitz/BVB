@@ -51,7 +51,14 @@
                 <a href="nbs.html" class="nav-special">NBS 2026</a>
                 <a href="galerij.html">Galerij</a>
                 <a href="agenda.html" class="active">Agenda</a>
-                <a href="vereniging.html">Vereniging</a>
+                <div class="nav-dropdown">
+                    <a href="#" class="dropdown-trigger">Vereniging <svg class="dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <div class="dropdown-menu">
+                        <a href="over-ons.html">Over ons</a>
+                        <a href="vereniging.html">Bonsai in Nederland</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
             </nav>
             <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu openen/sluiten" aria-expanded="false" aria-controls="main-nav">
                 <span></span>
@@ -86,6 +93,7 @@
                         <div class="filter-group">
                             <button class="filter-btn" data-filter="all">Alles</button>
                             <button class="filter-btn active" data-filter="club"><span class="dot-legend club"></span>Clubavonden</button>
+                            <button class="filter-btn" data-filter="nbv"><span class="dot-legend nbv"></span>NBV Activiteiten</button>
                             <button class="filter-btn" data-filter="event"><span class="dot-legend event"></span>Evenementen</button>
                         </div>
                         <div class="view-toggle">
@@ -131,7 +139,7 @@
 
                     <div class="sidebar-card" style="margin-top: 2rem;">
                         <h3>Agenda Sync</h3>
-                        <p>Zet alle BVB activiteiten van 2026 direct in je persoonlijke agenda (Apple, Google, Outlook) zodat je nooit een clubavond mist.</p>
+                        <p>Zet al onze activiteiten van 2026 direct in je persoonlijke agenda (Apple, Google, Outlook) zodat je nooit een clubavond mist.</p>
                         <a href="docs/bvb_agenda_2026.ics" class="sync-btn">Sync Agenda (.ics)</a>
                     </div>
 
@@ -200,7 +208,9 @@
             <a href="nbs.html">NBS 2026</a>
             <a href="galerij.html">Galerij</a>
             <a href="agenda.html">Agenda</a>
-            <a href="vereniging.html">Vereniging</a>
+            <a href="over-ons.html">Over ons</a>
+            <a href="vereniging.html">Bonsai in Nederland</a>
+            <a href="contact.html">Contact</a>
         </div>
 
         <div class="fs-menu-footer">

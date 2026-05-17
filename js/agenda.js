@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Precise 2026 Agenda Data (Club Nights + Real External Dutch/Belgian Events)
+    // 1. Precise 2026 Agenda Data (Club Nights + Real External Dutch/Belgian Events + NBV Masterclasses)
     const agendaEvents = [
         {
             id: 'ext-feb-trophy',
@@ -40,6 +40,19 @@ document.addEventListener('DOMContentLoaded', () => {
             description: 'Onder deskundige begeleiding werken aan je eigen bonsai. De ideale gelegenheid voor advies over vormgeving of verzorging.'
         },
         {
+            id: 'ext-may-apeldoorn',
+            title: 'Bonsai Tentoonstelling Apeldoorn',
+            startDate: '2026-05-30',
+            endDate: '2026-05-31',
+            startTime: '10:00',
+            endTime: '17:00',
+            location: 'Tuinland Wilp, Apeldoorn',
+            type: 'event',
+            tag: 'Evenement',
+            description: 'Prachtige tweedaagse show georganiseerd door Bonsai Vereniging Apeldoorn bij Tuinland Wilp. Bewonder hoogwaardige creaties van leden, krijg styling-advies en bewerkingsdemonstraties. Toegang is gratis.',
+            detailsUrl: 'http://www.bonsaiverenigingapeldoorn.nl'
+        },
+        {
             id: 'ext-june-westen',
             title: 'Bonsai van het Westen 2026',
             startDate: '2026-06-13',
@@ -62,6 +75,18 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'club',
             tag: 'NBS Selectie',
             description: 'Selectie van bomen voor de NBS-tentoonstelling en het gezamenlijk bepalen van de presentatie-opstelling.'
+        },
+        {
+            id: 'nbv-july-noelanders',
+            title: 'Masterclass Marc Noelanders',
+            startDate: '2026-07-18',
+            startTime: '10:00',
+            endTime: '16:00',
+            location: 'Landelijke locatie NBV, Nederland',
+            type: 'nbv',
+            tag: 'Masterclass',
+            description: 'Exclusieve en leerzame masterclass onder leiding van de wereldberoemde bonsai-meester Marc Noelanders. Georganiseerd door de Nederlandse Bonsai Vereniging (NBV). Een unieke kans om je boom onder deskundige begeleiding naar een hoger niveau te tillen.',
+            detailsUrl: 'https://bonsainederland.nl'
         },
         {
             id: 'bvb-aug-club',
@@ -88,6 +113,18 @@ document.addEventListener('DOMContentLoaded', () => {
             detailsUrl: 'https://www.bonsaivereniging-rijnmond.nl'
         },
         {
+            id: 'nbv-sept-uden',
+            title: 'Masterclass Pieter van Uden',
+            startDate: '2026-09-13',
+            startTime: '10:00',
+            endTime: '16:00',
+            location: 'Landelijke locatie NBV, Nederland',
+            type: 'nbv',
+            tag: 'Masterclass',
+            description: 'Diepgaande en praktijkgerichte masterclass verzorgd door de bekende Nederlandse bonsai-expert Pieter van Uden. Georganiseerd door de Nederlandse Bonsai Vereniging (NBV) met de focus op geavanceerde vormgeving en presentatietechnieken.',
+            detailsUrl: 'https://bonsainederland.nl'
+        },
+        {
             id: 'bvb-sept-styling',
             title: 'NBS Presentatie: De laatste hand',
             startDate: '2026-09-21',
@@ -109,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'De Moerkoal, Berlicum',
             type: 'event',
             tag: 'Hoogtepunt',
-            description: 'Hét landelijke evenement met grote tentoonstelling, markt and expert demo\'s. Bonsai Vereniging Brabant is dit jaar de trotse gastheer.',
+            description: 'Hét landelijke evenement met grote tentoonstelling, markt en expert demo\'s. Onze vereniging is dit jaar de trotse gastheer.',
             detailsUrl: 'nbs.html'
         },
         {
@@ -160,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'event',
             tag: 'Evenement',
             description: 'Gespecialiseerde najaarsexpositie met focus op loofbomen in adembenemende herfstkleuren, inclusief clinics en markt.',
-            detailsUrl: 'https://www.bonsainederland.nl'
+            detailsUrl: 'https://bonsainederland.nl'
         },
         {
             id: 'ext-nov-bab',
@@ -207,6 +244,15 @@ document.addEventListener('DOMContentLoaded', () => {
         'juli', 'augustus', 'september', 'oktober', 'november', 'december'
     ];
 
+    // Get today's date formatted as YYYY-MM-DD
+    function getTodayDateStr() {
+        const today = new Date();
+        const y = today.getFullYear();
+        const m = String(today.getMonth() + 1).padStart(2, '0');
+        const d = String(today.getDate()).padStart(2, '0');
+        return `${y}-${m}-${d}`;
+    }
+
     // Initialize Page View
     initView();
 
@@ -252,14 +298,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // LIST VIEW RENDERER
+    // LIST VIEW RENDERER (Filters out past events automatically)
     function renderListView() {
-        const filteredEvents = getFilteredEvents();
+        let filteredEvents = getFilteredEvents();
+
+        // Automatically hide events that have already passed based on start/end date
+        const todayStr = getTodayDateStr();
+        filteredEvents = filteredEvents.filter(evt => {
+            const eventCompareDate = evt.endDate || evt.startDate;
+            return eventCompareDate >= todayStr;
+        });
 
         if (filteredEvents.length === 0) {
             dynamicContainer.innerHTML = `
                 <div class="no-events-card" style="text-align: center; padding: 3rem; background: white; border-radius: 12px; border: 1px solid #eaeaea;">
-                    <p style="font-size: 1.1rem; color: #666;">Geen activiteiten gevonden voor dit filter.</p>
+                    <p style="font-size: 1.1rem; color: #666;">Geen toekomstige activiteiten gevonden voor dit filter.</p>
                 </div>
             `;
             return;
@@ -289,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Custom border / tag styling for Highlights (NBS)
             const isHighlight = evt.tag === 'Hoogtepunt';
             const cardStyle = isHighlight ? 'border: 2px solid var(--color-bark); background: #fdfaf7;' : '';
-            const tagStyle = isHighlight ? 'background: var(--color-bark); color: white;' : (evt.type === 'event' ? 'background: rgba(140, 106, 92, 0.1); color: var(--color-bark);' : '');
+            const tagStyle = isHighlight ? 'background: var(--color-bark); color: white;' : (evt.type === 'event' ? 'background: rgba(140, 106, 92, 0.1); color: var(--color-bark);' : (evt.type === 'nbv' ? 'background: rgba(194, 155, 56, 0.1); color: #C29B38;' : ''));
 
             // Construct add to calendar option values
             const calendarEndDate = evt.endDate || evt.startDate;
@@ -333,7 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 options="'Apple','Google','iCal','Microsoft365','Outlook.com'"
                                 label="Zet in mijn agenda"
                                 lightMode="light"
-                                styleLight="--btn-background: ${isHighlight ? 'var(--color-bark)' : 'var(--color-sage)'}; --btn-text: #fff; --font: var(--font-main); --btn-padding: 8px 16px; --btn-font-size: 0.9rem;"
+                                styleLight="--btn-background: ${isHighlight ? 'var(--color-bark)' : (evt.type === 'nbv' ? '#C29B38' : 'var(--color-sage)')}; --btn-text: #fff; --font: var(--font-main); --btn-padding: 8px 16px; --btn-font-size: 0.9rem;"
                             ></add-to-calendar-button>
                             ${evt.detailsUrl ? `<a href="${evt.detailsUrl}" ${evt.detailsUrl.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''} class="nav-special" style="text-decoration: none; padding: 8px 16px; font-size: 0.9rem;">Meer informatie</a>` : ''}
                         </div>
@@ -343,9 +396,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         html += '</div>';
+
         dynamicContainer.innerHTML = html;
 
-        // Force add-to-calendar script to re-process new elements
+        // Force calendar buttons to parse and render
         if (window.atcb_init) {
             window.atcb_init();
         }
@@ -354,63 +408,56 @@ document.addEventListener('DOMContentLoaded', () => {
     // CALENDAR VIEW RENDERER
     function renderCalendarView() {
         const filteredEvents = getFilteredEvents();
-        
-        // Days of week starting from Monday in Dutch
-        const dayNames = ['ma', 'di', 'wo', 'do', 'vr', 'za', 'zo'];
 
-        // Get first day and number of days of the selected calendarMonth/calendarYear
-        const firstDayOfMonth = new Date(calendarYear, calendarMonth, 1);
-        // JS getDay() starts on Sunday (0) to Saturday (6). 
-        // We shift it to Monday (0) to Sunday (6):
-        let startDayIndex = firstDayOfMonth.getDay() - 1;
-        if (startDayIndex < 0) startDayIndex = 6; // Sunday becomes index 6
-
-        const totalDaysInMonth = new Date(calendarYear, calendarMonth + 1, 0).getDate();
-        const totalDaysInPrevMonth = new Date(calendarYear, calendarMonth, 0).getDate();
-
+        // Build navigation and monthly header grid
         let html = `
             <div class="calendar-view-wrapper">
                 <div class="calendar-header">
                     <button class="calendar-nav-btn" id="prev-month" aria-label="Vorige maand">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
                     </button>
                     <h3>${dutchMonths[calendarMonth]} ${calendarYear}</h3>
                     <button class="calendar-nav-btn" id="next-month" aria-label="Volgende maand">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
                     </button>
                 </div>
                 
                 <div class="calendar-grid">
+                    <div class="calendar-day-name">ma</div>
+                    <div class="calendar-day-name">di</div>
+                    <div class="calendar-day-name">wo</div>
+                    <div class="calendar-day-name">do</div>
+                    <div class="calendar-day-name">vr</div>
+                    <div class="calendar-day-name">za</div>
+                    <div class="calendar-day-name">zo</div>
         `;
 
-        // Render Day names header
-        dayNames.forEach(name => {
-            html += `<div class="calendar-day-name">${name}</div>`;
-        });
+        // Calculate days to draw
+        const firstDayOfMonth = new Date(calendarYear, calendarMonth, 1);
+        let startDayIndex = firstDayOfMonth.getDay() - 1; // Convert to Mon-Sun (0-6)
+        if (startDayIndex === -1) startDayIndex = 6; // Sunday is 6
 
-        // Helper to check if event falls on a specific date (takes multi-day into account)
-        const getEventsForDate = (year, month, day) => {
-            const checkStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-            const checkTime = new Date(checkStr).getTime();
+        const totalDaysInMonth = new Date(calendarYear, calendarMonth + 1, 0).getDate();
+        const prevMonthTotalDays = new Date(calendarYear, calendarMonth, 0).getDate();
 
-            return filteredEvents.filter(evt => {
-                const startStr = evt.startDate;
-                const endStr = evt.endDate || evt.startDate;
-                
-                const startTime = new Date(startStr).getTime();
-                const endTime = new Date(endStr).getTime();
-
-                return checkTime >= startTime && checkTime <= endTime;
+        // Helper to check for events on specific day
+        const getEventsForDate = (y, m, d) => {
+            const searchDateStr = `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+            return filteredEvents.filter(e => {
+                if (e.endDate) {
+                    return searchDateStr >= e.startDate && searchDateStr <= e.endDate;
+                }
+                return e.startDate === searchDateStr;
             });
         };
 
-        // Render leading days from previous month
+        // Render trailing days of previous month
         for (let i = startDayIndex - 1; i >= 0; i--) {
-            const prevDayNum = totalDaysInPrevMonth - i;
-            html += `<div class="calendar-cell other-month"><span class="calendar-day-number">${prevDayNum}</span></div>`;
+            const dayNum = prevMonthTotalDays - i;
+            html += `<div class="calendar-cell other-month"><span class="calendar-day-number">${dayNum}</span></div>`;
         }
 
-        // Render actual days of the current month
+        // Render current month days
         const today = new Date();
         const isCurrentMonthYear = today.getFullYear() === calendarYear && today.getMonth() === calendarMonth;
         const currentDayNum = today.getDate();
@@ -425,7 +472,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (events.length > 0) {
                 dotsHtml += '<div class="calendar-cell-dots">';
                 events.forEach(e => {
-                    const dotClass = e.type === 'club' ? 'club' : 'event';
+                    const dotClass = e.type === 'club' ? 'club' : (e.type === 'nbv' ? 'nbv' : 'event');
                     dotsHtml += `<span class="calendar-cell-dot ${dotClass}" title="${e.title}"></span>`;
                 });
                 dotsHtml += '</div>';
@@ -495,10 +542,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // Determine dominant mode for popover styling
                     const dominantType = events[0].type;
+                    popover.classList.remove('event-mode', 'nbv-mode');
                     if (dominantType === 'event') {
                         popover.classList.add('event-mode');
-                    } else {
-                        popover.classList.remove('event-mode');
+                    } else if (dominantType === 'nbv') {
+                        popover.classList.add('nbv-mode');
                     }
 
                     let popoverHtml = '';
@@ -542,7 +590,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     options="'Apple','Google','iCal','Microsoft365','Outlook.com'"
                                     label="Zet in mijn agenda"
                                     lightMode="light"
-                                    styleLight="--btn-background: ${isHighlight ? 'var(--color-bark)' : 'var(--color-sage)'}; --btn-text: #fff; --font: var(--font-main); --btn-padding: 6px 12px; --btn-font-size: 0.85rem;"
+                                    styleLight="--btn-background: ${isHighlight ? 'var(--color-bark)' : (evt.type === 'nbv' ? '#C29B38' : 'var(--color-sage)')}; --btn-text: #fff; --font: var(--font-main); --btn-padding: 6px 12px; --btn-font-size: 0.85rem;"
                                 ></add-to-calendar-button>
                                 ${evt.detailsUrl ? `<a href="${evt.detailsUrl}" ${evt.detailsUrl.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''} class="nav-special" style="text-decoration: none; padding: 6px 12px; font-size: 0.85rem;">Meer informatie</a>` : ''}
                             </div>
@@ -557,7 +605,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 } else {
                     popover.classList.add('active');
-                    popover.classList.remove('event-mode');
+                    popover.classList.remove('event-mode', 'nbv-mode');
                     popover.innerHTML = `
                         <div style="text-align: center; color: #888; padding: 1rem 0;">
                             <p style="margin: 0; font-size: 0.95rem; font-weight: 500;">
