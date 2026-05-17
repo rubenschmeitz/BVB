@@ -1182,7 +1182,21 @@ a:focus-visible {
 
 @media (max-width: 600px) {
     .site-footer {
-        padding: 2rem 0 5.5rem; /* Extra bottom padding for mobile navigation */
+        padding: 0.8rem 0 4.8rem; /* Minimal top/bottom padding to fit the 70px mobile nav */
+    }
+    .footer-content {
+        gap: 0.4rem;
+        margin-bottom: 0.4rem;
+    }
+    .footer-logo {
+        height: 26px; /* Super minimal logo height for mobile */
+    }
+    .footer-bottom {
+        padding-top: 0.4rem;
+    }
+    .footer-bottom p {
+        font-size: 0.72rem; /* Clean and small text */
+        line-height: 1.4;
     }
 }
 
