@@ -39,12 +39,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Close FS menu on link click
-    document.querySelectorAll('.fs-menu-links a').forEach(link => {
+    document.querySelectorAll('.fs-menu-links a:not(.fs-menu-trigger)').forEach(link => {
         link.addEventListener('click', () => {
             fsMenu.classList.remove('active');
             document.body.style.overflow = 'auto';
         });
     });
+
+    // 1d. Full Screen Menu Dropdown Toggle (Mobile)
+    const fsDropdownTrigger = document.querySelector('.fs-menu-trigger');
+    const fsDropdown = document.querySelector('.fs-menu-dropdown');
+    if (fsDropdownTrigger && fsDropdown) {
+        fsDropdownTrigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isExpanded = fsDropdown.classList.toggle('expanded');
+            fsDropdownTrigger.setAttribute('aria-expanded', isExpanded);
+        });
+    }
 
     // 1c. Bottom Nav Active State Sync
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';

@@ -4377,3 +4377,87 @@ body.atcb-modal-open {
         font-size: 0.7rem;
     }
 }
+
+/* --- Full Screen Menu Accordion --- */
+.fs-menu-dropdown {
+    width: 100%;
+    margin: 0.5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fs-menu-trigger {
+    background: transparent;
+    border: none;
+    font-family: var(--font-main), sans-serif;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    font-weight: 700;
+    color: var(--color-charcoal);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    letter-spacing: -0.5px;
+}
+
+.fs-menu-trigger:hover,
+.fs-menu-dropdown.expanded .fs-menu-trigger {
+    color: var(--color-sage);
+}
+
+.fs-menu-chevron {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    stroke-width: 2.5;
+    width: clamp(20px, 4vw, 28px);
+    height: clamp(20px, 4vw, 28px);
+    color: currentColor;
+}
+
+.fs-menu-dropdown.expanded .fs-menu-chevron {
+    transform: rotate(180deg);
+}
+
+.fs-menu-submenu {
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 12px;
+    padding: 0;
+}
+
+.fs-menu-dropdown.expanded .fs-menu-submenu {
+    max-height: 250px;
+    opacity: 1;
+    visibility: visible;
+    padding: 1rem 0;
+    margin-top: 0.5rem;
+}
+
+.fs-menu-submenu a {
+    font-size: clamp(1.3rem, 3.5vw, 1.8rem) !important;
+    font-weight: 600 !important;
+    color: var(--color-charcoal) !important;
+    padding: 0.5rem 1.5rem !important;
+    width: auto !important;
+    text-align: center !important;
+    opacity: 0.8;
+    transition: var(--transition-smooth) !important;
+}
+
+.fs-menu-submenu a:hover,
+.fs-menu-submenu a.active {
+    color: var(--color-sage) !important;
+    opacity: 1;
+    transform: scale(1.05);
+}

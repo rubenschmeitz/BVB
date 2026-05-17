@@ -15,6 +15,30 @@ document.addEventListener('DOMContentLoaded', () => {
             detailsUrl: 'https://www.bonsaiassociation.be'
         },
         {
+            id: 'ext-apr-mvnl',
+            title: 'Voorjaarsshow BV Midden Nederland',
+            startDate: '2026-04-11',
+            startTime: '10:00',
+            endTime: '16:00',
+            location: 'De Binder, Leersum, Nederland',
+            type: 'event',
+            tag: 'Expositie',
+            description: 'De traditionele voorjaarsshow van Bonsai Vereniging Midden Nederland. Bewonder prachtige, zorgvuldig gekozen voorjaarsbomen van de leden, met live styling-demonstraties en gezellige verkoopstands.',
+            detailsUrl: 'https://www.bonsaimiddennederland.nl'
+        },
+        {
+            id: 'ext-may-rijnmond',
+            title: 'Open Dag BV Rijnmond 2026',
+            startDate: '2026-05-03',
+            startTime: '10:00',
+            endTime: '16:00',
+            location: 'Vlaardingen, Nederland',
+            type: 'event',
+            tag: 'Open Dag',
+            description: 'De jaarlijkse open dag van Bonsai Vereniging Rijnmond met een schitterende expositie van zowel beginners als gevorderden, clinics en deskundig advies.',
+            detailsUrl: 'https://www.bonsaivereniging-rijnmond.nl'
+        },
+        {
             id: 'ext-may-hasselt',
             title: 'Bonsai Festival Hasselt 2026',
             startDate: '2026-05-09',
@@ -26,6 +50,19 @@ document.addEventListener('DOMContentLoaded', () => {
             tag: 'Evenement',
             description: 'Jaarlijks Bonsai Festival in de adembenemende Japanse Tuin van Hasselt. Diverse Belgische bonsai-verenigingen presenteren hun topstukken met live vormgevingsdemonstraties en een sfeervolle markt.',
             detailsUrl: 'https://www.japansetuin.be'
+        },
+        {
+            id: 'ext-may-koewacht-show',
+            title: 'Jubileumshow Shimpaku Koewacht (20 Jaar)',
+            startDate: '2026-05-16',
+            endDate: '2026-05-17',
+            startTime: '10:00',
+            endTime: '17:00',
+            location: 'Koewacht, Zeeland (grens NL/BE)',
+            type: 'event',
+            tag: 'Jubileum',
+            description: 'Feestelijke jubileumtentoonstelling ter ere van het 20-jarig bestaan van Shimpaku Koewacht (René Lecocq Memorial) met een expositie van prachtige bonsai en een gezellige verkoopbeurs.',
+            detailsUrl: 'https://www.bonsaiateljee.be'
         },
         {
             id: 'bvb-may-club',
@@ -41,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             id: 'ext-may-apeldoorn',
-            title: 'Bonsai Tentoonstelling Apeldoorn',
+            title: 'Bonsai Show BV Apeldoorn 2026',
             startDate: '2026-05-30',
             endDate: '2026-05-31',
             startTime: '10:00',
@@ -49,8 +86,20 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Tuinland Wilp, Apeldoorn',
             type: 'event',
             tag: 'Evenement',
-            description: 'Prachtige tweedaagse show georganiseerd door Bonsai Vereniging Apeldoorn bij Tuinland Wilp. Bewonder hoogwaardige creaties van leden, krijg styling-advies en bewerkingsdemonstraties. Toegang is gratis.',
+            description: 'Prachtige tweedaagse show georganiseerd door Bonsai Vereniging Apeldoorn bij Tuinland Wilp. Bewonder hoogwaardige bomen van leden, krijg professioneel styling-advies en bewerkingsdemonstraties. Toegang is gratis.',
             detailsUrl: 'http://www.bonsaiverenigingapeldoorn.nl'
+        },
+        {
+            id: 'ext-may-izegem',
+            title: 'Bonsai Vlaanderen Show Izegem',
+            startDate: '2026-05-31',
+            startTime: '10:00',
+            endTime: '17:00',
+            location: 'Izegem, België',
+            type: 'event',
+            tag: 'Expositie',
+            description: 'Regionale bonsaitentoonstelling van Bonsai Vlaanderen afdeling West-Vlaanderen, met een schitterende selectie ledenbomen, vormgevingsdemonstraties en deskundige toelichting.',
+            detailsUrl: 'https://bonsaivlaanderen.be'
         },
         {
             id: 'ext-june-westen',
@@ -89,6 +138,19 @@ document.addEventListener('DOMContentLoaded', () => {
             detailsUrl: 'https://bonsainederland.nl'
         },
         {
+            id: 'ext-aug-belsele',
+            title: 'Belsele Ambachtelijk Weekend 2026',
+            startDate: '2026-08-22',
+            endDate: '2026-08-23',
+            startTime: '10:00',
+            endTime: '18:00',
+            location: 'Belsele, België',
+            type: 'event',
+            tag: 'Evenement',
+            description: 'Exclusieve samenwerking tussen Bonsai Shop Everaert en Bonsai Vlaanderen tijdens het sfeervolle Ambachtelijk Weekend. Geniet van live demonstraties, workshops en een hoogwaardige ledententoonstelling.',
+            detailsUrl: 'https://bonsaivlaanderen.be'
+        },
+        {
             id: 'bvb-aug-club',
             title: 'Werken aan eigen bomen',
             startDate: '2026-08-31',
@@ -98,6 +160,18 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'club',
             tag: 'Werkavond',
             description: 'Onder deskundige begeleiding werken aan je eigen bonsai. De ideale gelegenheid voor advies over vormgeving of verzorging.'
+        },
+        {
+            id: 'ext-sept-koewacht-markt',
+            title: 'Grote Bonsaimarkt Koewacht 2026',
+            startDate: '2026-09-05',
+            startTime: '09:00',
+            endTime: '16:00',
+            location: 'Koewacht, Zeeland (grens NL/BE)',
+            type: 'event',
+            tag: 'Markt',
+            description: 'De grote jaarlijkse bonsaimarkt van Shimpaku Koewacht. De perfecte gelegenheid om startmateriaal, volgroeide bomen, gereedschappen, potten en substraten aan te schaffen.',
+            detailsUrl: 'https://www.bonsaiateljee.be'
         },
         {
             id: 'ext-sept-rijnmond',
@@ -198,6 +272,19 @@ document.addEventListener('DOMContentLoaded', () => {
             tag: 'Evenement',
             description: 'Gespecialiseerde najaarsexpositie met focus op loofbomen in adembenemende herfstkleuren, inclusief clinics en markt.',
             detailsUrl: 'https://bonsainederland.nl'
+        },
+        {
+            id: 'ext-nov-edauchikai',
+            title: 'Eda Uchi Kai Bonsai Exhibition 2026',
+            startDate: '2026-11-14',
+            endDate: '2026-11-15',
+            startTime: '10:00',
+            endTime: '18:00',
+            location: 'Diepenbeek, België',
+            type: 'event',
+            tag: 'Expositie',
+            description: 'De prestigieuze driejaarlijkse tentoonstelling van de bekende Belgische bonsaiclub Eda Uchi Kai. Bewonder uiterst verfijnde topstukken en geniet van een kwalitatieve presentatie in een sfeervolle ambiance.',
+            detailsUrl: 'https://www.edauchikai.be'
         },
         {
             id: 'ext-nov-bab',
