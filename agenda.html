@@ -81,285 +81,29 @@
                         Onze clubavonden vinden plaats in <strong>De Moerkoal in Berlicum</strong>. Iedereen is welkom om kennis te maken met onze vereniging.
                     </p>
                     
-                    <div class="agenda-container reveal-staggered reveal-on-scroll">
-                        
-                        <!-- Mei -->
-                        <div class="agenda-item">
-                        <div class="agenda-header-flex">
-                            <div class="date-box">
-                                <span class="day-num">18</span>
-                                <div class="month-year">
-                                    <span class="month">Mei 2026</span>
-                                    <span class="weekday">Maandag</span>
-                                </div>
-                            </div>
-                            <span class="event-tag">Werkavond</span>
+                    <!-- Control Panel (Filters & View Toggles) -->
+                    <div class="agenda-controls">
+                        <div class="filter-group">
+                            <button class="filter-btn" data-filter="all">Alles</button>
+                            <button class="filter-btn active" data-filter="club"><span class="dot-legend club"></span>Clubavonden</button>
+                            <button class="filter-btn" data-filter="event"><span class="dot-legend event"></span>Evenementen</button>
                         </div>
-                        <div class="event-details">
-                            <h3 class="agenda-title">Werken aan eigen bomen</h3>
-                            <p style="font-size: 0.95rem; line-height: 1.5; color: var(--color-bark); font-weight: 600; margin-bottom: 0.5rem;">Let op: Deze bijeenkomst is op 18 mei i.v.m. tweede Pinksterdag.</p>
-                            <p style="font-size: 0.95rem; line-height: 1.5;">Onder deskundige begeleiding werken aan je eigen bonsai. De ideale gelegenheid voor advies over vormgeving of verzorging.</p>
-                            
-                            <div class="event-meta">
-                                <div class="meta-item">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                                    <span>19:30 - 22:00 uur</span>
-                                </div>
-                            </div>
-
-                            <div class="mt-1">
-                                <add-to-calendar-button hideBackground
-                                    name="Clubavond: Werken aan eigen bomen"
-                                    startDate="2026-05-18"
-                                    startTime="19:30"
-                                    endTime="22:00"
-                                    location="De Moerkoal, Berlicum"
-                                    options="'Apple','Google','iCal','Microsoft365','Outlook.com'"
-                                    label="Zet in mijn agenda"
-                                    lightMode="light"
-                                    styleLight="--btn-background: var(--color-sage); --btn-text: #fff; --font: var(--font-main); --btn-padding: 8px 16px; --btn-font-size: 0.9rem;"
-                                ></add-to-calendar-button>
-                            </div>
+                        <div class="view-toggle">
+                            <button class="toggle-btn active" id="view-list" aria-label="Lijstweergave">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                                <span>Lijst</span>
+                            </button>
+                            <button class="toggle-btn" id="view-calendar" aria-label="Kalenderweergave">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                <span>Maand</span>
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Juni -->
-                    <div class="agenda-item">
-                        <div class="agenda-header-flex">
-                            <div class="date-box">
-                                <span class="day-num">29</span>
-                                <div class="month-year">
-                                    <span class="month">Juni 2026</span>
-                                    <span class="weekday">Maandag</span>
-                                </div>
-                            </div>
-                            <span class="event-tag">NBS Selectie</span>
-                        </div>
-                        <div class="event-details">
-                            <h3 style="font-size: 1.25rem; margin-bottom: 0.3rem;">Selectie NBS & Opstelling maken</h3>
-                            <p style="font-size: 0.95rem; line-height: 1.5;">Selectie van bomen voor de NBS-tentoonstelling en het gezamenlijk bepalen van de presentatie-opstelling.</p>
-                            
-                            <div class="event-meta">
-                                <div class="meta-item">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                                    <span>19:30 - 22:00 uur</span>
-                                </div>
-                            </div>
-
-                            <div style="margin-top: 1.5rem;">
-                                <add-to-calendar-button hideBackground
-                                    name="NBS Selectie & Opstelling"
-                                    startDate="2026-06-29"
-                                    startTime="19:30"
-                                    endTime="22:00"
-                                    location="De Moerkoal, Berlicum"
-                                    options="'Apple','Google','iCal','Microsoft365','Outlook.com'"
-                                    label="Zet in mijn agenda"
-                                    lightMode="light"
-                                    styleLight="--btn-background: var(--color-sage); --btn-text: #fff; --font: var(--font-main); --btn-padding: 8px 16px; --btn-font-size: 0.9rem;"
-                                ></add-to-calendar-button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Augustus -->
-                    <div class="agenda-item">
-                        <div class="agenda-header-flex">
-                            <div class="date-box">
-                                <span class="day-num">31</span>
-                                <div class="month-year">
-                                    <span class="month">Aug 2026</span>
-                                    <span class="weekday">Maandag</span>
-                                </div>
-                            </div>
-                            <span class="event-tag">Werkavond</span>
-                        </div>
-                        <div class="event-details">
-                            <h3 style="font-size: 1.25rem; margin-bottom: 0.3rem;">Werken aan eigen bomen</h3>
-                            <p style="font-size: 0.95rem; line-height: 1.5;">Onder deskundige begeleiding werken aan je eigen bonsai. De ideale gelegenheid voor advies over vormgeving of verzorging.</p>
-                            
-                            <div class="event-meta">
-                                <div class="meta-item">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                                    <span>19:30 - 22:00 uur</span>
-                                </div>
-                            </div>
-
-                            <div style="margin-top: 1.5rem;">
-                                <add-to-calendar-button hideBackground
-                                    name="Clubavond: Werken aan eigen bomen"
-                                    startDate="2026-08-31"
-                                    startTime="19:30"
-                                    endTime="22:00"
-                                    location="De Moerkoal, Berlicum"
-                                    options="'Apple','Google','iCal','Microsoft365','Outlook.com'"
-                                    label="Zet in mijn agenda"
-                                    lightMode="light"
-                                    styleLight="--btn-background: var(--color-sage); --btn-text: #fff; --font: var(--font-main); --btn-padding: 8px 16px; --btn-font-size: 0.9rem;"
-                                ></add-to-calendar-button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- September NBS Voorbereiding -->
-                    <div class="agenda-item">
-                        <div class="agenda-header-flex">
-                            <div class="date-box">
-                                <span class="day-num">21</span>
-                                <div class="month-year">
-                                    <span class="month">Sept 2026</span>
-                                    <span class="weekday">Maandag</span>
-                                </div>
-                            </div>
-                            <span class="event-tag">NBS Styling</span>
-                        </div>
-                        <div class="event-details">
-                            <h3 style="font-size: 1.25rem; margin-bottom: 0.3rem;">NBS Presentatie: De laatste hand</h3>
-                            <p style="font-size: 0.95rem; line-height: 1.5; color: var(--color-bark); font-weight: 600; margin-bottom: 0.5rem;">Extra bijeenkomst i.v.m. de Nationale Bonsai Show.</p>
-                            <p style="font-size: 0.95rem; line-height: 1.5;">Laatste voorbereidingen voor de NBS-tentoonstelling: selecteren van tafels, scrolls, accentplanten en mossen.</p>
-                            
-                            <div class="event-meta">
-                                <div class="meta-item">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                                    <span>19:30 - 22:00 uur</span>
-                                </div>
-                            </div>
-
-                            <div style="margin-top: 1.5rem;">
-                                <add-to-calendar-button hideBackground
-                                    name="NBS Presentatie Voorbereiding"
-                                    startDate="2026-09-21"
-                                    startTime="19:30"
-                                    endTime="22:00"
-                                    location="De Moerkoal, Berlicum"
-                                    options="'Apple','Google','iCal','Microsoft365','Outlook.com'"
-                                    label="Zet in mijn agenda"
-                                    lightMode="light"
-                                    styleLight="--btn-background: var(--color-sage); --btn-text: #fff; --font: var(--font-main); --btn-padding: 8px 16px; --btn-font-size: 0.9rem;"
-                                ></add-to-calendar-button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- September NBS Main Event -->
-                    <div class="agenda-item" style="border: 2px solid var(--color-bark);">
-                        <div class="agenda-header-flex">
-                            <div class="date-box">
-                                <span class="day-num">26 & 27</span>
-                                <div class="month-year">
-                                    <span class="month">Sept 2026</span>
-                                    <span class="weekday">Weekend (NBS)</span>
-                                </div>
-                            </div>
-                            <span class="event-tag" style="background: var(--color-bark); color: white;">Hoogtepunt</span>
-                        </div>
-                        <div class="event-details">
-                            <h3 style="font-size: 1.25rem; margin-bottom: 0.3rem;">Nationale Bonsai Show (NBS) 2026</h3>
-                            <p style="font-size: 0.95rem; line-height: 1.5;">Hét landelijke evenement met grote tentoonstelling, markt en expert demo's. BVB is dit jaar de trotse gastheer.</p>
-                            
-                            <div class="event-meta">
-                                <div class="meta-item">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                                    <span>Zaterdag & Zondag: 09:00 - 17:00 uur</span>
-                                </div>
-                            </div>
-
-                            <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
-                                <add-to-calendar-button hideBackground
-                                    name="Nationale Bonsai Show (NBS) 2026"
-                                    startDate="2026-09-26"
-                                    endDate="2026-09-27"
-                                    startTime="09:00"
-                                    endTime="17:00"
-                                    location="De Moerkoal, Berlicum"
-                                    options="'Apple','Google','iCal','Microsoft365','Outlook.com'"
-                                    label="Zet in mijn agenda"
-                                    lightMode="light"
-                                    styleLight="--btn-background: var(--color-bark); --btn-text: #fff; --font: var(--font-main); --btn-padding: 8px 16px; --btn-font-size: 0.9rem;"
-                                ></add-to-calendar-button>
-                                <a href="nbs.html" class="nav-special" style="text-decoration: none; padding: 8px 16px; font-size: 0.9rem;">Meer informatie</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Oktober -->
-                    <div class="agenda-item">
-                        <div class="agenda-header-flex">
-                            <div class="date-box">
-                                <span class="day-num">26</span>
-                                <div class="month-year">
-                                    <span class="month">Okt 2026</span>
-                                    <span class="weekday">Maandag</span>
-                                </div>
-                            </div>
-                            <span class="event-tag">Lezing</span>
-                        </div>
-                        <div class="event-details">
-                            <h3 style="font-size: 1.25rem; margin-bottom: 0.3rem;">Herfst & Bonsai (Lezing)</h3>
-                            <p style="font-size: 0.95rem; line-height: 1.5;">Expert Bart Verstappen vertelt alles over herfstverzorging en voorbereiding op de winterrust.</p>
-                            
-                            <div class="event-meta">
-                                <div class="meta-item">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                                    <span>19:30 - 22:00 uur</span>
-                                </div>
-                            </div>
-
-                            <div style="margin-top: 1.5rem;">
-                                <add-to-calendar-button hideBackground
-                                    name="Lezing: Herfst & Bonsai (Bart Verstappen)"
-                                    startDate="2026-10-26"
-                                    startTime="19:30"
-                                    endTime="22:00"
-                                    location="De Moerkoal, Berlicum"
-                                    options="'Apple','Google','iCal','Microsoft365','Outlook.com'"
-                                    label="Zet in mijn agenda"
-                                    lightMode="light"
-                                    styleLight="--btn-background: var(--color-sage); --btn-text: #fff; --font: var(--font-main); --btn-padding: 8px 16px; --btn-font-size: 0.9rem;"
-                                ></add-to-calendar-button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- November -->
-                    <div class="agenda-item">
-                        <div class="agenda-header-flex">
-                            <div class="date-box">
-                                <span class="day-num">30</span>
-                                <div class="month-year">
-                                    <span class="month">Nov 2026</span>
-                                    <span class="weekday">Maandag</span>
-                                </div>
-                            </div>
-                            <span class="event-tag">Ruilbeurs</span>
-                        </div>
-                        <div class="event-details">
-                            <h3 style="font-size: 1.25rem; margin-bottom: 0.3rem;">Ruilbeurs & Afsluiting</h3>
-                            <p style="font-size: 0.95rem; line-height: 1.5;">Onze jaarlijkse ruilbeurs: neem bomen of spullen mee om te ruilen. Tevens laatste werkavond van het jaar.</p>
-                            
-                            <div class="event-meta">
-                                <div class="meta-item">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                                    <span>19:30 - 22:00 uur</span>
-                                </div>
-                            </div>
-
-                            <div style="margin-top: 1.5rem;">
-                                <add-to-calendar-button hideBackground
-                                    name="BVB Ruilbeurs & Jaarafsluiting"
-                                    startDate="2026-11-30"
-                                    startTime="19:30"
-                                    endTime="22:00"
-                                    location="De Moerkoal, Berlicum"
-                                    options="'Apple','Google','iCal','Microsoft365','Outlook.com'"
-                                    label="Zet in mijn agenda"
-                                    lightMode="light"
-                                    styleLight="--btn-background: var(--color-sage); --btn-text: #fff; --font: var(--font-main); --btn-padding: 8px 16px; --btn-font-size: 0.9rem;"
-                                ></add-to-calendar-button>
-                            </div>
-                        </div>
-                    </div> <!-- End of agenda-item -->
-                </div> <!-- End of agenda-container -->
+                    <!-- Dynamic Content Container -->
+                    <div id="agenda-dynamic-content" class="agenda-dynamic-content list-view">
+                        <!-- Content will be injected dynamically here -->
+                    </div>>
 
                 </div> <!-- End of agenda-main-column -->
 
@@ -473,6 +217,7 @@
     </div>
 
     <script src="js/app.js"></script>
+    <script src="js/agenda.js" defer></script>
 </body>
 </html>
 
