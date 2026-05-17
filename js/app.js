@@ -391,9 +391,9 @@ function toggleTree(card) {
         document.body.style.overflow = 'hidden';
 
         // Apply constant relative styling based on tree side (Shelf on left vs Floor on right)
-        // For bg_right_*, treeSide is 'left' (placed on shelf chigai-dana at exactly 50.00% from bottom).
-        // For bg_left_*, treeSide is 'right' (placed on the wooden floorboard at exactly 25.78% from bottom).
-        const baseBottomPercent = (treeSide === 'left') ? 50.00 : 25.78;
+        // For bg_right_*, treeSide is 'left' (placed on the raised shelf chigai-dana at exactly 49.90% from bottom).
+        // For bg_left_*, treeSide is 'right' (placed on the floorboard at exactly 12.00% from bottom to give beautiful 3D depth and grounding).
+        const baseBottomPercent = (treeSide === 'left') ? 49.90 : 12.00;
         const treeHeightPercent = (treeSide === 'left') ? 45 : 55; // Trees on the shelf look more elegant slightly smaller (45%)
         const paddingCompensationPercent = treeHeightPercent * paddingRatio;
         const finalBottomPercent = baseBottomPercent - paddingCompensationPercent;
