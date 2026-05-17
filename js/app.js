@@ -377,23 +377,21 @@ function toggleTree(card) {
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
 
-        // Apply constant relative styling based on tree side (Shelf on left vs Floor on right)
-        // Since we have cropped all tree images to remove bottom transparent padding, 
-        // the bottom of the image file aligns 100% perfectly with the bottom of the pot/stand.
-        // - For bg_right_*, treeSide is 'left' (placed on shelf chigai-dana at exactly 50.00% from bottom).
-        // - For bg_left_*, treeSide is 'right' (placed on the wooden floorboard at exactly 25.78% from bottom).
-        const baseBottomPercent = (treeSide === 'left') ? 50.00 : 25.78;
-        const treeHeightPercent = (treeSide === 'left') ? 45 : 55; // Trees on the shelf look more elegant slightly smaller (45%)
-
-        let finalLeft = (treeSide === 'left') ? '30%' : '70%';
+        // Apply highly optimized relative styling based on tree side (Shelf on left vs Floor on right)
+        // Omdat alle bomen strak zijn bijgesneden tot de potrand, bereiken we hiermee een adembenemende 3D-diepte:
+        // - 'left' (links op de houten tsuke-shoin vensterbank): we schuiven de boom naar 35% om overlap met de middenpilaar te minimaliseren.
+        // - 'right' (rechts op de verhoogde vloer): we schuiven de boom naar 60% om overlap met de rechter voorpilaar te vermijden en de pot perfect te centreren.
+        const baseBottomPercent = (treeSide === 'left') ? 49.00 : 21.00;
+        const treeHeightPercent = (treeSide === 'left') ? 45 : 55; // Plank-bomen schalen we naar 45%, vloer-bomen naar 55%
+        const finalLeft = (treeSide === 'left') ? '35%' : '60%';
 
         tokonomaImg.style.position = 'absolute';
         tokonomaImg.style.left = finalLeft;
         tokonomaImg.style.transform = 'translateX(-50%)';
-        tokonomaImg.style.width = 'auto'; // Width scales proportionally with height
-        tokonomaImg.style.height = treeHeightPercent + '%'; // Explicit vertical scaling
+        tokonomaImg.style.width = 'auto'; // Breedte schaalt automatisch proportioneel mee
+        tokonomaImg.style.height = treeHeightPercent + '%'; // Vaste schaling op basis van hoogte
         tokonomaImg.style.objectFit = 'contain';
-        tokonomaImg.style.bottom = baseBottomPercent + '%';
+        tokonomaImg.style.bottom = baseBottomPercent + '%'; // Plak de onderkant direct op de vloer/plank!
         tokonomaImg.style.top = 'auto';
         tokonomaImg.style.zIndex = '5';
         
