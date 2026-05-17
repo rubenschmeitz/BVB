@@ -335,30 +335,6 @@ function toggleTree(card) {
         lightbox.classList.add('tokonoma-mode');
         tokonomaImg.src = img.src;
 
-        // 1. Bottom Padding Compensation Map (Scientific alignment for all 17 trees)
-        const paddingMap = {
-            'tree_member_1.webp': 0.1914,
-            'tree_member_2.webp': 0.0332,
-            'tree_member_3.webp': 0.0381,
-            'tree_member_4.webp': 0.0000,
-            'tree_member_5.webp': 0.0254,
-            'tree_member_6.webp': 0.0244,
-            'tree_member_7.webp': 0.0518,
-            'tree_member_8.webp': 0.0361,
-            'tree_member_9.webp': 0.0371,
-            'tree_member_10.webp': 0.0986,
-            'tree_member_11.webp': 0.0332,
-            'tree_member_12.webp': 0.0215,
-            'tree_member_13.webp': 0.0488,
-            'tree_member_14.webp': 0.0518,
-            'tree_member_15.webp': 0.0352,
-            'tree_member_16.webp': 0.0342,
-            'tree_member_17.webp': 0.0605
-        };
-
-        const filename = img.src.split('/').pop();
-        const paddingRatio = paddingMap[filename] || 0.0;
-
         // 2. Background Selection
         const backgrounds = [
             { src: 'bg_left_mountain.png', scrollSide: 'left' },
@@ -391,22 +367,22 @@ function toggleTree(card) {
         document.body.style.overflow = 'hidden';
 
         // Apply constant relative styling based on tree side (Shelf on left vs Floor on right)
-        // For bg_right_*, treeSide is 'left' (placed on the raised shelf chigai-dana at exactly 49.90% from bottom).
-        // For bg_left_*, treeSide is 'right' (placed on the floorboard at exactly 12.00% from bottom to give beautiful 3D depth and grounding).
-        const baseBottomPercent = (treeSide === 'left') ? 49.90 : 12.00;
+        // Since we have cropped all tree images to remove bottom transparent padding, 
+        // the bottom of the image file aligns 100% perfectly with the bottom of the pot/stand.
+        // - For bg_right_*, treeSide is 'left' (placed on shelf chigai-dana at exactly 50.00% from bottom).
+        // - For bg_left_*, treeSide is 'right' (placed on the wooden floorboard at exactly 25.78% from bottom).
+        const baseBottomPercent = (treeSide === 'left') ? 50.00 : 25.78;
         const treeHeightPercent = (treeSide === 'left') ? 45 : 55; // Trees on the shelf look more elegant slightly smaller (45%)
-        const paddingCompensationPercent = treeHeightPercent * paddingRatio;
-        const finalBottomPercent = baseBottomPercent - paddingCompensationPercent;
 
         let finalLeft = (treeSide === 'left') ? '30%' : '70%';
 
         tokonomaImg.style.position = 'absolute';
         tokonomaImg.style.left = finalLeft;
         tokonomaImg.style.transform = 'translateX(-50%)';
-        tokonomaImg.style.width = treeHeightPercent + '%';
-        tokonomaImg.style.height = treeHeightPercent + '%';
+        tokonomaImg.style.width = 'auto'; // Width scales proportionally with height
+        tokonomaImg.style.height = treeHeightPercent + '%'; // Explicit vertical scaling
         tokonomaImg.style.objectFit = 'contain';
-        tokonomaImg.style.bottom = finalBottomPercent + '%';
+        tokonomaImg.style.bottom = baseBottomPercent + '%';
         tokonomaImg.style.top = 'auto';
         tokonomaImg.style.zIndex = '5';
         
