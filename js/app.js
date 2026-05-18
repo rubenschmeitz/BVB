@@ -346,12 +346,41 @@ function toggleTree(card) {
         lightbox.classList.add('tokonoma-mode');
         tokonomaImg.src = img.src;
 
-        // 2. Background Selection
+        // 1. Extract filename for metadata lookup
+        const filename = img.src.substring(img.src.lastIndexOf('/') + 1);
+
+        // 2. High-precision Horticultural Scale & Grounding offsets
+        // Elke boom heeft een op maat gemaakte schaalfactor (schaal) om zijn werkelijke verhoudingen (Shohin t/m Omono) te representeren.
+        // We berekenen de exacte schaal op basis van de geschatte werkelijke hoogte in centimeters: schaal = hoogte / 48.0.
+        // We passen ook een bottom-offset toe om eventuele schaduwranden of cascade-takken perfect te corrigeren op de houten vloer.
+        const treeMetadata = {
+            'carpinus_betulus.webp': { realHeightCm: 44, bottomOffset: 0, scale: 0.92 },
+            'wisteria_sinensis.webp': { realHeightCm: 55, bottomOffset: 0, scale: 1.15 },
+            'acer_palmatum_rood.webp': { realHeightCm: 50, bottomOffset: 0, scale: 1.04 },
+            'juniperus_chinensis_rots.webp': { realHeightCm: 38, bottomOffset: 0, scale: 0.79 },
+            'acer_palmatum_groen_klein.webp': { realHeightCm: 50, bottomOffset: 0, scale: 1.04 },
+            'larix_kaempferi.webp': { realHeightCm: 45, bottomOffset: 0, scale: 0.94 },
+            'juniperus_itoigawa_shohin.webp': { realHeightCm: 32, bottomOffset: 0, scale: 0.67 },
+            'larix_kaempferi_kaal.webp': { realHeightCm: 46, bottomOffset: 0, scale: 0.96 },
+            'pinus_sylvestris.webp': { realHeightCm: 64, bottomOffset: 0, scale: 1.33 },
+            'larix_decidua.webp': { realHeightCm: 48, bottomOffset: 0, scale: 1.00 },
+            'acer_palmatum_groen_groot.webp': { realHeightCm: 50, bottomOffset: 0, scale: 1.04 },
+            'acer_palmatum_winter.webp': { realHeightCm: 42, bottomOffset: 0, scale: 0.88 },
+            'wisteria_sinensis_paars.webp': { realHeightCm: 55, bottomOffset: 0, scale: 1.15 },
+            'juniperus_chinensis_pieter_rots.webp': { realHeightCm: 38, bottomOffset: 0, scale: 0.79 },
+            'juniperus_chinensis_pieter_chokkan.webp': { realHeightCm: 52, bottomOffset: 0, scale: 1.08 },
+            'acer_palmatum_bos.webp': { realHeightCm: 46, bottomOffset: 0, scale: 0.96 },
+            'ginkgo_biloba.webp': { realHeightCm: 44, bottomOffset: 0, scale: 0.92 }
+        };
+
+        const meta = treeMetadata[filename] || { realHeightCm: 50, bottomOffset: 0, scale: 1.0 };
+
+        // 3. Background Selection
         const backgrounds = [
             { src: 'bg_left_mountain.png', scrollSide: 'left' },
             { src: 'bg_right_calligraphy.png', scrollSide: 'right' },
             { src: 'bg_left_enso.png', scrollSide: 'left' },
-            { src: 'bg_right_bamboo.png', scrollSide: 'right' },
+            { src: 'bg_right_bamboo.png', scrollSide: 'right' }, // De boekrol is verschoven naar rechts
             { src: 'bg_left_autumn.png', scrollSide: 'left' },
             { src: 'bg_right_moon_bird.png', scrollSide: 'right' },
             { src: 'bg_left_crane.png', scrollSide: 'left' },
@@ -367,9 +396,10 @@ function toggleTree(card) {
 
         if (lightboxCaption) {
             lightboxCaption.innerHTML = `
-                <div style="padding: 0 20px;">
-                    <span style="display:block; font-weight:700; font-size:1.5rem; margin-bottom: 5px; color: white;">${species}</span>
-                    <span style="display:block; font-size:0.85rem; opacity:0.8; text-transform:uppercase; letter-spacing:2px; color: var(--color-sand);">${style}</span>
+                <div style="padding: 0 20px; text-align: center;">
+                    <span style="display:block; font-weight:700; font-size:1.5rem; margin-bottom: 2px; color: white;">${species}</span>
+                    <span style="display:block; font-size:0.85rem; opacity:0.8; text-transform:uppercase; letter-spacing:2px; color: var(--color-sand); margin-bottom: 8px;">${style}</span>
+                    <span style="display:inline-block; font-size:0.8rem; font-weight:600; padding: 3px 10px; border-radius: 20px; background: rgba(255,255,255,0.15); color: var(--color-sand); letter-spacing: 0.5px;">Formaat: ca. ${meta.realHeightCm} cm</span>
                 </div>
             `;
         }
@@ -377,21 +407,25 @@ function toggleTree(card) {
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
 
-        // Apply highly optimized relative styling based on tree side (Shelf on left vs Floor on right)
-        // Omdat alle bomen strak zijn bijgesneden tot de potrand, bereiken we hiermee een adembenemende 3D-diepte:
-        // - 'left' (links op de houten tsuke-shoin vensterbank): we schuiven de boom naar 35% om overlap met de middenpilaar te minimaliseren.
-        // - 'right' (rechts op de verhoogde vloer): we schuiven de boom naar 60% om overlap met de rechter voorpilaar te vermijden en de pot perfect te centreren.
-        const baseBottomPercent = (treeSide === 'left') ? 49.00 : 21.00;
-        const treeHeightPercent = (treeSide === 'left') ? 45 : 55; // Plank-bomen schalen we naar 45%, vloer-bomen naar 55%
-        const finalLeft = (treeSide === 'left') ? '35%' : '60%';
+        // Zowel links als rechts staan de bomen nu stabiel op de prachtige houten Tokonoma-vloerdelen.
+        // We corrigeren voor het perspectief- en hoogteverschil tussen de bg_left_... (11%) en bg_right_... (9.5%) achtergronden.
+        const baseBottomPercent = (treeSide === 'left') ? 9.50 : 11.00;
+        const baseHeightPercent = 43;
+
+        // Custom multiplier scale and offset van de boom-meta
+        const finalHeight = baseHeightPercent * meta.scale;
+        const finalBottom = baseBottomPercent + meta.bottomOffset;
+
+        // Asymmetrische balans (Fukinsei): links geplaatst op 38%, rechts geplaatst op 62%
+        const finalLeft = (treeSide === 'left') ? '38%' : '62%';
 
         tokonomaImg.style.position = 'absolute';
         tokonomaImg.style.left = finalLeft;
         tokonomaImg.style.transform = 'translateX(-50%)';
-        tokonomaImg.style.width = 'auto'; // Breedte schaalt automatisch proportioneel mee
-        tokonomaImg.style.height = treeHeightPercent + '%'; // Vaste schaling op basis van hoogte
+        tokonomaImg.style.width = 'auto';
+        tokonomaImg.style.height = finalHeight + '%';
         tokonomaImg.style.objectFit = 'contain';
-        tokonomaImg.style.bottom = baseBottomPercent + '%'; // Plak de onderkant direct op de vloer/plank!
+        tokonomaImg.style.bottom = finalBottom + '%';
         tokonomaImg.style.top = 'auto';
         tokonomaImg.style.zIndex = '5';
         
@@ -478,36 +512,110 @@ const initPremiumMap = () => {
 
     if (!container || !tooltip || !markers.length) return;
 
+    // Helper to check if it's a touch device
+    const checkTouch = () => {
+        return window.matchMedia('(hover: none)').matches || ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+    };
+
+    // Dynamic text update for touch devices
+    const mapHint = container.parentElement.querySelector('.map-hint') || document.querySelector('.map-hint');
+    if (checkTouch() && mapHint) {
+        mapHint.textContent = 'Tik op een stip voor details. Tik nogmaals om de website te bezoeken.';
+    }
+
+    const showTooltip = (marker) => {
+        const town = marker.getAttribute('data-town');
+        const name = marker.getAttribute('data-name');
+        if (!town || !name) return;
+
+        tooltip.querySelector('.tooltip-town').textContent = town;
+        tooltip.querySelector('.tooltip-name').textContent = name;
+
+        // Set visible class first so we can measure the tooltip width
+        tooltip.classList.add('visible');
+
+        const rect = marker.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+
+        // Find center of marker relative to container
+        const markerX = rect.left - containerRect.left + rect.width / 2;
+        const y = rect.top - containerRect.top;
+
+        // Clamp tooltip position inside container
+        const tooltipWidth = tooltip.offsetWidth;
+        const halfWidth = tooltipWidth / 2;
+        const buffer = 15; // padding from container edge
+        let tooltipX = markerX;
+
+        if (tooltipX - halfWidth < buffer) {
+            tooltipX = halfWidth + buffer;
+        } else if (tooltipX + halfWidth > containerRect.width - buffer) {
+            tooltipX = containerRect.width - halfWidth - buffer;
+        }
+
+        tooltip.style.left = `${tooltipX}px`;
+        tooltip.style.top = `${y}px`;
+
+        // Calculate and set arrow offset
+        const arrowOffset = markerX - tooltipX;
+        tooltip.style.setProperty('--arrow-offset', `${arrowOffset}px`);
+    };
+
+    const hideTooltip = () => {
+        tooltip.classList.remove('visible');
+        markers.forEach(m => m.classList.remove('active-touch'));
+    };
+
+    // Desktop/Hover Event Listeners
     markers.forEach(marker => {
-        const showTooltip = () => {
-            const town = marker.getAttribute('data-town');
-            const name = marker.getAttribute('data-name');
-            if (!town || !name) return;
+        marker.addEventListener('mouseenter', () => {
+            if (!checkTouch()) showTooltip(marker);
+        });
 
-            tooltip.querySelector('.tooltip-town').textContent = town;
-            tooltip.querySelector('.tooltip-name').textContent = name;
+        marker.addEventListener('mouseleave', () => {
+            if (!checkTouch()) hideTooltip();
+        });
 
-            const rect = marker.getBoundingClientRect();
-            const containerRect = container.getBoundingClientRect();
+        marker.addEventListener('focus', () => {
+            showTooltip(marker);
+        });
 
-            // Find center of marker relative to container
-            const x = rect.left - containerRect.left + rect.width / 2;
-            const y = rect.top - containerRect.top;
-
-            tooltip.style.left = `${x}px`;
-            tooltip.style.top = `${y}px`;
-            tooltip.classList.add('visible');
-        };
-
-        const hideTooltip = () => {
-            tooltip.classList.remove('visible');
-        };
-
-        marker.addEventListener('mouseenter', showTooltip);
-        marker.addEventListener('mouseleave', hideTooltip);
-        marker.addEventListener('focus', showTooltip);
-        marker.addEventListener('blur', hideTooltip);
+        marker.addEventListener('blur', () => {
+            hideTooltip();
+        });
     });
+
+    // Touch Interaction via click on the parent <a> tag
+    const links = container.querySelectorAll('svg a');
+    links.forEach(link => {
+        const marker = link.querySelector('.club-marker');
+        if (!marker) return;
+
+        link.addEventListener('click', (e) => {
+            if (checkTouch()) {
+                if (!marker.classList.contains('active-touch')) {
+                    // First tap: prevent navigation and show tooltip
+                    e.preventDefault();
+                    e.stopPropagation(); // Stop document click from hiding it immediately
+                    
+                    hideTooltip(); // Hide any other open tooltips first
+                    
+                    marker.classList.add('active-touch');
+                    showTooltip(marker);
+                } else {
+                    // Second tap: allow navigation (don't prevent default)
+                    hideTooltip();
+                }
+            }
+        });
+    });
+
+    // Dismiss tooltip when tapping outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.club-marker') && !e.target.closest('#map-tooltip')) {
+            hideTooltip();
+        }
+    }, { passive: true });
 };
 
 // Initialize if on the right page
