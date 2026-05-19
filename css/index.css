@@ -1182,7 +1182,7 @@ a:focus-visible {
 
 @media (max-width: 600px) {
     .site-footer {
-        padding: 0.8rem 0 4.8rem; /* Minimal top/bottom padding to fit the 70px mobile nav */
+        padding: 0.8rem 0 0.8rem; /* Minimal padding since body already has padding-bottom for mobile nav */
     }
     .footer-content {
         gap: 0.4rem;
@@ -4580,38 +4580,38 @@ body.atcb-modal-open {
 /* --- High-Density Mobile Spacing & Compact Typography Override --- */
 @media (max-width: 600px) {
     /* Compact Headings & Font Sizes */
-    h1, .h1 { font-size: 1.6rem !important; }
-    h2, .h2 { font-size: 1.4rem !important; }
-    h3, .h3 { font-size: 1.2rem !important; }
-    h4, .h4 { font-size: 1.05rem !important; }
+    h1, .h1 { font-size: 1.45rem !important; }
+    h2, .h2 { font-size: 1.3rem !important; }
+    h3, .h3 { font-size: 1.1rem !important; }
+    h4, .h4 { font-size: 0.95rem !important; }
     
-    .heading-xl { font-size: 1.7rem !important; }
-    .heading-lg { font-size: 1.45rem !important; margin-bottom: 0.8rem !important; }
-    .section-title { font-size: 1.55rem !important; letter-spacing: -0.3px !important; }
+    .heading-xl { font-size: 1.5rem !important; }
+    .heading-lg { font-size: 1.3rem !important; margin-bottom: 0.6rem !important; }
+    .section-title { font-size: 1.4rem !important; letter-spacing: -0.3px !important; }
     
     .text-content p, 
     .lead-alt, 
     p.large-text,
     p { 
-        font-size: 0.95rem !important; 
-        line-height: 1.55 !important;
-        margin-bottom: 0.8rem !important;
+        font-size: 0.92rem !important; 
+        line-height: 1.5 !important;
+        margin-bottom: 0.6rem !important;
     }
     
     /* Compact Hero Section */
     .page-hero {
-        height: 95px !important;
+        height: 75px !important;
     }
     .page-hero-content {
-        padding: 0.6rem 4% !important;
+        padding: 0.4rem 4% !important;
     }
     .page-hero-content h1 {
-        font-size: 1.6rem !important;
+        font-size: 1.4rem !important;
     }
     .page-hero-content p {
-        font-size: 0.8rem !important;
+        font-size: 0.75rem !important;
         letter-spacing: 2px !important;
-        margin-bottom: 0.2rem !important;
+        margin-bottom: 0.1rem !important;
     }
     
     /* High-Density Card & Component Spacing */
@@ -4619,19 +4619,19 @@ body.atcb-modal-open {
     .event-sidebar-card, 
     .hub-card,
     .premium-section {
-        padding: 1.15rem !important;
-        border-radius: 16px !important;
-        gap: 1rem !important;
+        padding: 0.95rem !important;
+        border-radius: 12px !important;
+        gap: 0.8rem !important;
     }
     
     .feature-card-body {
-        padding: 1.25rem 1rem 1rem !important;
+        padding: 1.1rem 0.8rem 0.8rem !important;
     }
     
     /* Compact Timeline Spacing */
     .nbs-timeline {
         padding-left: 26px !important;
-        margin: 0.6rem 0 !important;
+        margin: 0.5rem 0 !important;
     }
     .nbs-timeline::before {
         left: 9px !important;
@@ -4643,41 +4643,41 @@ body.atcb-modal-open {
         top: 6px !important;
     }
     .timeline-item {
-        margin-bottom: 0.8rem !important;
+        margin-bottom: 0.65rem !important;
     }
     .timeline-content {
-        padding: 0.4rem 0.8rem !important;
+        padding: 0.4rem 0.75rem !important;
     }
     .timeline-time {
-        font-size: 0.72rem !important;
-        padding: 0.15rem 0.4rem !important;
-        margin-bottom: 0.25rem !important;
+        font-size: 0.7rem !important;
+        padding: 0.1rem 0.35rem !important;
+        margin-bottom: 0.2rem !important;
     }
     .timeline-title {
-        font-size: 0.92rem !important;
+        font-size: 0.9rem !important;
     }
     .timeline-day-header {
-        margin-bottom: 0.6rem !important;
-        padding: 0.3rem 0 !important;
-        gap: 0.5rem !important;
+        margin-bottom: 0.5rem !important;
+        padding: 0.25rem 0 !important;
+        gap: 0.4rem !important;
     }
     .timeline-day-label {
-        font-size: 1.15rem !important;
+        font-size: 1.1rem !important;
     }
     
     /* Global Compact Margin/Padding Spacing Utilities */
-    .mb-4 { margin-bottom: 1.8rem !important; }
-    .mb-3 { margin-bottom: 1.3rem !important; }
-    .mb-2 { margin-bottom: 0.9rem !important; }
-    .mb-1-5 { margin-bottom: 0.7rem !important; }
-    .mb-1 { margin-bottom: 0.4rem !important; }
+    .mb-4 { margin-bottom: 1.4rem !important; }
+    .mb-3 { margin-bottom: 1rem !important; }
+    .mb-2 { margin-bottom: 0.75rem !important; }
+    .mb-1-5 { margin-bottom: 0.55rem !important; }
+    .mb-1 { margin-bottom: 0.35rem !important; }
     
-    .mt-4 { margin-top: 1.8rem !important; }
-    .mt-3 { margin-top: 1.3rem !important; }
-    .mt-2 { margin-top: 0.9rem !important; }
-    .mt-1 { margin-top: 0.4rem !important; }
+    .mt-4 { margin-top: 1.4rem !important; }
+    .mt-3 { margin-top: 1rem !important; }
+    .mt-2 { margin-top: 0.75rem !important; }
+    .mt-1 { margin-top: 0.35rem !important; }
     
     .content-area {
-        padding: 1rem 0 !important;
+        padding: 0.8rem 0 !important;
     }
 }
