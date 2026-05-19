@@ -4576,3 +4576,108 @@ body.atcb-modal-open {
     opacity: 1;
     transform: scale(1.05);
 }
+
+/* --- High-Density Mobile Spacing & Compact Typography Override --- */
+@media (max-width: 600px) {
+    /* Compact Headings & Font Sizes */
+    h1, .h1 { font-size: 1.6rem !important; }
+    h2, .h2 { font-size: 1.4rem !important; }
+    h3, .h3 { font-size: 1.2rem !important; }
+    h4, .h4 { font-size: 1.05rem !important; }
+    
+    .heading-xl { font-size: 1.7rem !important; }
+    .heading-lg { font-size: 1.45rem !important; margin-bottom: 0.8rem !important; }
+    .section-title { font-size: 1.55rem !important; letter-spacing: -0.3px !important; }
+    
+    .text-content p, 
+    .lead-alt, 
+    p.large-text,
+    p { 
+        font-size: 0.95rem !important; 
+        line-height: 1.55 !important;
+        margin-bottom: 0.8rem !important;
+    }
+    
+    /* Compact Hero Section */
+    .page-hero {
+        height: 95px !important;
+    }
+    .page-hero-content {
+        padding: 0.6rem 4% !important;
+    }
+    .page-hero-content h1 {
+        font-size: 1.6rem !important;
+    }
+    .page-hero-content p {
+        font-size: 0.8rem !important;
+        letter-spacing: 2px !important;
+        margin-bottom: 0.2rem !important;
+    }
+    
+    /* High-Density Card & Component Spacing */
+    .sidebar-card, 
+    .event-sidebar-card, 
+    .hub-card,
+    .premium-section {
+        padding: 1.15rem !important;
+        border-radius: 16px !important;
+        gap: 1rem !important;
+    }
+    
+    .feature-card-body {
+        padding: 1.25rem 1rem 1rem !important;
+    }
+    
+    /* Compact Timeline Spacing */
+    .nbs-timeline {
+        padding-left: 26px !important;
+        margin: 0.6rem 0 !important;
+    }
+    .nbs-timeline::before {
+        left: 9px !important;
+    }
+    .timeline-dot {
+        left: -22px !important;
+        width: 10px !important;
+        height: 10px !important;
+        top: 6px !important;
+    }
+    .timeline-item {
+        margin-bottom: 0.8rem !important;
+    }
+    .timeline-content {
+        padding: 0.4rem 0.8rem !important;
+    }
+    .timeline-time {
+        font-size: 0.72rem !important;
+        padding: 0.15rem 0.4rem !important;
+        margin-bottom: 0.25rem !important;
+    }
+    .timeline-title {
+        font-size: 0.92rem !important;
+    }
+    .timeline-day-header {
+        margin-bottom: 0.6rem !important;
+        padding: 0.3rem 0 !important;
+        gap: 0.5rem !important;
+    }
+    .timeline-day-label {
+        font-size: 1.15rem !important;
+    }
+    
+    /* Global Compact Margin/Padding Spacing Utilities */
+    .mb-4 { margin-bottom: 1.8rem !important; }
+    .mb-3 { margin-bottom: 1.3rem !important; }
+    .mb-2 { margin-bottom: 0.9rem !important; }
+    .mb-1-5 { margin-bottom: 0.7rem !important; }
+    .mb-1 { margin-bottom: 0.4rem !important; }
+    
+    .mt-4 { margin-top: 1.8rem !important; }
+    .mt-3 { margin-top: 1.3rem !important; }
+    .mt-2 { margin-top: 0.9rem !important; }
+    .mt-1 { margin-top: 0.4rem !important; }
+    
+    .content-area {
+        padding: 1rem 0 !important;
+    }
+}
