@@ -3271,13 +3271,7 @@ body.atcb-modal-open {
     fill: #ffffff;
     stroke: var(--color-sage);
     stroke-width: 0.25;
-    transition: all 0.3s ease;
-}
-
-.map-prov:hover {
-    fill: var(--color-sand);
-    stroke: var(--color-bark);
-    stroke-width: 0.4;
+    pointer-events: none;
 }
 
 .club-marker {
@@ -3323,7 +3317,7 @@ body.atcb-modal-open {
     opacity: 0;
     visibility: hidden;
     transform: translate(-50%, -100%) translateY(-10px);
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    transition: opacity 0.05s ease, transform 0.05s ease, visibility 0.05s ease;
     z-index: 100;
     text-align: center;
     min-width: 160px;
