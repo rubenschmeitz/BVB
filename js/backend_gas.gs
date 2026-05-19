@@ -16,7 +16,8 @@
 const CONFIG = {
   notificationEmail: 'info@bonsai-brabant.nl', // Recipient for notifications
   sheetName: 'Contact Submissions',           // Name of the sheet to store data
-  requiredFields: ['name', 'email', 'subject', 'message']
+  requiredFields: ['name', 'email', 'subject', 'message'],
+  turnstileSecretKey: 'YOUR_TURNSTILE_SECRET_KEY' // Put your Cloudflare Turnstile Secret Key here
 };
 
 /**
@@ -31,6 +32,14 @@ function doPost(e) {
     // If the 'website' field is filled, it's likely a bot.
     if (params.website && params.website.length > 0) {
       return createJsonResponse('success', 'Thank you for your submission (spam filtered).');
+    }
+
+    // 2b. Turnstile Verification (Anti-spam)
+    const turnstileResponse = params['cf-turnstile-response'];
+    if (CONFIG.turnstileSecretKey && CONFIG.turnstileSecretKey !== 'YOUR_TURNSTILE_SECRET_KEY') {
+      if (!turnstileResponse || !verifyTurnstile(turnstileResponse, CONFIG.turnstileSecretKey)) {
+        return createJsonResponse('error', 'Beveiligingscontrole mislukt. Probeer het opnieuw.');
+      }
     }
 
     // 3. Server-side Validation
@@ -148,4 +157,26 @@ function createJsonResponse(status, message, errors = []) {
   return ContentService
     .createTextOutput(JSON.stringify(response))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+/**
+ * Verify Cloudflare Turnstile token with Cloudflare's API
+ */
+function verifyTurnstile(token, secretKey) {
+  try {
+    const response = UrlFetchApp.fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'post',
+      payload: {
+        secret: secretKey,
+        response: token
+      }
+    });
+    
+    const result = JSON.parse(response.getContentText());
+    return result.success === true;
+  } catch (err) {
+    // Fail-open: if Cloudflare is down or fetch fails, do not block genuine contact attempts
+    console.error('Turnstile verification error: ' + err.toString());
+    return true; 
+  }
 }

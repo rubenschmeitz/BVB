@@ -11,9 +11,11 @@
     <link rel="preload" href="https://fonts.gstatic.com/s/outfit/v11/QkhMSyveCf7ncZX7WjXCF3vW7L6Gr_p-V_qG.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" as="image" href="images/logo_main.webp" fetchpriority="high">
     
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com; frame-src https://*.instagram.com; frame-ancestors 'none';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://challenges.cloudflare.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com; frame-src https://*.instagram.com https://challenges.cloudflare.com; frame-ancestors 'none';">
 
-    
+    <!-- Cloudflare Turnstile (Anti-Spam) -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
     <!-- Meta Tags & SEO -->
     <meta name="description" content="Neem contact op met Bonsai Vereniging Brabant. Vragen over lidmaatschap, workshops of de vereniging? Wij staan voor je klaar.">
     <meta name="theme-color" content="#5D7B51">
@@ -112,6 +114,11 @@
                         <div class="hp-field">
                             <label for="website">Website (laat dit veld leeg)</label>
                             <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <!-- Cloudflare Turnstile (Anti-Spam) -->
+                        <div class="form-group" style="margin: 1.5rem 0; display: flex; justify-content: center;">
+                            <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY" data-theme="light"></div>
                         </div>
 
                         <div class="form-submit">

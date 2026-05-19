@@ -212,24 +212,7 @@
                                 <p class="exhibition-style">Moyogi (Winter-silhouet)</p>
                             </div>
                         </div>
-                        <div class="exhibition-card reveal-on-scroll" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box skeleton">
-                                <img src="images/trees/wisteria_sinensis_paars.webp" alt="Wisteria Sinensis (Blauwe Regen)" loading="lazy">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Wisteria Sinensis</h3>
-                                <p class="exhibition-style">Moyogi (Paarse Bloei)</p>
-                            </div>
-                        </div>
-                        <div class="exhibition-card reveal-on-scroll" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box skeleton">
-                                <img src="images/trees/juniperus_chinensis_pieter_rots.webp" alt="Juniperus Chinensis (Jeneverbes)" loading="lazy">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Juniperus Chinensis</h3>
-                                <p class="exhibition-style">Ishisuki (Op Rots Geplant)</p>
-                            </div>
-                        </div>
+
                         <div class="exhibition-card reveal-on-scroll" onclick="toggleTree(this)">
                             <div class="exhibition-image-box skeleton">
                                 <img src="images/trees/juniperus_chinensis_pieter_chokkan.webp" alt="Juniperus Chinensis (Jeneverbes)" loading="lazy">
@@ -268,6 +251,8 @@
 
     <div id="lightbox" class="lightbox">
         <span class="lightbox-close">&times;</span>
+        <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Vorige">&lsaquo;</button>
+        <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Volgende">&rsaquo;</button>
         <div class="tokonoma-frame" id="tokonoma-frame">
             <img id="tokonoma-img" src="" alt="Tokonoma Tree">
         </div>

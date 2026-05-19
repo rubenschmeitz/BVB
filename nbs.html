@@ -102,54 +102,6 @@
         </div>
     </header>
     
-    <!-- Mobile Calendar Sync (Top Priority on Mobile) -->
-    <div class="mobile-sync-card mobile-top-sync">
-        <div class="sync-header">
-            <div class="sync-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            </div>
-            <div>
-                <h4>Sync Agenda</h4>
-                <p>Mis niets van de NBS 2026</p>
-            </div>
-        </div>
-        <div class="sync-actions">
-            <div class="sync-btn-wrapper">
-                <span class="sync-label">Zaterdag</span>
-                <add-to-calendar-button 
-                    hideBackground 
-                    hideBranding
-                    name="NBS 2026 - Zaterdag"
-                    description="Nationale Bonsai Show 2026. Programma: Opening, NTC en Demo Alain de Vroo."
-                    startDate="2026-09-26"
-                    startTime="09:00"
-                    endTime="18:00"
-                    location="Driezeeg 20, 5258 LE Berlicum"
-                    options="'Apple','Google','Outlook.com'"
-                    label="Zet in agenda"
-                    lightMode="light"
-                    styleLight="--btn-background: var(--color-bark); --btn-text: #fff; --font: var(--font-main); --btn-padding-x: 12px; --btn-padding-y: 8px; --btn-font-size: 12px;"
-                ></add-to-calendar-button>
-            </div>
-            <div class="sync-btn-wrapper">
-                <span class="sync-label">Zondag</span>
-                <add-to-calendar-button 
-                    hideBackground 
-                    hideBranding
-                    name="NBS 2026 - Zondag"
-                    description="Nationale Bonsai Show 2026. Programma: Demo Yannick Kiggen en Grote Loterij."
-                    startDate="2026-09-27"
-                    startTime="10:00"
-                    endTime="17:00"
-                    location="Driezeeg 20, 5258 LE Berlicum"
-                    options="'Apple','Google','Outlook.com'"
-                    label="Zet in agenda"
-                    lightMode="light"
-                    styleLight="--btn-background: var(--color-bark); --btn-text: #fff; --font: var(--font-main); --btn-padding-x: 12px; --btn-padding-y: 8px; --btn-font-size: 12px;"
-                ></add-to-calendar-button>
-            </div>
-        </div>
-    </div>
 
 
     <div class="page-hero">
@@ -166,7 +118,7 @@
                 
                 <!-- Main Content -->
                 <div class="nbs-main-column reveal-on-scroll">
-                    <section>
+                    <section class="mb-3">
                         <h2 class="mb-1-5">Hét Bonsai Evenement van het Jaar</h2>
                         <p class="large-text">
                             Met trots presenteren wij de NBS 2026 in dorpshuis De Moerkoal. Bewonder een indrukwekkende expositie van ruim 80 meter aan top-bonsai en Suiseki, en bezoek de uitgebreide markt met gespecialiseerde handelaren.
@@ -175,10 +127,7 @@
 
                     <!-- Tijdschema & Highlights -->
                     <section class="mb-4">
-                        <h3 class="timeline-header" style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--color-bark); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem;">
-                            <span class="decorative-line"></span>
-                            Tijdschema
-                        </h3>
+                        <h3 class="timeline-header" style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--color-bark); margin-top: 3.5rem; margin-bottom: 2rem;">Tijdschema</h3>
                             <div class="timeline-day-header">
                                 <div class="timeline-day-label">Zaterdag 26 September</div>
                                 <div class="day-calendar-btn">
@@ -355,13 +304,12 @@
                                 referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
-                        <a href="https://maps.app.goo.gl/CxBm92C7UXm5WZvj8" target="_blank" rel="noopener noreferrer" class="nav-special route-btn">Route plannen</a>
 
                     </div><!-- /.event-sidebar-card -->
 
                     <!-- Sidebar divider -->
                     <div class="sidebar-divider">
-                        <span>Partners &amp; Materiaal</span>
+                        <span>Sponsors &amp; Partners</span>
                     </div>
 
                         <!-- Sidebar Sponsors -->
@@ -373,10 +321,20 @@
                                         <img src="images/sponsors/logo-holland-bonsai.png" alt="Holland Bonsai" loading="lazy">
                                     </a>
                                 </div>
+                                <div class="sidebar-sponsor-item">
+                                    <a href="https://www.bonsaiplaza.com/" target="_blank">
+                                        <img src="images/sponsors/Bonsai_plaza_whitebg.webp" alt="Bonsai Plaza" loading="lazy">
+                                    </a>
+                                </div>
                             </div>
                             <div class="text-center mt-2">
                                 <a href="contact.html" class="contact-link" style="font-size: 0.85rem;">Sponsor worden?</a>
                             </div>
+                        </div>
+
+                        <!-- Sidebar divider -->
+                        <div class="sidebar-divider reveal-on-scroll">
+                            <span>NBS Poster &amp; Flyer</span>
                         </div>
 
                         <!-- Flyer Card -->

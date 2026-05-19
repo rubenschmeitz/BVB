@@ -186,6 +186,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            // Turnstile Validation Check (only if a real Site Key is configured)
+            const turnstileContainer = contactForm.querySelector('.cf-turnstile');
+            const siteKey = turnstileContainer ? turnstileContainer.getAttribute('data-sitekey') : '';
+            const isRealSiteKey = siteKey && siteKey !== 'YOUR_TURNSTILE_SITE_KEY';
+            
+            if (isRealSiteKey) {
+                const turnstileResponse = contactForm.querySelector('[name="cf-turnstile-response"]')?.value;
+                if (!turnstileResponse) {
+                    showFeedback(false, "Mislukt: Voltooi a.u.b. de beveiligingscontrole.");
+                    return;
+                }
+            }
+
             submitBtn.disabled = true;
             const originalBtnText = submitBtn.innerText;
             submitBtn.innerText = 'Verzenden...';
@@ -329,10 +342,16 @@ function showCategory(categoryId) {
     if (clickedBtn) clickedBtn.classList.add('active');
 }
 
+// Active elements tracking for slide navigation in lightbox
+let currentActiveCard = null;
+let currentActiveActivityItem = null;
+
 /**
  * Toggle tree details on click (Exhibition Gallery)
  */
 function toggleTree(card) {
+    currentActiveCard = card;
+    currentActiveActivityItem = null; // Reset normal gallery tracker
     const img = card.querySelector('img');
     const species = card.querySelector('.exhibition-species').textContent;
     const style = card.querySelector('.exhibition-style').textContent;
@@ -366,8 +385,6 @@ function toggleTree(card) {
             'larix_decidua.webp': { realHeightCm: 48, bottomOffset: 0, scale: 1.00 },
             'acer_palmatum_groen_groot.webp': { realHeightCm: 50, bottomOffset: 0, scale: 1.04 },
             'acer_palmatum_winter.webp': { realHeightCm: 42, bottomOffset: 0, scale: 0.88 },
-            'wisteria_sinensis_paars.webp': { realHeightCm: 55, bottomOffset: 0, scale: 1.15 },
-            'juniperus_chinensis_pieter_rots.webp': { realHeightCm: 38, bottomOffset: 0, scale: 0.79 },
             'juniperus_chinensis_pieter_chokkan.webp': { realHeightCm: 52, bottomOffset: 0, scale: 1.08 },
             'acer_palmatum_bos.webp': { realHeightCm: 46, bottomOffset: 0, scale: 0.96 },
             'ginkgo_biloba.webp': { realHeightCm: 44, bottomOffset: 0, scale: 0.92 }
@@ -408,8 +425,8 @@ function toggleTree(card) {
         document.body.style.overflow = 'hidden';
 
         // Zowel links als rechts staan de bomen nu stabiel op de prachtige houten Tokonoma-vloerdelen.
-        // We corrigeren voor het perspectief- en hoogteverschil tussen de bg_left_... (11%) en bg_right_... (9.5%) achtergronden.
-        const baseBottomPercent = (treeSide === 'left') ? 9.50 : 11.00;
+        // We corrigeren voor het perspectief- en hoogteverschil op basis van de strakke uitsnijding van de potten (links 19%, rechts 18%).
+        const baseBottomPercent = (treeSide === 'left') ? 19.00 : 18.00;
         const baseHeightPercent = 43;
 
         // Custom multiplier scale and offset van de boom-meta
@@ -451,6 +468,8 @@ function initLightbox(lightboxId, imgId, captionId, closeClass, itemClass) {
 
     document.querySelectorAll('.' + itemClass).forEach(item => {
         item.addEventListener('click', () => {
+            currentActiveActivityItem = item;
+            currentActiveCard = null; // Reset Tokonoma gallery tracker
             const img = item.querySelector('img');
             const fullSrc = item.getAttribute('data-full') || img.src;
             lightboxImg.src = fullSrc;
@@ -493,15 +512,93 @@ function initLightbox(lightboxId, imgId, captionId, closeClass, itemClass) {
         }
     });
 
+    // Unified navigation function for lightbox (ArrowRight, ArrowLeft, visual buttons, swipes)
+    const navigateLightbox = (direction) => {
+        if (lightbox.classList.contains('tokonoma-mode')) {
+            // Tokonoma Digital Exhibition Mode
+            const cards = Array.from(document.querySelectorAll('.exhibition-card'));
+            if (!cards.length) return;
+            let index = cards.indexOf(currentActiveCard);
+            if (index === -1) index = 0;
+            if (direction === 'next') {
+                index = (index + 1) % cards.length;
+            } else {
+                index = (index - 1 + cards.length) % cards.length;
+            }
+            toggleTree(cards[index]);
+        } else {
+            // Standard Photo Gallery Mode (filtering out hidden items)
+            const items = Array.from(document.querySelectorAll('.' + itemClass)).filter(el => el.getBoundingClientRect().width > 0);
+            if (!items.length) return;
+            let index = items.indexOf(currentActiveActivityItem);
+            if (index === -1) index = 0;
+            if (direction === 'next') {
+                index = (index + 1) % items.length;
+            } else {
+                index = (index - 1 + items.length) % items.length;
+            }
+            currentActiveActivityItem = items[index];
+            const nextImg = currentActiveActivityItem.querySelector('img');
+            const nextFullSrc = currentActiveActivityItem.getAttribute('data-full') || nextImg.src;
+            
+            // Apply a sleek, smooth fade transition for standard image changes
+            lightboxImg.style.transition = 'none';
+            lightboxImg.style.opacity = '0';
+            lightboxImg.src = nextFullSrc;
+            if (lightboxCaption) lightboxCaption.textContent = nextImg.alt || "BVB Clubavond";
+            
+            setTimeout(() => {
+                lightboxImg.style.transition = 'opacity 0.4s ease';
+                lightboxImg.style.opacity = '1';
+            }, 50);
+        }
+    };
+
+    // Attach event listeners to visual navigation buttons
+    const btnPrev = document.getElementById('lightbox-prev');
+    const btnNext = document.getElementById('lightbox-next');
+    if (btnPrev) {
+        btnPrev.addEventListener('click', (e) => {
+            e.stopPropagation(); // prevent closing lightbox on backdrop click
+            navigateLightbox('prev');
+        });
+    }
+    if (btnNext) {
+        btnNext.addEventListener('click', (e) => {
+            e.stopPropagation(); // prevent closing lightbox on backdrop click
+            navigateLightbox('next');
+        });
+    }
+
     document.addEventListener('keydown', (e) => {
         if (lightbox.classList.contains('active')) {
             if (e.key === 'Escape') {
                 closeLightbox();
-            } else if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-                // Future enhancement: navigation between images
+            } else if (e.key === 'ArrowRight') {
+                navigateLightbox('next');
+            } else if (e.key === 'ArrowLeft') {
+                navigateLightbox('prev');
             }
         }
     });
+
+    // Swipe gestures support for touch devices
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    lightbox.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    lightbox.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const threshold = 50; // swipe threshold in pixels
+        if (touchEndX < touchStartX - threshold) {
+            navigateLightbox('next'); // Swiped left -> next
+        } else if (touchEndX > touchStartX + threshold) {
+            navigateLightbox('prev'); // Swiped right -> prev
+        }
+    }, { passive: true });
 }
 
 // 7. Interactive NL Map with Premium HTML Tooltips
@@ -512,18 +609,61 @@ const initPremiumMap = () => {
 
     if (!container || !tooltip || !markers.length) return;
 
+    // Dynamically inject larger, invisible pointer-events hitboxes to make the tiny markers extremely easy to hover and click on PC
+    markers.forEach(marker => {
+        const hitbox = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        hitbox.setAttribute('r', '8');
+        hitbox.setAttribute('fill', 'none');
+        hitbox.setAttribute('pointer-events', 'all');
+        hitbox.style.cursor = 'pointer';
+        marker.insertBefore(hitbox, marker.firstChild);
+    });
+
+    // Sleek touch detection that adapts to how the user actually interacts
+    let isTouchInteraction = false;
+    let lastTouchTime = 0;
+
+    window.addEventListener('touchstart', () => {
+        isTouchInteraction = true;
+        lastTouchTime = Date.now();
+    }, { passive: true });
+
+    window.addEventListener('mousemove', () => {
+        // Prevent mobile/hybrid touch events from triggering mousemove compatibility overrides
+        if (Date.now() - lastTouchTime < 1000) return;
+        isTouchInteraction = false;
+    }, { passive: true });
+
     // Helper to check if it's a touch device
     const checkTouch = () => {
-        return window.matchMedia('(hover: none)').matches || ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+        return isTouchInteraction || window.matchMedia('(hover: none)').matches;
     };
 
     // Dynamic text update for touch devices
     const mapHint = container.parentElement.querySelector('.map-hint') || document.querySelector('.map-hint');
-    if (checkTouch() && mapHint) {
-        mapHint.textContent = 'Tik op een stip voor details. Tik nogmaals om de website te bezoeken.';
-    }
+    const updateHint = () => {
+        if (mapHint) {
+            if (checkTouch()) {
+                mapHint.textContent = 'Tik op een stip voor details. Tik nogmaals om de website te bezoeken.';
+            } else {
+                mapHint.textContent = 'Beweeg over de stippen voor details. Klik om de website te bezoeken.';
+            }
+        }
+    };
+    updateHint();
+
+    // Listen to touch/mouse events to update hint text dynamically
+    window.addEventListener('touchstart', updateHint, { passive: true });
+    window.addEventListener('mousemove', updateHint, { passive: true });
+
+    let hideTimeout = null;
 
     const showTooltip = (marker) => {
+        if (hideTimeout) {
+            clearTimeout(hideTimeout);
+            hideTimeout = null;
+        }
+
         const town = marker.getAttribute('data-town');
         const name = marker.getAttribute('data-name');
         if (!town || !name) return;
@@ -534,7 +674,9 @@ const initPremiumMap = () => {
         // Set visible class first so we can measure the tooltip width
         tooltip.classList.add('visible');
 
-        const rect = marker.getBoundingClientRect();
+        // Align tooltip with the visual dot, NOT the larger parent hitbox group
+        const visualDot = marker.querySelector('.marker-dot') || marker;
+        const rect = visualDot.getBoundingClientRect();
         const containerRect = container.getBoundingClientRect();
 
         // Find center of marker relative to container
@@ -573,7 +715,12 @@ const initPremiumMap = () => {
         });
 
         marker.addEventListener('mouseleave', () => {
-            if (!checkTouch()) hideTooltip();
+            if (!checkTouch()) {
+                // Debounce hide to prevent flickering when moving between markers quickly
+                hideTimeout = setTimeout(() => {
+                    hideTooltip();
+                }, 100);
+            }
         });
 
         marker.addEventListener('focus', () => {
@@ -610,12 +757,15 @@ const initPremiumMap = () => {
         });
     });
 
-    // Dismiss tooltip when tapping outside
-    document.addEventListener('click', (e) => {
+    // Dismiss tooltip when tapping outside (supports both clicks and touch taps)
+    const handleOutsideDismiss = (e) => {
         if (!e.target.closest('.club-marker') && !e.target.closest('#map-tooltip')) {
             hideTooltip();
         }
-    }, { passive: true });
+    };
+
+    document.addEventListener('click', handleOutsideDismiss, { passive: true });
+    document.addEventListener('touchstart', handleOutsideDismiss, { passive: true });
 };
 
 // Initialize if on the right page
