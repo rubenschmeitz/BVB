@@ -725,11 +725,18 @@ const initPremiumMap = () => {
 
             // ── Click / tap ──
             const link = marker.closest('a');
+            const href = link ? (link.getAttribute('href') || link.getAttribute('xlink:href')) : null;
+            const target = link ? link.getAttribute('target') : null;
+
             overlay.addEventListener('click', (e) => {
                 e.stopPropagation();
-                if (activeMarker === marker && link) {
+                if (activeMarker === marker && href) {
                     // Second interaction: navigate
-                    link.click();
+                    if (target === '_blank') {
+                        window.open(href, '_blank', 'noopener,noreferrer');
+                    } else {
+                        window.location.href = href;
+                    }
                 } else {
                     // First interaction: show tooltip
                     hideTooltip();
