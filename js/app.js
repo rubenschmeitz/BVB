@@ -619,7 +619,7 @@ const initPremiumMap = () => {
     if (!tooltip) {
         tooltip = document.createElement('div');
         tooltip.id = 'map-tooltip';
-        tooltip.className = 'premium-tooltip';
+        tooltip.className = 'map-tooltip';
         tooltip.setAttribute('role', 'tooltip');
         tooltip.setAttribute('aria-hidden', 'true');
         container.appendChild(tooltip);
@@ -700,8 +700,10 @@ const initPremiumMap = () => {
                     e.preventDefault(); // Stop native navigation on 1st tap
                     hideTooltip();
                     showTooltip(marker);
+                } else {
+                    // 2nd tap: navigate natively, but hide the tooltip so it doesn't stay large if we return
+                    setTimeout(hideTooltip, 100);
                 }
-                // If activeMarker === marker, native navigation proceeds automatically
             });
         } else {
             // Desktop: hover logic
@@ -711,6 +713,10 @@ const initPremiumMap = () => {
             });
             marker.addEventListener('mouseleave', () => {
                 hideTimeout = setTimeout(hideTooltip, 80);
+            });
+            marker.addEventListener('click', () => {
+                // Instantly hide when clicked so it doesn't stay stuck large (e.g. new tab opens)
+                setTimeout(hideTooltip, 100);
             });
         }
     });
