@@ -601,171 +601,123 @@ function initLightbox(lightboxId, imgId, captionId, closeClass, itemClass) {
     }, { passive: true });
 }
 
-// 7. Interactive NL Map — HTML overlay approach, positions derived from SVG viewBox
+// 7. Interactive NL Map — Native SVG hitboxes with hover tooltip
 const initPremiumMap = () => {
     const container = document.querySelector('.nl-map-container-new');
-    const tooltip   = document.getElementById('map-tooltip');
-    const svg       = container ? container.querySelector('svg') : null;
-    const markers   = container ? Array.from(container.querySelectorAll('.club-marker')) : [];
+    let tooltip = document.getElementById('map-tooltip');
+    const svg = container ? container.querySelector('svg') : null;
+    const markers = container ? Array.from(container.querySelectorAll('.club-marker')) : [];
 
-    if (!container || !tooltip || !markers.length || !svg) return;
+    if (!container || !markers.length || !svg) return;
 
-    // Completely disable pointer events on the SVG — HTML overlays handle everything
-    svg.style.pointerEvents = 'none';
+    // Remove any leftover HTML overlays from previous implementations
+    container.querySelectorAll('.map-html-overlay').forEach(el => el.remove());
 
-    let hideTimeout  = null;
+    // Ensure container is relative for absolute tooltip positioning
+    container.style.position = 'relative';
+
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.id = 'map-tooltip';
+        tooltip.className = 'premium-tooltip';
+        tooltip.setAttribute('role', 'tooltip');
+        tooltip.setAttribute('aria-hidden', 'true');
+        container.appendChild(tooltip);
+    }
+
     let activeMarker = null;
+    let hideTimeout = null;
+    let tooltipWidth = 0;
+    let tooltipHeight = 0;
 
-    /* ── Tooltip positioning ──────────────────────────────────────────── */
-    const positionTooltip = (svgX, svgY) => {
-        // Convert SVG viewBox coords → container-relative px
-        const vb    = svg.viewBox.baseVal;                    // {x,y,width,height}
-        const sRect = svg.getBoundingClientRect();
-        const cRect = container.getBoundingClientRect();
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
 
-        const scaleX = sRect.width  / vb.width;
-        const scaleY = sRect.height / vb.height;
+    const showTooltip = (marker) => {
+        const circle = marker.querySelector('.marker-dot');
+        if (!circle) return;
 
-        const px = (sRect.left - cRect.left) + svgX * scaleX;
-        const py = (sRect.top  - cRect.top)  + svgY * scaleY;
-
-        tooltip.style.left = '';
-        tooltip.style.top  = '';
-
-        const tw   = tooltip.offsetWidth;
-        const half = tw / 2;
-        const buf  = 12;
-        const cW   = cRect.width;
-
-        let tx = px;
-        if (tx - half < buf)      tx = half + buf;
-        else if (tx + half > cW - buf) tx = cW - half - buf;
-
-        tooltip.style.left = `${tx}px`;
-        tooltip.style.top  = `${py}px`;
-        tooltip.style.setProperty('--arrow-offset', `${px - tx}px`);
-    };
-
-    const showTooltip = (marker, svgX, svgY) => {
-        if (hideTimeout) { clearTimeout(hideTimeout); hideTimeout = null; }
-
-        const town = marker.getAttribute('data-town');
-        const name = marker.getAttribute('data-name');
-        if (!town || !name) return;
-
-        tooltip.querySelector('.tooltip-town').textContent = town;
-        tooltip.querySelector('.tooltip-name').textContent = name;
-        tooltip.classList.add('visible');
         activeMarker = marker;
+        marker.classList.add('active-touch');
 
-        positionTooltip(svgX, svgY);
-    };
+        const town = marker.getAttribute('data-town') || '';
+        const name = marker.getAttribute('data-name') || '';
+        tooltip.innerHTML = `<strong>${town}</strong><span>${name}</span>`;
+        
+        tooltip.style.display = 'flex';
+        tooltip.classList.add('visible');
+        tooltip.setAttribute('aria-hidden', 'false');
 
-    const hideTooltip = () => {
-        tooltip.classList.remove('visible');
-        activeMarker = null;
-    };
+        // Wait for display:flex to calculate dimensions
+        requestAnimationFrame(() => {
+            const cRect = container.getBoundingClientRect();
+            const mRect = circle.getBoundingClientRect();
+            const tRect = tooltip.getBoundingClientRect();
 
-    /* ── Overlay builder ──────────────────────────────────────────────── */
-    // Reads each marker's translate(x,y) directly from its SVG attribute and
-    // scales to container-relative px using the live viewBox ratio.
-    // This is immune to timing issues — no relying on child getBoundingClientRect.
-    const buildOverlays = () => {
-        container.querySelectorAll('.map-html-overlay').forEach(el => el.remove());
-        if (tooltip.classList.contains('visible')) hideTooltip();
+            tooltipWidth = tRect.width;
+            tooltipHeight = tRect.height;
 
-        const vb    = svg.viewBox.baseVal;
-        const sRect = svg.getBoundingClientRect();
-        const cRect = container.getBoundingClientRect();
+            // Center of the dot in screen coordinates
+            const cx = mRect.left + mRect.width / 2;
+            const cy = mRect.top + mRect.height / 2;
 
-        if (sRect.width === 0) return; // SVG not yet rendered — will retry
+            // Convert to container-relative coordinates
+            const x = cx - cRect.left;
+            const y = cy - cRect.top;
 
-        const scaleX = sRect.width  / vb.width;
-        const scaleY = sRect.height / vb.height;
-        const offX   = sRect.left - cRect.left;
-        const offY   = sRect.top  - cRect.top;
+            // Position tooltip above the dot
+            let tooltipX = x - tooltipWidth / 2;
+            let tooltipY = y - tooltipHeight - 15;
 
-        markers.forEach(marker => {
-            // Parse transform="translate(X, Y)"
-            const t = marker.getAttribute('transform') || '';
-            const m = t.match(/translate\(\s*([0-9.]+)\s*,\s*([0-9.]+)\s*\)/);
-            if (!m) return;
+            // Keep tooltip inside container
+            if (tooltipX < 10) tooltipX = 10;
+            if (tooltipX + tooltipWidth > cRect.width - 10) {
+                tooltipX = cRect.width - tooltipWidth - 10;
+            }
+            if (tooltipY < 10) {
+                tooltipY = y + 25; // Flip below if too high
+            }
 
-            const svgX = parseFloat(m[1]);
-            const svgY = parseFloat(m[2]);
-
-            // Pixel center relative to container
-            const cx = offX + svgX * scaleX;
-            const cy = offY + svgY * scaleY;
-            const size = 36; // generous tap target (≥44px recommended on mobile)
-
-            const overlay = document.createElement('div');
-            overlay.className = 'map-html-overlay';
-            overlay.setAttribute('aria-hidden', 'true');
-            Object.assign(overlay.style, {
-                position:     'absolute',
-                left:         `${cx - size / 2}px`,
-                top:          `${cy - size / 2}px`,
-                width:        `${size}px`,
-                height:       `${size}px`,
-                borderRadius: '50%',
-                cursor:       'pointer',
-                zIndex:       '10',
-                // Uncomment to debug: background: 'rgba(255,0,0,0.3)',
-            });
-
-            // ── Desktop hover ──
-            overlay.addEventListener('mouseenter', () => {
-                if (hideTimeout) { clearTimeout(hideTimeout); hideTimeout = null; }
-                showTooltip(marker, svgX, svgY);
-            });
-            overlay.addEventListener('mouseleave', () => {
-                hideTimeout = setTimeout(hideTooltip, 80);
-            });
-
-            // ── Click / tap ──
-            const link = marker.closest('a');
-            const href = link ? (link.getAttribute('href') || link.getAttribute('xlink:href')) : null;
-            const target = link ? link.getAttribute('target') : null;
-
-            overlay.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (activeMarker === marker && href) {
-                    // Second interaction: navigate
-                    if (target === '_blank') {
-                        window.open(href, '_blank', 'noopener,noreferrer');
-                    } else {
-                        window.location.href = href;
-                    }
-                } else {
-                    // First interaction: show tooltip
-                    hideTooltip();
-                    showTooltip(marker, svgX, svgY);
-                }
-            });
-
-            container.appendChild(overlay);
+            tooltip.style.left = `${tooltipX}px`;
+            tooltip.style.top = `${tooltipY}px`;
         });
     };
 
-    /* ── Init & lifecycle ─────────────────────────────────────────────── */
-    // Use rAF to ensure the SVG has its final dimensions before measuring
-    requestAnimationFrame(() => {
-        buildOverlays();
-        // Second rAF handles edge cases where layout is still settling (e.g. iOS)
-        requestAnimationFrame(buildOverlays);
-    });
+    const hideTooltip = () => {
+        if (activeMarker) {
+            activeMarker.classList.remove('active-touch');
+        }
+        tooltip.classList.remove('visible');
+        tooltip.setAttribute('aria-hidden', 'true');
+        activeMarker = null;
+    };
 
-    // Rebuild on resize (orientation change, window resize)
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(buildOverlays, 150);
+    // Attach native SVG event listeners
+    markers.forEach(marker => {
+        // Mobile: 2-tap logic
+        if (isTouch) {
+            marker.addEventListener('click', (e) => {
+                if (activeMarker !== marker) {
+                    e.preventDefault(); // Stop native navigation on 1st tap
+                    hideTooltip();
+                    showTooltip(marker);
+                }
+                // If activeMarker === marker, native navigation proceeds automatically
+            });
+        } else {
+            // Desktop: hover logic
+            marker.addEventListener('mouseenter', () => {
+                if (hideTimeout) { clearTimeout(hideTimeout); hideTimeout = null; }
+                showTooltip(marker);
+            });
+            marker.addEventListener('mouseleave', () => {
+                hideTimeout = setTimeout(hideTooltip, 80);
+            });
+        }
     });
 
     // Dismiss tooltip on tap/click outside the map
     document.addEventListener('click', (e) => {
-        if (!e.target.closest('.map-html-overlay') && !e.target.closest('#map-tooltip')) {
+        if (!e.target.closest('.club-marker') && !e.target.closest('#map-tooltip')) {
             hideTooltip();
         }
     }, { passive: true });
