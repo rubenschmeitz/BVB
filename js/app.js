@@ -637,11 +637,11 @@ const initPremiumMap = () => {
         if (!circle) return;
 
         activeMarker = marker;
-        marker.classList.add('active-touch');
+        marker.classList.add('is-active-marker');
 
         const town = marker.getAttribute('data-town') || '';
         const name = marker.getAttribute('data-name') || '';
-        tooltip.innerHTML = `<strong>${town}</strong><span>${name}</span>`;
+        tooltip.innerHTML = `<div class="tooltip-town">${town}</div><div class="tooltip-name">${name}</div>`;
         
         tooltip.style.display = 'flex';
         tooltip.classList.add('visible');
@@ -673,20 +673,29 @@ const initPremiumMap = () => {
             if (tooltipX + tooltipWidth > cRect.width - 10) {
                 tooltipX = cRect.width - tooltipWidth - 10;
             }
+            let isFlipped = false;
             if (tooltipY < 10) {
                 tooltipY = y + 25; // Flip below if too high
+                isFlipped = true;
             }
 
             tooltip.style.left = `${tooltipX}px`;
             tooltip.style.top = `${tooltipY}px`;
+
+            if (isFlipped) {
+                tooltip.classList.add('flipped');
+            } else {
+                tooltip.classList.remove('flipped');
+            }
         });
     };
 
     const hideTooltip = () => {
         if (activeMarker) {
-            activeMarker.classList.remove('active-touch');
+            activeMarker.classList.remove('is-active-marker');
         }
         tooltip.classList.remove('visible');
+        tooltip.classList.remove('flipped');
         tooltip.setAttribute('aria-hidden', 'true');
         activeMarker = null;
     };

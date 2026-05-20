@@ -3285,8 +3285,7 @@ body.atcb-modal-open {
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.club-marker:hover .marker-dot,
-.club-marker.active-touch .marker-dot {
+.club-marker.is-active-marker .marker-dot {
     fill: var(--color-charcoal);
     r: 4.5;
     stroke-width: 0.8;
@@ -3299,8 +3298,7 @@ body.atcb-modal-open {
     stroke-width: 0.8;
 }
 
-.club-marker.active:hover .marker-dot,
-.club-marker.active.active-touch .marker-dot {
+.club-marker.active.is-active-marker .marker-dot {
     fill: var(--color-charcoal);
 }
 
@@ -3315,8 +3313,8 @@ body.atcb-modal-open {
     pointer-events: none;
     opacity: 0;
     visibility: hidden;
-    transform: translate(-50%, -100%) translateY(-10px);
-    transition: opacity 0.05s ease, transform 0.05s ease, visibility 0.05s ease;
+    transform: translateY(10px);
+    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
     z-index: 100;
     text-align: center;
     min-width: 160px;
@@ -3326,7 +3324,7 @@ body.atcb-modal-open {
 .map-tooltip.visible {
     opacity: 1;
     visibility: visible;
-    transform: translate(-50%, -100%) translateY(-15px);
+    transform: translateY(0);
 }
 
 .map-tooltip::after {
@@ -3340,6 +3338,15 @@ body.atcb-modal-open {
     background: var(--color-white-pure);
     border-right: 1px solid var(--color-sand);
     border-bottom: 1px solid var(--color-sand);
+}
+
+.map-tooltip.flipped::after {
+    top: -6px;
+    bottom: auto;
+    border-right: none;
+    border-bottom: none;
+    border-left: 1px solid var(--color-sand);
+    border-top: 1px solid var(--color-sand);
 }
 
 .tooltip-town {
