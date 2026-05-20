@@ -3258,7 +3258,6 @@ body.atcb-modal-open {
     padding: 1.5rem;
     border: 1px solid var(--color-sand);
     position: relative;
-    overflow: hidden;
 }
 
 .nl-svg-final {

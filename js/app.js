@@ -601,22 +601,52 @@ function initLightbox(lightboxId, imgId, captionId, closeClass, itemClass) {
     }, { passive: true });
 }
 
-// 7. Interactive NL Map — HTML overlay approach for 100% reliable hover events
+// 7. Interactive NL Map — HTML overlay approach, positions derived from SVG viewBox
 const initPremiumMap = () => {
     const container = document.querySelector('.nl-map-container-new');
-    const tooltip = document.getElementById('map-tooltip');
-    const svg = container ? container.querySelector('svg') : null;
-    const markers = container ? container.querySelectorAll('.club-marker') : [];
+    const tooltip   = document.getElementById('map-tooltip');
+    const svg       = container ? container.querySelector('svg') : null;
+    const markers   = container ? Array.from(container.querySelectorAll('.club-marker')) : [];
 
     if (!container || !tooltip || !markers.length || !svg) return;
 
-    // Disable all SVG pointer events — we handle everything in HTML overlays
+    // Completely disable pointer events on the SVG — HTML overlays handle everything
     svg.style.pointerEvents = 'none';
 
-    let hideTimeout = null;
+    let hideTimeout  = null;
     let activeMarker = null;
 
-    const showTooltip = (marker) => {
+    /* ── Tooltip positioning ──────────────────────────────────────────── */
+    const positionTooltip = (svgX, svgY) => {
+        // Convert SVG viewBox coords → container-relative px
+        const vb    = svg.viewBox.baseVal;                    // {x,y,width,height}
+        const sRect = svg.getBoundingClientRect();
+        const cRect = container.getBoundingClientRect();
+
+        const scaleX = sRect.width  / vb.width;
+        const scaleY = sRect.height / vb.height;
+
+        const px = (sRect.left - cRect.left) + svgX * scaleX;
+        const py = (sRect.top  - cRect.top)  + svgY * scaleY;
+
+        tooltip.style.left = '';
+        tooltip.style.top  = '';
+
+        const tw   = tooltip.offsetWidth;
+        const half = tw / 2;
+        const buf  = 12;
+        const cW   = cRect.width;
+
+        let tx = px;
+        if (tx - half < buf)      tx = half + buf;
+        else if (tx + half > cW - buf) tx = cW - half - buf;
+
+        tooltip.style.left = `${tx}px`;
+        tooltip.style.top  = `${py}px`;
+        tooltip.style.setProperty('--arrow-offset', `${px - tx}px`);
+    };
+
+    const showTooltip = (marker, svgX, svgY) => {
         if (hideTimeout) { clearTimeout(hideTimeout); hideTimeout = null; }
 
         const town = marker.getAttribute('data-town');
@@ -628,23 +658,7 @@ const initPremiumMap = () => {
         tooltip.classList.add('visible');
         activeMarker = marker;
 
-        const dot = marker.querySelector('.marker-dot') || marker;
-        const dotRect = dot.getBoundingClientRect();
-        const cRect = container.getBoundingClientRect();
-
-        const markerX = dotRect.left - cRect.left + dotRect.width / 2;
-        const markerY = dotRect.top - cRect.top;
-
-        const tooltipWidth = tooltip.offsetWidth;
-        const half = tooltipWidth / 2;
-        const buf = 15;
-        let tx = markerX;
-        if (tx - half < buf) tx = half + buf;
-        else if (tx + half > cRect.width - buf) tx = cRect.width - half - buf;
-
-        tooltip.style.left = `${tx}px`;
-        tooltip.style.top = `${markerY}px`;
-        tooltip.style.setProperty('--arrow-offset', `${markerX - tx}px`);
+        positionTooltip(svgX, svgY);
     };
 
     const hideTooltip = () => {
@@ -652,52 +666,74 @@ const initPremiumMap = () => {
         activeMarker = null;
     };
 
-    // Create an HTML overlay div for each marker — plain HTML events, zero SVG quirks
+    /* ── Overlay builder ──────────────────────────────────────────────── */
+    // Reads each marker's translate(x,y) directly from its SVG attribute and
+    // scales to container-relative px using the live viewBox ratio.
+    // This is immune to timing issues — no relying on child getBoundingClientRect.
     const buildOverlays = () => {
         container.querySelectorAll('.map-html-overlay').forEach(el => el.remove());
+        if (tooltip.classList.contains('visible')) hideTooltip();
+
+        const vb    = svg.viewBox.baseVal;
+        const sRect = svg.getBoundingClientRect();
+        const cRect = container.getBoundingClientRect();
+
+        if (sRect.width === 0) return; // SVG not yet rendered — will retry
+
+        const scaleX = sRect.width  / vb.width;
+        const scaleY = sRect.height / vb.height;
+        const offX   = sRect.left - cRect.left;
+        const offY   = sRect.top  - cRect.top;
 
         markers.forEach(marker => {
-            const dot = marker.querySelector('.marker-dot') || marker;
-            const dotRect = dot.getBoundingClientRect();
-            const cRect = container.getBoundingClientRect();
+            // Parse transform="translate(X, Y)"
+            const t = marker.getAttribute('transform') || '';
+            const m = t.match(/translate\(\s*([0-9.]+)\s*,\s*([0-9.]+)\s*\)/);
+            if (!m) return;
 
-            const cx = dotRect.left - cRect.left + dotRect.width / 2;
-            const cy = dotRect.top - cRect.top + dotRect.height / 2;
-            const size = 28; // px — generous hit area
+            const svgX = parseFloat(m[1]);
+            const svgY = parseFloat(m[2]);
+
+            // Pixel center relative to container
+            const cx = offX + svgX * scaleX;
+            const cy = offY + svgY * scaleY;
+            const size = 36; // generous tap target (≥44px recommended on mobile)
 
             const overlay = document.createElement('div');
             overlay.className = 'map-html-overlay';
-            overlay.style.cssText = `
-                position: absolute;
-                left: ${cx - size / 2}px;
-                top: ${cy - size / 2}px;
-                width: ${size}px;
-                height: ${size}px;
-                border-radius: 50%;
-                cursor: pointer;
-                z-index: 10;
-            `;
+            overlay.setAttribute('aria-hidden', 'true');
+            Object.assign(overlay.style, {
+                position:     'absolute',
+                left:         `${cx - size / 2}px`,
+                top:          `${cy - size / 2}px`,
+                width:        `${size}px`,
+                height:       `${size}px`,
+                borderRadius: '50%',
+                cursor:       'pointer',
+                zIndex:       '10',
+                // Uncomment to debug: background: 'rgba(255,0,0,0.3)',
+            });
 
-            // Desktop hover
+            // ── Desktop hover ──
             overlay.addEventListener('mouseenter', () => {
                 if (hideTimeout) { clearTimeout(hideTimeout); hideTimeout = null; }
-                showTooltip(marker);
+                showTooltip(marker, svgX, svgY);
             });
             overlay.addEventListener('mouseleave', () => {
                 hideTimeout = setTimeout(hideTooltip, 80);
             });
 
-            // Click / tap
+            // ── Click / tap ──
             const link = marker.closest('a');
             overlay.addEventListener('click', (e) => {
+                e.stopPropagation();
                 if (activeMarker === marker && link) {
-                    // Tooltip already shown — navigate via the real <a> tag
+                    // Second interaction: navigate
                     link.click();
                 } else {
-                    // First interaction — show tooltip
-                    e.stopPropagation();
+                    // First interaction: show tooltip
                     hideTooltip();
-                    showTooltip(marker);
+                    showTooltip(marker, svgX, svgY);
                 }
             });
 
@@ -705,15 +741,22 @@ const initPremiumMap = () => {
         });
     };
 
-    buildOverlays();
-
-    // Rebuild overlays on resize (SVG scales, positions shift)
-    window.addEventListener('resize', () => {
-        hideTooltip();
+    /* ── Init & lifecycle ─────────────────────────────────────────────── */
+    // Use rAF to ensure the SVG has its final dimensions before measuring
+    requestAnimationFrame(() => {
         buildOverlays();
+        // Second rAF handles edge cases where layout is still settling (e.g. iOS)
+        requestAnimationFrame(buildOverlays);
     });
 
-    // Dismiss on click outside
+    // Rebuild on resize (orientation change, window resize)
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(buildOverlays, 150);
+    });
+
+    // Dismiss tooltip on tap/click outside the map
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.map-html-overlay') && !e.target.closest('#map-tooltip')) {
             hideTooltip();
@@ -725,5 +768,3 @@ const initPremiumMap = () => {
 if (document.querySelector('.nl-map-container-new')) {
     initPremiumMap();
 }
-
-
