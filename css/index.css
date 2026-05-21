@@ -3319,6 +3319,8 @@ body.atcb-modal-open {
     text-align: center;
     min-width: 160px;
     white-space: nowrap;
+    flex-direction: column;
+    align-items: center;
 }
 
 .map-tooltip.visible {
