@@ -3,22 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vereniging - Bonsai Vereniging Brabant</title>
+    <title>Bonsai in Nederland - Bonsai Vereniging Brabant</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/index.css?v=15">
-    <link rel="preload" href="https://fonts.gstatic.com/s/outfit/v11/QkhMSyveCf7ncZX7WjXCF3vW7L6Gr_p-V_qG.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/index.css?v=24">
     
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com; frame-src https://*.instagram.com; frame-ancestors 'none';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com https://www.bonsainederland.nl https://cdn.hollandbonsai.nl; frame-src https://*.instagram.com https://www.google.com; frame-ancestors 'none'; form-action 'self' mailto:;">
 
     <!-- Meta Tags & SEO -->
-    <meta name="description" content="Alles over Bonsai Vereniging Brabant. Ontdek de aangesloten regionale bonsaiverenigingen in Nederland op onze interactieve kaart.">
+    <meta name="description" content="Ontdek aangesloten regionale bonsaiverenigingen in Nederland op de interactieve kaart van Bonsai Vereniging Brabant.">
     <meta name="theme-color" content="#5D7B51">
+    <link rel="canonical" href="https://www.bonsaiverenigingbrabant.nl/vereniging.html">
     
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="nl_NL">
+    <meta property="og:site_name" content="Bonsai Vereniging Brabant">
+    <meta property="og:url" content="https://www.bonsaiverenigingbrabant.nl/vereniging.html">
+    <meta property="og:title" content="Bonsai in Nederland - Bonsai Vereniging Brabant">
+    <meta property="og:description" content="Ontdek aangesloten regionale bonsaiverenigingen in Nederland op de interactieve kaart van Bonsai Vereniging Brabant.">
+    <meta property="og:image" content="https://www.bonsaiverenigingbrabant.nl/images/tokonoma/05_tokonoma_mei_2024.webp">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.bonsaiverenigingbrabant.nl/vereniging.html">
+    <meta name="twitter:title" content="Bonsai in Nederland - Bonsai Vereniging Brabant">
+    <meta name="twitter:description" content="Ontdek aangesloten regionale bonsaiverenigingen in Nederland op de interactieve kaart van Bonsai Vereniging Brabant.">
+    <meta name="twitter:image" content="https://www.bonsaiverenigingbrabant.nl/images/tokonoma/05_tokonoma_mei_2024.webp">
     <!-- Favicon & Icons -->
     <link rel="icon" type="image/webp" href="images/logo_main.webp">
     <link rel="apple-touch-icon" href="images/logo_main.webp">
+    <link rel="manifest" href="site.webmanifest">
 </head>
 <body>
 
@@ -40,7 +56,7 @@
                 <a href="galerij.html">Galerij</a>
                 <a href="agenda.html">Agenda</a>
                 <div class="nav-dropdown">
-                    <a href="javascript:void(0)" class="dropdown-trigger active">Vereniging <svg class="dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <button type="button" class="dropdown-trigger active" aria-haspopup="true" aria-expanded="false">Vereniging <svg class="dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
                     <div class="dropdown-menu">
                         <a href="over-ons.html">Over ons</a>
                         <a href="vereniging.html" class="active">Bonsai in Nederland</a>
@@ -48,7 +64,7 @@
                     </div>
                 </div>
             </nav>
-            <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu openen/sluiten" aria-expanded="false" aria-controls="main-nav">
+            <button type="button" class="mobile-toggle" id="mobile-toggle" aria-label="Menu openen/sluiten" aria-expanded="false" aria-controls="main-nav">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -57,7 +73,7 @@
     </header>
 
     <div class="page-hero">
-        <div class="page-hero-bg" style="background-image: url('images/tokonoma/05_tokonoma_mei_2024.webp');"></div>
+        <div class="page-hero-bg hero-over-ons"></div>
         <div class="page-hero-content">
             <p>Regionale bonsai verenigingen</p>
             <h1>Bonsai in Nederland</h1>
@@ -75,6 +91,13 @@
                             <span class="section-subtitle">Landelijke Dekking</span>
                             <h2 class="section-title">Bonsai in Nederland</h2>
                             <p class="mt-1 opacity-70">Klik op de markers voor meer informatie over regionale verenigingen.</p>
+                        </div>
+                        <div class="map-primary-link map-primary-link-top">
+                            <a href="https://bonsainederland.nl/aangesloten-bonsai-verenigingen-en-bestuur-nbv/" target="_blank" rel="noopener noreferrer" class="map-nbv-link" aria-label="Bekijk aangesloten verenigingen bij de Nederlandse Bonsai Vereniging">
+                                <span class="map-nbv-dot" aria-hidden="true"></span>
+                                <span>Nederlandse Bonsai Vereniging</span>
+                                <span class="map-nbv-town">Aangesloten verenigingen</span>
+                            </a>
                         </div>
                         
                         <div class="nl-interactive-map-wrapper">
@@ -135,7 +158,7 @@
                                     </g>
 
                                     <!-- Friesland -->
-                                    <a aria-label="BV Friesland" href="https://www.facebook.com/bonsaiverenigingfriesland/" target="_blank">
+                                    <a aria-label="BV Friesland" href="https://www.facebook.com/bonsaiverenigingfriesland/" target="_blank" rel="noopener noreferrer">
                                         <g class="club-marker" transform="translate(148, 37)" data-town="Bakkeveen" data-name="BV Friesland">
                                             <circle r="12" fill="rgba(0,0,0,0.001)" pointer-events="all" class="marker-hitbox" />
                                             <circle r="2.5" class="marker-dot" />
@@ -143,7 +166,7 @@
                                     </a>
 
                                     <!-- Apeldoorn -->
-                                    <a aria-label="BV Apeldoorn" href="https://www.bonsaiverenigingapeldoorn.nl" target="_blank">
+                                    <a aria-label="BV Apeldoorn" href="http://www.bonsaiverenigingapeldoorn.nl" target="_blank" rel="noopener noreferrer">
                                         <g class="club-marker" transform="translate(145, 105)" data-town="Apeldoorn" data-name="BV Apeldoorn">
                                             <circle r="12" fill="rgba(0,0,0,0.001)" pointer-events="all" class="marker-hitbox" />
                                             <circle r="2.5" class="marker-dot" />
@@ -151,7 +174,7 @@
                                     </a>
 
                                     <!-- Midden Nederland -->
-                                    <a aria-label="BV Midden Nederland" href="https://bonsaimiddennederland.nl" target="_blank">
+                                    <a aria-label="BV Midden Nederland" href="https://bonsaimiddennederland.nl" target="_blank" rel="noopener noreferrer">
                                         <g class="club-marker" transform="translate(108, 128)" data-town="Leersum" data-name="BV Midden Nederland">
                                             <circle r="12" fill="rgba(0,0,0,0.001)" pointer-events="all" class="marker-hitbox" />
                                             <circle r="2.5" class="marker-dot" />
@@ -159,7 +182,7 @@
                                     </a>
 
                                     <!-- Zuid-Holland -->
-                                    <a aria-label="BV Zuid-Holland" href="https://www.bvz-h.nl" target="_blank">
+                                    <a aria-label="BV Zuid-Holland" href="https://www.bvz-h.nl" target="_blank" rel="noopener noreferrer">
                                         <g class="club-marker" transform="translate(78, 134)" data-town="Boskoop" data-name="BV Zuid-Holland">
                                             <circle r="12" fill="rgba(0,0,0,0.001)" pointer-events="all" class="marker-hitbox" />
                                             <circle r="2.5" class="marker-dot" />
@@ -167,7 +190,7 @@
                                     </a>
 
                                     <!-- Rijnmond -->
-                                    <a aria-label="BV Rijnmond" href="https://www.bonsaivereniging-rijnmond.nl" target="_blank">
+                                    <a aria-label="BV Rijnmond" href="https://bonsai-vereniging-rijnmond.nl/" target="_blank" rel="noopener noreferrer">
                                         <g class="club-marker" transform="translate(52, 148)" data-town="Spijkenisse" data-name="BV Rijnmond">
                                             <circle r="12" fill="rgba(0,0,0,0.001)" pointer-events="all" class="marker-hitbox" />
                                             <circle r="2.5" class="marker-dot" />
@@ -175,7 +198,7 @@
                                     </a>
 
                                     <!-- Zuidwest -->
-                                    <a aria-label="BW Zuidwest" href="https://www.bonsainederland.nl/verenigingen/" target="_blank">
+                                    <a aria-label="BW Zuidwest" href="https://bonsainederland.nl/aangesloten-bonsai-verenigingen-en-bestuur-nbv/" target="_blank" rel="noopener noreferrer">
                                         <g class="club-marker" transform="translate(34, 168)" data-town="Goes" data-name="BW Zuidwest">
                                             <circle r="12" fill="rgba(0,0,0,0.001)" pointer-events="all" class="marker-hitbox" />
                                             <circle r="2.5" class="marker-dot" />
@@ -183,7 +206,7 @@
                                     </a>
 
                                     <!-- BVB (Thuis) -->
-                                    <a aria-label="Bonsai Vereniging Brabant" href="index.html">
+                                    <a aria-label="Bonsai Vereniging Brabant" href="over-ons.html">
                                         <g class="club-marker active" transform="translate(105, 156)" data-town="Berlicum" data-name="Bonsai Vereniging Brabant">
                                             <circle r="12" fill="rgba(0,0,0,0.001)" pointer-events="all" class="marker-hitbox" />
                                             <circle r="3" class="marker-dot" />
@@ -191,7 +214,7 @@
                                     </a>
 
                                     <!-- Zuid-Nederland -->
-                                    <a aria-label="BV Zuid-Nederland" href="https://www.bonsai-znl.nl" target="_blank">
+                                    <a aria-label="BV Zuid-Nederland" href="https://bonsainederland.nl/bonsaivereniging-zuid-nederland/" target="_blank" rel="noopener noreferrer">
                                         <g class="club-marker" transform="translate(95, 164)" data-town="Moergestel" data-name="BV Zuid-Nederland">
                                             <circle r="12" fill="rgba(0,0,0,0.001)" pointer-events="all" class="marker-hitbox" />
                                             <circle r="2.5" class="marker-dot" />
@@ -199,7 +222,7 @@
                                     </a>
 
                                     <!-- Noord-Holland -->
-                                    <a aria-label="BV Noord-Holland" href="https://bonsai-nh.nl" target="_blank">
+                                    <a aria-label="BV Noord-Holland" href="https://bonsai-nh.nl" target="_blank" rel="noopener noreferrer">
                                         <g class="club-marker" transform="translate(80, 86)" data-town="Purmerend" data-name="BV Noord-Holland">
                                             <circle r="12" fill="rgba(0,0,0,0.001)" pointer-events="all" class="marker-hitbox" />
                                             <circle r="2.5" class="marker-dot" />
@@ -207,7 +230,7 @@
                                     </a>
 
                                     <!-- Overijssel -->
-                                    <a aria-label="BV Overijssel" href="https://bonsai-overijssel.nl" target="_blank">
+                                    <a aria-label="BV Overijssel" href="https://bonsai-overijssel.nl" target="_blank" rel="noopener noreferrer">
                                         <g class="club-marker" transform="translate(155, 89)" data-town="Oldenzaal" data-name="BV Overijssel">
                                             <circle r="12" fill="rgba(0,0,0,0.001)" pointer-events="all" class="marker-hitbox" />
                                             <circle r="2.5" class="marker-dot" />
@@ -215,7 +238,7 @@
                                     </a>
 
                                     <!-- Utrecht Komorebi -->
-                                    <a aria-label="BV Utrecht Komorebi" href="https://bonsaiverenigingutrecht.nl" target="_blank">
+                                    <a aria-label="BV Utrecht Komorebi" href="https://bonsaiverenigingutrecht.nl" target="_blank" rel="noopener noreferrer">
                                         <g class="club-marker" transform="translate(95, 122)" data-town="Utrecht" data-name="BV Utrecht Komorebi">
                                             <circle r="12" fill="rgba(0,0,0,0.001)" pointer-events="all" class="marker-hitbox" />
                                             <circle r="2.5" class="marker-dot" />
@@ -223,7 +246,7 @@
                                     </a>
 
                                     <!-- Doetinchem -->
-                                    <a aria-label="BV Doetinchem" href="https://bonsaivereniging-doetinchem.nl" target="_blank">
+                                    <a aria-label="BV Doetinchem" href="https://bonsaivereniging-doetinchem.nl" target="_blank" rel="noopener noreferrer">
                                         <g class="club-marker" transform="translate(166, 122)" data-town="Doetinchem" data-name="BV Doetinchem">
                                             <circle r="12" fill="rgba(0,0,0,0.001)" pointer-events="all" class="marker-hitbox" />
                                             <circle r="2.5" class="marker-dot" />
@@ -237,17 +260,12 @@
                                     <div class="tooltip-name">Club Name</div>
                                 </div>
                             </div>
-                            
-                            <div class="map-sidebar">
-                                <a href="https://www.bonsainederland.nl/" target="_blank" class="nbv-card-modern">
-                                    <div class="nbv-badge">NBV</div>
-                                    <div class="nbv-card-text">
-                                        <h4>Nederlandse Bonsai Vereniging</h4>
-                                        <p>Het landelijke netwerk voor alle bonsai liefhebbers.</p>
-                                    </div>
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            <div class="map-primary-link">
+                                <a href="https://bonsainederland.nl/aangesloten-bonsai-verenigingen-en-bestuur-nbv/" target="_blank" rel="noopener noreferrer" class="map-nbv-link" aria-label="Bekijk aangesloten verenigingen bij de Nederlandse Bonsai Vereniging">
+                                    <span class="map-nbv-dot" aria-hidden="true"></span>
+                                    <span>Nederlandse Bonsai Vereniging</span>
+                                    <span class="map-nbv-town">Aangesloten verenigingen</span>
                                 </a>
-                                <p class="map-hint">Beweeg over de stippen voor meer details.</p>
                             </div>
                         </div>
                     </section>
@@ -260,11 +278,11 @@
         <div class="footer-container">
             <div class="footer-content">
                 <a href="index.html" aria-label="Terug naar home">
-                    <img src="images/logo_main.webp" alt="BVB Logo" class="footer-logo" loading="lazy">
+                    <img src="images/logo_main.webp" alt="BVB Logo" class="footer-logo" loading="lazy" width="594" height="698" decoding="async">
                 </a>
             </div>
             <div class="footer-bottom">
-                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="vereniging.html" class="contact-link">Vereniging</a> | Design door <a href="https://www.linkedin.com/in/rubenschmeitz/" target="_blank" class="contact-link">Ruben Schmeitz</a></p>
+                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="vereniging.html" class="contact-link">Vereniging</a> | Design door <a href="https://nl.linkedin.com/in/rubenschmeitz" target="_blank" rel="noopener noreferrer" class="contact-link">Ruben Schmeitz</a></p>
             </div>
         </div>
     </footer>
@@ -280,22 +298,22 @@
             <span>Galerij</span>
         </a>
         <a href="nbs.html" class="bottom-nav-item special">
-            <img src="images/logo_main.webp" alt="NBS">
+            <img src="images/logo_main.webp" alt="NBS" width="594" height="698" decoding="async">
             <span>NBS</span>
         </a>
         <a href="agenda.html" class="bottom-nav-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             <span>Agenda</span>
         </a>
-        <a href="javascript:void(0)" class="bottom-nav-item" id="fs-menu-trigger">
+        <button type="button" class="bottom-nav-item bottom-nav-button" id="fs-menu-trigger">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
             <span>Meer</span>
-        </a>
+        </button>
     </nav>
 
     <!-- Full Screen Menu Overlay -->
     <div class="full-screen-menu" id="full-screen-menu">
-        <button class="fs-menu-close" id="fs-menu-close" aria-label="Sluiten">
+        <button type="button" class="fs-menu-close" id="fs-menu-close" aria-label="Sluiten">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
         <div class="fs-menu-links">
@@ -304,7 +322,7 @@
             <a href="galerij.html">Galerij</a>
             <a href="agenda.html">Agenda</a>
             <div class="fs-menu-dropdown expanded">
-                <a href="javascript:void(0)" class="fs-menu-trigger" aria-expanded="true">Vereniging <svg class="fs-menu-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+                <button type="button" class="fs-menu-trigger" aria-expanded="true">Vereniging <svg class="fs-menu-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
                 <div class="fs-menu-submenu">
                     <a href="over-ons.html">Over ons</a>
                     <a href="vereniging.html" class="active">Bonsai in Nederland</a>
@@ -314,6 +332,6 @@
         </div>
     </div>
 
-    <script src="js/app.js?v=15" defer></script>
+    <script src="js/app.js?v=23" defer></script>
 </body>
 </html>

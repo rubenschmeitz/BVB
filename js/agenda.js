@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'event',
             tag: 'Open Dag',
             description: 'De jaarlijkse open dag van Bonsai Vereniging Rijnmond met een schitterende expositie van zowel beginners als gevorderden, clinics en deskundig advies.',
-            detailsUrl: 'https://www.bonsaivereniging-rijnmond.nl'
+            detailsUrl: 'https://bonsai-vereniging-rijnmond.nl/'
         },
         {
             id: 'ext-may-hasselt',
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'event',
             tag: 'Evenement',
             description: 'Jaarlijks Bonsai Festival in de adembenemende Japanse Tuin van Hasselt. Diverse Belgische bonsai-verenigingen presenteren hun topstukken met live vormgevingsdemonstraties en een sfeervolle markt.',
-            detailsUrl: 'https://www.japansetuin.be'
+            detailsUrl: 'https://japansetuin.hasselt.be/nl'
         },
         {
             id: 'ext-may-koewacht-show',
@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'event',
             tag: 'Evenement',
             description: 'De tweejaarlijkse clubtentoonstelling van Bonsai Vereniging Rijnmond met prachtige bomen van leden, clinics voor beginners en ervaren hobbyisten, en verkoopstands.',
-            detailsUrl: 'https://www.bonsaivereniging-rijnmond.nl'
+            detailsUrl: 'https://bonsai-vereniging-rijnmond.nl/'
         },
         {
             id: 'nbv-sept-uden',
@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'De Moerkoal, Berlicum',
             type: 'club',
             tag: 'Lezing',
-            description: 'Expert Bart Verstappen vertelt alles over herfstverzorging, winterbescherming en voorbereiding op de winterrust van je bonsai.'
+            description: 'Lezing over herfstverzorging, winterbescherming en voorbereiding op de winterrust van je bonsai.'
         },
         {
             id: 'ext-nov-tenshi',
@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'event',
             tag: 'Expositie',
             description: 'De prestigieuze driejaarlijkse tentoonstelling van de bekende Belgische bonsaiclub Eda Uchi Kai. Bewonder uiterst verfijnde topstukken en geniet van een kwalitatieve presentatie in een sfeervolle ambiance.',
-            detailsUrl: 'https://www.edauchikai.be'
+            detailsUrl: 'https://bonsaivlaanderen.be'
         },
         {
             id: 'ext-nov-bab',
@@ -385,6 +385,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function refreshAgendaEffects() {
+        if (!dynamicContainer) return;
+
+        const revealTargets = dynamicContainer.querySelectorAll('.reveal-on-scroll');
+        if (!revealTargets.length) return;
+
+        revealTargets.forEach(target => target.classList.remove('active'));
+
+        requestAnimationFrame(() => {
+            if (typeof initRevealObservers === 'function') {
+                initRevealObservers();
+            } else {
+                revealTargets.forEach(target => target.classList.add('active'));
+            }
+        });
+    }
+
     // LIST VIEW RENDERER (Filters out past events automatically)
     function renderListView() {
         let filteredEvents = getFilteredEvents();
@@ -398,14 +415,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (filteredEvents.length === 0) {
             dynamicContainer.innerHTML = `
-                <div class="no-events-card" style="text-align: center; padding: 3rem; background: white; border-radius: 12px; border: 1px solid #eaeaea;">
-                    <p style="font-size: 1.1rem; color: #666;">Geen toekomstige activiteiten gevonden voor dit filter.</p>
+                <div class="no-events-card reveal-on-scroll">
+                    <p>Geen toekomstige activiteiten gevonden voor dit filter.</p>
                 </div>
             `;
+            refreshAgendaEffects();
             return;
         }
 
-        let html = '<div class="agenda-container" style="display: flex; flex-direction: column; gap: 2rem;">';
+        let html = '<div class="agenda-container agenda-list-stack reveal-staggered reveal-on-scroll">';
 
         filteredEvents.forEach(evt => {
             const startD = new Date(evt.startDate);
@@ -428,14 +446,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Custom border / tag styling for Highlights (NBS)
             const isHighlight = evt.tag === 'Hoogtepunt';
-            const cardStyle = isHighlight ? 'border: 2px solid var(--color-bark); background: #fdfaf7;' : '';
-            const tagStyle = isHighlight ? 'background: var(--color-bark); color: white;' : (evt.type === 'event' ? 'background: rgba(140, 106, 92, 0.1); color: var(--color-bark);' : (evt.type === 'nbv' ? 'background: rgba(194, 155, 56, 0.1); color: #C29B38;' : ''));
+            const tagClass = isHighlight ? 'highlight' : evt.type;
 
             // Construct add to calendar option values
             const calendarEndDate = evt.endDate || evt.startDate;
 
             html += `
-                <div class="agenda-item" style="${cardStyle}">
+                <div class="agenda-item ${isHighlight ? 'is-highlight' : ''}">
                     <div class="agenda-header-flex">
                         <div class="date-box">
                             <span class="day-num">${displayDate}</span>
@@ -444,25 +461,25 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <span class="weekday">${displayWeekday}</span>
                             </div>
                         </div>
-                        <span class="event-tag" style="${tagStyle}">${evt.tag}</span>
+                        <span class="event-tag ${tagClass}">${evt.tag}</span>
                     </div>
                     <div class="event-details">
-                        <h3 style="font-size: 1.25rem; margin-bottom: 0.3rem;">${evt.title}</h3>
-                        ${evt.extraInfo ? `<p style="font-size: 0.95rem; line-height: 1.5; color: var(--color-bark); font-weight: 600; margin-bottom: 0.5rem;">${evt.extraInfo}</p>` : ''}
-                        <p style="font-size: 0.95rem; line-height: 1.5; color: #444; margin-bottom: 1rem;">${evt.description}</p>
+                        <h3 class="event-title">${evt.title}</h3>
+                        ${evt.extraInfo ? `<p class="event-extra">${evt.extraInfo}</p>` : ''}
+                        <p class="event-description">${evt.description}</p>
                         
-                        <div class="event-meta" style="display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1rem; color: #666; font-size: 0.9rem;">
-                            <div class="meta-item" style="display: flex; align-items: center; gap: 6px;">
+                        <div class="event-meta">
+                            <div class="meta-item">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                                 <span>${evt.startTime} - ${evt.endTime} uur</span>
                             </div>
-                            <div class="meta-item" style="display: flex; align-items: center; gap: 6px;">
+                            <div class="meta-item">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="12" r="3"/></svg>
                                 <span>${evt.location}</span>
                             </div>
                         </div>
 
-                        <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+                        <div class="event-actions">
                             <add-to-calendar-button hideBackground
                                 name="${evt.title}"
                                 startDate="${evt.startDate}"
@@ -475,7 +492,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 lightMode="light"
                                 styleLight="--btn-background: ${isHighlight ? 'var(--color-bark)' : (evt.type === 'nbv' ? '#C29B38' : 'var(--color-sage)')}; --btn-text: #fff; --font: var(--font-main); --btn-padding: 8px 16px; --btn-font-size: 0.9rem;"
                             ></add-to-calendar-button>
-                            ${evt.detailsUrl ? `<a href="${evt.detailsUrl}" ${evt.detailsUrl.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''} class="nav-special" style="text-decoration: none; padding: 8px 16px; font-size: 0.9rem;">Meer informatie</a>` : ''}
+                            ${evt.detailsUrl ? `<a href="${evt.detailsUrl}" ${evt.detailsUrl.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''} class="nav-special agenda-more-link">Meer informatie</a>` : ''}
                         </div>
                     </div>
                 </div>
@@ -490,6 +507,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.atcb_init) {
             window.atcb_init();
         }
+
+        refreshAgendaEffects();
     }
 
     // CALENDAR VIEW RENDERER
@@ -498,18 +517,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Build navigation and monthly header grid
         let html = `
-            <div class="calendar-view-wrapper">
+            <div class="calendar-view-wrapper reveal-on-scroll">
                 <div class="calendar-header">
-                    <button class="calendar-nav-btn" id="prev-month" aria-label="Vorige maand">
+                    <button type="button" class="calendar-nav-btn" id="prev-month" aria-label="Vorige maand">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
                     </button>
                     <h3>${dutchMonths[calendarMonth]} ${calendarYear}</h3>
-                    <button class="calendar-nav-btn" id="next-month" aria-label="Volgende maand">
+                    <button type="button" class="calendar-nav-btn" id="next-month" aria-label="Volgende maand">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
                     </button>
                 </div>
                 
-                <div class="calendar-grid">
+                <div class="calendar-grid reveal-staggered reveal-on-scroll">
                     <div class="calendar-day-name">ma</div>
                     <div class="calendar-day-name">di</div>
                     <div class="calendar-day-name">wo</div>
@@ -644,29 +663,29 @@ document.addEventListener('DOMContentLoaded', () => {
                         const isHighlight = evt.tag === 'Hoogtepunt';
 
                         popoverHtml += `
-                            ${idx > 0 ? '<hr style="border: 0; border-top: 1px solid #eaeaea; margin: 1.5rem 0;">' : ''}
+                            ${idx > 0 ? '<hr class="calendar-divider">' : ''}
                             <div class="calendar-popover-header">
                                 <span class="calendar-popover-tag ${evt.type}">${evt.tag}</span>
-                                <span style="font-size: 0.85rem; color: #888; font-weight: 500;">
+                                <span class="calendar-popover-date">
                                     ${weekdayCap} ${day} ${dutchMonths[calendarMonth]}
                                 </span>
                             </div>
-                            <h4 style="font-size: 1.2rem; margin: 0.3rem 0; color: #222;">${evt.title}</h4>
-                            ${evt.extraInfo ? `<p style="font-size: 0.9rem; color: var(--color-bark); font-weight: 600; margin: 0.3rem 0;">${evt.extraInfo}</p>` : ''}
-                            <p style="font-size: 0.95rem; line-height: 1.5; color: #444; margin-bottom: 1rem;">${evt.description}</p>
+                            <h4 class="calendar-popover-title">${evt.title}</h4>
+                            ${evt.extraInfo ? `<p class="calendar-popover-extra">${evt.extraInfo}</p>` : ''}
+                            <p class="event-description">${evt.description}</p>
                             
-                            <div class="event-meta" style="display: flex; gap: 1.2rem; flex-wrap: wrap; margin-bottom: 1rem; color: #666; font-size: 0.85rem;">
-                                <div class="meta-item" style="display: flex; align-items: center; gap: 4px;">
+                            <div class="event-meta">
+                                <div class="meta-item">
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                                     <span>${evt.startTime} - ${evt.endTime} uur</span>
                                 </div>
-                                <div class="meta-item" style="display: flex; align-items: center; gap: 4px;">
+                                <div class="meta-item">
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="12" r="3"/></svg>
                                     <span>${evt.location}</span>
                                 </div>
                             </div>
 
-                            <div style="margin-top: 1rem; display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center;">
+                            <div class="event-actions compact">
                                 <add-to-calendar-button hideBackground
                                     name="${evt.title}"
                                     startDate="${evt.startDate}"
@@ -679,7 +698,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     lightMode="light"
                                     styleLight="--btn-background: ${isHighlight ? 'var(--color-bark)' : (evt.type === 'nbv' ? '#C29B38' : 'var(--color-sage)')}; --btn-text: #fff; --font: var(--font-main); --btn-padding: 6px 12px; --btn-font-size: 0.85rem;"
                                 ></add-to-calendar-button>
-                                ${evt.detailsUrl ? `<a href="${evt.detailsUrl}" ${evt.detailsUrl.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''} class="nav-special" style="text-decoration: none; padding: 6px 12px; font-size: 0.85rem;">Meer informatie</a>` : ''}
+                                ${evt.detailsUrl ? `<a href="${evt.detailsUrl}" ${evt.detailsUrl.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''} class="nav-special agenda-more-link compact">Meer informatie</a>` : ''}
                             </div>
                         `;
                     });
@@ -694,8 +713,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     popover.classList.add('active');
                     popover.classList.remove('event-mode', 'nbv-mode');
                     popover.innerHTML = `
-                        <div style="text-align: center; color: #888; padding: 1rem 0;">
-                            <p style="margin: 0; font-size: 0.95rem; font-weight: 500;">
+                        <div class="calendar-popover-empty">
+                            <p>
                                 Geen activiteiten gepland op ${day} ${dutchMonths[calendarMonth]} ${calendarYear}.
                             </p>
                         </div>
@@ -723,6 +742,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => defaultCell.click(), 100);
             }
         }
+
+        refreshAgendaEffects();
     }
 
     // Helper to get events matching the current active filter

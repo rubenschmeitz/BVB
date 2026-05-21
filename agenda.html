@@ -3,33 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda - Bonsai Vereniging Brabant</title>
+    <title>Agenda 2026 - Bonsai Vereniging Brabant</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/index.css?v=15">
-    <link rel="preload" href="https://fonts.gstatic.com/s/outfit/v11/QkhMSyveCf7ncZX7WjXCF3vW7L6Gr_p-V_qG.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/index.css?v=24">
     <link rel="preload" as="image" href="images/logo_main.webp" fetchpriority="high">
     
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com; frame-src https://*.instagram.com https://www.google.com; frame-ancestors 'none';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com https://www.bonsainederland.nl https://cdn.hollandbonsai.nl; frame-src https://*.instagram.com https://www.google.com; frame-ancestors 'none'; form-action 'self' mailto:;">
 
     
     <!-- Meta Tags & SEO -->
-    <meta name="description" content="Bekijk de jaaragenda van Bonsai Vereniging Brabant. Clubavonden, workshops, demonstraties en de Nationale Bonsai Show.">
+    <meta name="description" content="Bekijk de jaaragenda van Bonsai Vereniging Brabant met clubavonden, workshops, demonstraties en de Nationale Bonsai Show 2026.">
     <meta name="theme-color" content="#5D7B51">
+    <link rel="canonical" href="https://www.bonsaiverenigingbrabant.nl/agenda.html">
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="nl_NL">
+    <meta property="og:site_name" content="Bonsai Vereniging Brabant">
+    <meta property="og:url" content="https://www.bonsaiverenigingbrabant.nl/agenda.html">
     <meta property="og:title" content="Agenda 2026 - Bonsai Vereniging Brabant">
-    <meta property="og:description" content="Blijf op de hoogte van alle bonsai activiteiten in Brabant.">
-    <meta property="og:image" content="images/tokonoma/05_tokonoma_mei_2024.webp">
+    <meta property="og:description" content="Bekijk de jaaragenda van Bonsai Vereniging Brabant met clubavonden, workshops, demonstraties en de Nationale Bonsai Show 2026.">
+    <meta property="og:image" content="https://www.bonsaiverenigingbrabant.nl/images/tokonoma/05_tokonoma_mei_2024.webp">
     
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.bonsaiverenigingbrabant.nl/agenda.html">
+    <meta name="twitter:title" content="Agenda 2026 - Bonsai Vereniging Brabant">
+    <meta name="twitter:description" content="Bekijk de jaaragenda van Bonsai Vereniging Brabant met clubavonden, workshops, demonstraties en de Nationale Bonsai Show 2026.">
+    <meta name="twitter:image" content="https://www.bonsaiverenigingbrabant.nl/images/tokonoma/05_tokonoma_mei_2024.webp">
     <!-- Favicon & Icons -->
     <link rel="icon" type="image/webp" href="images/logo_main.webp">
     <link rel="apple-touch-icon" href="images/logo_main.webp">
+    <link rel="manifest" href="site.webmanifest">
     
 
-    <script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
+    <script src="js/calendar-button.js?v=2" defer></script>
 
 </head>
 <body>
@@ -52,7 +62,7 @@
                 <a href="galerij.html">Galerij</a>
                 <a href="agenda.html" class="active">Agenda</a>
                 <div class="nav-dropdown">
-                    <a href="javascript:void(0)" class="dropdown-trigger">Vereniging <svg class="dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <button type="button" class="dropdown-trigger" aria-haspopup="true" aria-expanded="false">Vereniging <svg class="dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
                     <div class="dropdown-menu">
                         <a href="over-ons.html">Over ons</a>
                         <a href="vereniging.html">Bonsai in Nederland</a>
@@ -60,7 +70,7 @@
                     </div>
                 </div>
             </nav>
-            <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu openen/sluiten" aria-expanded="false" aria-controls="main-nav">
+            <button type="button" class="mobile-toggle" id="mobile-toggle" aria-label="Menu openen/sluiten" aria-expanded="false" aria-controls="main-nav">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -84,24 +94,24 @@
                 
                 <!-- Main Agenda Column -->
                 <div class="agenda-main-column">
-                    <p class="large-text mb-2">
+                    <p class="large-text mb-2 reveal-on-scroll">
                         Onze clubavonden vinden plaats in <strong>De Moerkoal in Berlicum</strong>. Iedereen is welkom om kennis te maken met onze vereniging.
                     </p>
                     
                     <!-- Control Panel (Filters & View Toggles) -->
-                    <div class="agenda-controls">
+                    <div class="agenda-controls reveal-on-scroll">
                         <div class="filter-group">
-                            <button class="filter-btn" data-filter="all">Alles</button>
-                            <button class="filter-btn active" data-filter="club"><span class="dot-legend club"></span>Clubavonden</button>
-                            <button class="filter-btn" data-filter="nbv"><span class="dot-legend nbv"></span>NBV Activiteiten</button>
-                            <button class="filter-btn" data-filter="event"><span class="dot-legend event"></span>Evenementen</button>
+                            <button type="button" class="filter-btn" data-filter="all">Alles</button>
+                            <button type="button" class="filter-btn active" data-filter="club"><span class="dot-legend club"></span>Clubavonden</button>
+                            <button type="button" class="filter-btn" data-filter="nbv"><span class="dot-legend nbv"></span>NBV Activiteiten</button>
+                            <button type="button" class="filter-btn" data-filter="event"><span class="dot-legend event"></span>Evenementen</button>
                         </div>
                         <div class="view-toggle">
-                            <button class="toggle-btn active" id="view-list" aria-label="Lijstweergave">
+                            <button type="button" class="toggle-btn active" id="view-list" aria-label="Lijstweergave">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
                                 <span>Lijst</span>
                             </button>
-                            <button class="toggle-btn" id="view-calendar" aria-label="Kalenderweergave">
+                            <button type="button" class="toggle-btn" id="view-calendar" aria-label="Kalenderweergave">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                                 <span>Maand</span>
                             </button>
@@ -111,7 +121,7 @@
                     <!-- Dynamic Content Container -->
                     <div id="agenda-dynamic-content" class="agenda-dynamic-content list-view">
                         <!-- Content will be injected dynamically here -->
-                    </div>>
+                    </div>
 
                 </div> <!-- End of agenda-main-column -->
 
@@ -121,14 +131,13 @@
                     <div class="sidebar-card reveal-on-scroll">
                         <h3>Locatie & Bereikbaarheid</h3>
                         <p><strong>De Moerkoal</strong><br>Driezeeg 20, 5258 KE Berlicum</p>
-                        <p style="font-size: 0.9rem;">Ruime gratis parkeergelegenheid aanwezig.</p>
+                        <p class="fine-print">Ruime gratis parkeergelegenheid aanwezig.</p>
                         
-                        <div class="map-iframe-wrapper" style="height: 150px; border-radius: 12px; overflow: hidden; margin-top: 1rem;">
-                            <iframe 
+                        <div class="map-iframe-wrapper" >
+                            <iframe title="Kaart van De Moerkoal in Berlicum" class="map-frame" 
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2474.8251411929564!2d5.4156872761828785!3d51.66303779932199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c6e5ca14c47fcd%3A0x6740ba1b23b26f1e!2sStichting%20De%20Moerkoal!5e0!3m2!1snl!2snl!4v1777793012084!5m2!1snl!2snl" 
                                 width="100%" 
                                 height="100%" 
-                                style="border:0;" 
                                 allowfullscreen="" 
                                 loading="lazy" 
                                 referrerpolicy="no-referrer-when-downgrade">
@@ -136,16 +145,16 @@
                         </div>
                     </div>
 
-                    <div class="sidebar-card" style="margin-top: 2rem;">
+                    <div class="sidebar-card reveal-on-scroll stacked-card">
                         <h3>Agenda Sync</h3>
                         <p>Zet al onze activiteiten van 2026 direct in je persoonlijke agenda (Apple, Google, Outlook) zodat je nooit een clubavond mist.</p>
                         <a href="docs/bvb_agenda_2026.ics" class="sync-btn">Sync Agenda (.ics)</a>
                     </div>
 
-                    <div class="sidebar-card" style="margin-top: 2rem;">
+                    <div class="sidebar-card reveal-on-scroll stacked-card">
                         <h3>Bezoekers</h3>
                         <p>Ben je geen lid maar wel geïnteresseerd? Je bent van harte welkom om een keer sfeer te proeven tijdens een clubavond.</p>
-                        <a href="contact.html" style="color: var(--color-bark); font-weight: 600; text-decoration: none;">Stel een vraag &rarr;</a>
+                        <a href="contact.html" class="contact-inline-link">Stel een vraag &rarr;</a>
                     </div>
                 </aside>
 
@@ -157,16 +166,16 @@
         <div class="footer-container">
             <div class="footer-content">
                 <a href="index.html" aria-label="Terug naar home">
-                    <img src="images/logo_main.webp" alt="BVB Logo" class="footer-logo" loading="lazy">
+                    <img src="images/logo_main.webp" alt="BVB Logo" class="footer-logo" loading="lazy" width="594" height="698" decoding="async">
                 </a>
             </div>
             <div class="footer-bottom">
-                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="vereniging.html" class="contact-link">Vereniging</a> | Design door <a href="https://www.linkedin.com/in/rubenschmeitz/" target="_blank" class="contact-link">Ruben Schmeitz</a></p>
+                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="vereniging.html" class="contact-link">Vereniging</a> | Design door <a href="https://nl.linkedin.com/in/rubenschmeitz" target="_blank" rel="noopener noreferrer" class="contact-link">Ruben Schmeitz</a></p>
             </div>
         </div>
     </footer>
     
-    <button id="back-to-top" class="back-to-top" aria-label="Terug naar boven">
+    <button type="button" id="back-to-top" class="back-to-top" aria-label="Terug naar boven">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="18 15 12 9 6 15"></polyline>
         </svg>
@@ -183,22 +192,22 @@
             <span>Galerij</span>
         </a>
         <a href="nbs.html" class="bottom-nav-item special">
-            <img src="images/logo_main.webp" alt="NBS">
+            <img src="images/logo_main.webp" alt="NBS" width="594" height="698" decoding="async">
             <span>NBS</span>
         </a>
         <a href="agenda.html" class="bottom-nav-item active">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             <span>Agenda</span>
         </a>
-        <a href="javascript:void(0)" class="bottom-nav-item" id="fs-menu-trigger">
+        <button type="button" class="bottom-nav-item bottom-nav-button" id="fs-menu-trigger">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
             <span>Meer</span>
-        </a>
+        </button>
     </nav>
 
     <!-- Full Screen Menu Overlay -->
     <div class="full-screen-menu" id="full-screen-menu">
-        <button class="fs-menu-close" id="fs-menu-close" aria-label="Sluiten">
+        <button type="button" class="fs-menu-close" id="fs-menu-close" aria-label="Sluiten">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
         
@@ -208,7 +217,7 @@
             <a href="galerij.html">Galerij</a>
             <a href="agenda.html">Agenda</a>
             <div class="fs-menu-dropdown">
-                <a href="javascript:void(0)" class="fs-menu-trigger">Vereniging <svg class="fs-menu-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+                <button type="button" class="fs-menu-trigger">Vereniging <svg class="fs-menu-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
                 <div class="fs-menu-submenu">
                     <a href="over-ons.html">Over ons</a>
                     <a href="vereniging.html">Bonsai in Nederland</a>
@@ -226,13 +235,11 @@
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                 </a>
             </div>
-            <p class="color-sage" style="font-size: 0.9rem;">Bonsai Vereniging Brabant</p>
+            <p class="color-sage fine-print">Bonsai Vereniging Brabant</p>
         </div>
     </div>
 
-    <script src="js/app.js?v=15" defer></script>
-    <script src="js/agenda.js" defer></script>
+    <script src="js/app.js?v=23" defer></script>
+    <script src="js/agenda.js?v=23" defer></script>
 </body>
 </html>
-
-

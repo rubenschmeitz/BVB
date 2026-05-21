@@ -7,18 +7,34 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/index.css?v=15">
-    <link rel="preload" href="https://fonts.gstatic.com/s/outfit/v11/QkhMSyveCf7ncZX7WjXCF3vW7L6Gr_p-V_qG.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/index.css?v=24">
     
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com; frame-src https://*.instagram.com; frame-ancestors 'none';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com https://www.bonsainederland.nl https://cdn.hollandbonsai.nl; frame-src https://*.instagram.com https://www.google.com; frame-ancestors 'none'; form-action 'self' mailto:;">
 
     <!-- Meta Tags & SEO -->
-    <meta name="description" content="Ontdek de digitale bonsai expositie van Bonsai Vereniging Brabant. Prachtige collecties van onze leden en sfeervolle impressies van onze clubavonden.">
+    <meta name="description" content="Ontdek de digitale bonsai-expositie en sfeerimpressies van clubavonden van Bonsai Vereniging Brabant.">
     <meta name="theme-color" content="#5D7B51">
+    <link rel="canonical" href="https://www.bonsaiverenigingbrabant.nl/galerij.html">
     
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="nl_NL">
+    <meta property="og:site_name" content="Bonsai Vereniging Brabant">
+    <meta property="og:url" content="https://www.bonsaiverenigingbrabant.nl/galerij.html">
+    <meta property="og:title" content="Galerij - Bonsai Vereniging Brabant">
+    <meta property="og:description" content="Ontdek de digitale bonsai-expositie en sfeerimpressies van clubavonden van Bonsai Vereniging Brabant.">
+    <meta property="og:image" content="https://www.bonsaiverenigingbrabant.nl/images/tokonoma/02_tokonoma_feb_2024.webp">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.bonsaiverenigingbrabant.nl/galerij.html">
+    <meta name="twitter:title" content="Galerij - Bonsai Vereniging Brabant">
+    <meta name="twitter:description" content="Ontdek de digitale bonsai-expositie en sfeerimpressies van clubavonden van Bonsai Vereniging Brabant.">
+    <meta name="twitter:image" content="https://www.bonsaiverenigingbrabant.nl/images/tokonoma/02_tokonoma_feb_2024.webp">
     <!-- Favicon & Icons -->
     <link rel="icon" type="image/webp" href="images/logo_main.webp">
     <link rel="apple-touch-icon" href="images/logo_main.webp">
+    <link rel="manifest" href="site.webmanifest">
 </head>
 <body>
 
@@ -40,7 +56,7 @@
                 <a href="galerij.html" class="active">Galerij</a>
                 <a href="agenda.html">Agenda</a>
                 <div class="nav-dropdown">
-                    <a href="javascript:void(0)" class="dropdown-trigger">Vereniging <svg class="dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+                    <button type="button" class="dropdown-trigger" aria-haspopup="true" aria-expanded="false">Vereniging <svg class="dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
                     <div class="dropdown-menu">
                         <a href="over-ons.html">Over ons</a>
                         <a href="vereniging.html">Bonsai in Nederland</a>
@@ -48,7 +64,7 @@
                     </div>
                 </div>
             </nav>
-            <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu openen/sluiten" aria-expanded="false" aria-controls="main-nav">
+            <button type="button" class="mobile-toggle" id="mobile-toggle" aria-label="Menu openen/sluiten" aria-expanded="false" aria-controls="main-nav">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -57,7 +73,7 @@
     </header>
 
     <div class="page-hero">
-        <div class="page-hero-bg" style="background-image: url('images/tokonoma/02_tokonoma_feb_2024.webp');"></div>
+        <div class="page-hero-bg hero-gallery"></div>
         <div class="page-hero-content">
             <p>Onze Bomen</p>
             <h1>Fotogalerij</h1>
@@ -68,8 +84,8 @@
         <div class="content-container-wide">
             
             <div class="gallery-nav">
-                <button class="active" onclick="showCategory('club')">Clubavonden</button>
-                <button onclick="showCategory('leden')">Digitale Expositie</button>
+                <button type="button" class="active" data-category="club">Clubavonden</button>
+                <button type="button" data-category="leden">Digitale Expositie</button>
             </div>
 
             <!-- Clubavonden -->
@@ -80,18 +96,18 @@
                 </div>
                 
                 <div class="activity-grid reveal-staggered reveal-on-scroll">
-                    <div class="activity-item" data-full="images/club_diverse/club_feb_2024_1.webp"><img src="images/club_diverse/club_feb_2024_1.webp" alt="Clubavond impressie" loading="lazy"></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_wa_01.webp"><img src="images/club_diverse/club_wa_01.webp" alt="Clubavond impressie" loading="lazy"></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_wa_02.webp"><img src="images/club_diverse/club_wa_02.webp" alt="Clubavond impressie" loading="lazy"></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_juni_2024_1.webp"><img src="images/club_diverse/club_juni_2024_1.webp" alt="Clubavond impressie" loading="lazy"></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_cursus_2023_1.webp"><img src="images/club_diverse/club_cursus_2023_1.webp" alt="Clubavond impressie" loading="lazy"></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_nov_2022_1.webp"><img src="images/club_diverse/club_nov_2022_1.webp" alt="Clubavond impressie" loading="lazy"></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_juni_2022_1.webp"><img src="images/club_diverse/club_juni_2022_1.webp" alt="Clubavond impressie" loading="lazy"></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_cursus_2023_2.webp"><img src="images/club_diverse/club_cursus_2023_2.webp" alt="Clubavond impressie" loading="lazy"></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_wa_03.webp"><img src="images/club_diverse/club_wa_03.webp" alt="Clubavond impressie" loading="lazy"></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_wa_04.webp"><img src="images/club_diverse/club_wa_04.webp" alt="Clubavond impressie" loading="lazy"></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_wa_05.webp"><img src="images/club_diverse/club_wa_05.webp" alt="Clubavond impressie" loading="lazy"></div>
-                    <div class="activity-item" data-full="images/club_diverse/club_wa_06.webp"><img src="images/club_diverse/club_wa_06.webp" alt="Clubavond impressie" loading="lazy"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_feb_2024_1.webp"><img src="images/club_diverse/club_feb_2024_1.webp" alt="Clubavond impressie" loading="lazy" width="2040" height="1530" decoding="async"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_wa_01.webp"><img src="images/club_diverse/club_wa_01.webp" alt="Clubavond impressie" loading="lazy" width="2048" height="1536" decoding="async"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_wa_02.webp"><img src="images/club_diverse/club_wa_02.webp" alt="Clubavond impressie" loading="lazy" width="2048" height="1536" decoding="async"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_juni_2024_1.webp"><img src="images/club_diverse/club_juni_2024_1.webp" alt="Clubavond impressie" loading="lazy" width="2048" height="1536" decoding="async"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_cursus_2023_1.webp"><img src="images/club_diverse/club_cursus_2023_1.webp" alt="Clubavond impressie" loading="lazy" width="1500" height="2000" decoding="async"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_nov_2022_1.webp"><img src="images/club_diverse/club_nov_2022_1.webp" alt="Clubavond impressie" loading="lazy" width="1536" height="2048" decoding="async"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_juni_2022_1.webp"><img src="images/club_diverse/club_juni_2022_1.webp" alt="Clubavond impressie" loading="lazy" width="2048" height="1536" decoding="async"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_cursus_2023_2.webp"><img src="images/club_diverse/club_cursus_2023_2.webp" alt="Clubavond impressie" loading="lazy" width="1600" height="1200" decoding="async"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_wa_03.webp"><img src="images/club_diverse/club_wa_03.webp" alt="Clubavond impressie" loading="lazy" width="1536" height="2048" decoding="async"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_wa_04.webp"><img src="images/club_diverse/club_wa_04.webp" alt="Clubavond impressie" loading="lazy" width="2048" height="1536" decoding="async"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_wa_05.webp"><img src="images/club_diverse/club_wa_05.webp" alt="Clubavond impressie" loading="lazy" width="2048" height="1536" decoding="async"></div>
+                    <div class="activity-item" data-full="images/club_diverse/club_wa_06.webp"><img src="images/club_diverse/club_wa_06.webp" alt="Clubavond impressie" loading="lazy" width="1512" height="2016" decoding="async"></div>
                 </div>
             </section>
 
@@ -104,146 +120,36 @@
                 
                 <div class="exhibition-wrapper">
                     <div class="exhibition-container">
-                        <div class="exhibition-card reveal-on-scroll" onclick="toggleTree(this)">
+                        <div class="exhibition-card reveal-on-scroll" role="button" tabindex="0" data-tree-id="wisteria-sinensis">
                             <div class="exhibition-image-box skeleton">
-                                <img src="images/trees/carpinus_betulus.webp" alt="Carpinus Betulus (Haagbeuk)" loading="lazy">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Carpinus Betulus</h3>
-                                <p class="exhibition-style">Hokidachi (Bezemstijl)</p>
-                            </div>
-                        </div>
-                        <div class="exhibition-card reveal-on-scroll" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box skeleton">
-                                <img src="images/trees/wisteria_sinensis.webp" alt="Wisteria Sinensis (Blauwe Regen)" loading="lazy">
+                                <img src="images/trees/wisteria_sinensis.webp" alt="Wisteria Sinensis (Blauwe Regen)" loading="lazy" width="694" height="934" decoding="async">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Wisteria Sinensis</h3>
                                 <p class="exhibition-style">Bunjin (Literati Stijl)</p>
                             </div>
                         </div>
-                        <div class="exhibition-card reveal-on-scroll" onclick="toggleTree(this)">
+                        <div class="exhibition-card reveal-on-scroll" role="button" tabindex="0" data-tree-id="acer-palmatum">
                             <div class="exhibition-image-box skeleton">
-                                <img src="images/trees/acer_palmatum_rood.webp" alt="Acer Palmatum (Japanse Esdoorn)" loading="lazy">
+                                <img src="images/trees/acer_palmatum_groen_klein.webp" alt="Acer Palmatum (Japanse Esdoorn)" loading="lazy" width="931" height="956" decoding="async">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Acer Palmatum</h3>
                                 <p class="exhibition-style">Moyogi (Informele Rechtopgaande Stijl)</p>
                             </div>
                         </div>
-                        <div class="exhibition-card reveal-on-scroll" onclick="toggleTree(this)">
+                        <div class="exhibition-card reveal-on-scroll" role="button" tabindex="0" data-tree-id="juniperus-chinensis-rots">
                             <div class="exhibition-image-box skeleton">
-                                <img src="images/trees/juniperus_chinensis_rots.webp" alt="Juniperus Chinensis (Jeneverbes)" loading="lazy">
+                                <img src="images/trees/juniperus_chinensis_rots.webp" alt="Juniperus Chinensis (Jeneverbes)" loading="lazy" width="828" height="949" decoding="async">
                             </div>
                             <div class="exhibition-details">
                                 <h3 class="exhibition-species">Juniperus Chinensis</h3>
                                 <p class="exhibition-style">Ishisuki (In Rots Verankerd)</p>
                             </div>
                         </div>
-                        <div class="exhibition-card reveal-on-scroll" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box skeleton">
-                                <img src="images/trees/acer_palmatum_groen_klein.webp" alt="Acer Palmatum (Japanse Esdoorn)" loading="lazy">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Acer Palmatum</h3>
-                                <p class="exhibition-style">Moyogi (Informele Rechtopgaande Stijl)</p>
-                            </div>
-                        </div>
-                        <div class="exhibition-card reveal-on-scroll" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box skeleton">
-                                <img src="images/trees/larix_kaempferi.webp" alt="Larix Kaempferi (Japanse Larix)" loading="lazy">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Larix Kaempferi</h3>
-                                <p class="exhibition-style">Moyogi (Informele Rechtopgaande Stijl)</p>
-                            </div>
-                        </div>
-                        <div class="exhibition-card reveal-on-scroll" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box skeleton">
-                                <img src="images/trees/juniperus_itoigawa_shohin.webp" alt="Juniperus Chinensis 'Itoigawa'" loading="lazy">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Juniperus 'Itoigawa'</h3>
-                                <p class="exhibition-style">Moyogi (Informele Rechtopgaande Stijl)</p>
-                            </div>
-                        </div>
-                        <div class="exhibition-card reveal-on-scroll" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box skeleton">
-                                <img src="images/trees/larix_kaempferi_kaal.webp" alt="Larix Kaempferi (Japanse Larix)" loading="lazy">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Larix Kaempferi</h3>
-                                <p class="exhibition-style">Moyogi (Kaal)</p>
-                            </div>
-                        </div>
-                        <div class="exhibition-card reveal-on-scroll" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box skeleton">
-                                <img src="images/trees/pinus_sylvestris.webp" alt="Pinus Sylvestris (Grove Den)" loading="lazy">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Pinus Sylvestris</h3>
-                                <p class="exhibition-style">Bunjin (Literati Stijl)</p>
-                            </div>
-                        </div>
-                        <div class="exhibition-card reveal-on-scroll" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box skeleton">
-                                <img src="images/trees/larix_decidua.webp" alt="Larix Decidua (Europese Larix)" loading="lazy">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Larix Decidua</h3>
-                                <p class="exhibition-style">Shakan (Hellende Stijl)</p>
-                            </div>
-                        </div>
-                        <div class="exhibition-card reveal-on-scroll" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box skeleton">
-                                <img src="images/trees/acer_palmatum_groen_groot.webp" alt="Acer Palmatum (Japanse Esdoorn)" loading="lazy">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Acer Palmatum</h3>
-                                <p class="exhibition-style">Moyogi (Informele Rechtopgaande Stijl)</p>
-                            </div>
-                        </div>
-                        <div class="exhibition-card reveal-on-scroll" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box skeleton">
-                                <img src="images/trees/acer_palmatum_winter.webp" alt="Acer Palmatum (Japanse Esdoorn)" loading="lazy">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Acer Palmatum</h3>
-                                <p class="exhibition-style">Moyogi (Winter-silhouet)</p>
-                            </div>
-                        </div>
-
-                        <div class="exhibition-card reveal-on-scroll" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box skeleton">
-                                <img src="images/trees/acer_palmatum_pieter_chokkan.webp" alt="Acer Palmatum (Japanse Esdoorn)" loading="lazy">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Acer Palmatum</h3>
-                                <p class="exhibition-style">Chokkan (Formeel Rechtopgaande Stijl)</p>
-                            </div>
-                        </div>
-                        <div class="exhibition-card reveal-on-scroll" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box skeleton">
-                                <img src="images/trees/acer_palmatum_bos.webp" alt="Acer Palmatum (Japanse Esdoorn Bos)" loading="lazy">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Acer Palmatum</h3>
-                                <p class="exhibition-style">Yose-ue (Esdoornbos op plaat)</p>
-                            </div>
-                        </div>
-                        <div class="exhibition-card reveal-on-scroll" onclick="toggleTree(this)">
-                            <div class="exhibition-image-box skeleton">
-                                <img src="images/trees/ginkgo_biloba.webp" alt="Ginkgo Biloba" loading="lazy">
-                            </div>
-                            <div class="exhibition-details">
-                                <h3 class="exhibition-species">Ginkgo Biloba</h3>
-                                <p class="exhibition-style">Moyogi (Informele Rechtopgaande Stijl)</p>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
-                <div class="scroll-indicator">&larr; Scroll horizontaal voor meer &rarr;</div>
+                <div class="scroll-indicator">Klik op een boom voor de tokonoma-weergave</div>
             </section>
 
         </div>
@@ -251,8 +157,8 @@
 
     <div id="lightbox" class="lightbox">
         <span class="lightbox-close">&times;</span>
-        <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Vorige">&lsaquo;</button>
-        <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Volgende">&rsaquo;</button>
+        <button type="button" class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Vorige">&lsaquo;</button>
+        <button type="button" class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Volgende">&rsaquo;</button>
         <div class="tokonoma-frame" id="tokonoma-frame">
             <img id="tokonoma-img" src="" alt="Tokonoma Tree">
         </div>
@@ -264,11 +170,11 @@
         <div class="footer-container">
             <div class="footer-content">
                 <a href="index.html" aria-label="Terug naar home">
-                    <img src="images/logo_main.webp" alt="BVB Logo" class="footer-logo" loading="lazy">
+                    <img src="images/logo_main.webp" alt="BVB Logo" class="footer-logo" loading="lazy" width="594" height="698" decoding="async">
                 </a>
             </div>
             <div class="footer-bottom">
-                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="vereniging.html" class="contact-link">Vereniging</a> | Design door <a href="https://www.linkedin.com/in/rubenschmeitz/" target="_blank" class="contact-link">Ruben Schmeitz</a></p>
+                <p>Copyright &copy; 2026 Bonsai Vereniging Brabant | <a href="vereniging.html" class="contact-link">Vereniging</a> | Design door <a href="https://nl.linkedin.com/in/rubenschmeitz" target="_blank" rel="noopener noreferrer" class="contact-link">Ruben Schmeitz</a></p>
             </div>
         </div>
     </footer>
@@ -284,22 +190,22 @@
             <span>Galerij</span>
         </a>
         <a href="nbs.html" class="bottom-nav-item special">
-            <img src="images/logo_main.webp" alt="NBS">
+            <img src="images/logo_main.webp" alt="NBS" width="594" height="698" decoding="async">
             <span>NBS</span>
         </a>
         <a href="agenda.html" class="bottom-nav-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             <span>Agenda</span>
         </a>
-        <a href="javascript:void(0)" class="bottom-nav-item" id="fs-menu-trigger">
+        <button type="button" class="bottom-nav-item bottom-nav-button" id="fs-menu-trigger">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
             <span>Meer</span>
-        </a>
+        </button>
     </nav>
 
     <!-- Full Screen Menu Overlay -->
     <div class="full-screen-menu" id="full-screen-menu">
-        <button class="fs-menu-close" id="fs-menu-close" aria-label="Sluiten">
+        <button type="button" class="fs-menu-close" id="fs-menu-close" aria-label="Sluiten">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
         <div class="fs-menu-links">
@@ -308,7 +214,7 @@
             <a href="galerij.html">Galerij</a>
             <a href="agenda.html">Agenda</a>
             <div class="fs-menu-dropdown">
-                <a href="javascript:void(0)" class="fs-menu-trigger">Vereniging <svg class="fs-menu-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+                <button type="button" class="fs-menu-trigger">Vereniging <svg class="fs-menu-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
                 <div class="fs-menu-submenu">
                     <a href="over-ons.html">Over ons</a>
                     <a href="vereniging.html">Bonsai in Nederland</a>
@@ -318,6 +224,6 @@
         </div>
     </div>
 
-    <script src="js/app.js?v=15" defer></script>
+    <script src="js/app.js?v=23" defer></script>
 </body>
 </html>

@@ -18,6 +18,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 1a. Accessible desktop dropdown toggle
+    document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+        const trigger = dropdown.querySelector('.dropdown-trigger');
+        if (!trigger) return;
+
+        trigger.addEventListener('click', () => {
+            const isOpen = dropdown.classList.toggle('open');
+            trigger.setAttribute('aria-expanded', isOpen);
+        });
+
+        dropdown.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                dropdown.classList.remove('open');
+                trigger.setAttribute('aria-expanded', 'false');
+                trigger.focus();
+            }
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        document.querySelectorAll('.nav-dropdown.open').forEach(dropdown => {
+            if (dropdown.contains(e.target)) return;
+            dropdown.classList.remove('open');
+            const trigger = dropdown.querySelector('.dropdown-trigger');
+            if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        });
+    });
+
     // 1b. Full Screen Menu Logic
     const fsMenuTrigger = document.getElementById('fs-menu-trigger');
     const fsMenu = document.getElementById('full-screen-menu');
@@ -167,10 +195,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // 6. Init Social Carousels
     initIGCarousel('ig-carousel', 'ig-prev', 'ig-next', '#ig-dots .ig-dot');
 
+    // 6b. Gallery category and exhibition controls
+    document.querySelectorAll('.gallery-nav button[data-category]').forEach(button => {
+        button.addEventListener('click', () => {
+            showCategory(button.dataset.category);
+        });
+    });
+
+    document.querySelectorAll('.exhibition-card').forEach(card => {
+        card.addEventListener('click', () => toggleTree(card));
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleTree(card);
+            }
+        });
+    });
+
     // 7. Contact Form Handling
     const contactForm = document.querySelector('.contact-form');
     const submitBtn = contactForm ? contactForm.querySelector('.submit-btn') : null;
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz4yuS1qGTa4AqVABmqRfnDE45LU-8HlpGCU97fnQ9ZuanJmXI6YZtQ0_E49b5txMz9/exec';
+    const SCRIPT_URL = '';
+    const CONTACT_EMAIL = 'info@bonsai-brabant.nl';
 
     if (contactForm && submitBtn) {
         contactForm.addEventListener('submit', (e) => {
@@ -186,27 +232,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Turnstile Validation Check (only if a real Site Key is configured)
-            const turnstileContainer = contactForm.querySelector('.cf-turnstile');
-            const siteKey = turnstileContainer ? turnstileContainer.getAttribute('data-sitekey') : '';
-            const isRealSiteKey = siteKey && siteKey !== 'YOUR_TURNSTILE_SITE_KEY';
-            
-            if (isRealSiteKey) {
-                const turnstileResponse = contactForm.querySelector('[name="cf-turnstile-response"]')?.value;
-                if (!turnstileResponse) {
-                    showFeedback(false, "Mislukt: Voltooi a.u.b. de beveiligingscontrole.");
-                    return;
-                }
-            }
-
             submitBtn.disabled = true;
-            const originalBtnText = submitBtn.innerText;
             submitBtn.innerText = 'Verzenden...';
 
             const formData = new FormData(contactForm);
             const params = new URLSearchParams();
             for (const pair of formData) {
                 params.append(pair[0], pair[1]);
+            }
+
+            const openMailFallback = () => {
+                const name = formData.get('name') || '';
+                const email = formData.get('email') || '';
+                const subject = formData.get('subject') || 'Contactformulier';
+                const message = formData.get('message') || '';
+                const mailSubject = `Contactformulier BVB: ${subject}`;
+                const mailBody = [
+                    `Naam: ${name}`,
+                    `E-mail: ${email}`,
+                    `Onderwerp: ${subject}`,
+                    '',
+                    'Bericht:',
+                    message
+                ].join('\n');
+
+                window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+                showFeedback(true, 'Als je e-mailprogramma opent, staat het bericht klaar. Verstuur het daar om het echt te verzenden.');
+            };
+
+            if (!SCRIPT_URL) {
+                openMailFallback();
+                return;
             }
 
             fetch(SCRIPT_URL, {
@@ -219,9 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(error => {
                 console.error('Error:', error);
-                showFeedback(false, "Er is iets misgegaan. Probeer het later opnieuw.");
-                submitBtn.disabled = false;
-                submitBtn.innerText = originalBtnText;
+                openMailFallback();
             });
         });
     }
@@ -237,13 +291,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 : '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
             
             contactForm.innerHTML = `
-                <div style="text-align: center; padding: 2rem 0;">
-                    <div style="width: 80px; height: 80px; background: ${isSuccess ? 'var(--color-sage)' : '#d9534f'}; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                <div class="form-feedback">
+                    <div class="form-feedback-icon ${isSuccess ? 'success' : 'error'}">
                         ${icon}
                     </div>
-                    <h3 style="color: var(--color-bark); margin-bottom: 1rem;">${isSuccess ? 'Bedankt!' : 'Oeps!'}</h3>
-                    <p style="color: var(--color-charcoal); line-height: 1.6;">${message}</p>
-                    <button id="cf-reload-btn" type="button" style="margin-top: 2rem; background: transparent; border: 1px solid var(--color-bark); color: var(--color-bark); padding: 0.8rem 1.5rem; border-radius: 50px; cursor: pointer; font-weight: 600;">${isSuccess ? 'Nieuw bericht' : 'Opnieuw proberen'}</button>
+                    <h3 class="form-feedback-title">${isSuccess ? 'Bedankt!' : 'Oeps!'}</h3>
+                    <p class="form-feedback-text">${message}</p>
+                    <button id="cf-reload-btn" type="button" class="form-feedback-action">${isSuccess ? 'Nieuw bericht' : 'Opnieuw proberen'}</button>
                 </div>
             `;
             contactForm.style.opacity = '1';
@@ -338,7 +392,7 @@ function showCategory(categoryId) {
         }, 100);
     }
     
-    const clickedBtn = Array.from(document.querySelectorAll('.gallery-nav button')).find(b => b.getAttribute('onclick')?.includes(categoryId));
+    const clickedBtn = Array.from(document.querySelectorAll('.gallery-nav button')).find(b => b.dataset.category === categoryId);
     if (clickedBtn) clickedBtn.classList.add('active');
 }
 
@@ -374,10 +428,10 @@ function toggleTree(card) {
         // We passen ook een bottom-offset toe om eventuele schaduwranden of cascade-takken perfect te corrigeren op de houten vloer.
         const treeMetadata = {
             'carpinus_betulus.webp': { realHeightCm: 44, bottomOffset: 0, scale: 0.92 },
-            'wisteria_sinensis.webp': { realHeightCm: 55, bottomOffset: 0, scale: 1.15 },
+            'wisteria_sinensis.webp': { realHeightCm: 55, bottomOffset: 0, scale: 1.15, placement: { left: '41%', bottom: 20.5, height: 52 } },
             'acer_palmatum_rood.webp': { realHeightCm: 50, bottomOffset: 0, scale: 1.04 },
-            'juniperus_chinensis_rots.webp': { realHeightCm: 38, bottomOffset: 0, scale: 0.79 },
-            'acer_palmatum_groen_klein.webp': { realHeightCm: 50, bottomOffset: 0, scale: 1.04 },
+            'juniperus_chinensis_rots.webp': { realHeightCm: 38, bottomOffset: 0, scale: 0.79, placement: { left: '39%', bottom: 20.2, height: 37.5 } },
+            'acer_palmatum_groen_klein.webp': { realHeightCm: 50, bottomOffset: 0, scale: 1.04, placement: { left: '63%', bottom: 20, height: 40 } },
             'larix_kaempferi.webp': { realHeightCm: 45, bottomOffset: 0, scale: 0.94 },
             'juniperus_itoigawa_shohin.webp': { realHeightCm: 32, bottomOffset: 0, scale: 0.67 },
             'larix_kaempferi_kaal.webp': { realHeightCm: 46, bottomOffset: 0, scale: 0.96 },
@@ -394,29 +448,40 @@ function toggleTree(card) {
 
         // 3. Background Selection
         const backgrounds = [
-            { src: 'bg_left_mountain.png', scrollSide: 'left' },
-            { src: 'bg_right_calligraphy.png', scrollSide: 'right' },
-            { src: 'bg_left_enso.png', scrollSide: 'left' },
-            { src: 'bg_right_bamboo.png', scrollSide: 'right' }, // De boekrol is verschoven naar rechts
-            { src: 'bg_left_autumn.png', scrollSide: 'left' },
-            { src: 'bg_right_moon_bird.png', scrollSide: 'right' },
-            { src: 'bg_left_crane.png', scrollSide: 'left' },
-            { src: 'bg_right_pine.png', scrollSide: 'right' },
-            { src: 'bg_left_plum_blossom.png', scrollSide: 'left' },
-            { src: 'bg_right_river.png', scrollSide: 'right' }
+            { src: 'bg_left_mountain.png', scrollSide: 'left', treeSide: 'right' },
+            { src: 'bg_right_calligraphy.png', scrollSide: 'right', treeSide: 'left' },
+            { src: 'bg_left_enso.png', scrollSide: 'left', treeSide: 'right' },
+            { src: 'bg_right_bamboo.png', scrollSide: 'right', treeSide: 'left' },
+            { src: 'bg_left_autumn.png', scrollSide: 'left', treeSide: 'right' },
+            { src: 'bg_right_moon_bird.png', scrollSide: 'right', treeSide: 'left' },
+            { src: 'bg_left_crane.png', scrollSide: 'left', treeSide: 'right' },
+            { src: 'bg_right_pine.png', scrollSide: 'right', treeSide: 'left' },
+            { src: 'bg_left_plum_blossom.png', scrollSide: 'left', treeSide: 'right' },
+            { src: 'bg_right_river.png', scrollSide: 'right', treeSide: 'left' }
         ];
 
-        const selectedBg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
-        const treeSide = selectedBg.scrollSide === 'left' ? 'right' : 'left';
-        
+        const backgroundByTree = {
+            'wisteria_sinensis.webp': backgrounds.find(bg => bg.src === 'bg_right_calligraphy.png'),
+            'acer_palmatum_groen_klein.webp': backgrounds.find(bg => bg.src === 'bg_left_crane.png'),
+            'juniperus_chinensis_rots.webp': backgrounds.find(bg => bg.src === 'bg_right_river.png')
+        };
+
+        const hashValue = Array.from(filename).reduce((hash, char) => {
+            return ((hash << 5) - hash + char.charCodeAt(0)) >>> 0;
+        }, 0);
+        const selectedBg = backgroundByTree[filename] || backgrounds[hashValue % backgrounds.length];
+        const treeSide = selectedBg.treeSide;
+	        
         tokonomaFrame.style.backgroundImage = `url('images/tokonoma/backgrounds/${selectedBg.src}')`;
+        tokonomaFrame.dataset.scrollSide = selectedBg.scrollSide;
+        tokonomaFrame.dataset.treeSide = treeSide;
 
         if (lightboxCaption) {
             lightboxCaption.innerHTML = `
-                <div style="padding: 0 20px; text-align: center;">
-                    <span style="display:block; font-weight:700; font-size:1.5rem; margin-bottom: 2px; color: white;">${species}</span>
-                    <span style="display:block; font-size:0.85rem; opacity:0.8; text-transform:uppercase; letter-spacing:2px; color: var(--color-sand); margin-bottom: 8px;">${style}</span>
-                    <span style="display:inline-block; font-size:0.8rem; font-weight:600; padding: 3px 10px; border-radius: 20px; background: rgba(255,255,255,0.15); color: var(--color-sand); letter-spacing: 0.5px;">Formaat: ca. ${meta.realHeightCm} cm</span>
+                <div class="tokonoma-caption-content">
+                    <span class="tokonoma-caption-species">${species}</span>
+                    <span class="tokonoma-caption-style">${style}</span>
+                    <span class="tokonoma-caption-size">Formaat: ca. ${meta.realHeightCm} cm</span>
                 </div>
             `;
         }
@@ -424,25 +489,24 @@ function toggleTree(card) {
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
 
-        // Zowel links als rechts staan de bomen nu stabiel op de prachtige houten Tokonoma-vloerdelen.
-        // We corrigeren voor het perspectief- en hoogteverschil op basis van de strakke uitsnijding van de potten (links 19%, rechts 18%).
-        const baseBottomPercent = (treeSide === 'left') ? 19.00 : 18.00;
+        // Per tree placement keeps the display balanced with each scroll background.
+        const baseBottomPercent = (treeSide === 'left') ? 20.5 : 20.0;
         const baseHeightPercent = 43;
 
-        // Custom multiplier scale and offset van de boom-meta
-        const finalHeight = baseHeightPercent * meta.scale;
-        const finalBottom = baseBottomPercent + meta.bottomOffset;
-
-        // Asymmetrische balans (Fukinsei): links geplaatst op 38%, rechts geplaatst op 62%
-        const finalLeft = (treeSide === 'left') ? '38%' : '62%';
+        const defaultPlacement = {
+            height: baseHeightPercent * meta.scale,
+            bottom: baseBottomPercent + meta.bottomOffset,
+            left: (treeSide === 'left') ? '39%' : '62%'
+        };
+        const placement = { ...defaultPlacement, ...(meta.placement || {}) };
 
         tokonomaImg.style.position = 'absolute';
-        tokonomaImg.style.left = finalLeft;
+        tokonomaImg.style.left = placement.left;
         tokonomaImg.style.transform = 'translateX(-50%)';
         tokonomaImg.style.width = 'auto';
-        tokonomaImg.style.height = finalHeight + '%';
+        tokonomaImg.style.height = placement.height + '%';
         tokonomaImg.style.objectFit = 'contain';
-        tokonomaImg.style.bottom = finalBottom + '%';
+        tokonomaImg.style.bottom = placement.bottom + '%';
         tokonomaImg.style.top = 'auto';
         tokonomaImg.style.zIndex = '5';
         
@@ -467,6 +531,8 @@ function initLightbox(lightboxId, imgId, captionId, closeClass, itemClass) {
     if (!lightbox || !lightboxImg) return;
 
     document.querySelectorAll('.' + itemClass).forEach(item => {
+        item.setAttribute('role', 'button');
+        item.tabIndex = 0;
         item.addEventListener('click', () => {
             currentActiveActivityItem = item;
             currentActiveCard = null; // Reset Tokonoma gallery tracker
@@ -476,6 +542,12 @@ function initLightbox(lightboxId, imgId, captionId, closeClass, itemClass) {
             if (lightboxCaption) lightboxCaption.textContent = img.alt || "BVB Clubavond";
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
+        });
+        item.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                item.click();
+            }
         });
     });
 
@@ -516,7 +588,8 @@ function initLightbox(lightboxId, imgId, captionId, closeClass, itemClass) {
     const navigateLightbox = (direction) => {
         if (lightbox.classList.contains('tokonoma-mode')) {
             // Tokonoma Digital Exhibition Mode
-            const cards = Array.from(document.querySelectorAll('.exhibition-card'));
+            const cards = Array.from(document.querySelectorAll('.exhibition-card'))
+                .filter(card => !card.hidden && card.getBoundingClientRect().width > 0);
             if (!cards.length) return;
             let index = cards.indexOf(currentActiveCard);
             if (index === -1) index = 0;
@@ -601,6 +674,7 @@ function initLightbox(lightboxId, imgId, captionId, closeClass, itemClass) {
     }, { passive: true });
 }
 
+
 // 7. Interactive NL Map — Native SVG hitboxes with hover tooltip
 const initPremiumMap = () => {
     const container = document.querySelector('.nl-map-container-new');
@@ -626,25 +700,89 @@ const initPremiumMap = () => {
     }
 
     let activeMarker = null;
-    let hideTimeout = null;
+    let hideTimeoutId = null;
     let tooltipWidth = 0;
     let tooltipHeight = 0;
 
-    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    const getMarkerCenter = (marker) => {
+        const dot = marker.querySelector('.marker-dot');
+        if (!dot) return null;
+        const rect = dot.getBoundingClientRect();
+        return {
+            x: rect.left + rect.width / 2,
+            y: rect.top + rect.height / 2
+        };
+    };
 
-    const showTooltip = (marker) => {
+    const getNearestMarker = (event) => {
+        if (!event || typeof event.clientX !== 'number' || typeof event.clientY !== 'number') {
+            return null;
+        }
+
+        const maxDistance = window.matchMedia("(pointer: coarse)").matches ? 38 : 32;
+        let nearestMarker = null;
+        let nearestDistance = Infinity;
+
+        markers.forEach(marker => {
+            const center = getMarkerCenter(marker);
+            if (!center) return;
+
+            const distance = Math.hypot(event.clientX - center.x, event.clientY - center.y);
+            if (distance < nearestDistance) {
+                nearestDistance = distance;
+                nearestMarker = marker;
+            }
+        });
+
+        return nearestDistance <= maxDistance ? nearestMarker : null;
+    };
+
+    const navigateToMarker = (marker) => {
+        const parentAnchor = marker ? marker.closest('a') : null;
+        if (!parentAnchor) return;
+
+        const href = parentAnchor.getAttribute('href');
+        if (!href) return;
+
+        if (parentAnchor.getAttribute('target') === '_blank') {
+            window.open(href, '_blank', 'noopener,noreferrer');
+        } else {
+            window.location.href = href;
+        }
+    };
+
+    const showTooltip = (marker, makeInteractive = false) => {
         const circle = marker.querySelector('.marker-dot');
         if (!circle) return;
+
+        // Clean up any previously active markers to prevent stuck states when transitioning directly
+        markers.forEach(m => m.classList.remove('is-active-marker'));
 
         activeMarker = marker;
         marker.classList.add('is-active-marker');
 
         const town = marker.getAttribute('data-town') || '';
         const name = marker.getAttribute('data-name') || '';
-        tooltip.innerHTML = `<div class="tooltip-town">${town}</div><div class="tooltip-name">${name}</div>`;
+        
+        const parentAnchor = marker.closest('a');
+        const href = parentAnchor ? parentAnchor.getAttribute('href') : '#';
+        const target = parentAnchor ? parentAnchor.getAttribute('target') : '';
+        const targetAttr = target ? `target="${target}" rel="noopener noreferrer"` : '';
+        const ctaText = town === 'Berlicum' ? 'Bekijk vereniging &rarr;' : 'Bezoek website &rarr;';
+
+        tooltip.innerHTML = `
+            <div class="tooltip-town">${town}</div>
+            <div class="tooltip-name">${name}</div>
+            <a href="${href}" ${targetAttr} class="tooltip-cta">${ctaText}</a>
+        `;
         
         tooltip.style.display = 'flex';
         tooltip.classList.add('visible');
+        if (makeInteractive) {
+            tooltip.classList.add('interactive');
+        } else {
+            tooltip.classList.remove('interactive');
+        }
         tooltip.setAttribute('aria-hidden', 'false');
 
         // Wait for display:flex to calculate dimensions
@@ -696,53 +834,91 @@ const initPremiumMap = () => {
     };
 
     const hideTooltip = () => {
+        clearTimeout(hideTimeoutId);
         if (activeMarker) {
             activeMarker.classList.remove('is-active-marker');
         }
         tooltip.classList.remove('visible');
         tooltip.classList.remove('flipped');
+        tooltip.classList.remove('interactive');
         tooltip.setAttribute('aria-hidden', 'true');
+        
+        // Absolute cleanup to prevent overlapping/intercepting events:
+        tooltip.style.display = 'none';
+        tooltip.style.left = '-9999px';
+        tooltip.style.top = '-9999px';
+        
         activeMarker = null;
     };
+    // Track active pointer type to distinguish touch vs mouse interaction perfectly
+    let clickPointerType = 'mouse';
 
-    // Global tracking of pointer type to distinguish touch vs mouse interaction
-    let lastPointerType = 'mouse';
-    document.addEventListener('pointerdown', (e) => {
-        lastPointerType = e.pointerType;
-    }, { passive: true });
-    document.addEventListener('pointermove', (e) => {
-        lastPointerType = e.pointerType;
-    }, { passive: true });
-
-    // Attach native SVG event listeners
+    // Attach native SVG event listeners using PointerEvents
     markers.forEach(marker => {
-        // Hover listeners for mouse/pen users (skip for touch)
-        marker.addEventListener('mouseenter', () => {
-            if (lastPointerType === 'touch') return;
-            if (hideTimeout) { clearTimeout(hideTimeout); hideTimeout = null; }
-            showTooltip(marker);
-        });
-        marker.addEventListener('mouseleave', () => {
-            if (lastPointerType === 'touch') return;
-            hideTimeout = setTimeout(hideTooltip, 80);
-        });
+        // Track pointerdown to dynamically know if the interaction is a touch tap
+        marker.addEventListener('pointerdown', (e) => {
+            clickPointerType = e.pointerType;
+        }, { passive: true });
 
-        // Unified click handler
-        marker.addEventListener('click', (e) => {
-            if (lastPointerType === 'touch') {
-                if (activeMarker !== marker) {
-                    e.preventDefault(); // First tap: show tooltip, prevent navigation
+        // Hover listeners for mouse/pen users (skipped for touch)
+        marker.addEventListener('pointerenter', (e) => {
+            if (e.pointerType === 'touch') return;
+            clearTimeout(hideTimeoutId);
+            showTooltip(getNearestMarker(e) || marker, true);
+        });
+        
+        marker.addEventListener('pointerleave', (e) => {
+            if (e.pointerType === 'touch') return;
+            
+            // Check if we are moving the cursor into the tooltip
+            const enteredTooltip = e.relatedTarget && (tooltip === e.relatedTarget || tooltip.contains(e.relatedTarget));
+            if (!enteredTooltip) {
+                clearTimeout(hideTimeoutId);
+                hideTimeoutId = setTimeout(() => {
                     hideTooltip();
-                    showTooltip(marker);
-                } else {
-                    // Second tap: navigate naturally, but hide the tooltip shortly after
-                    setTimeout(hideTooltip, 100);
-                }
-            } else {
-                // Mouse/Pen: navigate immediately, but hide the tooltip so it doesn't get stuck if they press back
-                setTimeout(hideTooltip, 100);
+                }, 250);
             }
         });
+
+        // Unified click/tap handler
+        marker.addEventListener('click', (e) => {
+            const targetMarker = getNearestMarker(e) || marker;
+            const isTouch = clickPointerType === 'touch' || window.matchMedia("(pointer: coarse)").matches;
+            e.preventDefault();
+
+            if (isTouch) {
+                if (activeMarker !== targetMarker) {
+                    hideTooltip();
+                    showTooltip(targetMarker, true);
+                } else {
+                    hideTooltip();
+                    navigateToMarker(targetMarker);
+                }
+            } else {
+                hideTooltip();
+                navigateToMarker(targetMarker);
+            }
+        });
+    });
+
+    // Keep tooltip open when cursor enters it
+    tooltip.addEventListener('pointerenter', (e) => {
+        if (clickPointerType === 'touch') return;
+        clearTimeout(hideTimeoutId);
+    });
+
+    // Add pointerleave to the tooltip container to hide it when mouse leaves the tooltip
+    tooltip.addEventListener('pointerleave', (e) => {
+        if (clickPointerType === 'touch') return; // Ignore on touch devices
+        
+        // Check if we are moving back into the active marker
+        const enteredActiveMarker = activeMarker && (activeMarker === e.relatedTarget || activeMarker.contains(e.relatedTarget));
+        if (!enteredActiveMarker) {
+            clearTimeout(hideTimeoutId);
+            hideTimeoutId = setTimeout(() => {
+                hideTooltip();
+            }, 250);
+        }
     });
 
     // Dismiss tooltip on tap/click outside the map
