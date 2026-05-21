@@ -3428,6 +3428,19 @@ body.atcb-modal-open {
     }
 }
 
+@media (max-width: 480px) {
+    .nl-interactive-map-wrapper {
+        padding: 1rem 0.75rem;
+        border-radius: 16px;
+    }
+    .nl-map-container-new {
+        min-width: unset;
+        width: 100%;
+        padding: 0.75rem;
+        border-radius: 12px;
+    }
+}
+
 /* --- Utility Classes & Performance Helpers --- */
 .text-center { text-align: center; }
 .text-left { text-align: left; }

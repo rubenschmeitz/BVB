@@ -673,6 +673,11 @@ const initPremiumMap = () => {
             if (tooltipX + tooltipWidth > cRect.width - 10) {
                 tooltipX = cRect.width - tooltipWidth - 10;
             }
+
+            // Calculate arrow offset to ensure the arrow points exactly at the dot
+            const arrowOffset = x - (tooltipX + tooltipWidth / 2);
+            tooltip.style.setProperty('--arrow-offset', `${arrowOffset}px`);
+
             let isFlipped = false;
             if (tooltipY < 10) {
                 tooltipY = y + 25; // Flip below if too high
@@ -700,34 +705,44 @@ const initPremiumMap = () => {
         activeMarker = null;
     };
 
+    // Global tracking of pointer type to distinguish touch vs mouse interaction
+    let lastPointerType = 'mouse';
+    document.addEventListener('pointerdown', (e) => {
+        lastPointerType = e.pointerType;
+    }, { passive: true });
+    document.addEventListener('pointermove', (e) => {
+        lastPointerType = e.pointerType;
+    }, { passive: true });
+
     // Attach native SVG event listeners
     markers.forEach(marker => {
-        // Mobile: 2-tap logic
-        if (isTouch) {
-            marker.addEventListener('click', (e) => {
+        // Hover listeners for mouse/pen users (skip for touch)
+        marker.addEventListener('mouseenter', () => {
+            if (lastPointerType === 'touch') return;
+            if (hideTimeout) { clearTimeout(hideTimeout); hideTimeout = null; }
+            showTooltip(marker);
+        });
+        marker.addEventListener('mouseleave', () => {
+            if (lastPointerType === 'touch') return;
+            hideTimeout = setTimeout(hideTooltip, 80);
+        });
+
+        // Unified click handler
+        marker.addEventListener('click', (e) => {
+            if (lastPointerType === 'touch') {
                 if (activeMarker !== marker) {
-                    e.preventDefault(); // Stop native navigation on 1st tap
+                    e.preventDefault(); // First tap: show tooltip, prevent navigation
                     hideTooltip();
                     showTooltip(marker);
                 } else {
-                    // 2nd tap: navigate natively, but hide the tooltip so it doesn't stay large if we return
+                    // Second tap: navigate naturally, but hide the tooltip shortly after
                     setTimeout(hideTooltip, 100);
                 }
-            });
-        } else {
-            // Desktop: hover logic
-            marker.addEventListener('mouseenter', () => {
-                if (hideTimeout) { clearTimeout(hideTimeout); hideTimeout = null; }
-                showTooltip(marker);
-            });
-            marker.addEventListener('mouseleave', () => {
-                hideTimeout = setTimeout(hideTooltip, 80);
-            });
-            marker.addEventListener('click', () => {
-                // Instantly hide when clicked so it doesn't stay stuck large (e.g. new tab opens)
+            } else {
+                // Mouse/Pen: navigate immediately, but hide the tooltip so it doesn't get stuck if they press back
                 setTimeout(hideTooltip, 100);
-            });
-        }
+            }
+        });
     });
 
     // Dismiss tooltip on tap/click outside the map
