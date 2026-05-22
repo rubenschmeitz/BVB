@@ -168,12 +168,18 @@ a:focus-visible {
 
 .logo-wrapper {
     position: relative;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
     margin-bottom: 0;
 }
 
 .main-logo {
     height: 55px;
+    width: auto;
+    max-width: none;
+    object-fit: contain;
+    aspect-ratio: 47 / 55;
     display: block;
     transition: filter 0.5s ease;
 }
@@ -537,6 +543,23 @@ a:focus-visible {
     height: 400px;
     background: radial-gradient(circle, var(--color-warm-shadow) 0%, transparent 70%);
     pointer-events: none;
+}
+
+.home-page .premium-section {
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 2.35rem 0;
+    overflow: visible;
+}
+
+.home-page .premium-section::before {
+    display: none;
+}
+
+.home-page .premium-section + .premium-section {
+    border-top: 1px solid rgba(122, 91, 73, 0.1);
 }
 
 .content-container, .content-container-wide {
@@ -1226,8 +1249,12 @@ a:focus-visible {
 
 /* --- Responsive & Mobile Optimization --- */
 @media (max-width: 900px) {
+    .site-header {
+        padding: 0;
+    }
+
     .header-container {
-        padding: 0.6rem 5%;
+        padding: 0.38rem 5%;
         flex-direction: row;
         justify-content: space-between;
     }
@@ -1238,6 +1265,7 @@ a:focus-visible {
 
     .main-logo {
         height: 45px;
+        width: auto;
     }
     
     .site-title {
@@ -1314,6 +1342,7 @@ a:focus-visible {
 @media (max-width: 600px) {
     .main-logo {
         height: 40px;
+        width: auto;
     }
     
     .site-title {
@@ -1424,11 +1453,12 @@ a:focus-visible {
     }
     
     .header-container {
-        padding: 0 0.5rem;
+        padding: 0.32rem 0.5rem;
     }
     
     .main-logo {
         height: 40px;
+        width: auto;
     }
 }
 
@@ -1443,13 +1473,14 @@ a:focus-visible {
     
     .site-branding {
         flex-direction: row;
-        gap: 1rem;
+        gap: 0.65rem;
         text-align: left;
         align-items: center;
     }
     
     .main-logo {
         height: 45px;
+        width: auto;
         margin-bottom: 0;
     }
 }
@@ -1938,6 +1969,57 @@ a:focus-visible {
     color: var(--color-charcoal);
     line-height: 1.6;
     margin: 0;
+}
+
+.home-page .feature-grid {
+    gap: 1.4rem;
+    margin: 1.25rem 0 0;
+}
+
+.home-page .feature-card {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+    text-align: left;
+}
+
+.home-page .feature-card:hover {
+    transform: translateY(-3px);
+    box-shadow: none;
+}
+
+.home-page .feature-media {
+    position: relative;
+}
+
+.home-page .feature-image-wrapper {
+    height: 210px;
+    border-radius: 14px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+}
+
+.home-page .feature-icon-badge {
+    width: 42px;
+    height: 42px;
+    left: 1rem;
+    bottom: -14px;
+    transform: none;
+}
+
+.home-page .feature-card-body {
+    padding: 1.35rem 0.15rem 0;
+}
+
+.home-page .feature-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.45rem;
+}
+
+.home-page .feature-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 
 /* --- Layout Splits --- */
@@ -2998,10 +3080,6 @@ details[data-mobile-collapsible] > summary {
     min-width: 0;
 }
 
-.mobile-map-details {
-    width: 100%;
-}
-
 .schedule-day {
     margin-bottom: 1.5rem;
 }
@@ -3639,13 +3717,21 @@ body.atcb-modal-open {
     color: var(--color-charcoal);
 }
 
-.map-nbv-dot {
-    width: 0.82rem;
-    height: 0.82rem;
-    border-radius: 50%;
-    background: #D97706;
-    box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.14);
+.map-nbv-logo {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 8px;
+    background: var(--color-white-pure);
+    border: 1px solid rgba(122, 91, 73, 0.22);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    color: var(--color-bark);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     flex: 0 0 auto;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
 }
 
 .map-nbv-town {
@@ -5264,7 +5350,6 @@ body.atcb-modal-open {
 
     .mobile-filter-panel,
     .mobile-practical-info,
-    .mobile-map-details,
     .mobile-read-more,
     .schedule-day {
         margin-bottom: 0.7rem;
@@ -5273,7 +5358,6 @@ body.atcb-modal-open {
     .mobile-filter-panel .filter-group,
     .mobile-practical-info > .sidebar-card,
     .mobile-read-more > p,
-    .mobile-map-details > .nl-interactive-map-wrapper,
     .schedule-day > .timeline-day-header,
     .schedule-day > .nbs-timeline {
         margin-top: 0.65rem;
@@ -5449,12 +5533,32 @@ select {
     .header-container,
     .footer-container {
         width: 100%;
+        max-width: 100%;
         padding-left: max(14px, env(safe-area-inset-left, 0px));
         padding-right: max(14px, env(safe-area-inset-right, 0px));
     }
 
+    .content-area,
+    .home-intro-section,
+    .split-layout,
+    .split-text,
+    .gallery-category,
+    .gallery-header,
+    .agenda-grid-layout,
+    .agenda-main-column,
+    .agenda-sidebar,
+    .community-map-section {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .header-container {
+        padding-top: 0.28rem;
+        padding-bottom: 0.28rem;
+    }
+
     .site-branding {
-        gap: 0.65rem;
+        gap: 0.58rem;
         min-width: 0;
     }
 
@@ -5465,7 +5569,7 @@ select {
     .site-title {
         max-width: calc(100vw - 96px);
         font-size: clamp(1.02rem, 5.6vw, 1.26rem) !important;
-        line-height: 1.12 !important;
+        line-height: 1.05 !important;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -5476,13 +5580,28 @@ select {
         max-width: calc(100vw - 96px);
         font-size: 0.68rem !important;
         letter-spacing: 0.08em !important;
+        line-height: 1.05 !important;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
 
     .main-logo {
-        height: 36px !important;
+        height: 42px !important;
+        width: auto !important;
+        max-width: none !important;
+    }
+
+    .home-page .premium-section {
+        padding: 1.25rem 0 !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+
+    .home-page .premium-section + .premium-section {
+        border-top: 1px solid rgba(122, 91, 73, 0.1);
     }
 
     .page-hero {
@@ -5495,17 +5614,122 @@ select {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 0.6rem !important;
         padding: 0 !important;
-        margin-bottom: 1.25rem !important;
+        margin-bottom: 0.7rem !important;
     }
 
     .gallery-nav button {
         width: 100% !important;
         min-height: 42px;
+        min-width: 0;
+        padding: 0.55rem 0.28rem !important;
+        font-size: 0.76rem !important;
+        line-height: 1.1;
         justify-content: center;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .gallery-header {
+        margin-bottom: 0.75rem !important;
+    }
+
+    .gallery-header h2 {
+        font-size: 1.15rem !important;
+        line-height: 1.15 !important;
+        margin-bottom: 0.25rem !important;
+    }
+
+    .gallery-header p {
+        max-width: 100%;
+        font-size: 0.82rem !important;
+        line-height: 1.35 !important;
+        overflow-wrap: break-word;
+        padding: 0 0.1rem;
+    }
+
+    .activity-grid {
+        gap: 0.45rem !important;
+        margin-top: 0.6rem;
+    }
+
+    .activity-item {
+        border-radius: 10px;
+    }
+
+    .home-page .feature-grid {
+        gap: 0;
+        margin-top: 0.7rem;
+    }
+
+    .home-page .feature-card {
+        display: grid;
+        grid-template-columns: minmax(92px, 34%) minmax(0, 1fr);
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.62rem 0;
+        border-bottom: 1px solid rgba(122, 91, 73, 0.1);
+    }
+
+    .home-page .feature-card:last-child {
+        border-bottom: 0;
+    }
+
+    .home-page .feature-card:hover {
+        transform: none;
+    }
+
+    .home-page .feature-image-wrapper {
+        height: 96px !important;
+        border-radius: 10px;
+        box-shadow: none;
+    }
+
+    .home-page .feature-icon-badge {
+        display: none;
+    }
+
+    .home-page .feature-card-body {
+        padding: 0 !important;
+    }
+
+    .home-page .feature-card h3 {
+        font-size: 0.98rem;
+        line-height: 1.15;
+        margin-bottom: 0.2rem;
+    }
+
+    .home-page .feature-card p {
+        font-size: 0.78rem;
+        line-height: 1.35;
+    }
+
+    .home-intro-section .split-text {
+        overflow-wrap: break-word;
+    }
+
+    .home-intro-section .split-text .lead {
+        max-width: 100%;
+        font-size: 0.94rem !important;
+        line-height: 1.42 !important;
+        overflow-wrap: break-word;
+    }
+
+    .action-row .button-primary,
+    .action-row .button-secondary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 36px;
+        white-space: normal;
+        overflow-wrap: anywhere;
     }
 
     .agenda-grid-layout {
         gap: 1rem;
+    }
+
+    .agenda-sidebar {
+        order: -1;
     }
 
     .agenda-controls {
@@ -5696,32 +5920,53 @@ select {
     }
 
     .exhibition-wrapper {
-        margin: 1.25rem -14px;
-        padding: 1.25rem 0 0.9rem;
-        scroll-padding-inline: 14px;
+        margin: 0.7rem 0 0;
+        padding: 0;
+        overflow: visible;
+        background: transparent;
+        border: 0;
+        scrollbar-width: none;
     }
 
     .exhibition-container {
-        gap: 1.25rem;
-        padding: 0 14px 1rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+        gap: 0.75rem;
+        padding: 0;
+        align-items: stretch;
+        scroll-snap-type: none;
     }
 
     .exhibition-card {
-        width: min(76vw, 280px);
-        gap: 0.85rem;
+        width: 100%;
+        display: grid;
+        grid-template-columns: minmax(96px, 34%) minmax(0, 1fr);
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.7rem;
+        background: var(--color-white-pure);
+        border: 1px solid rgba(122, 91, 73, 0.12);
+        border-radius: 12px;
+        scroll-snap-align: none;
     }
 
     .exhibition-image-box {
-        height: min(70vw, 300px);
+        height: clamp(118px, 32vw, 150px) !important;
+        width: 100%;
     }
 
     .exhibition-species {
-        font-size: 1rem;
+        font-size: 1rem !important;
     }
 
     .exhibition-style {
         font-size: 0.68rem;
         letter-spacing: 0.12em;
+    }
+
+    .scroll-indicator {
+        display: none;
     }
 
     .lightbox.tokonoma-mode {
@@ -5768,9 +6013,35 @@ select {
         margin-bottom: 1rem;
     }
 
+    .nl-interactive-map-wrapper {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 0.8rem;
+        overflow: hidden;
+    }
+
+    .nl-map-container-new {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0 !important;
+    }
+
     .map-nbv-link {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: center;
+        justify-content: flex-start;
         min-height: 44px;
         padding: 0.35rem 0;
+        text-align: left;
+        font-size: 0.9rem;
+    }
+
+    .map-nbv-town {
+        width: auto;
+        grid-column: 2;
+        font-size: 0.78rem;
     }
 
     .map-tooltip {
