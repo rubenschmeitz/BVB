@@ -18,7 +18,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 1a. Accessible desktop dropdown toggle
+    // 1a. Mobile-only compact details: open on desktop, collapsed once on mobile
+    const mobileCollapsibles = document.querySelectorAll('details[data-mobile-collapsible]');
+    const mobileCollapsibleQuery = window.matchMedia('(max-width: 600px)');
+
+    const syncMobileCollapsibles = () => {
+        mobileCollapsibles.forEach(details => {
+            if (mobileCollapsibleQuery.matches) {
+                if (!details.dataset.mobileReady) {
+                    details.open = false;
+                    details.dataset.mobileReady = 'true';
+                }
+            } else {
+                details.open = true;
+                delete details.dataset.mobileReady;
+            }
+        });
+    };
+
+    if (mobileCollapsibles.length) {
+        syncMobileCollapsibles();
+        if (typeof mobileCollapsibleQuery.addEventListener === 'function') {
+            mobileCollapsibleQuery.addEventListener('change', syncMobileCollapsibles);
+        } else if (typeof mobileCollapsibleQuery.addListener === 'function') {
+            mobileCollapsibleQuery.addListener(syncMobileCollapsibles);
+        }
+    }
+
+    // 1b. Accessible desktop dropdown toggle
     document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
         const trigger = dropdown.querySelector('.dropdown-trigger');
         if (!trigger) return;
@@ -46,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 1b. Full Screen Menu Logic
+    // 1c. Full Screen Menu Logic
     const fsMenuTrigger = document.getElementById('fs-menu-trigger');
     const fsMenu = document.getElementById('full-screen-menu');
     const fsMenuClose = document.getElementById('fs-menu-close');
