@@ -1203,21 +1203,24 @@ a:focus-visible {
 
 @media (max-width: 600px) {
     .site-footer {
-        padding: 0.8rem 0 0.8rem; /* Minimal padding since body already has padding-bottom for mobile nav */
+        padding: 0.55rem 0 0.6rem;
     }
     .footer-content {
-        gap: 0.4rem;
-        margin-bottom: 0.4rem;
+        gap: 0.25rem;
+        margin-bottom: 0.25rem;
     }
     .footer-logo {
-        height: 26px; /* Super minimal logo height for mobile */
+        height: 22px;
     }
     .footer-bottom {
-        padding-top: 0.4rem;
+        padding-top: 0.3rem;
     }
     .footer-bottom p {
-        font-size: 0.72rem; /* Clean and small text */
-        line-height: 1.4;
+        max-width: 28rem;
+        margin: 0 auto;
+        font-size: 0.64rem;
+        line-height: 1.25;
+        letter-spacing: 0;
     }
 }
 
