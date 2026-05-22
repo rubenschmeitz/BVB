@@ -157,9 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2500);
     });
 
-    // 4. Header & Back-to-Top Scroll Effect (Throttled)
+    // 4. Header Scroll Effect (Throttled)
     const header = document.querySelector('.site-header');
-    const backToTop = document.getElementById('back-to-top');
     let isScrolling = false;
     const scrollHandler = () => {
         if (!isScrolling) {
@@ -169,10 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (header) {
                     header.classList.toggle('scrolled', scrollPos > 50);
                 }
-
-                if (backToTop) {
-                    backToTop.classList.toggle('visible', scrollPos > 400);
-                }
                 isScrolling = false;
             });
             isScrolling = true;
@@ -180,12 +175,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.addEventListener('scroll', scrollHandler, { passive: true });
-
-    if (backToTop) {
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    }
 
     // 5. Calendar Library Safety
     window.addEventListener('focus', () => {
