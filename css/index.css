@@ -5066,6 +5066,23 @@ body.atcb-modal-open {
         border-radius: 12px !important;
         gap: 0.8rem !important;
     }
+
+    .action-row {
+        margin-top: 0.85rem;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.45rem;
+    }
+
+    .button-primary,
+    .button-secondary {
+        min-width: 0;
+        padding: 0.6rem 0.35rem;
+        font-size: clamp(0.68rem, 3.1vw, 0.78rem);
+        line-height: 1.1;
+        text-align: center;
+        white-space: nowrap;
+    }
     
     .feature-card-body {
         padding: 1.1rem 0.8rem 0.8rem !important;
