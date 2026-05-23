@@ -1,951 +1,294 @@
-/**
- * BVB Website - Consolidated App Logic
- */
+(() => {
+    'use strict';
 
-// Global function to (re)initialize reveal observers
-let initRevealObservers;
+    const BVB = window.BVB = window.BVB || {};
 
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Mobile Menu Toggle
-    const mobileToggle = document.getElementById('mobile-toggle');
-    const mainNav = document.getElementById('main-nav');
+    const onReady = (callback) => {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', callback);
+        } else {
+            callback();
+        }
+    };
 
-    if (mobileToggle && mainNav) {
+    const setBodyLocked = (locked) => {
+        document.body.style.overflow = locked ? 'hidden' : '';
+    };
+
+    BVB.onReady = onReady;
+    BVB.setBodyLocked = setBodyLocked;
+
+    onReady(() => {
+        initMobileNav();
+        initMobileCollapsibles();
+        initDropdownNav();
+        initFullScreenMenu();
+        syncBottomNavActiveState();
+        initRevealObservers();
+        initLazyImages();
+        initHomeGallery();
+        initHeaderScroll();
+    });
+
+    function initMobileNav() {
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mainNav = document.getElementById('main-nav');
+
+        if (!mobileToggle || !mainNav) return;
+
         mobileToggle.addEventListener('click', () => {
             const isActive = mobileToggle.classList.toggle('active');
-            mainNav.classList.toggle('active');
-            mobileToggle.setAttribute('aria-expanded', isActive);
+            mainNav.classList.toggle('active', isActive);
+            mobileToggle.setAttribute('aria-expanded', String(isActive));
         });
     }
 
-    // 1a. Mobile-only compact details: open on desktop, collapsed once on mobile
-    const mobileCollapsibles = document.querySelectorAll('details[data-mobile-collapsible]');
-    const mobileCollapsibleQuery = window.matchMedia('(max-width: 600px)');
+    function initMobileCollapsibles() {
+        const mobileCollapsibles = document.querySelectorAll('details[data-mobile-collapsible]');
+        if (!mobileCollapsibles.length || typeof window.matchMedia !== 'function') return;
 
-    const syncMobileCollapsibles = () => {
-        mobileCollapsibles.forEach(details => {
-            if (mobileCollapsibleQuery.matches) {
-                if (!details.dataset.mobileReady) {
-                    details.open = false;
-                    details.dataset.mobileReady = 'true';
+        const mobileQuery = window.matchMedia('(max-width: 600px)');
+        const syncMobileCollapsibles = () => {
+            mobileCollapsibles.forEach(details => {
+                if (mobileQuery.matches) {
+                    if (!details.dataset.mobileReady) {
+                        details.open = false;
+                        details.dataset.mobileReady = 'true';
+                    }
+                } else {
+                    details.open = true;
+                    delete details.dataset.mobileReady;
                 }
-            } else {
-                details.open = true;
-                delete details.dataset.mobileReady;
-            }
-        });
-    };
+            });
+        };
 
-    if (mobileCollapsibles.length) {
         syncMobileCollapsibles();
-        if (typeof mobileCollapsibleQuery.addEventListener === 'function') {
-            mobileCollapsibleQuery.addEventListener('change', syncMobileCollapsibles);
-        } else if (typeof mobileCollapsibleQuery.addListener === 'function') {
-            mobileCollapsibleQuery.addListener(syncMobileCollapsibles);
+        if (typeof mobileQuery.addEventListener === 'function') {
+            mobileQuery.addEventListener('change', syncMobileCollapsibles);
+        } else if (typeof mobileQuery.addListener === 'function') {
+            mobileQuery.addListener(syncMobileCollapsibles);
         }
     }
 
-    // 1b. Accessible desktop dropdown toggle
-    document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
-        const trigger = dropdown.querySelector('.dropdown-trigger');
-        if (!trigger) return;
+    function initDropdownNav() {
+        document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+            const trigger = dropdown.querySelector('.dropdown-trigger');
+            if (!trigger) return;
 
-        trigger.addEventListener('click', () => {
-            const isOpen = dropdown.classList.toggle('open');
-            trigger.setAttribute('aria-expanded', isOpen);
-        });
+            trigger.addEventListener('click', () => {
+                const isOpen = dropdown.classList.toggle('open');
+                trigger.setAttribute('aria-expanded', String(isOpen));
+            });
 
-        dropdown.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
+            dropdown.addEventListener('keydown', (event) => {
+                if (event.key !== 'Escape') return;
                 dropdown.classList.remove('open');
                 trigger.setAttribute('aria-expanded', 'false');
                 trigger.focus();
-            }
+            });
         });
-    });
 
-    document.addEventListener('click', (e) => {
-        document.querySelectorAll('.nav-dropdown.open').forEach(dropdown => {
-            if (dropdown.contains(e.target)) return;
-            dropdown.classList.remove('open');
-            const trigger = dropdown.querySelector('.dropdown-trigger');
-            if (trigger) trigger.setAttribute('aria-expanded', 'false');
-        });
-    });
-
-    // 1c. Full Screen Menu Logic
-    const fsMenuTrigger = document.getElementById('fs-menu-trigger');
-    const fsMenu = document.getElementById('full-screen-menu');
-    const fsMenuClose = document.getElementById('fs-menu-close');
-
-    if (fsMenuTrigger && fsMenu) {
-        fsMenuTrigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            fsMenu.classList.add('active');
-            document.body.style.overflow = 'hidden';
+        document.addEventListener('click', (event) => {
+            document.querySelectorAll('.nav-dropdown.open').forEach(dropdown => {
+                if (dropdown.contains(event.target)) return;
+                dropdown.classList.remove('open');
+                const trigger = dropdown.querySelector('.dropdown-trigger');
+                if (trigger) trigger.setAttribute('aria-expanded', 'false');
+            });
         });
     }
 
-    if (fsMenuClose && fsMenu) {
-        fsMenuClose.addEventListener('click', () => {
+    function initFullScreenMenu() {
+        const fsMenuTrigger = document.getElementById('fs-menu-trigger');
+        const fsMenu = document.getElementById('full-screen-menu');
+        const fsMenuClose = document.getElementById('fs-menu-close');
+        const fsDropdown = document.querySelector('.fs-menu-dropdown');
+        const fsDropdownTrigger = fsDropdown ? fsDropdown.querySelector('.fs-menu-trigger') : null;
+
+        if (!fsMenu) return;
+
+        const closeMenu = () => {
             fsMenu.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-    }
-
-    // Close FS menu on link click
-    document.querySelectorAll('.fs-menu-links a:not(.fs-menu-trigger)').forEach(link => {
-        link.addEventListener('click', () => {
-            fsMenu.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-    });
-
-    // 1d. Full Screen Menu Dropdown Toggle (Mobile)
-    const fsDropdownTrigger = document.querySelector('.fs-menu-trigger');
-    const fsDropdown = document.querySelector('.fs-menu-dropdown');
-    if (fsDropdownTrigger && fsDropdown) {
-        fsDropdownTrigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            const isExpanded = fsDropdown.classList.toggle('expanded');
-            fsDropdownTrigger.setAttribute('aria-expanded', isExpanded);
-        });
-    }
-
-    // 1c. Bottom Nav Active State Sync
-    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('.bottom-nav-item').forEach(item => {
-        const href = item.getAttribute('href');
-        if (href === currentPath) {
-            item.classList.add('active');
-        } else {
-            item.classList.remove('active');
-        }
-    });
-
-    // 2. Scroll Reveal Observer - Refined for performance
-    const observerOptions = {
-        threshold: 0.05,
-        rootMargin: '0px 0px 50px 0px' // Reveal slightly before entering
-    };
-
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                revealObserver.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    // Specialized observer for horizontal containers
-    const horizontalObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                horizontalObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 100px 0px 100px' });
-
-    initRevealObservers = () => {
-        document.querySelectorAll('.reveal-on-scroll:not(.active)').forEach(el => {
-            // Horizontal check
-            if (el.closest('.exhibition-container')) {
-                horizontalObserver.observe(el);
-            } else {
-                revealObserver.observe(el);
-            }
-        });
-    };
-
-    initRevealObservers();
-
-    // 3. Lazy Image Loading Enhancement & Skeleton Removal
-    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-    lazyImages.forEach(img => {
-        const handleLoad = () => {
-            img.classList.add('loaded');
-            if (img.parentElement && img.parentElement.classList.contains('skeleton')) {
-                img.parentElement.classList.add('loaded');
-                // Optional: remove skeleton class after fade
-                setTimeout(() => img.parentElement.classList.remove('skeleton'), 600);
-            }
+            setBodyLocked(false);
         };
 
-        img.addEventListener('load', handleLoad);
-        if (img.complete) handleLoad();
-        
-        // Safety timeout to remove skeletons if loading fails or is too slow
-        setTimeout(() => {
-            if (img.parentElement && img.parentElement.classList.contains('skeleton') && !img.parentElement.classList.contains('loaded')) {
-                handleLoad();
-            }
-        }, 2500);
-    });
+        BVB.closeFullScreenMenu = closeMenu;
 
-    // 4. Header Scroll Effect (Throttled)
-    const header = document.querySelector('.site-header');
-    let isScrolling = false;
-    const scrollHandler = () => {
-        if (!isScrolling) {
-            window.requestAnimationFrame(() => {
-                const scrollPos = window.scrollY;
+        if (fsMenuTrigger) {
+            fsMenuTrigger.addEventListener('click', (event) => {
+                event.preventDefault();
+                fsMenu.classList.add('active');
+                setBodyLocked(true);
+            });
+        }
 
-                if (header) {
-                    header.classList.toggle('scrolled', scrollPos > 50);
+        if (fsMenuClose) {
+            fsMenuClose.addEventListener('click', closeMenu);
+        }
+
+        fsMenu.querySelectorAll('.fs-menu-links a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        if (fsDropdownTrigger && fsDropdown) {
+            fsDropdownTrigger.addEventListener('click', (event) => {
+                event.preventDefault();
+                const isExpanded = fsDropdown.classList.toggle('expanded');
+                fsDropdownTrigger.setAttribute('aria-expanded', String(isExpanded));
+            });
+        }
+    }
+
+    function syncBottomNavActiveState() {
+        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+
+        document.querySelectorAll('.bottom-nav-item').forEach(item => {
+            const href = item.getAttribute('href');
+            item.classList.toggle('active', href === currentPath);
+        });
+    }
+
+    function initRevealObservers() {
+        if (!('IntersectionObserver' in window)) {
+            const revealAll = () => {
+                document.querySelectorAll('.reveal-on-scroll:not(.active)').forEach(el => {
+                    el.classList.add('active');
+                });
+            };
+            BVB.initRevealObservers = revealAll;
+            window.initRevealObservers = revealAll;
+            revealAll();
+            return;
+        }
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('active');
+                revealObserver.unobserve(entry.target);
+            });
+        }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' });
+
+        const horizontalObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('active');
+                horizontalObserver.unobserve(entry.target);
+            });
+        }, { threshold: 0.1, rootMargin: '0px 100px 0px 100px' });
+
+        const observeReveals = () => {
+            document.querySelectorAll('.reveal-on-scroll:not(.active)').forEach(el => {
+                if (el.closest('.exhibition-container')) {
+                    horizontalObserver.observe(el);
+                } else {
+                    revealObserver.observe(el);
                 }
+            });
+        };
+
+        BVB.initRevealObservers = observeReveals;
+        window.initRevealObservers = observeReveals;
+        observeReveals();
+    }
+
+    function initLazyImages() {
+        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+            const handleLoad = () => {
+                img.classList.add('loaded');
+                if (img.parentElement && img.parentElement.classList.contains('skeleton')) {
+                    img.parentElement.classList.add('loaded');
+                    setTimeout(() => img.parentElement.classList.remove('skeleton'), 600);
+                }
+            };
+
+            img.addEventListener('load', handleLoad);
+            if (img.complete) handleLoad();
+
+            setTimeout(() => {
+                const parent = img.parentElement;
+                if (parent && parent.classList.contains('skeleton') && !parent.classList.contains('loaded')) {
+                    handleLoad();
+                }
+            }, 2500);
+        });
+    }
+
+    function initHomeGallery() {
+        document.querySelectorAll('[data-home-gallery]').forEach(widget => {
+            const slides = Array.from(widget.querySelectorAll('.home-showcase-slide'));
+            const title = widget.querySelector('[data-home-gallery-title]');
+            const copy = widget.querySelector('[data-home-gallery-copy]');
+            const counter = widget.querySelector('[data-home-gallery-counter]');
+            const link = widget.querySelector('[data-home-gallery-link]');
+            const previousButton = widget.querySelector('[data-home-gallery-prev]');
+            const nextButton = widget.querySelector('[data-home-gallery-next]');
+
+            if (!slides.length) return;
+
+            let currentIndex = Math.max(0, slides.findIndex(slide => slide.classList.contains('is-active')));
+
+            const showSlide = (nextIndex) => {
+                currentIndex = (nextIndex + slides.length) % slides.length;
+                const activeSlide = slides[currentIndex];
+
+                slides.forEach((slide, index) => {
+                    const isActive = index === currentIndex;
+                    slide.classList.toggle('is-active', isActive);
+                    slide.setAttribute('aria-hidden', String(!isActive));
+                });
+
+                if (title) title.textContent = activeSlide.dataset.galleryTitle || '';
+                if (copy) copy.textContent = activeSlide.dataset.galleryCopy || '';
+                if (counter) counter.textContent = `${currentIndex + 1} / ${slides.length}`;
+                if (link) {
+                    const href = activeSlide.dataset.galleryLink || 'galerij.html';
+                    const linkText = activeSlide.dataset.galleryLinkText || 'Bekijk meer';
+                    link.href = href;
+                    link.textContent = linkText;
+
+                    if (/^https?:\/\//.test(href)) {
+                        link.target = '_blank';
+                        link.rel = 'noopener noreferrer';
+                    } else {
+                        link.removeAttribute('target');
+                        link.removeAttribute('rel');
+                    }
+                }
+            };
+
+            if (previousButton) {
+                previousButton.addEventListener('click', () => showSlide(currentIndex - 1));
+            }
+
+            if (nextButton) {
+                nextButton.addEventListener('click', () => showSlide(currentIndex + 1));
+            }
+
+            widget.addEventListener('keydown', (event) => {
+                if (event.key === 'ArrowLeft') showSlide(currentIndex - 1);
+                if (event.key === 'ArrowRight') showSlide(currentIndex + 1);
+            });
+
+            showSlide(currentIndex);
+        });
+    }
+
+    function initHeaderScroll() {
+        const header = document.querySelector('.site-header');
+        if (!header) return;
+
+        let isScrolling = false;
+        const scrollHandler = () => {
+            if (isScrolling) return;
+            window.requestAnimationFrame(() => {
+                header.classList.toggle('scrolled', window.scrollY > 50);
                 isScrolling = false;
             });
             isScrolling = true;
-        }
-    };
-
-    window.addEventListener('scroll', scrollHandler, { passive: true });
-
-    // 5. Calendar Library Safety
-    window.addEventListener('focus', () => {
-        document.body.classList.remove('atcb-modal-open');
-    });
-
-    // 6. Init Social Carousels
-    initIGCarousel('ig-carousel', 'ig-prev', 'ig-next', '#ig-dots .ig-dot');
-
-    // 6b. Gallery category and exhibition controls
-    document.querySelectorAll('.gallery-nav button[data-category]').forEach(button => {
-        button.addEventListener('click', () => {
-            showCategory(button.dataset.category);
-        });
-    });
-
-    document.querySelectorAll('.exhibition-card').forEach(card => {
-        card.addEventListener('click', () => toggleTree(card));
-        card.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                toggleTree(card);
-            }
-        });
-    });
-
-    // 7. Contact Form Handling
-    const contactForm = document.querySelector('.contact-form');
-    const submitBtn = contactForm ? contactForm.querySelector('.submit-btn') : null;
-    const SCRIPT_URL = '';
-    const CONTACT_EMAIL = 'info@bonsai-brabant.nl';
-
-    if (contactForm && submitBtn) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            if (!contactForm.checkValidity()) {
-                contactForm.reportValidity();
-                return;
-            }
-
-            const honeypot = contactForm.querySelector('input[name="website"]').value;
-            if (honeypot) {
-                showFeedback(true, "Bericht verzonden!"); 
-                return;
-            }
-
-            submitBtn.disabled = true;
-            submitBtn.innerText = 'Verzenden...';
-
-            const formData = new FormData(contactForm);
-            const params = new URLSearchParams();
-            for (const pair of formData) {
-                params.append(pair[0], pair[1]);
-            }
-
-            const openMailFallback = () => {
-                const name = formData.get('name') || '';
-                const email = formData.get('email') || '';
-                const subject = formData.get('subject') || 'Contactformulier';
-                const message = formData.get('message') || '';
-                const mailSubject = `Contactformulier BVB: ${subject}`;
-                const mailBody = [
-                    `Naam: ${name}`,
-                    `E-mail: ${email}`,
-                    `Onderwerp: ${subject}`,
-                    '',
-                    'Bericht:',
-                    message
-                ].join('\n');
-
-                window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
-                showFeedback(true, 'Als je e-mailprogramma opent, staat het bericht klaar. Verstuur het daar om het echt te verzenden.');
-            };
-
-            if (!SCRIPT_URL) {
-                openMailFallback();
-                return;
-            }
-
-            fetch(SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors', 
-                body: params
-            })
-            .then(() => {
-                showFeedback(true, "Bericht verzonden! Bedankt voor je bericht.");
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                openMailFallback();
-            });
-        });
-    }
-
-    function showFeedback(isSuccess, message) {
-        if (!contactForm) return;
-        contactForm.style.transition = 'opacity 0.4s ease';
-        contactForm.style.opacity = '0';
-        
-        setTimeout(() => {
-            const icon = isSuccess 
-                ? '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>'
-                : '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
-            
-            contactForm.innerHTML = `
-                <div class="form-feedback">
-                    <div class="form-feedback-icon ${isSuccess ? 'success' : 'error'}">
-                        ${icon}
-                    </div>
-                    <h3 class="form-feedback-title">${isSuccess ? 'Bedankt!' : 'Oeps!'}</h3>
-                    <p class="form-feedback-text">${message}</p>
-                    <button id="cf-reload-btn" type="button" class="form-feedback-action">${isSuccess ? 'Nieuw bericht' : 'Opnieuw proberen'}</button>
-                </div>
-            `;
-            contactForm.style.opacity = '1';
-            const reloadBtn = document.getElementById('cf-reload-btn');
-            if (reloadBtn) reloadBtn.addEventListener('click', () => location.reload());
-        }, 400);
-    }
-
-    // 8. Initialize Lightbox (Moved here to ensure function is defined)
-    if (document.getElementById('lightbox')) {
-        initLightbox('lightbox', 'lightbox-img', 'lightbox-caption', 'lightbox-close', 'activity-item');
-    }
-
-    // 9. Flyer Share Functionality
-    const shareFlyerBtn = document.getElementById('share-flyer-btn');
-    if (shareFlyerBtn) {
-        shareFlyerBtn.addEventListener('click', () => {
-            const shareData = {
-                title: 'NBS 2026 - Nationale Bonsai Show',
-                text: 'Kom je ook naar de Nationale Bonsai Show 2026? Bekijk de flyer en het programma!',
-                url: window.location.href
-            };
-
-            if (navigator.share) {
-                navigator.share(shareData).catch(err => console.log('Error sharing:', err));
-            } else {
-                // Fallback: WhatsApp share
-                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareData.text + ' ' + shareData.url)}`;
-                window.open(whatsappUrl, '_blank');
-            }
-        });
-    }
-});
-
-/**
- * Helper to initialize Instagram-style carousel
- */
-function initIGCarousel(carouselId, prevId, nextId, dotClass) {
-    const carousel = document.getElementById(carouselId);
-    if (!carousel) return;
-
-    const dots = document.querySelectorAll(dotClass);
-    const prev = document.getElementById(prevId);
-    const next = document.getElementById(nextId);
-    const slides = carousel.querySelectorAll('.ig-post-slide');
-    let currentSlide = 0;
-
-    const goTo = (index) => {
-        currentSlide = (index + slides.length) % slides.length;
-        const slideWidth = carousel.offsetWidth;
-        carousel.scrollTo({ left: currentSlide * slideWidth, behavior: 'smooth' });
-        dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
-    };
-
-    if (prev) prev.addEventListener('click', () => goTo(currentSlide - 1));
-    if (next) next.addEventListener('click', () => goTo(currentSlide + 1));
-
-    carousel.addEventListener('scroll', () => {
-        const slideWidth = carousel.offsetWidth;
-        const newIndex = Math.round(carousel.scrollLeft / slideWidth);
-        if (newIndex !== currentSlide) {
-            currentSlide = newIndex;
-            dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
-        }
-    }, { passive: true });
-
-    dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
-}
-
-/**
- * Helper to show gallery category
- */
-function showCategory(categoryId) {
-    document.querySelectorAll('.gallery-category').forEach(cat => {
-        cat.classList.remove('active');
-    });
-    document.querySelectorAll('.gallery-nav button').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    
-    const section = document.getElementById(categoryId + '-section');
-    if (section) {
-        section.classList.add('active');
-        // Re-init reveal observers for the newly visible section
-        if (typeof initRevealObservers === 'function') initRevealObservers();
-        
-        // Force reveal first items for snappiness
-        setTimeout(() => {
-            section.querySelectorAll('.reveal-on-scroll').forEach((el, i) => {
-                if (i < 6) el.classList.add('active');
-            });
-        }, 100);
-    }
-    
-    const clickedBtn = Array.from(document.querySelectorAll('.gallery-nav button')).find(b => b.dataset.category === categoryId);
-    if (clickedBtn) clickedBtn.classList.add('active');
-}
-
-// Active elements tracking for slide navigation in lightbox
-let currentActiveCard = null;
-let currentActiveActivityItem = null;
-
-/**
- * Toggle tree details on click (Exhibition Gallery)
- */
-function toggleTree(card) {
-    currentActiveCard = card;
-    currentActiveActivityItem = null; // Reset normal gallery tracker
-    const img = card.querySelector('img');
-    const species = card.querySelector('.exhibition-species').textContent;
-    const style = card.querySelector('.exhibition-style').textContent;
-
-    const lightbox = document.getElementById('lightbox');
-    const tokonomaFrame = document.getElementById('tokonoma-frame');
-    const tokonomaImg = document.getElementById('tokonoma-img');
-    const lightboxCaption = document.getElementById('lightbox-caption');
-
-    if (lightbox && tokonomaFrame && tokonomaImg) {
-        lightbox.classList.add('tokonoma-mode');
-        tokonomaImg.src = img.src;
-
-        // 1. Extract filename for metadata lookup
-        const filename = img.src.substring(img.src.lastIndexOf('/') + 1);
-
-        // 2. High-precision Horticultural Scale & Grounding offsets
-        // Elke boom heeft een op maat gemaakte schaalfactor (schaal) om zijn werkelijke verhoudingen (Shohin t/m Omono) te representeren.
-        // We berekenen de exacte schaal op basis van de geschatte werkelijke hoogte in centimeters: schaal = hoogte / 48.0.
-        // We passen ook een bottom-offset toe om eventuele schaduwranden of cascade-takken perfect te corrigeren op de houten vloer.
-        const treeMetadata = {
-            'carpinus_betulus.webp': { realHeightCm: 44, bottomOffset: 0, scale: 0.92 },
-            'wisteria_sinensis.webp': { realHeightCm: 55, bottomOffset: 0, scale: 1.15, placement: { left: '41%', bottom: 20.5, height: 52 } },
-            'acer_palmatum_rood.webp': { realHeightCm: 50, bottomOffset: 0, scale: 1.04 },
-            'juniperus_chinensis_rots.webp': { realHeightCm: 38, bottomOffset: 0, scale: 0.79, placement: { left: '39%', bottom: 20.2, height: 37.5 } },
-            'acer_palmatum_groen_klein.webp': { realHeightCm: 50, bottomOffset: 0, scale: 1.04, placement: { left: '63%', bottom: 20, height: 40 } },
-            'larix_kaempferi.webp': { realHeightCm: 45, bottomOffset: 0, scale: 0.94 },
-            'juniperus_itoigawa_shohin.webp': { realHeightCm: 32, bottomOffset: 0, scale: 0.67 },
-            'larix_kaempferi_kaal.webp': { realHeightCm: 46, bottomOffset: 0, scale: 0.96 },
-            'pinus_sylvestris.webp': { realHeightCm: 64, bottomOffset: 0, scale: 1.33 },
-            'larix_decidua.webp': { realHeightCm: 48, bottomOffset: 0, scale: 1.00 },
-            'acer_palmatum_groen_groot.webp': { realHeightCm: 50, bottomOffset: 0, scale: 1.04 },
-            'acer_palmatum_winter.webp': { realHeightCm: 42, bottomOffset: 0, scale: 0.88 },
-            'acer_palmatum_pieter_chokkan.webp': { realHeightCm: 52, bottomOffset: 0, scale: 1.08 },
-            'acer_palmatum_bos.webp': { realHeightCm: 46, bottomOffset: 0, scale: 0.96 },
-            'ginkgo_biloba.webp': { realHeightCm: 44, bottomOffset: 0, scale: 0.92 }
         };
 
-        const meta = treeMetadata[filename] || { realHeightCm: 50, bottomOffset: 0, scale: 1.0 };
-
-        // 3. Background Selection
-        const backgrounds = [
-            { src: 'bg_left_mountain.png', scrollSide: 'left', treeSide: 'right' },
-            { src: 'bg_right_calligraphy.png', scrollSide: 'right', treeSide: 'left' },
-            { src: 'bg_left_enso.png', scrollSide: 'left', treeSide: 'right' },
-            { src: 'bg_right_bamboo.png', scrollSide: 'right', treeSide: 'left' },
-            { src: 'bg_left_autumn.png', scrollSide: 'left', treeSide: 'right' },
-            { src: 'bg_right_moon_bird.png', scrollSide: 'right', treeSide: 'left' },
-            { src: 'bg_left_crane.png', scrollSide: 'left', treeSide: 'right' },
-            { src: 'bg_right_pine.png', scrollSide: 'right', treeSide: 'left' },
-            { src: 'bg_left_plum_blossom.png', scrollSide: 'left', treeSide: 'right' },
-            { src: 'bg_right_river.png', scrollSide: 'right', treeSide: 'left' }
-        ];
-
-        const backgroundByTree = {
-            'wisteria_sinensis.webp': backgrounds.find(bg => bg.src === 'bg_right_calligraphy.png'),
-            'acer_palmatum_groen_klein.webp': backgrounds.find(bg => bg.src === 'bg_left_crane.png'),
-            'juniperus_chinensis_rots.webp': backgrounds.find(bg => bg.src === 'bg_right_river.png')
-        };
-
-        const hashValue = Array.from(filename).reduce((hash, char) => {
-            return ((hash << 5) - hash + char.charCodeAt(0)) >>> 0;
-        }, 0);
-        const selectedBg = backgroundByTree[filename] || backgrounds[hashValue % backgrounds.length];
-        const treeSide = selectedBg.treeSide;
-	        
-        tokonomaFrame.style.backgroundImage = `url('images/tokonoma/backgrounds/${selectedBg.src}')`;
-        tokonomaFrame.dataset.scrollSide = selectedBg.scrollSide;
-        tokonomaFrame.dataset.treeSide = treeSide;
-
-        if (lightboxCaption) {
-            lightboxCaption.innerHTML = `
-                <div class="tokonoma-caption-content">
-                    <span class="tokonoma-caption-species">${species}</span>
-                    <span class="tokonoma-caption-style">${style}</span>
-                    <span class="tokonoma-caption-size">Formaat: ca. ${meta.realHeightCm} cm</span>
-                </div>
-            `;
-        }
-        
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-
-        // Per tree placement keeps the display balanced with each scroll background.
-        const baseBottomPercent = (treeSide === 'left') ? 20.5 : 20.0;
-        const baseHeightPercent = 43;
-
-        const defaultPlacement = {
-            height: baseHeightPercent * meta.scale,
-            bottom: baseBottomPercent + meta.bottomOffset,
-            left: (treeSide === 'left') ? '39%' : '62%'
-        };
-        const placement = { ...defaultPlacement, ...(meta.placement || {}) };
-
-        tokonomaImg.style.position = 'absolute';
-        tokonomaImg.style.left = placement.left;
-        tokonomaImg.style.transform = 'translateX(-50%)';
-        tokonomaImg.style.width = 'auto';
-        tokonomaImg.style.height = placement.height + '%';
-        tokonomaImg.style.objectFit = 'contain';
-        tokonomaImg.style.bottom = placement.bottom + '%';
-        tokonomaImg.style.top = 'auto';
-        tokonomaImg.style.zIndex = '5';
-        
-        // Add slight fade in for the tree itself
-        tokonomaImg.style.opacity = '0';
-        setTimeout(() => {
-            tokonomaImg.style.transition = 'opacity 0.8s ease';
-            tokonomaImg.style.opacity = '1';
-        }, 50);
+        window.addEventListener('scroll', scrollHandler, { passive: true });
+        scrollHandler();
     }
-}
-
-/**
- * Lightbox initialization
- */
-function initLightbox(lightboxId, imgId, captionId, closeClass, itemClass) {
-    const lightbox = document.getElementById(lightboxId);
-    const lightboxImg = document.getElementById(imgId);
-    const lightboxCaption = document.getElementById(captionId);
-    const lightboxClose = document.querySelector('.' + closeClass);
-
-    if (!lightbox || !lightboxImg) return;
-
-    document.querySelectorAll('.' + itemClass).forEach(item => {
-        item.setAttribute('role', 'button');
-        item.tabIndex = 0;
-        item.addEventListener('click', () => {
-            currentActiveActivityItem = item;
-            currentActiveCard = null; // Reset Tokonoma gallery tracker
-            const img = item.querySelector('img');
-            const fullSrc = item.getAttribute('data-full') || img.src;
-            lightboxImg.src = fullSrc;
-            if (lightboxCaption) lightboxCaption.textContent = img.alt || "BVB Clubavond";
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-        item.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                item.click();
-            }
-        });
-    });
-
-    const closeLightbox = () => {
-        lightbox.classList.remove('active');
-        lightbox.classList.remove('tokonoma-mode');
-        // Reset inline styles
-        lightbox.style.paddingBottom = '';
-        lightbox.style.display = '';
-        lightbox.style.position = '';
-        lightbox.style.backgroundImage = '';
-        lightboxImg.style.bottom = '';
-        
-        // Reset tokonoma if present
-        const tokonomaFrame = document.getElementById('tokonoma-frame');
-        const tokonomaImg = document.getElementById('tokonoma-img');
-        if (tokonomaFrame) tokonomaFrame.style.backgroundImage = '';
-        if (tokonomaImg) {
-            tokonomaImg.src = '';
-            tokonomaImg.style.bottom = '';
-            tokonomaImg.style.left = '';
-        }
-
-        document.body.style.overflow = 'auto';
-    };
-
-    if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
-    
-    // Close on background click
-    lightbox.addEventListener('click', (e) => {
-        // If the user clicks on the backdrop itself (not the children)
-        if (e.target === lightbox) {
-            closeLightbox();
-        }
-    });
-
-    // Unified navigation function for lightbox (ArrowRight, ArrowLeft, visual buttons, swipes)
-    const navigateLightbox = (direction) => {
-        if (lightbox.classList.contains('tokonoma-mode')) {
-            // Tokonoma Digital Exhibition Mode
-            const cards = Array.from(document.querySelectorAll('.exhibition-card'))
-                .filter(card => !card.hidden && card.getBoundingClientRect().width > 0);
-            if (!cards.length) return;
-            let index = cards.indexOf(currentActiveCard);
-            if (index === -1) index = 0;
-            if (direction === 'next') {
-                index = (index + 1) % cards.length;
-            } else {
-                index = (index - 1 + cards.length) % cards.length;
-            }
-            toggleTree(cards[index]);
-        } else {
-            // Standard Photo Gallery Mode (filtering out hidden items)
-            const items = Array.from(document.querySelectorAll('.' + itemClass)).filter(el => el.getBoundingClientRect().width > 0);
-            if (!items.length) return;
-            let index = items.indexOf(currentActiveActivityItem);
-            if (index === -1) index = 0;
-            if (direction === 'next') {
-                index = (index + 1) % items.length;
-            } else {
-                index = (index - 1 + items.length) % items.length;
-            }
-            currentActiveActivityItem = items[index];
-            const nextImg = currentActiveActivityItem.querySelector('img');
-            const nextFullSrc = currentActiveActivityItem.getAttribute('data-full') || nextImg.src;
-            
-            // Apply a sleek, smooth fade transition for standard image changes
-            lightboxImg.style.transition = 'none';
-            lightboxImg.style.opacity = '0';
-            lightboxImg.src = nextFullSrc;
-            if (lightboxCaption) lightboxCaption.textContent = nextImg.alt || "BVB Clubavond";
-            
-            setTimeout(() => {
-                lightboxImg.style.transition = 'opacity 0.4s ease';
-                lightboxImg.style.opacity = '1';
-            }, 50);
-        }
-    };
-
-    // Attach event listeners to visual navigation buttons
-    const btnPrev = document.getElementById('lightbox-prev');
-    const btnNext = document.getElementById('lightbox-next');
-    if (btnPrev) {
-        btnPrev.addEventListener('click', (e) => {
-            e.stopPropagation(); // prevent closing lightbox on backdrop click
-            navigateLightbox('prev');
-        });
-    }
-    if (btnNext) {
-        btnNext.addEventListener('click', (e) => {
-            e.stopPropagation(); // prevent closing lightbox on backdrop click
-            navigateLightbox('next');
-        });
-    }
-
-    document.addEventListener('keydown', (e) => {
-        if (lightbox.classList.contains('active')) {
-            if (e.key === 'Escape') {
-                closeLightbox();
-            } else if (e.key === 'ArrowRight') {
-                navigateLightbox('next');
-            } else if (e.key === 'ArrowLeft') {
-                navigateLightbox('prev');
-            }
-        }
-    });
-
-    // Swipe gestures support for touch devices
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    lightbox.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-    
-    lightbox.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        const threshold = 50; // swipe threshold in pixels
-        if (touchEndX < touchStartX - threshold) {
-            navigateLightbox('next'); // Swiped left -> next
-        } else if (touchEndX > touchStartX + threshold) {
-            navigateLightbox('prev'); // Swiped right -> prev
-        }
-    }, { passive: true });
-}
-
-
-// 7. Interactive NL Map — Native SVG hitboxes with hover tooltip
-const initPremiumMap = () => {
-    const container = document.querySelector('.nl-map-container-new');
-    let tooltip = document.getElementById('map-tooltip');
-    const svg = container ? container.querySelector('svg') : null;
-    const markers = container ? Array.from(container.querySelectorAll('.club-marker')) : [];
-
-    if (!container || !markers.length || !svg) return;
-
-    // Remove any leftover HTML overlays from previous implementations
-    container.querySelectorAll('.map-html-overlay').forEach(el => el.remove());
-
-    // Ensure container is relative for absolute tooltip positioning
-    container.style.position = 'relative';
-
-    if (!tooltip) {
-        tooltip = document.createElement('div');
-        tooltip.id = 'map-tooltip';
-        tooltip.className = 'map-tooltip';
-        tooltip.setAttribute('role', 'tooltip');
-        tooltip.setAttribute('aria-hidden', 'true');
-        container.appendChild(tooltip);
-    }
-
-    let activeMarker = null;
-    let hideTimeoutId = null;
-    let tooltipWidth = 0;
-    let tooltipHeight = 0;
-
-    const getMarkerCenter = (marker) => {
-        const dot = marker.querySelector('.marker-dot');
-        if (!dot) return null;
-        const rect = dot.getBoundingClientRect();
-        return {
-            x: rect.left + rect.width / 2,
-            y: rect.top + rect.height / 2
-        };
-    };
-
-    const getNearestMarker = (event) => {
-        if (!event || typeof event.clientX !== 'number' || typeof event.clientY !== 'number') {
-            return null;
-        }
-
-        const maxDistance = window.matchMedia("(pointer: coarse)").matches ? 38 : 32;
-        let nearestMarker = null;
-        let nearestDistance = Infinity;
-
-        markers.forEach(marker => {
-            const center = getMarkerCenter(marker);
-            if (!center) return;
-
-            const distance = Math.hypot(event.clientX - center.x, event.clientY - center.y);
-            if (distance < nearestDistance) {
-                nearestDistance = distance;
-                nearestMarker = marker;
-            }
-        });
-
-        return nearestDistance <= maxDistance ? nearestMarker : null;
-    };
-
-    const navigateToMarker = (marker) => {
-        const parentAnchor = marker ? marker.closest('a') : null;
-        if (!parentAnchor) return;
-
-        const href = parentAnchor.getAttribute('href');
-        if (!href) return;
-
-        if (parentAnchor.getAttribute('target') === '_blank') {
-            window.open(href, '_blank', 'noopener,noreferrer');
-        } else {
-            window.location.href = href;
-        }
-    };
-
-    const showTooltip = (marker, makeInteractive = false) => {
-        const circle = marker.querySelector('.marker-dot');
-        if (!circle) return;
-
-        // Clean up any previously active markers to prevent stuck states when transitioning directly
-        markers.forEach(m => m.classList.remove('is-active-marker'));
-
-        activeMarker = marker;
-        marker.classList.add('is-active-marker');
-
-        const town = marker.getAttribute('data-town') || '';
-        const name = marker.getAttribute('data-name') || '';
-        
-        const parentAnchor = marker.closest('a');
-        const href = parentAnchor ? parentAnchor.getAttribute('href') : '#';
-        const target = parentAnchor ? parentAnchor.getAttribute('target') : '';
-        const targetAttr = target ? `target="${target}" rel="noopener noreferrer"` : '';
-        const ctaText = town === 'Berlicum' ? 'Bekijk vereniging &rarr;' : 'Bezoek website &rarr;';
-
-        tooltip.innerHTML = `
-            <div class="tooltip-town">${town}</div>
-            <div class="tooltip-name">${name}</div>
-            <a href="${href}" ${targetAttr} class="tooltip-cta">${ctaText}</a>
-        `;
-        
-        tooltip.style.display = 'flex';
-        tooltip.classList.add('visible');
-        if (makeInteractive) {
-            tooltip.classList.add('interactive');
-        } else {
-            tooltip.classList.remove('interactive');
-        }
-        tooltip.setAttribute('aria-hidden', 'false');
-
-        // Wait for display:flex to calculate dimensions
-        requestAnimationFrame(() => {
-            const cRect = container.getBoundingClientRect();
-            const mRect = circle.getBoundingClientRect();
-            const tRect = tooltip.getBoundingClientRect();
-
-            tooltipWidth = tRect.width;
-            tooltipHeight = tRect.height;
-
-            // Center of the dot in screen coordinates
-            const cx = mRect.left + mRect.width / 2;
-            const cy = mRect.top + mRect.height / 2;
-
-            // Convert to container-relative coordinates
-            const x = cx - cRect.left;
-            const y = cy - cRect.top;
-
-            // Position tooltip above the dot
-            let tooltipX = x - tooltipWidth / 2;
-            let tooltipY = y - tooltipHeight - 15;
-
-            // Keep tooltip inside container
-            if (tooltipX < 10) tooltipX = 10;
-            if (tooltipX + tooltipWidth > cRect.width - 10) {
-                tooltipX = cRect.width - tooltipWidth - 10;
-            }
-
-            // Calculate arrow offset to ensure the arrow points exactly at the dot
-            const arrowOffset = x - (tooltipX + tooltipWidth / 2);
-            tooltip.style.setProperty('--arrow-offset', `${arrowOffset}px`);
-
-            let isFlipped = false;
-            if (tooltipY < 10) {
-                tooltipY = y + 25; // Flip below if too high
-                isFlipped = true;
-            }
-
-            tooltip.style.left = `${tooltipX}px`;
-            tooltip.style.top = `${tooltipY}px`;
-
-            if (isFlipped) {
-                tooltip.classList.add('flipped');
-            } else {
-                tooltip.classList.remove('flipped');
-            }
-        });
-    };
-
-    const hideTooltip = () => {
-        clearTimeout(hideTimeoutId);
-        if (activeMarker) {
-            activeMarker.classList.remove('is-active-marker');
-        }
-        tooltip.classList.remove('visible');
-        tooltip.classList.remove('flipped');
-        tooltip.classList.remove('interactive');
-        tooltip.setAttribute('aria-hidden', 'true');
-        
-        // Absolute cleanup to prevent overlapping/intercepting events:
-        tooltip.style.display = 'none';
-        tooltip.style.left = '-9999px';
-        tooltip.style.top = '-9999px';
-        
-        activeMarker = null;
-    };
-    // Track active pointer type to distinguish touch vs mouse interaction perfectly
-    let clickPointerType = 'mouse';
-
-    // Attach native SVG event listeners using PointerEvents
-    markers.forEach(marker => {
-        // Track pointerdown to dynamically know if the interaction is a touch tap
-        marker.addEventListener('pointerdown', (e) => {
-            clickPointerType = e.pointerType;
-        }, { passive: true });
-
-        // Hover listeners for mouse/pen users (skipped for touch)
-        marker.addEventListener('pointerenter', (e) => {
-            if (e.pointerType === 'touch') return;
-            clearTimeout(hideTimeoutId);
-            showTooltip(getNearestMarker(e) || marker, true);
-        });
-        
-        marker.addEventListener('pointerleave', (e) => {
-            if (e.pointerType === 'touch') return;
-            
-            // Check if we are moving the cursor into the tooltip
-            const enteredTooltip = e.relatedTarget && (tooltip === e.relatedTarget || tooltip.contains(e.relatedTarget));
-            if (!enteredTooltip) {
-                clearTimeout(hideTimeoutId);
-                hideTimeoutId = setTimeout(() => {
-                    hideTooltip();
-                }, 250);
-            }
-        });
-
-        // Unified click/tap handler
-        marker.addEventListener('click', (e) => {
-            const targetMarker = getNearestMarker(e) || marker;
-            const isTouch = clickPointerType === 'touch' || window.matchMedia("(pointer: coarse)").matches;
-            e.preventDefault();
-
-            if (isTouch) {
-                if (activeMarker !== targetMarker) {
-                    hideTooltip();
-                    showTooltip(targetMarker, true);
-                } else {
-                    hideTooltip();
-                    navigateToMarker(targetMarker);
-                }
-            } else {
-                hideTooltip();
-                navigateToMarker(targetMarker);
-            }
-        });
-    });
-
-    // Keep tooltip open when cursor enters it
-    tooltip.addEventListener('pointerenter', (e) => {
-        if (clickPointerType === 'touch') return;
-        clearTimeout(hideTimeoutId);
-    });
-
-    // Add pointerleave to the tooltip container to hide it when mouse leaves the tooltip
-    tooltip.addEventListener('pointerleave', (e) => {
-        if (clickPointerType === 'touch') return; // Ignore on touch devices
-        
-        // Check if we are moving back into the active marker
-        const enteredActiveMarker = activeMarker && (activeMarker === e.relatedTarget || activeMarker.contains(e.relatedTarget));
-        if (!enteredActiveMarker) {
-            clearTimeout(hideTimeoutId);
-            hideTimeoutId = setTimeout(() => {
-                hideTooltip();
-            }, 250);
-        }
-    });
-
-    // Dismiss tooltip on tap/click outside the map
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.club-marker') && !e.target.closest('#map-tooltip')) {
-            hideTooltip();
-        }
-    }, { passive: true });
-};
-
-// Initialize if on the right page
-if (document.querySelector('.nl-map-container-new')) {
-    initPremiumMap();
-}
+})();

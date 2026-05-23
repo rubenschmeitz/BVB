@@ -1,318 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Precise 2026 Agenda Data (Club Nights + Real External Dutch/Belgian Events + NBV Masterclasses)
-    const agendaEvents = [
-        {
-            id: 'ext-feb-trophy',
-            title: 'The Trophy 2026 (Noelanders Trophy)',
-            startDate: '2026-02-28',
-            endDate: '2026-03-01',
-            startTime: '09:00',
-            endTime: '18:00',
-            location: 'Limburghal, Genk, België',
-            type: 'event',
-            tag: 'Evenement',
-            description: 'De absolute koningin onder de Europese bonsai-shows met een spectaculaire internationale tentoonstelling, de befaamde European Bonsai Pottery Contest en demonstraties van wereldfaam.',
-            detailsUrl: 'https://www.bonsaiassociation.be'
-        },
-        {
-            id: 'ext-apr-mvnl',
-            title: 'Voorjaarsshow BV Midden Nederland',
-            startDate: '2026-04-11',
-            startTime: '10:00',
-            endTime: '16:00',
-            location: 'De Binder, Leersum, Nederland',
-            type: 'event',
-            tag: 'Expositie',
-            description: 'De traditionele voorjaarsshow van Bonsai Vereniging Midden Nederland. Bewonder prachtige, zorgvuldig gekozen voorjaarsbomen van de leden, met live styling-demonstraties en gezellige verkoopstands.',
-            detailsUrl: 'https://www.bonsaimiddennederland.nl'
-        },
-        {
-            id: 'ext-may-rijnmond',
-            title: 'Open Dag BV Rijnmond 2026',
-            startDate: '2026-05-03',
-            startTime: '10:00',
-            endTime: '16:00',
-            location: 'Vlaardingen, Nederland',
-            type: 'event',
-            tag: 'Open Dag',
-            description: 'De jaarlijkse open dag van Bonsai Vereniging Rijnmond met een schitterende expositie van zowel beginners als gevorderden, clinics en deskundig advies.',
-            detailsUrl: 'https://bonsai-vereniging-rijnmond.nl/'
-        },
-        {
-            id: 'ext-may-hasselt',
-            title: 'Bonsai Festival Hasselt 2026',
-            startDate: '2026-05-09',
-            endDate: '2026-05-10',
-            startTime: '10:00',
-            endTime: '17:00',
-            location: 'Japanse Tuin, Hasselt, België',
-            type: 'event',
-            tag: 'Evenement',
-            description: 'Jaarlijks Bonsai Festival in de adembenemende Japanse Tuin van Hasselt. Diverse Belgische bonsai-verenigingen presenteren hun topstukken met live vormgevingsdemonstraties en een sfeervolle markt.',
-            detailsUrl: 'https://japansetuin.hasselt.be/nl'
-        },
-        {
-            id: 'ext-may-koewacht-show',
-            title: 'Jubileumshow Shimpaku Koewacht (20 Jaar)',
-            startDate: '2026-05-16',
-            endDate: '2026-05-17',
-            startTime: '10:00',
-            endTime: '17:00',
-            location: 'Koewacht, Zeeland (grens NL/BE)',
-            type: 'event',
-            tag: 'Jubileum',
-            description: 'Feestelijke jubileumtentoonstelling ter ere van het 20-jarig bestaan van Shimpaku Koewacht (René Lecocq Memorial) met een expositie van prachtige bonsai en een gezellige verkoopbeurs.',
-            detailsUrl: 'https://www.bonsaiateljee.be'
-        },
-        {
-            id: 'bvb-may-club',
-            title: 'Werken aan eigen bomen',
-            startDate: '2026-05-18',
-            startTime: '19:30',
-            endTime: '22:00',
-            location: 'De Moerkoal, Berlicum',
-            type: 'club',
-            tag: 'Werkavond',
-            extraInfo: 'Let op: Deze bijeenkomst is op 18 mei i.v.m. tweede Pinksterdag.',
-            description: 'Onder deskundige begeleiding werken aan je eigen bonsai. De ideale gelegenheid voor advies over vormgeving of verzorging.'
-        },
-        {
-            id: 'ext-may-apeldoorn',
-            title: 'Bonsai Show BV Apeldoorn 2026',
-            startDate: '2026-05-30',
-            endDate: '2026-05-31',
-            startTime: '10:00',
-            endTime: '17:00',
-            location: 'Tuinland Wilp, Apeldoorn',
-            type: 'event',
-            tag: 'Evenement',
-            description: 'Prachtige tweedaagse show georganiseerd door Bonsai Vereniging Apeldoorn bij Tuinland Wilp. Bewonder hoogwaardige bomen van leden, krijg professioneel styling-advies en bewerkingsdemonstraties. Toegang is gratis.',
-            detailsUrl: 'http://www.bonsaiverenigingapeldoorn.nl'
-        },
-        {
-            id: 'ext-may-izegem',
-            title: 'Bonsai Vlaanderen Show Izegem',
-            startDate: '2026-05-31',
-            startTime: '10:00',
-            endTime: '17:00',
-            location: 'Izegem, België',
-            type: 'event',
-            tag: 'Expositie',
-            description: 'Regionale bonsaitentoonstelling van Bonsai Vlaanderen afdeling West-Vlaanderen, met een schitterende selectie ledenbomen, vormgevingsdemonstraties en deskundige toelichting.',
-            detailsUrl: 'https://bonsaivlaanderen.be'
-        },
-        {
-            id: 'ext-june-westen',
-            title: 'Bonsai van het Westen 2026',
-            startDate: '2026-06-13',
-            endDate: '2026-06-14',
-            startTime: '10:00',
-            endTime: '17:00',
-            location: 'Hortus Botanicus, Delft',
-            type: 'event',
-            tag: 'Evenement',
-            description: 'Een van de grootste bonsai-evenementen van Nederland met tentoonstelling, markt, demonstraties en workshops in de prachtige Botanische Tuin van Delft.',
-            detailsUrl: 'https://www.bonsaivanhetwesten.nl'
-        },
-        {
-            id: 'bvb-june-nbs',
-            title: 'Selectie NBS & Opstelling maken',
-            startDate: '2026-06-29',
-            startTime: '19:30',
-            endTime: '22:00',
-            location: 'De Moerkoal, Berlicum',
-            type: 'club',
-            tag: 'NBS Selectie',
-            description: 'Selectie van bomen voor de NBS-tentoonstelling en het gezamenlijk bepalen van de presentatie-opstelling.'
-        },
-        {
-            id: 'nbv-july-noelanders',
-            title: 'Masterclass Marc Noelanders',
-            startDate: '2026-07-18',
-            startTime: '10:00',
-            endTime: '16:00',
-            location: 'Landelijke locatie NBV, Nederland',
-            type: 'nbv',
-            tag: 'Masterclass',
-            description: 'Exclusieve en leerzame masterclass onder leiding van de wereldberoemde bonsai-meester Marc Noelanders. Georganiseerd door de Nederlandse Bonsai Vereniging (NBV). Een unieke kans om je boom onder deskundige begeleiding naar een hoger niveau te tillen.',
-            detailsUrl: 'https://bonsainederland.nl'
-        },
-        {
-            id: 'ext-aug-belsele',
-            title: 'Belsele Ambachtelijk Weekend 2026',
-            startDate: '2026-08-22',
-            endDate: '2026-08-23',
-            startTime: '10:00',
-            endTime: '18:00',
-            location: 'Belsele, België',
-            type: 'event',
-            tag: 'Evenement',
-            description: 'Exclusieve samenwerking tussen Bonsai Shop Everaert en Bonsai Vlaanderen tijdens het sfeervolle Ambachtelijk Weekend. Geniet van live demonstraties, workshops en een hoogwaardige ledententoonstelling.',
-            detailsUrl: 'https://bonsaivlaanderen.be'
-        },
-        {
-            id: 'bvb-aug-club',
-            title: 'Werken aan eigen bomen',
-            startDate: '2026-08-31',
-            startTime: '19:30',
-            endTime: '22:00',
-            location: 'De Moerkoal, Berlicum',
-            type: 'club',
-            tag: 'Werkavond',
-            description: 'Onder deskundige begeleiding werken aan je eigen bonsai. De ideale gelegenheid voor advies over vormgeving of verzorging.'
-        },
-        {
-            id: 'ext-sept-koewacht-markt',
-            title: 'Grote Bonsaimarkt Koewacht 2026',
-            startDate: '2026-09-05',
-            startTime: '09:00',
-            endTime: '16:00',
-            location: 'Koewacht, Zeeland (grens NL/BE)',
-            type: 'event',
-            tag: 'Markt',
-            description: 'De grote jaarlijkse bonsaimarkt van Shimpaku Koewacht. De perfecte gelegenheid om startmateriaal, volgroeide bomen, gereedschappen, potten en substraten aan te schaffen.',
-            detailsUrl: 'https://www.bonsaiateljee.be'
-        },
-        {
-            id: 'ext-sept-rijnmond',
-            title: 'Bonsai Tentoonstelling Rijnmond 2026',
-            startDate: '2026-09-05',
-            endDate: '2026-09-06',
-            startTime: '10:00',
-            endTime: '17:00',
-            location: 'Vlaardingen, Nederland',
-            type: 'event',
-            tag: 'Evenement',
-            description: 'De tweejaarlijkse clubtentoonstelling van Bonsai Vereniging Rijnmond met prachtige bomen van leden, clinics voor beginners en ervaren hobbyisten, en verkoopstands.',
-            detailsUrl: 'https://bonsai-vereniging-rijnmond.nl/'
-        },
-        {
-            id: 'nbv-sept-uden',
-            title: 'Masterclass Pieter van Uden',
-            startDate: '2026-09-13',
-            startTime: '10:00',
-            endTime: '16:00',
-            location: 'Landelijke locatie NBV, Nederland',
-            type: 'nbv',
-            tag: 'Masterclass',
-            description: 'Diepgaande en praktijkgerichte masterclass verzorgd door de bekende Nederlandse bonsai-expert Pieter van Uden. Georganiseerd door de Nederlandse Bonsai Vereniging (NBV) met de focus op geavanceerde vormgeving en presentatietechnieken.',
-            detailsUrl: 'https://bonsainederland.nl'
-        },
-        {
-            id: 'bvb-sept-styling',
-            title: 'NBS Presentatie: De laatste hand',
-            startDate: '2026-09-21',
-            startTime: '19:30',
-            endTime: '22:00',
-            location: 'De Moerkoal, Berlicum',
-            type: 'club',
-            tag: 'NBS Styling',
-            extraInfo: 'Extra bijeenkomst i.v.m. de Nationale Bonsai Show.',
-            description: 'Laatste voorbereidingen voor de NBS-tentoonstelling: selecteren van tafels, scrolls, accentplanten en mossen.'
-        },
-        {
-            id: 'bvb-sept-nbs-main',
-            title: 'Nationale Bonsai Show (NBS) 2026',
-            startDate: '2026-09-26',
-            endDate: '2026-09-27',
-            startTime: '09:00',
-            endTime: '17:00',
-            location: 'De Moerkoal, Berlicum',
-            type: 'event',
-            tag: 'Hoogtepunt',
-            description: 'Hét landelijke evenement met grote tentoonstelling, markt en expert demo\'s. Onze vereniging is dit jaar de trotse gastheer.',
-            detailsUrl: 'nbs.html'
-        },
-        {
-            id: 'ext-oct-vlaanderen',
-            title: 'Bonsai Show Bonsai Vlaanderen',
-            startDate: '2026-10-10',
-            endDate: '2026-10-11',
-            startTime: '10:00',
-            endTime: '18:00',
-            location: 'Brugge, België',
-            type: 'event',
-            tag: 'Evenement',
-            description: 'De grote najaarstentoonstelling van Bonsai Vlaanderen met hoogwaardige bomen, internationale demonstrateurs en een uitgebreide Bonsaimarkt.',
-            detailsUrl: 'https://www.bonsaivlaanderen.be'
-        },
-        {
-            id: 'ext-oct-zuidholland',
-            title: 'Herfst Expositie BV Zuid-Holland 2026',
-            startDate: '2026-10-24',
-            endDate: '2026-10-25',
-            startTime: '10:00',
-            endTime: '16:30',
-            location: 'Boskoop, Nederland',
-            type: 'event',
-            tag: 'Evenement',
-            description: 'Regionale najaarsexpositie in het hart van de boomkwekerijregio Boskoop, met schitterende satsuki azalea\'s en jeneverbomen, deskundig styling-advies en verkoop van startmateriaal.',
-            detailsUrl: 'https://www.bvz-h.nl'
-        },
-        {
-            id: 'bvb-oct-lecture',
-            title: 'Herfst & Bonsai (Lezing)',
-            startDate: '2026-10-26',
-            startTime: '19:30',
-            endTime: '22:00',
-            location: 'De Moerkoal, Berlicum',
-            type: 'club',
-            tag: 'Lezing',
-            description: 'Lezing over herfstverzorging, winterbescherming en voorbereiding op de winterrust van je bonsai.'
-        },
-        {
-            id: 'ext-nov-tenshi',
-            title: 'Tenshi Bonsai Najaarsshow',
-            startDate: '2026-11-14',
-            endDate: '2026-11-15',
-            startTime: '10:00',
-            endTime: '17:00',
-            location: 'Arnhem, Nederland',
-            type: 'event',
-            tag: 'Evenement',
-            description: 'Gespecialiseerde najaarsexpositie met focus op loofbomen in adembenemende herfstkleuren, inclusief clinics en markt.',
-            detailsUrl: 'https://bonsainederland.nl'
-        },
-        {
-            id: 'ext-nov-edauchikai',
-            title: 'Eda Uchi Kai Bonsai Exhibition 2026',
-            startDate: '2026-11-14',
-            endDate: '2026-11-15',
-            startTime: '10:00',
-            endTime: '18:00',
-            location: 'Diepenbeek, België',
-            type: 'event',
-            tag: 'Expositie',
-            description: 'De prestigieuze driejaarlijkse tentoonstelling van de bekende Belgische bonsaiclub Eda Uchi Kai. Bewonder uiterst verfijnde topstukken en geniet van een kwalitatieve presentatie in een sfeervolle ambiance.',
-            detailsUrl: 'https://bonsaivlaanderen.be'
-        },
-        {
-            id: 'ext-nov-bab',
-            title: 'Bonsai Association Belgium Autumn Show',
-            startDate: '2026-11-21',
-            endDate: '2026-11-22',
-            startTime: '10:00',
-            endTime: '18:00',
-            location: 'Zwijndrecht, België',
-            type: 'event',
-            tag: 'Evenement',
-            description: 'Grote nationale najaarsshow georganiseerd door de Belgische Bonsai Associatie met topbomen uit heel België en de buurlanden, en lezingen door internationale meesters.',
-            detailsUrl: 'https://www.bonsaiassociation.be'
-        },
-        {
-            id: 'bvb-nov-swap',
-            title: 'Ruilbeurs & Jaarafsluiting',
-            startDate: '2026-11-30',
-            startTime: '19:30',
-            endTime: '22:00',
-            location: 'De Moerkoal, Berlicum',
-            type: 'club',
-            tag: 'Ruilbeurs',
-            description: 'Onze gezellige jaarlijkse ruilbeurs: neem bomen, schalen of gereedschap mee om te ruilen of te verkopen. Tevens de laatste officiële clubavond van 2026.'
-        }
-    ];
+    const BVB = window.BVB || {};
+    const agendaEvents = window.BVB_AGENDA_EVENTS || [];
 
-    // State Variables
     let currentView = 'list'; // 'list' or 'calendar'
     let currentFilter = 'club'; // Default filter is set to BVB Activiteiten ('club')
     
@@ -320,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let calendarYear = 2026;
     let calendarMonth = 4; // May (0-indexed)
 
-    // DOM Elements
     const dynamicContainer = document.getElementById('agenda-dynamic-content');
     const filterButtons = document.querySelectorAll('.filter-btn');
     const viewButtons = document.querySelectorAll('.toggle-btn');
@@ -394,7 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
         revealTargets.forEach(target => target.classList.remove('active'));
 
         requestAnimationFrame(() => {
-            if (typeof initRevealObservers === 'function') {
+            if (typeof BVB.initRevealObservers === 'function') {
+                BVB.initRevealObservers();
+            } else if (typeof initRevealObservers === 'function') {
                 initRevealObservers();
             } else {
                 revealTargets.forEach(target => target.classList.add('active'));
@@ -502,11 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
         html += '</div>';
 
         dynamicContainer.innerHTML = html;
-
-        // Force calendar buttons to parse and render
-        if (window.atcb_init) {
-            window.atcb_init();
-        }
 
         refreshAgendaEffects();
     }
@@ -705,10 +390,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     popover.innerHTML = popoverHtml;
                     
-                    // Force calendar buttons to parse
-                    if (window.atcb_init) {
-                        window.atcb_init();
-                    }
                 } else {
                     popover.classList.add('active');
                     popover.classList.remove('event-mode', 'nbv-mode');
@@ -723,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // By default, if the current display month has events, auto-click the first day with an event to wow the user!
+        // Select the first event day by default so the month view opens with useful detail.
         const monthEvents = filteredEvents.filter(e => {
             const d = new Date(e.startDate);
             return d.getFullYear() === calendarYear && d.getMonth() === calendarMonth;

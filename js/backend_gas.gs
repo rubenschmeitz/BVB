@@ -10,14 +10,23 @@
  * 6. Select "Web App".
  * 7. Execute as: "Me".
  * 8. Who has access: "Anyone".
- * 9. Copy the Web App URL and paste it into your contact.html.
+ * 9. Keep this as an optional backend template until contact.html/js/contact.js
+ *    include a matching Turnstile token flow and endpoint submit.
  */
 
 const CONFIG = {
   notificationEmail: 'info@bonsai-brabant.nl', // Recipient for notifications
   sheetName: 'Contact Submissions',           // Name of the sheet to store data
   requiredFields: ['name', 'email', 'subject', 'message'],
-  turnstileSecretKey: 'YOUR_TURNSTILE_SECRET_KEY' // Put your Cloudflare Turnstile Secret Key here
+  turnstileSecretKey: PropertiesService.getScriptProperties().getProperty('TURNSTILE_SECRET_KEY') || '',
+  maxFieldLengths: {
+    name: 100,
+    email: 254,
+    subject: 160,
+    message: 4000
+  },
+  rateLimitWindowSeconds: 3600,
+  rateLimitMaxSubmissions: 3
 };
 
 /**
@@ -35,11 +44,13 @@ function doPost(e) {
     }
 
     // 2b. Turnstile Verification (Anti-spam)
+    if (!CONFIG.turnstileSecretKey) {
+      return createJsonResponse('error', 'Contactformulier is nog niet geconfigureerd.');
+    }
+
     const turnstileResponse = params['cf-turnstile-response'];
-    if (CONFIG.turnstileSecretKey && CONFIG.turnstileSecretKey !== 'YOUR_TURNSTILE_SECRET_KEY') {
-      if (!turnstileResponse || !verifyTurnstile(turnstileResponse, CONFIG.turnstileSecretKey)) {
-        return createJsonResponse('error', 'Beveiligingscontrole mislukt. Probeer het opnieuw.');
-      }
+    if (!turnstileResponse || !verifyTurnstile(turnstileResponse, CONFIG.turnstileSecretKey)) {
+      return createJsonResponse('error', 'Beveiligingscontrole mislukt. Probeer het opnieuw.');
     }
 
     // 3. Server-side Validation
@@ -54,8 +65,18 @@ function doPost(e) {
       errors.push('Invalid email address');
     }
 
+    Object.keys(CONFIG.maxFieldLengths).forEach(field => {
+      if (params[field] && String(params[field]).length > CONFIG.maxFieldLengths[field]) {
+        errors.push(`${field} is too long`);
+      }
+    });
+
     if (errors.length > 0) {
       return createJsonResponse('error', 'Validation failed', errors);
+    }
+
+    if (!isAllowedSubmission(params.email)) {
+      return createJsonResponse('error', 'Te veel berichten in korte tijd. Probeer het later opnieuw.');
     }
 
     // 4. Store in Google Sheet
@@ -84,7 +105,8 @@ function doPost(e) {
     return createJsonResponse('success', 'Bericht succesvol verzonden! We nemen zo snel mogelijk contact met je op.');
 
   } catch (error) {
-    return createJsonResponse('error', 'Server error: ' + error.toString());
+    console.error('Contact form error: ' + error.toString());
+    return createJsonResponse('error', 'Er ging iets mis. Probeer het later opnieuw.');
   }
 }
 
@@ -110,7 +132,8 @@ function getOrCreateSheet() {
  * Send email notification to the association
  */
 function sendEmailNotification(data) {
-  const subject = `Nieuw Contactformulier: ${data.subject}`;
+  const cleanSubject = String(data.subject || '').replace(/[\r\n]+/g, ' ').slice(0, CONFIG.maxFieldLengths.subject);
+  const subject = `Nieuw Contactformulier: ${cleanSubject}`;
   const body = `
     Je hebt een nieuw bericht ontvangen via het contactformulier op bonsai-brabant.nl.
 
@@ -142,6 +165,23 @@ function validateEmail(email) {
 }
 
 /**
+ * Basic email-based rate limit for the public endpoint.
+ */
+function isAllowedSubmission(email) {
+  const cache = CacheService.getScriptCache();
+  const normalizedEmail = String(email || 'unknown').trim().toLowerCase();
+  const key = 'contact_' + Utilities.base64EncodeWebSafe(normalizedEmail).slice(0, 80);
+  const currentCount = Number(cache.get(key) || '0');
+
+  if (currentCount >= CONFIG.rateLimitMaxSubmissions) {
+    return false;
+  }
+
+  cache.put(key, String(currentCount + 1), CONFIG.rateLimitWindowSeconds);
+  return true;
+}
+
+/**
  * Create a JSON response for the frontend
  */
 function createJsonResponse(status, message, errors = []) {
@@ -166,6 +206,7 @@ function verifyTurnstile(token, secretKey) {
   try {
     const response = UrlFetchApp.fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
       method: 'post',
+      muteHttpExceptions: true,
       payload: {
         secret: secretKey,
         response: token
@@ -175,8 +216,7 @@ function verifyTurnstile(token, secretKey) {
     const result = JSON.parse(response.getContentText());
     return result.success === true;
   } catch (err) {
-    // Fail-open: if Cloudflare is down or fetch fails, do not block genuine contact attempts
     console.error('Turnstile verification error: ' + err.toString());
-    return true; 
+    return false;
   }
 }

@@ -3,30 +3,30 @@ VERSION:2.0
 PRODID:-//Bonsai Vereniging Brabant//Agenda 2026//NL
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-SUMMARY:Clubavond: Werken aan eigen bomen
+SUMMARY:Werken aan eigen bomen
 DTSTART;TZID=Europe/Amsterdam:20260518T193000
-DTEND;TZID=Europe/Amsterdam:20260518T223000
+DTEND;TZID=Europe/Amsterdam:20260518T220000
 LOCATION:De Moerkoal, Driezeeg 20, 5258 LE Berlicum
 DESCRIPTION:Clubavond Bonsai Vereniging Brabant. Werkavond voor eigen bomen onder begeleiding.
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:NBS Voorbereiding: Bomen selecteren
+SUMMARY:Selectie NBS & Opstelling maken
 DTSTART;TZID=Europe/Amsterdam:20260629T193000
-DTEND;TZID=Europe/Amsterdam:20260629T223000
+DTEND;TZID=Europe/Amsterdam:20260629T220000
 LOCATION:De Moerkoal, Driezeeg 20, 5258 LE Berlicum
 DESCRIPTION:Bomen selecteren voor de Nationale Bonsai Show 2026.
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Clubavond: Werken aan eigen bomen
+SUMMARY:Werken aan eigen bomen
 DTSTART;TZID=Europe/Amsterdam:20260831T193000
-DTEND;TZID=Europe/Amsterdam:20260831T223000
+DTEND;TZID=Europe/Amsterdam:20260831T220000
 LOCATION:De Moerkoal, Driezeeg 20, 5258 LE Berlicum
 DESCRIPTION:Clubavond Bonsai Vereniging Brabant. Werkavond voor eigen bomen onder begeleiding.
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:NBS Presentatie: De laatste hand
 DTSTART;TZID=Europe/Amsterdam:20260921T193000
-DTEND;TZID=Europe/Amsterdam:20260921T223000
+DTEND;TZID=Europe/Amsterdam:20260921T220000
 LOCATION:De Moerkoal, Driezeeg 20, 5258 LE Berlicum
 DESCRIPTION:Laatste voorbereidingen voor de NBS: selecteren van tafels, scrolls en accenten.
 END:VEVENT
@@ -45,16 +45,16 @@ LOCATION:De Moerkoal, Driezeeg 20, 5258 LE Berlicum
 DESCRIPTION:Hét landelijke topevenement van de Nederlandse Bonsai Vereniging. Georganiseerd door BVB.
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Lezing: Herfst & Bonsai (Bart Verstappen)
+SUMMARY:Herfst & Bonsai (Lezing)
 DTSTART;TZID=Europe/Amsterdam:20261026T193000
-DTEND;TZID=Europe/Amsterdam:20261026T223000
+DTEND;TZID=Europe/Amsterdam:20261026T220000
 LOCATION:De Moerkoal, Driezeeg 20, 5258 LE Berlicum
-DESCRIPTION:Lezing door Bart Verstappen over bonsai-verzorging in de herfst.
+DESCRIPTION:Lezing over herfstverzorging, winterbescherming en voorbereiding op de winterrust van je bonsai.
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:BVB Ruilbeurs 2026
+SUMMARY:Ruilbeurs & Jaarafsluiting
 DTSTART;TZID=Europe/Amsterdam:20261130T193000
-DTEND;TZID=Europe/Amsterdam:20261130T223000
+DTEND;TZID=Europe/Amsterdam:20261130T220000
 LOCATION:De Moerkoal, Driezeeg 20, 5258 LE Berlicum
 DESCRIPTION:Jaarlijkse ruilbeurs van de Bonsai Vereniging Brabant.
 END:VEVENT

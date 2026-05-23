@@ -124,7 +124,10 @@
 
     class BvbCalendarButton extends HTMLElement {
         connectedCallback() {
-            if (this.shadowRoot) return;
+            if (this.shadowRoot) {
+                this.addDocumentClickListener();
+                return;
+            }
 
             const event = buildEvent(this);
             const options = parseOptions(this.getAttribute('options'));
@@ -217,6 +220,7 @@
                 menu.hidden = !open;
                 button.setAttribute('aria-expanded', String(open));
             };
+            this.toggleMenu = toggleMenu;
 
             const addDownloadOption = (optionLabel) => {
                 const option = document.createElement('button');
@@ -255,20 +259,36 @@
             });
 
             button.addEventListener('click', () => toggleMenu());
-            document.addEventListener('click', (event) => {
+
+            this.handleDocumentClick = (event) => {
                 if (!event.composedPath().includes(this)) {
                     toggleMenu(false);
                 }
-            });
-            this.addEventListener('keydown', (event) => {
+            };
+            this.handleHostKeydown = (event) => {
                 if (event.key === 'Escape') {
                     toggleMenu(false);
                     button.focus();
                 }
-            });
+            };
+            this.addEventListener('keydown', this.handleHostKeydown);
+            this.addDocumentClickListener();
 
             wrapper.append(button, menu);
             shadow.append(style, wrapper);
+        }
+
+        disconnectedCallback() {
+            if (this.handleDocumentClick && this.documentClickListenerAttached) {
+                document.removeEventListener('click', this.handleDocumentClick);
+                this.documentClickListenerAttached = false;
+            }
+        }
+
+        addDocumentClickListener() {
+            if (!this.handleDocumentClick || this.documentClickListenerAttached) return;
+            document.addEventListener('click', this.handleDocumentClick);
+            this.documentClickListenerAttached = true;
         }
     }
 
