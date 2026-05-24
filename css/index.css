@@ -2727,11 +2727,9 @@ details[data-mobile-collapsible] > summary {
     width: 27px;
     height: 27px;
     margin-bottom: 1px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    display: block;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
     transition: transform 0.3s ease;
 }
 
@@ -2750,7 +2748,12 @@ details[data-mobile-collapsible] > summary {
     -webkit-appearance: none;
     border: 0;
     background: transparent;
-    font: inherit;
+    font-family: var(--font-main);
+    font-size: 0.7rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     color: inherit;
     cursor: pointer;
 }
@@ -2957,7 +2960,7 @@ details[data-mobile-collapsible] > summary {
     display: flex;
     gap: 1.5rem;
     justify-content: center;
-    margin-bottom: 2rem;
+    margin-bottom: 0;
 }
 
 /* Hide mobile toggle in header if using bottom nav */
@@ -4343,11 +4346,17 @@ details[data-mobile-collapsible] > summary {
         margin-bottom: 0.7rem;
     }
 
+    .schedule-day {
+        overflow: hidden;
+        border: 1px solid rgba(122, 91, 73, 0.12);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.74);
+        box-shadow: 0 8px 22px rgba(54, 51, 48, 0.05);
+    }
+
     .mobile-filter-panel .filter-group,
     .mobile-practical-info > .sidebar-card,
-    .mobile-read-more > p,
-    .schedule-day > .timeline-day-header,
-    .schedule-day > .nbs-timeline {
+    .mobile-read-more > p {
         margin-top: 0.65rem;
     }
 
@@ -4356,6 +4365,9 @@ details[data-mobile-collapsible] > summary {
         grid-template-columns: 1fr auto;
         align-items: center !important;
         gap: 0.12rem 0.75rem !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        background: rgba(255, 255, 255, 0.86) !important;
     }
 
     .schedule-day > summary span,
@@ -4374,6 +4386,15 @@ details[data-mobile-collapsible] > summary {
         font-weight: 500;
         line-height: 1.25;
     }
+
+    .schedule-day[open] > summary {
+        border-bottom: 1px solid rgba(122, 91, 73, 0.1) !important;
+    }
+
+    .schedule-day[open] > .timeline-day-header,
+    .schedule-day[open] > .nbs-timeline {
+        animation: scheduleReveal 0.24s ease both;
+    }
     
     .feature-card-body {
         padding: 1.1rem 0.8rem 0.8rem !important;
@@ -4382,7 +4403,10 @@ details[data-mobile-collapsible] > summary {
     /* Compact Timeline Spacing */
     .nbs-timeline {
         padding-left: 26px !important;
-        margin: 0.5rem 0 !important;
+        margin: 0 !important;
+        padding-top: 0.2rem;
+        padding-right: 0.75rem;
+        padding-bottom: 0.75rem;
     }
     .nbs-timeline::before {
         left: 9px !important;
@@ -4408,12 +4432,13 @@ details[data-mobile-collapsible] > summary {
         font-size: 0.9rem !important;
     }
     .timeline-day-header {
-        margin-bottom: 0.5rem !important;
-        padding: 0.25rem 0 !important;
+        margin: 0 !important;
+        padding: 0.65rem 0.75rem 0.45rem !important;
         gap: 0.4rem !important;
+        border-bottom: 0 !important;
     }
     .timeline-day-label {
-        font-size: 1.1rem !important;
+        display: none;
     }
     
     /* Global Compact Margin/Padding Spacing Utilities */
@@ -4428,6 +4453,17 @@ details[data-mobile-collapsible] > summary {
     
     .content-area {
         padding: 0.8rem 0 !important;
+    }
+}
+
+@keyframes scheduleReveal {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -5676,13 +5712,58 @@ select {
     }
 
     .home-gallery-body {
-        grid-template-columns: 1fr;
-        gap: 0.6rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-areas:
+            "media media"
+            "caption caption"
+            "prev next";
+        gap: 0 0.5rem;
+        padding: 0.55rem;
+        overflow: hidden;
+        border-radius: 18px;
     }
 
     .home-showcase-carousel {
+        grid-area: media;
         aspect-ratio: 4 / 3;
         min-height: 300px;
+        border: 0;
+        border-radius: 14px 14px 0 0;
+    }
+
+    .home-insta-caption {
+        grid-area: caption;
+        border-left: 0;
+        border-top: 1px solid rgba(122, 91, 73, 0.13);
+        border-radius: 0;
+        padding: 1rem;
+    }
+
+    .home-gallery-nav {
+        position: static;
+        transform: none;
+        width: 100%;
+        height: 42px;
+        margin-top: 0.55rem;
+        border-color: rgba(122, 91, 73, 0.14);
+        background: rgba(255, 255, 255, 0.72);
+        box-shadow: none;
+    }
+
+    .home-gallery-nav:hover,
+    .home-gallery-nav:focus-visible {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 18px rgba(54, 51, 48, 0.1);
+    }
+
+    .home-gallery-prev {
+        grid-area: prev;
+        left: auto;
+    }
+
+    .home-gallery-next {
+        grid-area: next;
+        right: auto;
     }
 
 }
@@ -5786,9 +5867,6 @@ select {
     }
 
     .home-insta-caption {
-        border-left: 0;
-        border-top: 1px solid rgba(122, 91, 73, 0.13);
-        border-radius: 0 0 14px 14px;
         font-size: 0.82rem;
         line-height: 1.4;
         padding: 0.9rem;
@@ -5806,9 +5884,7 @@ select {
     }
 
     .home-gallery-nav {
-        width: 38px;
-        height: 38px;
-        top: clamp(8.5rem, 38vw, 18rem);
+        height: 40px;
     }
 
     .home-page .reveal-on-scroll.reveal-left,
