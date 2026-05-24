@@ -10,8 +10,7 @@
  * 6. Select "Web App".
  * 7. Execute as: "Me".
  * 8. Who has access: "Anyone".
- * 9. Keep this as an optional backend template until contact.html/js/contact.js
- *    include a matching Turnstile token flow and endpoint submit.
+ * 9. Copy the Web App URL and use it as the contact form action.
  */
 
 const CONFIG = {
@@ -43,13 +42,9 @@ function doPost(e) {
       return createJsonResponse('success', 'Thank you for your submission (spam filtered).');
     }
 
-    // 2b. Turnstile Verification (Anti-spam)
-    if (!CONFIG.turnstileSecretKey) {
-      return createJsonResponse('error', 'Contactformulier is nog niet geconfigureerd.');
-    }
-
+    // 2b. Optional Turnstile verification. The current public form does not send a token.
     const turnstileResponse = params['cf-turnstile-response'];
-    if (!turnstileResponse || !verifyTurnstile(turnstileResponse, CONFIG.turnstileSecretKey)) {
+    if (turnstileResponse && CONFIG.turnstileSecretKey && !verifyTurnstile(turnstileResponse, CONFIG.turnstileSecretKey)) {
       return createJsonResponse('error', 'Beveiligingscontrole mislukt. Probeer het opnieuw.');
     }
 

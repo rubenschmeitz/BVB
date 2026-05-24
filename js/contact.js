@@ -9,8 +9,6 @@
         const submitBtn = contactForm ? contactForm.querySelector('.submit-btn') : null;
         if (!contactForm || !submitBtn) return;
 
-        const contactEmail = getContactEmail(contactForm);
-
         contactForm.addEventListener('submit', (event) => {
             event.preventDefault();
 
@@ -26,32 +24,32 @@
             }
 
             submitBtn.disabled = true;
+            const originalBtnText = submitBtn.innerText;
             submitBtn.innerText = 'Verzenden...';
 
             const formData = new FormData(contactForm);
-            const subject = formData.get('subject') || 'Contactformulier';
-            const mailSubject = `Contactformulier: ${subject}`;
-            const mailBody = [
-                `Naam: ${formData.get('name') || ''}`,
-                `E-mail: ${formData.get('email') || ''}`,
-                `Onderwerp: ${subject}`,
-                '',
-                'Bericht:',
-                formData.get('message') || ''
-            ].join('\n');
+            const params = new URLSearchParams();
 
-            window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
-            showFeedback(contactForm, true, 'Als je e-mailprogramma opent, staat het bericht klaar. Verstuur het daar om het echt te verzenden.');
+            formData.forEach((value, key) => {
+                params.append(key, value);
+            });
+
+            fetch(contactForm.action, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: params
+            })
+                .then(() => {
+                    showFeedback(contactForm, true, 'Bericht verzonden! Bedankt voor je bericht.');
+                })
+                .catch((error) => {
+                    console.error('Contact form error:', error);
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = originalBtnText;
+                    showFeedback(contactForm, false, 'Er is iets misgegaan. Probeer het later opnieuw of mail ons direct.');
+                });
         });
     });
-
-    function getContactEmail(form) {
-        const action = form.getAttribute('action') || '';
-        if (action.toLowerCase().startsWith('mailto:')) {
-            return action.slice('mailto:'.length).split('?')[0];
-        }
-        return 'info@bonsai-brabant.nl';
-    }
 
     function showFeedback(contactForm, isSuccess, message) {
         contactForm.style.transition = 'opacity 0.4s ease';
