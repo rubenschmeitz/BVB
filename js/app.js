@@ -3,6 +3,8 @@
 
     const BVB = window.BVB = window.BVB || {};
 
+    redirectLegacyWordPressUrls();
+
     const onReady = (callback) => {
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', callback);
@@ -29,6 +31,31 @@
         initHomeGallery();
         initHeaderScroll();
     });
+
+    function redirectLegacyWordPressUrls() {
+        const params = new URLSearchParams(window.location.search);
+        const legacyRoutes = {
+            '36': '/',
+            '100': '/contact.html',
+            '108': '/vereniging.html',
+            '155': '/agenda.html',
+        };
+
+        let target = null;
+        const pageId = params.get('page_id');
+
+        if (pageId && legacyRoutes[pageId]) {
+            target = legacyRoutes[pageId];
+        } else if (params.get('post_type') === 'tribe_events') {
+            target = '/agenda.html';
+        }
+
+        if (!target || window.location.pathname !== '/') return;
+
+        const nextUrl = new URL(target, window.location.origin);
+        nextUrl.hash = window.location.hash;
+        window.location.replace(nextUrl.href);
+    }
 
     function initMobileNav() {
         const mobileToggle = document.getElementById('mobile-toggle');

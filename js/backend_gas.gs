@@ -10,7 +10,8 @@
  * 6. Select "Web App".
  * 7. Execute as: "Me".
  * 8. Who has access: "Anyone".
- * 9. Copy the Web App URL and use it as the contact form action.
+ * 9. Add script property TURNSTILE_SECRET_KEY with your Cloudflare Turnstile secret.
+ * 10. Copy the Web App URL and use it as the contact form action.
  */
 
 const CONFIG = {
@@ -18,6 +19,7 @@ const CONFIG = {
   sheetName: 'Contact Submissions',           // Name of the sheet to store data
   requiredFields: ['name', 'email', 'subject', 'message'],
   turnstileSecretKey: PropertiesService.getScriptProperties().getProperty('TURNSTILE_SECRET_KEY') || '',
+  turnstileExpectedAction: 'contact',
   maxFieldLengths: {
     name: 100,
     email: 254,
@@ -42,10 +44,11 @@ function doPost(e) {
       return createJsonResponse('success', 'Thank you for your submission (spam filtered).');
     }
 
-    // 2b. Optional Turnstile verification. The current public form does not send a token.
+    // 2b. Turnstile verification. Fail closed when the token or secret is missing.
     const turnstileResponse = params['cf-turnstile-response'];
-    if (turnstileResponse && CONFIG.turnstileSecretKey && !verifyTurnstile(turnstileResponse, CONFIG.turnstileSecretKey)) {
-      return createJsonResponse('error', 'Beveiligingscontrole mislukt. Probeer het opnieuw.');
+    const turnstileResult = verifyTurnstile(turnstileResponse, CONFIG.turnstileSecretKey);
+    if (!turnstileResult.success) {
+      return createJsonResponse('error', turnstileResult.message || 'Beveiligingscontrole mislukt. Probeer het opnieuw.');
     }
 
     // 3. Server-side Validation
@@ -199,6 +202,20 @@ function createJsonResponse(status, message, errors = []) {
  */
 function verifyTurnstile(token, secretKey) {
   try {
+    if (!secretKey) {
+      return {
+        success: false,
+        message: 'Contactformulier is nog niet volledig beveiligd.'
+      };
+    }
+
+    if (!token) {
+      return {
+        success: false,
+        message: 'Beveiligingscontrole ontbreekt. Probeer het opnieuw.'
+      };
+    }
+
     const response = UrlFetchApp.fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
       method: 'post',
       muteHttpExceptions: true,
@@ -209,9 +226,26 @@ function verifyTurnstile(token, secretKey) {
     });
     
     const result = JSON.parse(response.getContentText());
-    return result.success === true;
+    if (result.success !== true) {
+      return {
+        success: false,
+        message: 'Beveiligingscontrole mislukt. Probeer het opnieuw.'
+      };
+    }
+
+    if (CONFIG.turnstileExpectedAction && result.action !== CONFIG.turnstileExpectedAction) {
+      return {
+        success: false,
+        message: 'Beveiligingscontrole hoort niet bij dit formulier.'
+      };
+    }
+
+    return { success: true };
   } catch (err) {
     console.error('Turnstile verification error: ' + err.toString());
-    return false;
+    return {
+      success: false,
+      message: 'Beveiligingscontrole kon niet worden uitgevoerd.'
+    };
   }
 }

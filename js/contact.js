@@ -11,6 +11,7 @@
 
         contactForm.addEventListener('submit', (event) => {
             event.preventDefault();
+            clearFormStatus(contactForm);
 
             if (!contactForm.checkValidity()) {
                 contactForm.reportValidity();
@@ -23,11 +24,26 @@
                 return;
             }
 
+            const turnstileWidget = contactForm.querySelector('.cf-turnstile');
+            const turnstileSiteKey = turnstileWidget ? turnstileWidget.getAttribute('data-sitekey') || '' : '';
+            if (turnstileWidget && (!turnstileSiteKey || turnstileSiteKey === 'PASTE_TURNSTILE_SITE_KEY_HERE')) {
+                showFormStatus(contactForm, 'Het contactformulier moet nog met de Turnstile site key worden ingesteld.');
+                return;
+            }
+
             submitBtn.disabled = true;
             const originalBtnText = submitBtn.innerText;
             submitBtn.innerText = 'Verzenden...';
 
             const formData = new FormData(contactForm);
+            const turnstileToken = formData.get('cf-turnstile-response');
+            if (turnstileWidget && !turnstileToken) {
+                submitBtn.disabled = false;
+                submitBtn.innerText = originalBtnText;
+                showFormStatus(contactForm, 'Vink de beveiligingscontrole aan en probeer het opnieuw.');
+                return;
+            }
+
             const params = new URLSearchParams();
 
             formData.forEach((value, key) => {
@@ -46,10 +62,34 @@
                     console.error('Contact form error:', error);
                     submitBtn.disabled = false;
                     submitBtn.innerText = originalBtnText;
+                    resetTurnstile();
                     showFeedback(contactForm, false, 'Er is iets misgegaan. Probeer het later opnieuw of mail ons direct.');
                 });
         });
     });
+
+    function showFormStatus(contactForm, message) {
+        let status = contactForm.querySelector('.form-status');
+        if (!status) {
+            status = document.createElement('p');
+            status.className = 'form-status';
+            status.setAttribute('role', 'alert');
+            const submitArea = contactForm.querySelector('.form-submit');
+            contactForm.insertBefore(status, submitArea || null);
+        }
+        status.textContent = message;
+    }
+
+    function clearFormStatus(contactForm) {
+        const status = contactForm.querySelector('.form-status');
+        if (status) status.remove();
+    }
+
+    function resetTurnstile() {
+        if (window.turnstile && typeof window.turnstile.reset === 'function') {
+            window.turnstile.reset();
+        }
+    }
 
     function showFeedback(contactForm, isSuccess, message) {
         contactForm.style.transition = 'opacity 0.4s ease';

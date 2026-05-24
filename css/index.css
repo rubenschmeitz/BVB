@@ -2276,6 +2276,21 @@ a:focus-visible {
     display: none;
 }
 
+.turnstile-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-status {
+    margin: 0 0 1rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(217, 83, 79, 0.28);
+    border-radius: 8px;
+    background: rgba(217, 83, 79, 0.08);
+    color: #8f2f2b;
+    font-weight: 600;
+    line-height: 1.45;
+}
+
 .form-submit {
     margin-top: 2rem;
 }
