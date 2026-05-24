@@ -117,7 +117,7 @@
         const filename = img.src.substring(img.src.lastIndexOf('/') + 1);
         const treeMetadata = {
             'carpinus_betulus.webp': { realHeightCm: 44, bottomOffset: 0, scale: 0.92 },
-            'wisteria_sinensis.webp': { realHeightCm: 55, bottomOffset: 0, scale: 1.15, placement: { left: '41%', bottom: 20.5, height: 52 } },
+            'wisteria_sinensis.webp': { realHeightCm: 55, bottomOffset: 0, scale: 1.15, placement: { left: '34%', bottom: 20.2, height: 48 } },
             'acer_palmatum_rood.webp': { realHeightCm: 50, bottomOffset: 0, scale: 1.04 },
             'juniperus_chinensis_rots.webp': { realHeightCm: 38, bottomOffset: 0, scale: 0.79, placement: { left: '39%', bottom: 20.2, height: 37.5 } },
             'acer_palmatum_groen_klein.webp': { realHeightCm: 50, bottomOffset: 0, scale: 1.04, placement: { left: '63%', bottom: 20, height: 40 } },

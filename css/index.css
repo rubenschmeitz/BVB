@@ -1315,6 +1315,60 @@ a:focus-visible {
     font-size: 1.2rem;
 }
 
+.nbs-practical-strip {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.85rem 0.95rem;
+    background: var(--color-sand);
+    border: 1px solid rgba(122, 91, 73, 0.12);
+    border-radius: 12px;
+}
+
+.nbs-practical-strip div {
+    min-width: 0;
+}
+
+.nbs-practical-strip strong,
+.nbs-practical-strip span {
+    display: block;
+    line-height: 1.25;
+}
+
+.nbs-practical-strip strong {
+    color: var(--color-bark);
+    font-size: 0.92rem;
+}
+
+.nbs-practical-strip span {
+    color: rgba(54, 51, 48, 0.78);
+    font-size: 0.82rem;
+}
+
+.nbs-practical-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(84px, 1fr));
+    gap: 0.5rem;
+}
+
+.nbs-practical-actions a {
+    padding: 0.58rem 0.8rem;
+    border-radius: 8px;
+    background: var(--color-bark);
+    color: white !important;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.nbs-practical-actions a:hover {
+    background: var(--color-forest);
+    transform: translateY(-1px);
+}
+
 .fact-item {
     display: flex;
     gap: 1rem;
@@ -2068,6 +2122,11 @@ a:focus-visible {
     min-width: 0;
 }
 
+.agenda-single-layout {
+    grid-template-columns: 1fr;
+    max-width: 1100px;
+}
+
 .agenda-sidebar {
     position: sticky;
     top: 120px;
@@ -2116,6 +2175,33 @@ a:focus-visible {
     color: var(--color-bark) !important;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(150, 107, 78, 0.1);
+}
+
+.agenda-sync-action {
+    align-self: center;
+    display: inline-flex;
+    min-height: 40px;
+    padding: 0.65rem 0.95rem;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.agenda-location-section {
+    margin-top: 2.5rem;
+    padding: 1.35rem;
+    background: var(--color-sand);
+    border: 1px solid rgba(122, 91, 73, 0.12);
+    border-radius: 16px;
+}
+
+.agenda-location-section h3 {
+    color: var(--color-bark);
+    margin-bottom: 0.75rem;
+}
+
+.agenda-location-section .map-iframe-wrapper {
+    height: 260px;
+    margin-top: 1rem;
 }
 
 @media (max-width: 1024px) {
@@ -3338,7 +3424,7 @@ details[data-mobile-collapsible] > summary {
     background-image: url('../images/tokonoma/02_tokonoma_feb_2024.webp');
     --hero-focus-y: 32%;
 }
-.hero-club-photo { background-image: url('../images/bijeenkomst.webp'); }
+.hero-club-photo { background-image: url('../images/over-ons-collage4-upscaled.webp'); }
 
 /* --- Section Headers --- */
 .section-header {
@@ -4023,8 +4109,8 @@ details[data-mobile-collapsible] > summary {
 
     /* Keep tokonoma photos readable instead of reducing them to a thin strip. */
     .page-hero {
-        min-height: 120px !important;
-        height: clamp(120px, 18svh, 150px) !important;
+        min-height: 92px !important;
+        height: clamp(92px, 14svh, 124px) !important;
     }
     .page-hero-content {
         padding: 0.35rem 4% !important;
@@ -4183,6 +4269,32 @@ details[data-mobile-collapsible] > summary {
         font-weight: 700;
         text-align: center;
         text-decoration: none;
+    }
+
+    .nbs-practical-strip {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.45rem;
+        padding: 0.75rem;
+        border-radius: 12px;
+    }
+
+    .nbs-practical-strip strong {
+        font-size: 0.82rem;
+    }
+
+    .nbs-practical-strip span {
+        font-size: 0.72rem;
+    }
+
+    .nbs-practical-actions {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.45rem;
+    }
+
+    .nbs-practical-actions a {
+        padding: 0.52rem 0.4rem;
+        font-size: 0.75rem;
     }
 
     details[data-mobile-collapsible] > summary {
@@ -4474,8 +4586,8 @@ select {
     }
 
     .page-hero {
-        min-height: 120px !important;
-        height: clamp(120px, 18svh, 150px) !important;
+        min-height: 92px !important;
+        height: clamp(92px, 14svh, 124px) !important;
     }
 
     .gallery-nav {
@@ -4609,6 +4721,21 @@ select {
         margin-bottom: 1.25rem;
         padding: 0.75rem;
         border-radius: 12px;
+    }
+
+    .agenda-sync-action {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .agenda-location-section {
+        margin-top: 1.5rem;
+        padding: 0.95rem;
+        border-radius: 12px;
+    }
+
+    .agenda-location-section .map-iframe-wrapper {
+        height: 210px;
     }
 
     .filter-group {
@@ -5232,8 +5359,12 @@ select {
 .home-gallery-body {
     display: grid;
     grid-template-columns: minmax(0, 1.08fr) minmax(230px, 0.92fr);
-    gap: 0.82rem;
+    gap: 0;
     align-items: stretch;
+    padding: 0.72rem;
+    background: rgba(249, 247, 242, 0.72);
+    border: 1px solid rgba(122, 91, 73, 0.12);
+    border-radius: 20px;
 }
 
 .home-showcase-carousel {
@@ -5325,9 +5456,10 @@ select {
     justify-content: center;
     margin: 0;
     padding: clamp(1rem, 2.4vw, 1.55rem);
-    background: rgba(249, 247, 242, 0.82);
-    border: 1px solid rgba(122, 91, 73, 0.1);
-    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.62);
+    border: 0;
+    border-left: 1px solid rgba(122, 91, 73, 0.13);
+    border-radius: 0 16px 16px 0;
     color: rgba(54, 51, 48, 0.78);
     font-size: 0.94rem;
     line-height: 1.45;
@@ -5533,6 +5665,7 @@ select {
 
     .home-gallery-body {
         grid-template-columns: 1fr;
+        gap: 0.6rem;
     }
 
     .home-showcase-carousel {
@@ -5628,6 +5761,9 @@ select {
     }
 
     .home-insta-caption {
+        border-left: 0;
+        border-top: 1px solid rgba(122, 91, 73, 0.13);
+        border-radius: 0 0 14px 14px;
         font-size: 0.82rem;
         line-height: 1.4;
         padding: 0.9rem;
