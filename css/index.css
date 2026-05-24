@@ -41,6 +41,7 @@
 html {
     scroll-behavior: smooth;
     scrollbar-gutter: stable; /* Prevents layout shift when scrollbar appears/disappears */
+    min-height: 100%;
 }
 
 ::selection {
@@ -75,6 +76,10 @@ body {
     -webkit-font-smoothing: antialiased;
     transition: background-color 0.8s ease, color 0.8s ease;
     width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
 }
 
 a {
@@ -432,6 +437,7 @@ a:focus-visible {
     padding: 2rem 0;
     background-color: var(--color-white);
     position: relative;
+    flex: 1 0 auto;
 }
 
 .premium-section {
@@ -938,6 +944,7 @@ a:focus-visible {
     border-top: none;
     position: relative;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 /* Subtle pattern for footer */
