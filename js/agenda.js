@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentView = 'list'; // 'list' or 'calendar'
     let currentFilter = 'club'; // Default filter is set to BVB Activiteiten ('club')
     
-    // Set default month to May 2026 (first event)
-    let calendarYear = 2026;
-    let calendarMonth = 4; // May (0-indexed)
+    const firstUpcomingEvent = getUpcomingEventsForFilter(currentFilter)[0] || getUpcomingEvents(agendaEvents)[0] || agendaEvents[0];
+    let calendarYear = firstUpcomingEvent ? new Date(firstUpcomingEvent.startDate).getFullYear() : new Date().getFullYear();
+    let calendarMonth = firstUpcomingEvent ? new Date(firstUpcomingEvent.startDate).getMonth() : new Date().getMonth();
 
     const dynamicContainer = document.getElementById('agenda-dynamic-content');
     const filterButtons = document.querySelectorAll('.filter-btn');
@@ -38,6 +38,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 filterButtons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 currentFilter = btn.getAttribute('data-filter');
+                if (currentView === 'calendar') {
+                    setCalendarToFirstEvent(getFilteredEvents());
+                }
                 render();
             });
         });
@@ -56,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     currentView = 'calendar';
                     dynamicContainer.classList.add('calendar-view');
                     dynamicContainer.classList.remove('list-view');
+                    setCalendarToFirstEvent(getFilteredEvents());
                 }
                 render();
             });
@@ -92,16 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // LIST VIEW RENDERER (Filters out past events automatically)
+    // LIST VIEW RENDERER
     function renderListView() {
-        let filteredEvents = getFilteredEvents();
-
-        // Automatically hide events that have already passed based on start/end date
-        const todayStr = getTodayDateStr();
-        filteredEvents = filteredEvents.filter(evt => {
-            const eventCompareDate = evt.endDate || evt.startDate;
-            return eventCompareDate >= todayStr;
-        });
+        const filteredEvents = getFilteredEvents();
 
         if (filteredEvents.length === 0) {
             dynamicContainer.innerHTML = `
@@ -427,11 +424,32 @@ document.addEventListener('DOMContentLoaded', () => {
         refreshAgendaEffects();
     }
 
-    // Helper to get events matching the current active filter
-    function getFilteredEvents() {
-        return agendaEvents.filter(evt => {
-            if (currentFilter === 'all') return true;
-            return evt.type === currentFilter;
+    function getUpcomingEvents(events) {
+        const todayStr = getTodayDateStr();
+
+        return events.filter(evt => {
+            const eventCompareDate = evt.endDate || evt.startDate;
+            return eventCompareDate >= todayStr;
         });
+    }
+
+    function getUpcomingEventsForFilter(filter) {
+        return getUpcomingEvents(agendaEvents).filter(evt => {
+            if (filter === 'all') return true;
+            return evt.type === filter;
+        });
+    }
+
+    function setCalendarToFirstEvent(events) {
+        if (!events.length) return;
+
+        const firstEventDate = new Date(events[0].startDate);
+        calendarYear = firstEventDate.getFullYear();
+        calendarMonth = firstEventDate.getMonth();
+    }
+
+    // Helper to get upcoming events matching the current active filter
+    function getFilteredEvents() {
+        return getUpcomingEventsForFilter(currentFilter);
     }
 });

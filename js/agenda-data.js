@@ -91,16 +91,28 @@
             detailsUrl: 'http://www.bonsaiverenigingapeldoorn.nl'
         },
         {
+            id: 'ext-may-lodder-satsuki',
+            title: 'Satsuki Azalea Dag 2026',
+            startDate: '2026-05-30',
+            startTime: '09:00',
+            endTime: '16:00',
+            location: 'Lodder Bonsai, Harmelen',
+            type: 'event',
+            tag: 'Evenement',
+            description: 'Eendaags evenement bij Lodder Bonsai met Satsuki bonsai-tentoonstelling, sale en een kennismakingsworkshop rond Satsuki azalea.',
+            detailsUrl: 'https://lodderbonsai.nl/news-events/'
+        },
+        {
             id: 'ext-may-izegem',
-            title: 'Bonsai Vlaanderen Show Izegem',
+            title: 'Tuinbeurs Tuin en Sfeer Izegem',
             startDate: '2026-05-31',
-            startTime: '10:00',
+            startTime: '14:00',
             endTime: '17:00',
-            location: 'Izegem, België',
+            location: 'Domein Blauwhuis, Izegem, België',
             type: 'event',
             tag: 'Expositie',
-            description: 'Regionale bonsaitentoonstelling van Bonsai Vlaanderen afdeling West-Vlaanderen, met een schitterende selectie ledenbomen, vormgevingsdemonstraties en deskundige toelichting.',
-            detailsUrl: 'https://bonsaivlaanderen.be'
+            description: 'Bonsai Vlaanderen neemt deel aan de tuinbeurs Tuin en Sfeer in Izegem.',
+            detailsUrl: 'https://bonsaivlaanderen.be/kalender/categorie/tentoonstelling/'
         },
         {
             id: 'ext-june-westen',
@@ -127,31 +139,6 @@
             description: 'We bekijken samen welke bomen geschikt zijn voor de Nationale Bonsai Show en hoe we ze netjes kunnen presenteren. Denk aan boomkeuze, tafels, accenten en de opstelling.'
         },
         {
-            id: 'nbv-july-noelanders',
-            title: 'Masterclass Marc Noelanders',
-            startDate: '2026-07-18',
-            startTime: '10:00',
-            endTime: '16:00',
-            location: 'Landelijke locatie NBV, Nederland',
-            type: 'nbv',
-            tag: 'Masterclass',
-            description: 'Exclusieve en leerzame masterclass onder leiding van de wereldberoemde bonsai-meester Marc Noelanders. Georganiseerd door de Nederlandse Bonsai Vereniging (NBV). Een unieke kans om je boom onder deskundige begeleiding naar een hoger niveau te tillen.',
-            detailsUrl: 'https://bonsainederland.nl'
-        },
-        {
-            id: 'ext-aug-belsele',
-            title: 'Belsele Ambachtelijk Weekend 2026',
-            startDate: '2026-08-22',
-            endDate: '2026-08-23',
-            startTime: '10:00',
-            endTime: '18:00',
-            location: 'Belsele, België',
-            type: 'event',
-            tag: 'Evenement',
-            description: 'Exclusieve samenwerking tussen Bonsai Shop Everaert en Bonsai Vlaanderen tijdens het sfeervolle Ambachtelijk Weekend. Geniet van live demonstraties, workshops en een hoogwaardige ledententoonstelling.',
-            detailsUrl: 'https://bonsaivlaanderen.be'
-        },
-        {
             id: 'bvb-aug-club',
             title: 'Werken aan eigen bomen',
             startDate: '2026-08-31',
@@ -173,31 +160,6 @@
             tag: 'Markt',
             description: 'De grote jaarlijkse bonsaimarkt van Shimpaku Koewacht. De perfecte gelegenheid om startmateriaal, volgroeide bomen, gereedschappen, potten en substraten aan te schaffen.',
             detailsUrl: 'https://www.bonsaiateljee.be'
-        },
-        {
-            id: 'ext-sept-rijnmond',
-            title: 'Bonsai Tentoonstelling Rijnmond 2026',
-            startDate: '2026-09-05',
-            endDate: '2026-09-06',
-            startTime: '10:00',
-            endTime: '17:00',
-            location: 'Vlaardingen, Nederland',
-            type: 'event',
-            tag: 'Evenement',
-            description: 'De tweejaarlijkse clubtentoonstelling van Bonsai Vereniging Rijnmond met prachtige bomen van leden, clinics voor beginners en ervaren hobbyisten, en verkoopstands.',
-            detailsUrl: 'https://bonsai-vereniging-rijnmond.nl/'
-        },
-        {
-            id: 'nbv-sept-uden',
-            title: 'Masterclass Pieter van Uden',
-            startDate: '2026-09-13',
-            startTime: '10:00',
-            endTime: '16:00',
-            location: 'Landelijke locatie NBV, Nederland',
-            type: 'nbv',
-            tag: 'Masterclass',
-            description: 'Diepgaande en praktijkgerichte masterclass verzorgd door de bekende Nederlandse bonsai-expert Pieter van Uden. Georganiseerd door de Nederlandse Bonsai Vereniging (NBV) met de focus op geavanceerde vormgeving en presentatietechnieken.',
-            detailsUrl: 'https://bonsainederland.nl'
         },
         {
             id: 'bvb-sept-styling',
@@ -225,30 +187,17 @@
             detailsUrl: 'nbs.html'
         },
         {
-            id: 'ext-oct-vlaanderen',
-            title: 'Bonsai Show Bonsai Vlaanderen',
-            startDate: '2026-10-10',
-            endDate: '2026-10-11',
+            id: 'ext-oct-sint-niklaas-biennale',
+            title: 'Sint-Niklaas Derde Bonsai Biënnale',
+            startDate: '2026-10-17',
+            endDate: '2026-10-18',
             startTime: '10:00',
-            endTime: '18:00',
-            location: 'Brugge, België',
+            endTime: '17:00',
+            location: 'Paterskerk, Sint-Niklaas, België',
             type: 'event',
-            tag: 'Evenement',
-            description: 'De grote najaarstentoonstelling van Bonsai Vlaanderen met hoogwaardige bomen, internationale demonstrateurs en een uitgebreide Bonsaimarkt.',
-            detailsUrl: 'https://www.bonsaivlaanderen.be'
-        },
-        {
-            id: 'ext-oct-zuidholland',
-            title: 'Herfst Expositie BV Zuid-Holland 2026',
-            startDate: '2026-10-24',
-            endDate: '2026-10-25',
-            startTime: '10:00',
-            endTime: '16:30',
-            location: 'Boskoop, Nederland',
-            type: 'event',
-            tag: 'Evenement',
-            description: 'Regionale najaarsexpositie in het hart van de boomkwekerijregio Boskoop, met schitterende satsuki azalea\'s en jeneverbomen, deskundig styling-advies en verkoop van startmateriaal.',
-            detailsUrl: 'https://www.bvz-h.nl'
+            tag: 'Expositie',
+            description: 'Tweedaagse bonsai-biënnale van Bonsai Vlaanderen afdeling Waasland in de Paterskerk in Sint-Niklaas.',
+            detailsUrl: 'https://bonsaivlaanderen.be/kalender/categorie/tentoonstelling/'
         },
         {
             id: 'bvb-oct-lecture',
@@ -262,43 +211,17 @@
             description: 'Een avond over herfstverzorging, winterrust en bescherming tegen kou en vocht. Daarnaast is er ruimte om aan eigen bomen te werken.'
         },
         {
-            id: 'ext-nov-tenshi',
-            title: 'Tenshi Bonsai Najaarsshow',
-            startDate: '2026-11-14',
-            endDate: '2026-11-15',
-            startTime: '10:00',
-            endTime: '17:00',
-            location: 'Arnhem, Nederland',
+            id: 'ext-nov-bonsai-plaza-sale',
+            title: 'Bonsai Plaza Najaarsuitverkoop 2026',
+            startDate: '2026-11-07',
+            endDate: '2026-11-08',
+            startTime: '08:00',
+            endTime: '16:00',
+            location: 'Bonsai Plaza, Boskoop',
             type: 'event',
-            tag: 'Evenement',
-            description: 'Gespecialiseerde najaarsexpositie met focus op loofbomen in adembenemende herfstkleuren, inclusief clinics en markt.',
-            detailsUrl: 'https://bonsainederland.nl'
-        },
-        {
-            id: 'ext-nov-edauchikai',
-            title: 'Eda Uchi Kai Bonsai Exhibition 2026',
-            startDate: '2026-11-14',
-            endDate: '2026-11-15',
-            startTime: '10:00',
-            endTime: '18:00',
-            location: 'Diepenbeek, België',
-            type: 'event',
-            tag: 'Expositie',
-            description: 'De prestigieuze driejaarlijkse tentoonstelling van de bekende Belgische bonsaiclub Eda Uchi Kai. Bewonder uiterst verfijnde topstukken en geniet van een kwalitatieve presentatie in een sfeervolle ambiance.',
-            detailsUrl: 'https://bonsaivlaanderen.be'
-        },
-        {
-            id: 'ext-nov-bab',
-            title: 'Bonsai Association Belgium Autumn Show',
-            startDate: '2026-11-21',
-            endDate: '2026-11-22',
-            startTime: '10:00',
-            endTime: '18:00',
-            location: 'Zwijndrecht, België',
-            type: 'event',
-            tag: 'Evenement',
-            description: 'Grote nationale najaarsshow georganiseerd door de Belgische Bonsai Associatie met topbomen uit heel België en de buurlanden, en lezingen door internationale meesters.',
-            detailsUrl: 'https://www.bonsaiassociation.be'
+            tag: 'Markt',
+            description: 'Jaarlijkse najaarsuitverkoop bij Bonsai Plaza in Boskoop, met extra aandacht voor de collectie en demonstratie/werk van Mario Komsta op zaterdag.',
+            detailsUrl: 'https://www.bonsaiplaza.com/nl/service/bonsai-exhibitions-events/'
         },
         {
             id: 'bvb-nov-swap',
