@@ -32,14 +32,14 @@ DESCRIPTION:Laatste voorbereidingen voor de NBS: selecteren van tafels, scrolls 
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Nationale Bonsai Show (NBS) 2026 - Dag 1
-DTSTART;TZID=Europe/Amsterdam:20260926T090000
+DTSTART;TZID=Europe/Amsterdam:20260926T100000
 DTEND;TZID=Europe/Amsterdam:20260926T170000
 LOCATION:De Moerkoal, Driezeeg 20, 5258 LE Berlicum
 DESCRIPTION:Hét landelijke topevenement van de Nederlandse Bonsai Vereniging. Georganiseerd door BVB.
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Nationale Bonsai Show (NBS) 2026 - Dag 2
-DTSTART;TZID=Europe/Amsterdam:20260927T090000
+DTSTART;TZID=Europe/Amsterdam:20260927T100000
 DTEND;TZID=Europe/Amsterdam:20260927T170000
 LOCATION:De Moerkoal, Driezeeg 20, 5258 LE Berlicum
 DESCRIPTION:Hét landelijke topevenement van de Nederlandse Bonsai Vereniging. Georganiseerd door BVB.

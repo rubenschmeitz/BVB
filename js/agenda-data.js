@@ -202,7 +202,7 @@
             title: 'Nationale Bonsai Show (NBS) 2026',
             startDate: '2026-09-26',
             endDate: '2026-09-27',
-            startTime: '09:00',
+            startTime: '10:00',
             endTime: '17:00',
             location: 'De Moerkoal, Berlicum',
             type: 'event',
