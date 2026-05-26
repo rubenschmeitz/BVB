@@ -139,6 +139,18 @@
             description: 'We bekijken samen welke bomen geschikt zijn voor de Nationale Bonsai Show en hoe we ze netjes kunnen presenteren. Denk aan boomkeuze, tafels, accenten en de opstelling.'
         },
         {
+            id: 'nbv-july-noelanders',
+            title: 'Masterclass Marc Noelanders',
+            startDate: '2026-07-18',
+            startTime: '10:00',
+            endTime: '16:00',
+            location: 'Landelijke locatie NBV, Nederland',
+            type: 'nbv',
+            tag: 'Masterclass',
+            description: 'Exclusieve en leerzame masterclass onder leiding van de wereldberoemde bonsai-meester Marc Noelanders. Georganiseerd door de Nederlandse Bonsai Vereniging (NBV). Een unieke kans om je boom onder deskundige begeleiding naar een hoger niveau te tillen.',
+            detailsUrl: 'https://bonsainederland.nl'
+        },
+        {
             id: 'bvb-aug-club',
             title: 'Werken aan eigen bomen',
             startDate: '2026-08-31',
@@ -160,6 +172,18 @@
             tag: 'Markt',
             description: 'De grote jaarlijkse bonsaimarkt van Shimpaku Koewacht. De perfecte gelegenheid om startmateriaal, volgroeide bomen, gereedschappen, potten en substraten aan te schaffen.',
             detailsUrl: 'https://www.bonsaiateljee.be'
+        },
+        {
+            id: 'nbv-sept-uden',
+            title: 'Masterclass Pieter van Uden',
+            startDate: '2026-09-13',
+            startTime: '10:00',
+            endTime: '16:00',
+            location: 'Landelijke locatie NBV, Nederland',
+            type: 'nbv',
+            tag: 'Masterclass',
+            description: 'Diepgaande en praktijkgerichte masterclass verzorgd door de bekende Nederlandse bonsai-expert Pieter van Uden. Georganiseerd door de Nederlandse Bonsai Vereniging (NBV) met de focus op geavanceerde vormgeving en presentatietechnieken.',
+            detailsUrl: 'https://bonsainederland.nl'
         },
         {
             id: 'bvb-sept-styling',
