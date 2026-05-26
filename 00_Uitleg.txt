@@ -1,6 +1,0 @@
-﻿📂 04_WEBSITE - BEHEER EN DOCUMENTATIE
-======================================
-
-📁 01_Inloggegevens     - Gebruikersnamen en wachtwoorden (beveiligd).
-📁 02_Handleidingen     - Instructies voor het bijwerken van de site.
-📁 03_Afbeeldingen_Web  - Specifieke afbeeldingen geoptimaliseerd voor het web.
