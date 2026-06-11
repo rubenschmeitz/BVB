@@ -140,7 +140,17 @@
                 :host {
                     display: inline-block;
                     position: relative;
+                    z-index: 1;
                     font-family: var(--font-main, system-ui, sans-serif);
+                }
+
+                :host([data-menu-open="true"]) {
+                    z-index: 80;
+                }
+
+                :host([data-menu-direction="up"]) .calendar-menu {
+                    top: auto;
+                    bottom: calc(100% + 6px);
                 }
 
                 .calendar-button {
@@ -200,6 +210,29 @@
                 .calendar-menu button:hover {
                     background: rgba(93, 123, 81, 0.12);
                 }
+
+                @media (max-width: 600px) {
+                    :host([data-menu-open="true"]) {
+                        position: static;
+                    }
+
+                    .calendar-menu {
+                        position: fixed;
+                        top: auto;
+                        right: 14px;
+                        bottom: calc(var(--bottom-nav-height, 64px) + env(safe-area-inset-bottom, 0px) + 14px);
+                        left: 14px;
+                        min-width: 0;
+                        z-index: 5000;
+                        padding: 8px;
+                        border-radius: 14px;
+                    }
+
+                    :host([data-menu-direction="up"]) .calendar-menu {
+                        top: auto;
+                        bottom: calc(var(--bottom-nav-height, 64px) + env(safe-area-inset-bottom, 0px) + 14px);
+                    }
+                }
             `;
 
             const wrapper = document.createElement('span');
@@ -215,10 +248,31 @@
             menu.className = 'calendar-menu';
             menu.hidden = true;
 
+            const updateMenuDirection = () => {
+                this.setAttribute('data-menu-direction', 'down');
+                if (menu.hidden) return;
+
+                const menuRect = menu.getBoundingClientRect();
+                const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+                const overflowBelow = menuRect.bottom > viewportHeight - 12;
+                const spaceAbove = menuRect.top;
+                const spaceNeeded = menuRect.height + 12;
+
+                if (overflowBelow && spaceAbove >= spaceNeeded) {
+                    this.setAttribute('data-menu-direction', 'up');
+                }
+            };
+
             const toggleMenu = (forceState) => {
                 const open = typeof forceState === 'boolean' ? forceState : menu.hidden;
                 menu.hidden = !open;
                 button.setAttribute('aria-expanded', String(open));
+                this.toggleAttribute('data-menu-open', open);
+                if (open) {
+                    requestAnimationFrame(updateMenuDirection);
+                } else {
+                    this.setAttribute('data-menu-direction', 'down');
+                }
             };
             this.toggleMenu = toggleMenu;
 
