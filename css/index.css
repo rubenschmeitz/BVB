@@ -3581,6 +3581,10 @@ details[data-mobile-collapsible] > summary {
     transform: scale(1.04);
 }
 
+.sidebar-sponsor-item--portrait img {
+    max-height: 132px;
+}
+
 /* Sidebar Section Divider */
 .sidebar-divider {
     display: flex;
