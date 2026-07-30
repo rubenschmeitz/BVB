@@ -269,10 +269,10 @@ if (publishWorkflow?.on?.push) {
 if (!publishWorkflow?.on?.workflow_dispatch?.inputs?.payload) {
   errors.push(".github/workflows/publish.yml: Pages CMS payload-input ontbreekt");
 }
-if (!/actions\/upload-pages-artifact@v4/.test(publishWorkflowSource) || !/path:\s*_site/.test(publishWorkflowSource)) {
+if (!/actions\/upload-pages-artifact@v5/.test(publishWorkflowSource) || !/path:\s*_site/.test(publishWorkflowSource)) {
   errors.push(".github/workflows/publish.yml: alleen _site moet als Pages-artifact worden geüpload");
 }
-if (!/actions\/deploy-pages@v4/.test(publishWorkflowSource)) {
+if (!/actions\/deploy-pages@v5/.test(publishWorkflowSource)) {
   errors.push(".github/workflows/publish.yml: de expliciete Pages-publicatiestap ontbreekt");
 }
 
