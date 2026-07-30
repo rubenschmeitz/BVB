@@ -1,6 +1,6 @@
 /**
  * Google Apps Script Backend for Contact Form
- * 
+ *
  * Instructions:
  * 1. Create a new Google Sheet.
  * 2. Go to Extensions > Apps Script.
@@ -20,6 +20,8 @@ const CONFIG = {
   requiredFields: ['name', 'email', 'subject', 'message'],
   turnstileSecretKey: PropertiesService.getScriptProperties().getProperty('TURNSTILE_SECRET_KEY') || '',
   turnstileExpectedAction: 'contact',
+  turnstileAllowedHostnames: ['bonsai-brabant.nl', 'www.bonsai-brabant.nl'],
+  allowedParentOrigins: ['https://bonsai-brabant.nl', 'https://www.bonsai-brabant.nl'],
   maxFieldLengths: {
     name: 100,
     email: 254,
@@ -34,24 +36,38 @@ const CONFIG = {
  * Handle POST requests from the contact form
  */
 function doPost(e) {
+  const params = (e && e.parameter) || {};
+
   try {
-    // 1. Basic CORS handling (Apps Script doesn't support preflight, so we use a simple POST)
-    const params = e.parameter;
-    
-    // 2. Honeypot check (Anti-spam)
-    // If the 'website' field is filled, it's likely a bot.
-    if (params.website && params.website.length > 0) {
-      return createJsonResponse('success', 'Thank you for your submission (spam filtered).');
+    // 1. Validate the response channel used by the hidden iframe.
+    const responseContext = getResponseContext(params);
+    if (responseContext.mode === 'iframe' && !responseContext.valid) {
+      return createContactResponse(
+        responseContext,
+        'error',
+        'De bevestiging van het formulier kon niet veilig worden verwerkt.'
+      );
     }
 
-    // 2b. Turnstile verification. Fail closed when the token or secret is missing.
+    // 2. Honeypot check (anti-spam). This is an explicit backend response,
+    // but the submission is deliberately not stored or mailed.
+    // If the 'website' field is filled, it's likely a bot.
+    if (params.website && params.website.length > 0) {
+      return createContactResponse(responseContext, 'success', 'Bericht ontvangen.');
+    }
+
+    // 3. Turnstile verification. Fail closed when token or secret is missing.
     const turnstileResponse = params['cf-turnstile-response'];
     const turnstileResult = verifyTurnstile(turnstileResponse, CONFIG.turnstileSecretKey);
     if (!turnstileResult.success) {
-      return createJsonResponse('error', turnstileResult.message || 'Beveiligingscontrole mislukt. Probeer het opnieuw.');
+      return createContactResponse(
+        responseContext,
+        'error',
+        turnstileResult.message || 'Beveiligingscontrole mislukt. Probeer het opnieuw.'
+      );
     }
 
-    // 3. Server-side Validation
+    // 4. Server-side validation.
     const errors = [];
     CONFIG.requiredFields.forEach(field => {
       if (!params[field] || params[field].trim() === '') {
@@ -70,17 +86,26 @@ function doPost(e) {
     });
 
     if (errors.length > 0) {
-      return createJsonResponse('error', 'Validation failed', errors);
+      return createContactResponse(
+        responseContext,
+        'error',
+        'Controleer de ingevulde velden en probeer het opnieuw.',
+        errors
+      );
     }
 
     if (!isAllowedSubmission(params.email)) {
-      return createJsonResponse('error', 'Te veel berichten in korte tijd. Probeer het later opnieuw.');
+      return createContactResponse(
+        responseContext,
+        'error',
+        'Te veel berichten in korte tijd. Probeer het later opnieuw.'
+      );
     }
 
-    // 4. Store in Google Sheet
+    // 5. Store in Google Sheet.
     const sheet = getOrCreateSheet();
     const timestamp = new Date();
-    
+
     // Sanitize to prevent CSV Injection
     const sanitize = (val) => {
         if (!val) return '';
@@ -96,15 +121,23 @@ function doPost(e) {
       sanitize(params.message)
     ]);
 
-    // 5. Send Email Notification
+    // 6. Send email notification.
     sendEmailNotification(params);
 
-    // 6. Return Success Response
-    return createJsonResponse('success', 'Bericht succesvol verzonden! We nemen zo snel mogelijk contact met je op.');
+    // 7. Return an explicit success response to the originating iframe.
+    return createContactResponse(
+      responseContext,
+      'success',
+      'Bericht succesvol verzonden! We nemen zo snel mogelijk contact met je op.'
+    );
 
   } catch (error) {
     console.error('Contact form error: ' + error.toString());
-    return createJsonResponse('error', 'Er ging iets mis. Probeer het later opnieuw.');
+    return createContactResponse(
+      getResponseContext(params),
+      'error',
+      'Er ging iets mis. Probeer het later opnieuw.'
+    );
   }
 }
 
@@ -114,7 +147,7 @@ function doPost(e) {
 function getOrCreateSheet() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   let sheet = ss.getSheetByName(CONFIG.sheetName);
-  
+
   if (!sheet) {
     sheet = ss.insertSheet(CONFIG.sheetName);
     sheet.appendRow(['Timestamp', 'Name', 'Email', 'Subject', 'Message']);
@@ -122,7 +155,7 @@ function getOrCreateSheet() {
     sheet.getRange(1, 1, 1, 5).setFontWeight('bold').setBackground('#f3f3f3');
     sheet.setFrozenRows(1);
   }
-  
+
   return sheet;
 }
 
@@ -180,16 +213,69 @@ function isAllowedSubmission(email) {
 }
 
 /**
- * Create a JSON response for the frontend
+ * Resolve whether this is the new hidden-iframe client or the legacy client.
+ * Legacy JSON stays available so this version can be deployed before cutover.
  */
-function createJsonResponse(status, message, errors = []) {
+function getResponseContext(params) {
+  const submissionId = String(params.submissionId || '').trim();
+  const parentOrigin = String(params.parentOrigin || '').trim();
+  const hasIframeFields = submissionId !== '' || parentOrigin !== '';
+
+  if (!hasIframeFields) {
+    return {
+      mode: 'legacy',
+      valid: true,
+      submissionId: '',
+      parentOrigin: ''
+    };
+  }
+
+  return {
+    mode: 'iframe',
+    valid: isValidSubmissionId(submissionId) && CONFIG.allowedParentOrigins.indexOf(parentOrigin) !== -1,
+    submissionId: submissionId,
+    parentOrigin: parentOrigin
+  };
+}
+
+function isValidSubmissionId(submissionId) {
+  return /^[a-zA-Z0-9-]{16,120}$/.test(submissionId);
+}
+
+/**
+ * Return a minimal HtmlService document that confirms the backend result with
+ * postMessage. The old JSON response remains available for a safe staged cutover.
+ */
+function createContactResponse(context, status, message, errors = []) {
   const response = {
+    source: 'bvb-contact',
+    submissionId: context.submissionId || '',
     status: status,
     message: message
   };
-  
+
   if (errors.length > 0) {
     response.errors = errors;
+  }
+
+  if (context.mode === 'iframe') {
+    if (!context.valid) {
+      return HtmlService
+        .createHtmlOutput('<!doctype html><meta charset="utf-8"><title>Ongeldige aanvraag</title>')
+        .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+    }
+
+    const payload = JSON.stringify(response)
+      .replace(/</g, '\\u003c')
+      .replace(/>/g, '\\u003e')
+      .replace(/&/g, '\\u0026');
+    const targetOrigin = JSON.stringify(context.parentOrigin);
+    const html = '<!doctype html><meta charset="utf-8"><title>Contactbevestiging</title>' +
+      '<script>parent.postMessage(' + payload + ',' + targetOrigin + ');</script>';
+
+    return HtmlService
+      .createHtmlOutput(html)
+      .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
   }
 
   return ContentService
@@ -224,7 +310,7 @@ function verifyTurnstile(token, secretKey) {
         response: token
       }
     });
-    
+
     const result = JSON.parse(response.getContentText());
     if (result.success !== true) {
       return {
@@ -237,6 +323,16 @@ function verifyTurnstile(token, secretKey) {
       return {
         success: false,
         message: 'Beveiligingscontrole hoort niet bij dit formulier.'
+      };
+    }
+
+    if (
+      CONFIG.turnstileAllowedHostnames.length > 0 &&
+      CONFIG.turnstileAllowedHostnames.indexOf(result.hostname) === -1
+    ) {
+      return {
+        success: false,
+        message: 'Beveiligingscontrole hoort niet bij deze website.'
       };
     }
 
