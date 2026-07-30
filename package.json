@@ -11,7 +11,7 @@
   "scripts": {
     "clean": "node scripts/clean.mjs",
     "build:assets": "node scripts/build-assets.mjs",
-    "build": "npm run clean && npm run build:assets && eleventy",
+    "build": "npm run clean && npm run build:assets && eleventy && node scripts/sanitize-output.mjs",
     "baseline:visual": "node scripts/capture-visual-baseline.mjs",
     "validate:content": "node scripts/validate-content.mjs",
     "lint:js": "eslint .",

@@ -61,7 +61,11 @@ for (const match of css.matchAll(/url\(["']?([^"')]+)["']?\)/g)) {
 }
 
 const forbiddenExtensions = [".gs", ".md", ".mjs", ".py", ".yml", ".yaml"];
+const forbiddenFileNames = new Set([".DS_Store", "desktop.ini", "Thumbs.db"]);
 for (const outputFile of allOutputFiles) {
+  if (forbiddenFileNames.has(path.basename(outputFile))) {
+    errors.push(`Besturingssysteembestand is ten onrechte gepubliceerd: ${outputFile}`);
+  }
   if (forbiddenExtensions.includes(path.extname(outputFile).toLowerCase())) {
     errors.push(`Intern bronbestand is ten onrechte gepubliceerd: ${outputFile}`);
   }
