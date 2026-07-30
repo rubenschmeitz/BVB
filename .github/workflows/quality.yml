@@ -11,17 +11,20 @@ permissions:
 jobs:
   quality:
     name: Inhoud, techniek en visuele gelijkheid
-    runs-on: ubuntu-latest
+    # De referentiebeelden zijn met de vaste Windows/Chromium-combinatie
+    # opgenomen. Linux gebruikt andere font-rasterisatie en zou daardoor
+    # platformruis als een visuele regressie aanmerken.
+    runs-on: windows-latest
     timeout-minutes: 30
 
     steps:
       - name: Broncode ophalen
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Node.js 24 instellen
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
@@ -29,8 +32,8 @@ jobs:
       - name: Vaste afhankelijkheden installeren
         run: npm ci
 
-      - name: Chromium met systeemafhankelijkheden installeren
-        run: npx playwright install --with-deps chromium
+      - name: Vaste Chromium-versie installeren
+        run: npx playwright install chromium
 
       - name: Bouw, inhoud, HTML, links en toegankelijkheid controleren
         run: npm run check
@@ -46,7 +49,7 @@ jobs:
 
       - name: Testrapport bewaren bij een fout
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: website-testresultaten
           path: |
