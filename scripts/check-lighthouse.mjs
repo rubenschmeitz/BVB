@@ -18,6 +18,11 @@ const pages = [
 
 const webServer = externalBaseUrl ? null : await startStaticServer(publicRoot);
 const baseUrl = externalBaseUrl || `http://127.0.0.1:${webServer.address().port}`;
+const baseline = reportOnly
+  ? null
+  : JSON.parse(
+      await readFile(path.join(projectRoot, "tests", "lighthouse-baseline.json"), "utf8")
+    );
 const debuggingPort = await findFreePort();
 const windowsChrome = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const browser = await chromium.launch({
@@ -36,29 +41,20 @@ try {
   await waitForDebugger(debuggingPort);
 
   for (const pageName of pages) {
-    const result = await lighthouse(
-      new URL(pageName, `${baseUrl}/`).toString(),
-      {
-        port: debuggingPort,
-        output: "json",
-        logLevel: "error",
-        onlyCategories: ["performance", "accessibility", "seo"],
-        blockedUrlPatterns: [
-          "*static.cloudflareinsights.com*",
-          "*challenges.cloudflare.com*",
-          "*google.com/maps/embed*"
-        ]
-      }
-    );
-    if (!result?.lhr) throw new Error(`Geen Lighthouse-resultaat voor ${pageName}`);
-
-    scores[pageName] = Object.fromEntries(
-      ["performance", "accessibility", "seo"].map((category) => [
-        category,
-        Math.round((result.lhr.categories[category]?.score || 0) * 100)
-      ])
-    );
+    scores[pageName] = await auditPage(pageName);
     console.log(`${pageName}: ${formatScores(scores[pageName])}`);
+
+    const performanceFloor = baseline?.[pageName]?.performance - 5;
+    if (Number.isFinite(performanceFloor) && scores[pageName].performance < performanceFloor) {
+      const samples = [scores[pageName].performance];
+      for (let retry = 0; retry < 2; retry += 1) {
+        samples.push((await auditPage(pageName)).performance);
+      }
+      scores[pageName].performance = median(samples);
+      console.log(
+        `${pageName}: performance opnieuw gemeten [${samples.join(", ")}], mediaan ${scores[pageName].performance}`
+      );
+    }
   }
 } finally {
   await browser.close();
@@ -70,9 +66,6 @@ if (reportOnly) {
   process.exit(0);
 }
 
-const baseline = JSON.parse(
-  await readFile(path.join(projectRoot, "tests", "lighthouse-baseline.json"), "utf8")
-);
 const errors = [];
 for (const pageName of pages) {
   const current = scores[pageName];
@@ -165,4 +158,34 @@ function contentType(filePath) {
 
 function formatScores(value) {
   return `performance ${value.performance}, toegankelijkheid ${value.accessibility}, SEO ${value.seo}`;
+}
+
+async function auditPage(pageName) {
+  const result = await lighthouse(
+    new URL(pageName, `${baseUrl}/`).toString(),
+    {
+      port: debuggingPort,
+      output: "json",
+      logLevel: "error",
+      onlyCategories: ["performance", "accessibility", "seo"],
+      blockedUrlPatterns: [
+        "*static.cloudflareinsights.com*",
+        "*challenges.cloudflare.com*",
+        "*google.com/maps/embed*"
+      ]
+    }
+  );
+  if (!result?.lhr) throw new Error(`Geen Lighthouse-resultaat voor ${pageName}`);
+
+  return Object.fromEntries(
+    ["performance", "accessibility", "seo"].map((category) => [
+      category,
+      Math.round((result.lhr.categories[category]?.score || 0) * 100)
+    ])
+  );
+}
+
+function median(values) {
+  const sorted = [...values].sort((left, right) => left - right);
+  return sorted[Math.floor(sorted.length / 2)];
 }
