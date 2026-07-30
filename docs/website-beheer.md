@@ -39,6 +39,11 @@ Bij een rode controle blijft de laatst geslaagde versie live. Open de mislukte
 stap op GitHub; de foutmelding noemt doorgaans het bestand en veld. Corrigeer de
 inhoud, sla opnieuw op en start daarna opnieuw **Website publiceren**.
 
+Een gewone inhouds- of mediawijziging vergelijkt niet opnieuw alle letters en
+foto's met de oude website: die verschillen zijn juist de bedoeling van de
+wijziging. Aanpassingen aan vormgeving, sjablonen of scripts krijgen wel altijd
+de strenge visuele vergelijking op alle pagina's en schermformaten.
+
 ## Veelvoorkomende taken
 
 ### Agenda-item toevoegen

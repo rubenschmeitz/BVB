@@ -11,10 +11,7 @@ permissions:
 jobs:
   quality:
     name: Inhoud, techniek en visuele gelijkheid
-    # De referentiebeelden zijn met de vaste Windows/Chromium-combinatie
-    # opgenomen. Linux gebruikt andere font-rasterisatie en zou daardoor
-    # platformruis als een visuele regressie aanmerken.
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     timeout-minutes: 30
 
     steps:
@@ -22,6 +19,34 @@ jobs:
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
+
+      - name: Bepalen of visuele techniek is gewijzigd
+        id: visual-scope
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        shell: bash
+        run: |
+          if [[ -z "$BASE_SHA" || "$BASE_SHA" =~ ^0+$ ]] || ! git cat-file -e "$BASE_SHA^{commit}"; then
+            echo "required=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          mapfile -t technical_changes < <(
+            git diff --name-only "$BASE_SHA" "$GITHUB_SHA" |
+              grep -Ev '^(src/content/|images/|docs/[^/]+\.pdf$)' || true
+          )
+          if (( ${#technical_changes[@]} > 0 )); then
+            echo "required=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "required=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Ongewijzigde visuele referentie ophalen
+        if: steps.visual-scope.outputs.required == 'true'
+        uses: actions/checkout@v7
+        with:
+          ref: d0a63bcf92fac0efb1b2f71410514c8a4ae9f5ed
+          path: .visual-reference
 
       - name: Node.js 24 instellen
         uses: actions/setup-node@v7
@@ -32,8 +57,17 @@ jobs:
       - name: Vaste afhankelijkheden installeren
         run: npm ci
 
-      - name: Vaste Chromium-versie installeren
-        run: npx playwright install chromium
+      - name: Chromium met systeemafhankelijkheden installeren
+        run: npx playwright install --with-deps chromium
+
+      - name: Platformgelijke visuele referentie vastleggen
+        if: steps.visual-scope.outputs.required == 'true'
+        env:
+          BVB_ACCEPT_BASELINE: "1"
+          BVB_BASELINE_ROOT: .visual-reference
+        run: |
+          npm run baseline:visual
+          rm -rf .visual-reference
 
       - name: Bouw, inhoud, HTML, links en toegankelijkheid controleren
         run: npm run check
@@ -42,7 +76,12 @@ jobs:
         run: npm run test:e2e
 
       - name: Visuele vergelijking uitvoeren
+        if: steps.visual-scope.outputs.required == 'true'
         run: npm run test:visual
+
+      - name: Bewuste inhoudswijziging bevestigen
+        if: steps.visual-scope.outputs.required != 'true'
+        run: echo "Strikte visuele vergelijking overgeslagen voor uitsluitend CMS-inhoud en media."
 
       - name: Lighthouse-grenzen controleren
         run: npm run test:lighthouse

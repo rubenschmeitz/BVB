@@ -2,6 +2,7 @@ import { existsSync } from "node:fs";
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
 import { chromium } from "@playwright/test";
+import { startStaticServer } from "./serve.mjs";
 import { prepareVisualPage, publicPages } from "../tests/helpers.mjs";
 
 if (process.env.BVB_ACCEPT_BASELINE !== "1") {
@@ -10,16 +11,27 @@ if (process.env.BVB_ACCEPT_BASELINE !== "1") {
   );
 }
 
-const baseURL = process.env.BVB_BASELINE_URL;
+let baselineServer;
+let baseURL = process.env.BVB_BASELINE_URL;
+if (process.env.BVB_BASELINE_ROOT) {
+  baselineServer = await startStaticServer({
+    port: 0,
+    rootDirectory: process.env.BVB_BASELINE_ROOT,
+    quiet: true
+  });
+  baseURL = `http://127.0.0.1:${baselineServer.address().port}`;
+}
 if (!baseURL || !/^https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?\//.test(`${baseURL}/`)) {
   throw new Error("BVB_BASELINE_URL moet een expliciete lokale http(s)-URL zijn.");
 }
 
 const windowsChrome = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const browser = await chromium.launch(
-  existsSync(windowsChrome) ? { executablePath: windowsChrome } : {}
+  !process.env.CI && existsSync(windowsChrome) ? { executablePath: windowsChrome } : {}
 );
-const outputDirectory = path.resolve("tests/visual-baseline");
+const outputDirectory = path.resolve(
+  process.env.BVB_BASELINE_OUTPUT || "tests/visual-baseline"
+);
 await mkdir(outputDirectory, { recursive: true });
 
 const viewports = [
@@ -51,4 +63,9 @@ try {
   }
 } finally {
   await browser.close();
+  if (baselineServer) {
+    await new Promise((resolve, reject) =>
+      baselineServer.close((error) => error ? reject(error) : resolve())
+    );
+  }
 }

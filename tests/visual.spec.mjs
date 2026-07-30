@@ -11,7 +11,9 @@ const viewports = [
   { name: "390", width: 390, height: 844 },
   { name: "360", width: 360, height: 800 }
 ];
-const baselineDirectory = path.resolve("tests/visual-baseline");
+const baselineDirectory = path.resolve(
+  process.env.BVB_VISUAL_BASELINE_DIR || "tests/visual-baseline"
+);
 const diffDirectory = path.resolve("test-results/visual-diffs");
 
 for (const viewport of viewports) {
