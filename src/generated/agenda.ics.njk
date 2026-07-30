@@ -1,0 +1,24 @@
+---
+permalink: /docs/bvb_agenda_2026.ics
+eleventyExcludeFromCollections: true
+---
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Bonsai Vereniging Brabant//Agenda 2026//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Bonsai Vereniging Brabant
+X-WR-TIMEZONE:Europe/Amsterdam
+{% for event in contentCollections.events | calendarEvents -%}
+BEGIN:VEVENT
+UID:{{ event.id }}@bonsai-brabant.nl
+DTSTAMP:{{ build.icsTimestamp }}
+SUMMARY:{{ event.title | icsEscape }}
+DTSTART;TZID=Europe/Amsterdam:{{ (event.startDate + "T" + event.startTime) | icsDateTime }}
+DTEND;TZID=Europe/Amsterdam:{{ ((event.endDate or event.startDate) + "T" + event.endTime) | icsDateTime }}
+LOCATION:{{ event.location | icsEscape }}
+DESCRIPTION:{{ event.description | icsEscape }}
+{% if event.detailsUrl %}URL:{{ event.detailsUrl }}{% endif %}
+END:VEVENT
+{% endfor -%}
+END:VCALENDAR

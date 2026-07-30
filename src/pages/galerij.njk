@@ -1,0 +1,77 @@
+---
+layout: layouts/base.njk
+permalink: /galerij.html
+pageKey: gallery
+activeNav: gallery
+bodyClass:
+scripts:
+  - club-gallery-data.js
+  - exhibition-data.js
+  - gallery.js
+---
+{% set pageContent = pages.gallery %}
+{% set trees = contentCollections.trees | published %}
+<div class="page-hero">
+        <div class="page-hero-bg {{ pageContent.hero.className }}"></div>
+        <div class="page-hero-content">
+            <p>{{ pageContent.hero.eyebrow }}</p>
+            <h1>{{ pageContent.hero.title }}</h1>
+        </div>
+    </div>
+
+    <main class="content-area">
+        <div class="content-container-wide">
+
+            <div class="gallery-nav">
+                <button type="button" class="active" data-category="club">{{ pageContent.club.tabLabel }}</button>
+                <button type="button" data-category="leden">{{ pageContent.exhibition.tabLabel }}</button>
+            </div>
+
+            <!-- Clubavonden -->
+            <section id="club-section" class="gallery-category active">
+                <div class="gallery-header reveal-on-scroll">
+                    <h2>{{ pageContent.club.heading }}</h2>
+                    <p>{{ pageContent.club.description }}</p>
+                </div>
+
+                <div class="activity-grid reveal-staggered reveal-on-scroll" data-club-gallery></div>
+            </section>
+
+            <!-- Digitale Expositie -->
+            <section id="leden-section" class="gallery-category">
+                <div class="gallery-header reveal-on-scroll">
+                    <h2>{{ pageContent.exhibition.heading }}</h2>
+                    <p>{{ pageContent.exhibition.description }}</p>
+                </div>
+
+                <div class="exhibition-wrapper">
+                    <div class="exhibition-container">
+                        {% for tree in trees %}
+                        <div class="exhibition-card reveal-on-scroll" role="button" tabindex="0" data-tree-id="{{ tree.id }}">
+                            <div class="exhibition-image-box skeleton">
+                                <img src="{{ tree.image }}" alt="{{ tree.alt }}" loading="lazy" width="{{ tree.image | imageWidth(tree.width) }}" height="{{ tree.image | imageHeight(tree.height) }}" decoding="async">
+                            </div>
+                            <div class="exhibition-details">
+                                <h3 class="exhibition-species">{{ tree.species }}</h3>
+                                <p class="exhibition-style">{{ tree.style }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="scroll-indicator">{{ pageContent.exhibition.hint }}</div>
+            </section>
+
+        </div>
+    </main>
+
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <button type="button" class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Vorige">&lsaquo;</button>
+        <button type="button" class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Volgende">&rsaquo;</button>
+        <div class="tokonoma-frame" id="tokonoma-frame">
+            <img id="tokonoma-img" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Tokonoma-weergave van bonsai">
+        </div>
+        <img id="lightbox-img" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Vergrote weergave van bonsai">
+        <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>

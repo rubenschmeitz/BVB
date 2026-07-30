@@ -1,0 +1,27 @@
+{
+  "seo": {
+    "title": "Agenda 2026 | Bonsai Vereniging Brabant",
+    "description": "Bekijk onze agenda met clubavonden, werkavonden, workshops, demonstraties, NBV-activiteiten en NBS 2026 in Berlicum.",
+    "canonicalPath": "agenda.html",
+    "socialImage": "images/tokonoma/05_tokonoma_mei_2024.webp"
+  },
+  "hero": {
+    "eyebrow": "Activiteiten en clubavonden",
+    "title": "Agenda 2026",
+    "className": "hero-over-ons"
+  },
+  "intro": {
+    "beforeVenue": "Onze clubavonden vinden plaats in",
+    "venueLabel": "De Moerkoal in Berlicum",
+    "afterVenue": "Leden werken aan hun eigen bomen en bezoekers zijn welkom om eens sfeer te komen proeven. Ben je nog geen lid, maar wil je een keer meekijken? Meld je vooraf even aan via de contactpagina, dan maken we tijd om je wegwijs te maken."
+  },
+  "filters": {
+    "all": "Alles",
+    "club": "Clubavonden",
+    "nbv": "NBV-activiteiten",
+    "event": "Evenementen"
+  },
+  "syncLabel": "Agenda synchroniseren",
+  "locationHeading": "Locatie en bereikbaarheid",
+  "parkingText": "Ruime gratis parkeergelegenheid aanwezig."
+}

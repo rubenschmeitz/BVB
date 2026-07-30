@@ -1,0 +1,31 @@
+{
+  "contact": {
+    "email": "info@bonsai-brabant.nl"
+  },
+  "venue": {
+    "name": "De Moerkoal",
+    "street": "Driezeeg 20",
+    "postalCode": "5258 LE",
+    "city": "Berlicum",
+    "province": "Noord-Brabant",
+    "country": "NL",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Driezeeg%2020%205258%20LE%20Berlicum"
+  },
+  "social": [
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/bonsaiverenigingbrabant/",
+      "active": true
+    },
+    {
+      "label": "Facebook",
+      "url": "https://www.facebook.com/bonsaiverenigingbrabant",
+      "active": true
+    }
+  ],
+  "featuredNavigation": {
+    "label": "NBS 2026",
+    "url": "nbs.html",
+    "active": true
+  }
+}

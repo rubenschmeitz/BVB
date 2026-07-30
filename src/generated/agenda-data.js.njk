@@ -1,0 +1,9 @@
+---
+permalink: /js/agenda-data.js
+eleventyExcludeFromCollections: true
+---
+(() => {
+    'use strict';
+
+    window.BVB_AGENDA_EVENTS = {{ contentCollections.events | published | json | safe }};
+})();

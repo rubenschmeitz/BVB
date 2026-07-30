@@ -1,0 +1,110 @@
+{% set pageContent = pages[pageKey] %}
+<!DOCTYPE html>
+<html lang="{{ site.language }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ pageContent.seo.title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css?v={{ build.assetVersion }}">
+    <link rel="preload" as="image" href="{{ site.logo }}"{% if pageKey == "home" %} fetchpriority="high"{% endif %}>
+    {% if pageKey == "home" %}<link rel="preload" as="image" href="{{ pageContent.seo.socialImage }}" fetchpriority="high">{% endif %}
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; connect-src 'self' https://cloudflareinsights.com https://challenges.cloudflare.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com/beacon.min.js https://challenges.cloudflare.com; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com https://www.bonsainederland.nl https://cdn.hollandbonsai.nl; frame-src https://*.instagram.com https://www.google.com https://challenges.cloudflare.com https://script.google.com https://script.googleusercontent.com; form-action 'self' https://script.google.com mailto:;">
+
+    <meta name="description" content="{{ pageContent.seo.description }}">
+    <meta name="theme-color" content="{{ site.themeColor }}">
+    <link rel="canonical" href="{{ pageContent.seo.canonicalPath | absoluteUrl(site.baseUrl) }}">
+    {% if pageContent.seo.keywords %}<meta name="keywords" content="{{ pageContent.seo.keywords }}">{% endif %}
+    <meta name="author" content="{{ site.name }}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="{{ site.locale }}">
+    <meta property="og:site_name" content="{{ site.name }}">
+    <meta property="og:url" content="{{ pageContent.seo.canonicalPath | absoluteUrl(site.baseUrl) }}">
+    <meta property="og:title" content="{{ pageContent.seo.socialTitle or pageContent.seo.title }}">
+    <meta property="og:description" content="{{ pageContent.seo.description }}">
+    <meta property="og:image" content="{{ pageContent.seo.socialImage | absoluteUrl(site.baseUrl) }}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ pageContent.seo.canonicalPath | absoluteUrl(site.baseUrl) }}">
+    <meta name="twitter:title" content="{{ pageContent.seo.socialTitle or pageContent.seo.title }}">
+    <meta name="twitter:description" content="{{ pageContent.seo.description }}">
+    <meta name="twitter:image" content="{{ pageContent.seo.socialImage | absoluteUrl(site.baseUrl) }}">
+
+    <link rel="icon" type="image/webp" href="{{ site.favicon }}">
+    <link rel="apple-touch-icon" href="{{ site.favicon }}">
+    <link rel="manifest" href="site.webmanifest">
+
+    {% if pageKey == "home" %}
+    <script type="application/ld+json">{{ {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": site.name,
+      "alternateName": site.shortName,
+      "url": site.baseUrl,
+      "logo": site.logo | absoluteUrl(site.baseUrl),
+      "sameAs": site.social | activeSocialUrls,
+      "description": site.description
+    } | json | safe }}</script>
+    {% endif %}
+    {% if pageKey == "nbs" %}
+    {% set featuredEvents = contentCollections.events | featuredEvents %}
+    {% set event = featuredEvents[0] %}
+    <script type="application/ld+json">{{ {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": event.schemaName or event.title,
+      "startDate": (event.startDate + "T" + event.startTime) | schemaDateTime,
+      "endDate": ((event.endDate or event.startDate) + "T" + event.endTime) | schemaDateTime,
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place",
+        "name": site.venue.name,
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": site.venue.street,
+          "addressLocality": site.venue.city,
+          "postalCode": site.venue.postalCode,
+          "addressRegion": site.venue.province,
+          "addressCountry": site.venue.country
+        }
+      },
+      "image": [pageContent.seo.socialImage | absoluteUrl(site.baseUrl)],
+      "description": pageContent.seo.description,
+      "offers": {
+        "@type": "Offer",
+        "url": pageContent.seo.canonicalPath | absoluteUrl(site.baseUrl),
+        "price": "0",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock"
+      },
+      "organizer": {
+        "@type": "Organization",
+        "name": site.name,
+        "url": site.baseUrl
+      }
+    } | json | safe }}</script>
+    {% endif %}
+</head>
+<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
+    {% include "partials/header.njk" %}
+    {{ content | safe }}
+    {% include "partials/footer.njk" %}
+    {% include "partials/mobile-navigation.njk" %}
+
+    <script src="js/app.js?v={{ build.assetVersion }}" defer></script>
+    {% for script in scripts %}
+    <script src="js/{{ script }}?v={{ build.assetVersion }}" defer></script>
+    {% endfor %}
+    {% if pageKey == "contact" %}
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    {% endif %}
+    {% if site.analytics.enabled %}
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"{{ site.analytics.cloudflareToken }}"}'></script>
+    {% endif %}
+</body>
+</html>

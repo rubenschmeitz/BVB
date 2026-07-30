@@ -1,0 +1,73 @@
+---
+layout: layouts/base.njk
+permalink: /contact.html
+pageKey: contact
+activeNav: contact
+bodyClass:
+scripts:
+  - contact.js
+---
+{% set pageContent = pages.contact %}
+<div class="page-hero">
+        <div class="page-hero-bg {{ pageContent.hero.className }}"></div>
+        <div class="page-hero-content">
+            <p>{{ pageContent.hero.eyebrow }}</p>
+            <h1>{{ pageContent.hero.title }}</h1>
+        </div>
+    </div>
+
+    <main class="content-area">
+        <div class="content-container">
+            <div class="text-content">
+                <div class="contact-form-wrapper">
+                    {% for paragraph in pageContent.paragraphs %}
+                    <p>{{ paragraph }}</p>
+                    {% endfor %}
+                    <div class="contact-quick-actions">
+                        <a href="mailto:{{ site.contact.email }}" class="button-primary">{{ pageContent.mailButton }}</a>
+                        <a href="{{ site.venue.mapsUrl }}" target="_blank" rel="noopener noreferrer" class="button-secondary">{{ pageContent.routeButton }}</a>
+                    </div>
+
+                    <form action="{{ site.contact.formEndpoint }}" method="post" target="contact-response-frame" class="contact-form" data-pending-message="{{ pageContent.pendingMessage }}" data-timeout-message="{{ pageContent.timeoutMessage }}" data-response-source="{{ site.contact.responseSource }}" data-response-timeout="{{ site.contact.responseTimeoutMs }}" data-allowed-response-origins="{{ site.contact.allowedResponseOrigins | join(',') }}">
+                        <input type="hidden" id="submission-id" name="submissionId" value="">
+                        <input type="hidden" id="parent-origin" name="parentOrigin" value="">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Naam *</label>
+                            <input type="text" id="name" name="name" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">E-mail *</label>
+                            <input type="email" id="email" name="email" required class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject" class="form-label">Onderwerp *</label>
+                            <select id="subject" name="subject" required class="form-select">
+                                <option value="" disabled selected>Kies een onderwerp...</option>
+                                {% for subject in pageContent.subjects %}
+                                <option value="{{ subject.value }}">{{ subject.label }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Bericht *</label>
+                            <textarea id="message" name="message" rows="4" required class="form-textarea"></textarea>
+                        </div>
+                        <!-- Honeypot Field (Anti-spam) -->
+                        <div class="hp-field">
+                            <label for="website">Website (laat dit veld leeg)</label>
+                            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <div class="form-group turnstile-group">
+                            <div class="cf-turnstile" data-sitekey="{{ site.contact.turnstileSiteKey }}" data-action="{{ site.contact.turnstileAction }}" data-theme="light"></div>
+                        </div>
+
+                        <div class="form-submit">
+                            <button type="submit" class="submit-btn">{{ pageContent.submitLabel }}</button>
+                        </div>
+                    </form>
+                    <iframe name="contact-response-frame" id="contact-response-frame" class="contact-response-frame" title="Bevestiging contactformulier" aria-hidden="true" tabindex="-1" hidden></iframe>
+                </div>
+            </div>
+        </div>
+    </main>

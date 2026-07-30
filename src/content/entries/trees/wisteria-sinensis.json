@@ -1,0 +1,18 @@
+{
+  "id": "8ba36ea6-9f97-5d2c-8bd4-061460015e29",
+  "order": 1,
+  "species": "Wisteria Sinensis",
+  "style": "Bunjin (Literati Stijl)",
+  "image": "images/trees/wisteria_sinensis.webp",
+  "alt": "Wisteria Sinensis (Blauwe Regen)",
+  "width": 694,
+  "height": 934,
+  "realHeightCm": 55,
+  "background": "bg_right_moon_bird.png",
+  "scrollSide": "right",
+  "treeSide": "left",
+  "positionLeft": "41%",
+  "positionBottom": 20.2,
+  "positionHeight": 48,
+  "published": true
+}

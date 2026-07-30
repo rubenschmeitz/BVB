@@ -1,0 +1,60 @@
+---
+layout: layouts/base.njk
+permalink: /over-ons.html
+pageKey: about
+activeNav: about
+bodyClass:
+scripts:
+---
+{% set pageContent = pages.about %}
+{% set honoraryMembers = contentCollections.honoraryMembers | published %}
+<div class="page-hero">
+        <div class="page-hero-bg {{ pageContent.hero.className }}"></div>
+        <div class="page-hero-content">
+            <p>{{ pageContent.hero.eyebrow }}</p>
+            <h1>{{ pageContent.hero.title }}</h1>
+        </div>
+    </div>
+
+    <main class="content-area">
+        <div class="content-container-wide">
+
+            <!-- Wie zijn wij Section -->
+            <section class="premium-section about-root-section">
+                <div class="split-layout">
+                    <div class="split-text">
+                        <p class="lead lead-alt">{{ pageContent.lead }}</p>
+                        {% for paragraph in pageContent.paragraphs %}
+                        <p>{{ paragraph }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="split-image">
+                        <div class="single-hero-image hero-club-photo"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ereleden Section -->
+            <section class="honorary-section">
+                <div class="text-center mb-3">
+                    <span class="label color-bark font-bold">Eregalerij</span>
+                    <h2 class="heading-xl color-bark mt-1">{{ pageContent.honoraryHeading }}</h2>
+                    <p class="max-w-700 m-auto mt-1 muted-copy">{{ pageContent.honoraryIntro }}</p>
+                </div>
+
+                <div class="honorary-grid">
+                    {% for member in honoraryMembers %}
+                    <div class="honorary-card">
+                        <div class="honorary-portrait">
+                            <img src="{{ member.image }}" alt="{{ member.alt }}" decoding="async" loading="lazy" width="{{ member.image | imageWidth(member.width) }}" height="{{ member.image | imageHeight(member.height) }}">
+                        </div>
+                        <span class="honorary-label">{{ member.label }}</span>
+                        <h3>{{ member.name }}</h3>
+                        <p class="honorary-bio">{{ member.biography }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+        </div>
+    </main>

@@ -1,0 +1,34 @@
+<header class="site-header">
+    <div class="header-container">
+        <a href="index.html" class="site-branding" aria-label="Terug naar home">
+            <div class="logo-wrapper">
+                <img src="{{ site.logo }}" alt="Logo" class="main-logo" width="47" height="55" decoding="async">
+                <div class="logo-overlay"></div>
+            </div>
+            <div class="site-title-box">
+                <div class="site-title">{{ site.name }}</div>
+            </div>
+        </a>
+        <nav class="main-nav" id="main-nav" aria-label="Hoofdnavigatie">
+            <a href="index.html"{% if activeNav == "home" %} class="active"{% endif %}>Home</a>
+            {% if site.featuredNavigation.active %}
+            <a href="{{ site.featuredNavigation.url }}" class="nav-special{% if activeNav == "nbs" %} active{% endif %}">{{ site.featuredNavigation.label }}</a>
+            {% endif %}
+            <a href="galerij.html"{% if activeNav == "gallery" %} class="active"{% endif %}>Galerij</a>
+            <a href="agenda.html"{% if activeNav == "agenda" %} class="active"{% endif %}>Agenda</a>
+            <div class="nav-dropdown">
+                <button type="button" class="dropdown-trigger{% if activeNav in ["about", "associations", "contact"] %} active{% endif %}" aria-haspopup="true" aria-expanded="false">Vereniging <svg class="dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="dropdown-menu">
+                    <a href="over-ons.html"{% if activeNav == "about" %} class="active"{% endif %}>Over ons</a>
+                    <a href="vereniging.html"{% if activeNav == "associations" %} class="active"{% endif %}>Bonsai in Nederland</a>
+                    <a href="contact.html"{% if activeNav == "contact" %} class="active"{% endif %}>Contact</a>
+                </div>
+            </div>
+        </nav>
+        <button type="button" class="mobile-toggle" id="mobile-toggle" aria-label="Menu openen/sluiten" aria-expanded="false" aria-controls="main-nav">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</header>

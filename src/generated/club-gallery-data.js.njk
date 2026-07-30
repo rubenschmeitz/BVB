@@ -1,0 +1,17 @@
+---
+permalink: /js/club-gallery-data.js
+eleventyExcludeFromCollections: true
+---
+/* Generated from the editor-controlled club photo collection. */
+window.BVB_CLUB_GALLERY = [
+{% for photo in contentCollections.clubGallery | published %}
+    {
+        "id": {{ photo.id | json | safe }},
+        "title": {{ photo.title | json | safe }},
+        "src": {{ photo.src | json | safe }},
+        "alt": {{ photo.alt | json | safe }},
+        "width": {{ photo.src | imageWidth(photo.width) }},
+        "height": {{ photo.src | imageHeight(photo.height) }}
+    }{% if not loop.last %},{% endif %}
+{% endfor %}
+];

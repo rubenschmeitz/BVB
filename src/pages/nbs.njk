@@ -1,0 +1,119 @@
+---
+layout: layouts/base.njk
+permalink: /nbs.html
+pageKey: nbs
+activeNav: nbs
+bodyClass:
+scripts:
+  - calendar-button.js
+---
+{% set pageContent = pages.nbs %}
+{% set sponsors = contentCollections.sponsors | published %}
+{% set featuredEvents = contentCollections.events | featuredEvents %}
+{% set event = featuredEvents[0] %}
+<div class="page-hero">
+    <div class="page-hero-bg {{ pageContent.hero.className }}"></div>
+    <div class="page-hero-content">
+        <p>{{ event | dutchDateRange }}</p>
+        <h1>{{ pageContent.hero.title }}</h1>
+    </div>
+</div>
+
+<main class="content-area">
+    <div class="content-container-wide">
+        <div class="nbs-grid-layout">
+            <div class="nbs-main-column reveal-on-scroll">
+                <section class="mb-3">
+                    {% for paragraph in pageContent.intro %}
+                    <p class="large-text">{{ paragraph }}</p>
+                    {% endfor %}
+                </section>
+
+                <section class="nbs-practical-strip mb-4" aria-label="Praktische informatie">
+                    <div>
+                        <strong>{{ event | dutchDateRangeShort }}</strong>
+                        <span>{{ site.venue.name }}, {{ site.venue.city }}</span>
+                    </div>
+                    <div>
+                        <strong>Za {{ pageContent.days[0].startTime }}-{{ pageContent.days[0].endTime }}</strong>
+                        <strong>Zo {{ pageContent.days[1].startTime }}-{{ pageContent.days[1].endTime }}</strong>
+                    </div>
+                    <div class="nbs-practical-actions">
+                        <a href="{{ site.venue.mapsUrl }}" target="_blank" rel="noopener noreferrer">{{ pageContent.practical.routeLabel }}</a>
+                        <a href="{{ pageContent.practical.flyer }}" target="_blank" rel="noopener noreferrer">{{ pageContent.practical.flyerLabel }}</a>
+                    </div>
+                </section>
+
+                <section class="mb-4 nbs-program-section">
+                    <h3 class="timeline-header">{{ pageContent.programHeading }}</h3>
+                    {% for day in pageContent.days | published %}
+                    <details class="schedule-day" data-mobile-collapsible open>
+                        <summary>
+                            <span>{{ day.label }}</span>
+                            <small>{{ day.summary }}</small>
+                        </summary>
+                        <div class="timeline-day-header{% if not loop.first %} mt-4{% endif %}">
+                            <div class="timeline-day-label">{{ day.label }}</div>
+                            <div class="day-calendar-btn">
+                                <add-to-calendar-button
+                                    hidebackground
+                                    hidebranding
+                                    name="{{ day.calendarName }}"
+                                    description="{{ day.calendarDescription }}"
+                                    startdate="{{ day.date }}"
+                                    starttime="{{ day.startTime }}"
+                                    endtime="{{ day.endTime }}"
+                                    location="{{ site.venue.street }}, {{ site.venue.postalCode }} {{ site.venue.city }}"
+                                    options="'Apple','Google','Outlook.com'"
+                                    label="Zet in agenda"
+                                    lightmode="light"
+                                    stylelight="--btn-background: var(--color-sand); --btn-text: var(--color-bark); --font: var(--font-main); --btn-padding-x: 12px; --btn-padding-y: 6px; --btn-font-size: 12px; --btn-shadow: none;"
+                                ></add-to-calendar-button>
+                            </div>
+                        </div>
+                        <div class="nbs-timeline reveal-staggered reveal-on-scroll">
+                            {% for entry in day.entries %}
+                            <div class="timeline-item{% if entry.highlighted %} highlighted{% endif %}">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <span class="timeline-time">{{ entry.time }}</span>
+                                    <p class="timeline-title">{{ entry.title }}</p>
+                                    {% if entry.description %}<p class="timeline-description">{{ entry.description }}</p>{% endif %}
+                                    {% if entry.image %}
+                                    <div class="timeline-demo-box">
+                                        <img src="{{ entry.image }}" alt="{{ entry.alt }}" class="timeline-demo-portrait skeleton" loading="lazy" decoding="async" width="{{ entry.image | imageWidth(entry.width) }}" height="{{ entry.image | imageHeight(entry.height) }}">
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </details>
+                    {% endfor %}
+                </section>
+            </div>
+
+            <aside class="nbs-sidebar">
+                <div class="sidebar-divider">
+                    <span>Sponsors en partners</span>
+                </div>
+
+                <div class="sidebar-sponsor-card reveal-on-scroll">
+                    <h4>Sponsors en partners</h4>
+                    <div class="sidebar-sponsor-grid">
+                        {% for sponsor in sponsors %}
+                        <div class="sidebar-sponsor-item{% if sponsor.variant == "portrait" %} sidebar-sponsor-item--portrait{% endif %}">
+                            <a href="{{ sponsor.url }}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ sponsor.image }}" alt="{{ sponsor.alt }}" loading="lazy" width="{{ sponsor.image | imageWidth(sponsor.width) }}" height="{{ sponsor.image | imageHeight(sponsor.height) }}" decoding="async">
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="text-center mt-2">
+                        <a href="contact.html" class="contact-link sponsor-link-small">Sponsor worden?</a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</main>

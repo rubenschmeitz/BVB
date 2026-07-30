@@ -1,0 +1,47 @@
+---
+permalink: /404.html
+eleventyExcludeFromCollections: true
+---
+{% set pageContent = pages.error %}
+<!DOCTYPE html>
+<html lang="{{ site.language }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ pageContent.seo.title }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css?v={{ build.assetVersion }}">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; connect-src 'self' https://cloudflareinsights.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com/beacon.min.js; img-src 'self' data:; form-action 'self';">
+    <meta name="description" content="{{ pageContent.seo.description }}">
+    <meta name="theme-color" content="{{ site.themeColor }}">
+    <link rel="canonical" href="{{ pageContent.seo.canonicalPath | absoluteUrl(site.baseUrl) }}">
+    <meta name="robots" content="noindex, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="{{ site.locale }}">
+    <meta property="og:site_name" content="{{ site.name }}">
+    <meta property="og:url" content="{{ pageContent.seo.canonicalPath | absoluteUrl(site.baseUrl) }}">
+    <meta property="og:title" content="{{ pageContent.seo.title }}">
+    <meta property="og:description" content="{{ pageContent.seo.description }}">
+    <meta property="og:image" content="{{ pageContent.seo.socialImage | absoluteUrl(site.baseUrl) }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ pageContent.seo.title }}">
+    <meta name="twitter:description" content="{{ pageContent.seo.description }}">
+    <meta name="twitter:image" content="{{ pageContent.seo.socialImage | absoluteUrl(site.baseUrl) }}">
+    <link rel="icon" type="image/webp" href="{{ site.favicon }}">
+    <link rel="apple-touch-icon" href="{{ site.favicon }}">
+    <link rel="manifest" href="site.webmanifest">
+</head>
+<body>
+    <div class="error-page">
+        <div class="error-content">
+            <h1>{{ pageContent.code }}</h1>
+            <h2>{{ pageContent.heading }}</h2>
+            <p>{{ pageContent.message }}</p>
+            <a href="index.html" class="cta-btn">{{ pageContent.buttonLabel }}</a>
+        </div>
+    </div>
+    {% if site.analytics.enabled %}
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"{{ site.analytics.cloudflareToken }}"}'></script>
+    {% endif %}
+</body>
+</html>

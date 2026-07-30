@@ -1,0 +1,52 @@
+{
+  "seo": {
+    "title": "Contact | Bonsai Vereniging Brabant",
+    "description": "Neem contact met ons op voor lidmaatschap, bezoek aan een clubavond, workshops, samenwerking of vragen over NBS 2026.",
+    "canonicalPath": "contact.html",
+    "socialImage": "images/tokonoma/02_tokonoma_feb_2024.webp"
+  },
+  "hero": {
+    "eyebrow": "Kom kennismaken",
+    "title": "Contact",
+    "className": "hero-contact"
+  },
+  "paragraphs": [
+    "Wil je een clubavond bezoeken, lid worden of heb je een vraag over bonsai, workshops of NBS 2026? Stuur ons gerust een bericht.",
+    "Bezoekers zijn welkom. Meld je vooraf even aan, dan zorgen we dat iemand je ontvangt en je een beetje wegwijs maakt."
+  ],
+  "mailButton": "Mail ons direct",
+  "routeButton": "Route naar De Moerkoal",
+  "subjects": [
+    {
+      "value": "Komen kijken",
+      "label": "Komen kijken bij een clubavond"
+    },
+    {
+      "value": "Eenmalig bezoek via een andere vereniging",
+      "label": "Eenmalig bezoek via een andere vereniging"
+    },
+    {
+      "value": "Lid worden",
+      "label": "Lid worden"
+    },
+    {
+      "value": "Vraag over NBS 2026",
+      "label": "Vraag over NBS 2026"
+    },
+    {
+      "value": "Workshop informatie",
+      "label": "Informatie over workshops"
+    },
+    {
+      "value": "Sponsoring of samenwerking",
+      "label": "Sponsoring of samenwerking"
+    },
+    {
+      "value": "Overige vraag",
+      "label": "Overige vraag"
+    }
+  ],
+  "submitLabel": "Bericht versturen",
+  "pendingMessage": "Je bericht wordt veilig verstuurd…",
+  "timeoutMessage": "We kregen nog geen bevestiging. Probeer het opnieuw of mail ons direct."
+}

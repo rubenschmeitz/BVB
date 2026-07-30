@@ -1,0 +1,24 @@
+{
+  "seo": {
+    "title": "Galerij | Bonsai Vereniging Brabant",
+    "description": "Bekijk foto's van onze clubavonden, bomen van leden en sfeerbeelden van Bonsai Vereniging Brabant.",
+    "canonicalPath": "galerij.html",
+    "socialImage": "images/tokonoma/02_tokonoma_feb_2024.webp"
+  },
+  "hero": {
+    "eyebrow": "Bomen en clubavonden",
+    "title": "Galerij",
+    "className": "hero-gallery"
+  },
+  "club": {
+    "tabLabel": "Clubavonden",
+    "heading": "Sfeer van onze clubavonden",
+    "description": "Tijdens onze bijeenkomsten wordt gekeken, besproken, gesnoeid, bedraad, verpot en vooral veel geleerd. Deze foto's geven een indruk van hoe het er bij ons aan toegaat."
+  },
+  "exhibition": {
+    "tabLabel": "Digitale expositie",
+    "heading": "Bomen van leden",
+    "description": "Onze leden laten hier een aantal van hun bomen zien, in verschillende stijlen en seizoenen. Iedere boom is een momentopname, want bonsai blijft altijd in ontwikkeling.",
+    "hint": "Klik op een boom voor de tokonoma-weergave."
+  }
+}

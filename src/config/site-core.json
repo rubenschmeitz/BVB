@@ -1,0 +1,60 @@
+{
+  "name": "Bonsai Vereniging Brabant",
+  "shortName": "BVB",
+  "baseUrl": "https://bonsai-brabant.nl/",
+  "language": "nl",
+  "locale": "nl_NL",
+  "description": "Gemoedelijke bonsaivereniging voor liefhebbers in Brabant.",
+  "themeColor": "#5D7B51",
+  "logo": "images/logo_main.webp",
+  "favicon": "images/logo_main.webp",
+  "contact": {
+    "formEndpoint": "https://script.google.com/macros/s/AKfycbyh224WyEw3oP7hdnVDuldK9r6DhIJ6bO63cDEHWuTPlAXnaqrt6E9x9ojTXernBKAn/exec",
+    "turnstileSiteKey": "0x4AAAAAADVZU3LRuzCbbllX",
+    "turnstileAction": "contact",
+    "responseSource": "bvb-contact",
+    "responseTimeoutMs": 15000,
+    "allowedResponseOrigins": [
+      "https://script.google.com",
+      "https://script.googleusercontent.com"
+    ]
+  },
+  "analytics": {
+    "enabled": true,
+    "cloudflareToken": "f23664f43fa6471ba9dd5b8ed08e86f6"
+  },
+  "designer": {
+    "name": "Ruben Schmeitz",
+    "url": "https://nl.linkedin.com/in/rubenschmeitz"
+  },
+  "publicPages": [
+    {
+      "url": "",
+      "source": "src/pages/index.njk"
+    },
+    {
+      "url": "agenda.html",
+      "source": "src/pages/agenda.njk"
+    },
+    {
+      "url": "galerij.html",
+      "source": "src/pages/galerij.njk"
+    },
+    {
+      "url": "nbs.html",
+      "source": "src/pages/nbs.njk"
+    },
+    {
+      "url": "over-ons.html",
+      "source": "src/pages/over-ons.njk"
+    },
+    {
+      "url": "vereniging.html",
+      "source": "src/pages/vereniging.njk"
+    },
+    {
+      "url": "contact.html",
+      "source": "src/pages/contact.njk"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "seo": {
+    "title": "Bonsai Vereniging Brabant",
+    "socialTitle": "Bonsai Vereniging Brabant | Echt Brabants, echt bonsai",
+    "description": "Bonsai Vereniging Brabant is een gemoedelijke vereniging voor bonsailiefhebbers in Brabant. Kom eens kijken op een clubavond in Berlicum en leer werken aan je eigen bonsai.",
+    "keywords": "Bonsai, Brabant, Bonsai Vereniging, Boomverzorging, Japanse kunst, Berlicum, Bonsai cursus",
+    "canonicalPath": "",
+    "socialImage": "images/tokonoma/04_tokonoma_apr_2024.webp"
+  },
+  "hero": {
+    "eyebrow": "Echt Brabants, echt bonsai",
+    "title": "Welkom bij onze club",
+    "className": "hero-home"
+  },
+  "story": {
+    "lead": "Bonsai leer je het best door te kijken, te vragen en vooral zelf te doen. Bij ons zitten beginners en ervaren liefhebbers gewoon samen aan tafel om aan hun bomen te werken en elkaar verder te helpen.",
+    "paragraphs": [
+      "Onze clubavonden in De Moerkoal in Berlicum zijn waar het om draait. Je neemt je eigen boom mee, iemand kijkt met je mee en ondertussen zie je ook waar anderen aan werken. Soms is dat een kleine vraag over snoei of bedrading, soms gewoon even samen kijken wat een boom nodig heeft.",
+      "Je hoeft dus niet met een perfecte boom binnen te komen. Als je nieuwsgierig bent en zin hebt om mee te kijken, ben je al een heel eind."
+    ],
+    "buttons": [
+      {
+        "label": "Kom een avond kijken",
+        "url": "contact.html",
+        "style": "primary"
+      },
+      {
+        "label": "Bekijk de galerij",
+        "url": "galerij.html",
+        "style": "secondary"
+      }
+    ]
+  },
+  "showcase": [
+    {
+      "title": "Samen naar een boom kijken",
+      "description": "Op clubavonden zet iemand zijn boom op tafel en kijken we samen wat een volgende stap kan zijn. Soms gaat het om de voorkant, soms om een tak die net anders mag. Juist door hardop mee te denken leer je veel van elkaar.",
+      "image": "images/home-widget/samen-kijken.webp",
+      "alt": "Leden bespreken samen een bonsai tijdens een clubavond",
+      "width": 1200,
+      "height": 1600,
+      "url": "over-ons.html",
+      "linkLabel": "Meer over de club",
+      "published": true
+    },
+    {
+      "title": "Uitleg waar je iets aan hebt",
+      "description": "Soms pakt iemand het bord erbij voor een korte uitleg. Praktisch en begrijpelijk, zonder ingewikkeld gedoe. Het gaat vooral om dingen die je daarna thuis of op een volgende clubavond zelf kunt gebruiken.",
+      "image": "images/home-widget/uitleg-demo.webp",
+      "alt": "Demonstratie met uitleg op een whiteboard tijdens een clubavond",
+      "width": 2040,
+      "height": 1530,
+      "url": "agenda.html",
+      "linkLabel": "Bekijk bijeenkomsten",
+      "published": true
+    },
+    {
+      "title": "Bomen in de kijker",
+      "description": "In de digitale expositie zie je bomen van leden wat rustiger in beeld. Zo kun je beter kijken naar de vorm, de pot, de opbouw en de sfeer van de boom. Mooi om inspiratie op te doen voor je eigen bonsai.",
+      "image": "images/tokonoma/04_tokonoma_apr_2024.webp",
+      "alt": "Tokonoma-opstelling van een bonsai uit april 2024",
+      "width": 1200,
+      "height": 1600,
+      "url": "galerij.html#leden-section",
+      "linkLabel": "Bekijk de expositie",
+      "published": true
+    },
+    {
+      "title": "Talent en tentoonstellingen",
+      "description": "Wie dat leuk vindt, kan meedoen aan tentoonstellingen en landelijke activiteiten zoals de New Talent Contest. Dat hoeft niet meteen, maar het is wel mooi om samen ergens naartoe te werken en ook buiten de club te laten zien wat er groeit.",
+      "image": "images/home-widget/talent-tentoonstellingen.webp",
+      "alt": "New Talent Contest voor nieuwe bonsailiefhebbers",
+      "width": 1530,
+      "height": 2040,
+      "url": "nbs.html",
+      "linkLabel": "Naar de NBS-pagina",
+      "published": true
+    }
+  ]
+}

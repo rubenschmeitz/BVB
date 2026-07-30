@@ -1,0 +1,18 @@
+{
+  "id": "b99eda54-5242-52c3-9969-e4a5ffb22078",
+  "order": 3,
+  "species": "Juniperus Chinensis",
+  "style": "Ishisuki (In Rots Verankerd)",
+  "image": "images/trees/juniperus_chinensis_rots.webp",
+  "alt": "Juniperus Chinensis (Jeneverbes)",
+  "width": 969,
+  "height": 1118,
+  "realHeightCm": 38,
+  "background": "bg_right_bamboo.png",
+  "scrollSide": "right",
+  "treeSide": "left",
+  "positionLeft": "39%",
+  "positionBottom": 20.2,
+  "positionHeight": 37.5,
+  "published": true
+}

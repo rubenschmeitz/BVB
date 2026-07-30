@@ -1,0 +1,21 @@
+{
+  "seo": {
+    "title": "Bonsai in Nederland | Verenigingen en NBV",
+    "description": "Ontdek bonsaiverenigingen in Nederland en vind regionale clubs die zijn aangesloten bij de Nederlandse Bonsai Vereniging.",
+    "canonicalPath": "vereniging.html",
+    "socialImage": "images/tokonoma/05_tokonoma_mei_2024.webp"
+  },
+  "hero": {
+    "eyebrow": "Regionale bonsaiverenigingen",
+    "title": "Bonsai in Nederland",
+    "className": "hero-over-ons"
+  },
+  "subtitle": "Landelijk netwerk",
+  "paragraphs": [
+    "Bonsailiefhebbers vind je in heel Nederland. Via de Nederlandse Bonsai Vereniging werken regionale verenigingen samen, delen ze kennis en organiseren ze activiteiten zoals tentoonstellingen, masterclasses en de Nationale Bonsai Show.",
+    "Klik op een marker op de kaart voor meer informatie over een regionale vereniging. Zoek je een club dichter bij huis, dan is dit een goed startpunt."
+  ],
+  "nbvLabel": "Nederlandse Bonsai Vereniging",
+  "nbvSubLabel": "Aangesloten verenigingen",
+  "nbvUrl": "https://bonsainederland.nl/aangesloten-bonsai-verenigingen-en-bestuur-nbv/"
+}

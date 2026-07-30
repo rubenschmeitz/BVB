@@ -1,0 +1,26 @@
+{
+  "id": "af0f0817-bc39-51af-b4d4-58d0bdae446f",
+  "title": "Nationale Bonsai Show (NBS) 2026",
+  "schemaName": "Nationale Bonsai Show 2026",
+  "startDate": "2026-09-26",
+  "endDate": "2026-09-27",
+  "startTime": "10:00",
+  "endTime": "17:00",
+  "location": "De Moerkoal, Berlicum",
+  "type": "event",
+  "tag": "Hoogtepunt",
+  "description": "Hét landelijke evenement met grote tentoonstelling, markt en expert demo's. Onze vereniging is dit jaar de trotse gastheer.",
+  "detailsUrl": "nbs.html",
+  "featuredOnHome": true,
+  "homePromotion": {
+    "title": "Kom naar onze NBS-tentoonstelling",
+    "copyAfterDate": "ben je van harte welkom in De Moerkoal in Berlicum. Kom bonsai bekijken, loop rustig rond langs de bomen en maak kennis met de sfeer van onze vereniging. De toegang is gratis.",
+    "image": "images/nbs_flyer_preview.png",
+    "alt": "Folder van de NBS-tentoonstelling 2026",
+    "width": 1100,
+    "height": 1554,
+    "linkLabel": "Alle info over de NBS"
+  },
+  "published": true,
+  "includeInCalendar": true
+}

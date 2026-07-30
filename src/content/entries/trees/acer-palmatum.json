@@ -1,0 +1,18 @@
+{
+  "id": "a39f75f9-d974-54ef-bd15-5f3a0746984e",
+  "order": 2,
+  "species": "Acer Palmatum",
+  "style": "Moyogi (Informele Rechtopgaande Stijl)",
+  "image": "images/trees/acer_palmatum_groen_klein.webp",
+  "alt": "Acer Palmatum (Japanse Esdoorn)",
+  "width": 931,
+  "height": 956,
+  "realHeightCm": 50,
+  "background": "bg_left_crane.png",
+  "scrollSide": "left",
+  "treeSide": "right",
+  "positionLeft": "63%",
+  "positionBottom": 20,
+  "positionHeight": 40,
+  "published": true
+}

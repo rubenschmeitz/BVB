@@ -1,0 +1,109 @@
+{
+  "seo": {
+    "title": "NBS 2026 in Berlicum | Nationale Bonsai Show",
+    "description": "Bezoek de Nationale Bonsai Show 2026 in De Moerkoal in Berlicum. Met bonsaitentoonstelling, New Talent Contest, demonstraties, markt, suiseki en activiteiten.",
+    "canonicalPath": "nbs.html",
+    "socialImage": "images/tokonoma/10_tokonoma_okt_2024.webp"
+  },
+  "hero": {
+    "title": "Nationale Bonsai Show 2026",
+    "className": "hero-nbs"
+  },
+  "intro": [
+    "Op 26 en 27 september 2026 organiseren wij de Nationale Bonsai Show in De Moerkoal in Berlicum. Twee dagen lang staat de locatie in het teken van bonsai, suiseki, demonstraties, de New Talent Contest en een markt met gespecialiseerde handelaren.",
+    "Bezoekers zien bonsai-opstellingen van verenigingen uit heel Nederland. Of je nu net begint of al jaren met bonsai bezig bent: NBS 2026 is een mooie plek om rond te kijken, vragen te stellen en andere liefhebbers te ontmoeten."
+  ],
+  "practical": {
+    "routeLabel": "Route",
+    "flyerLabel": "Flyer",
+    "flyer": "docs/NBS_Flyer_2026.pdf"
+  },
+  "programHeading": "Tijdschema",
+  "days": [
+    {
+      "id": "nbs-saturday",
+      "label": "Zaterdag 26 september",
+      "summary": "Opening, New Talent Contest en demonstratie Alain de Vroo",
+      "date": "2026-09-26",
+      "startTime": "10:00",
+      "endTime": "17:00",
+      "calendarName": "NBS 2026 - Zaterdag",
+      "calendarDescription": "Nationale Bonsai Show 2026. Programma: Opening, NTC en Demo Alain de Vroo.",
+      "published": true,
+      "entries": [
+        {
+          "time": "10:00 - 10:45",
+          "title": "Opening en Tomodachi Taiko",
+          "description": "Officiële opening door Tom Rense en Kees de Kort, gevolgd door Japans drummen van Tomodachi Taiko.",
+          "highlighted": true
+        },
+        {
+          "time": "11:00 - 14:00",
+          "title": "New Talent Contest",
+          "description": "Nieuwe talenten uit de aangesloten verenigingen werken aan gelijkwaardig startmateriaal en laten zien hoe zij een boom vormgeven.",
+          "highlighted": true
+        },
+        {
+          "time": "12:00",
+          "title": "Tomodachi Taiko",
+          "description": "Tweede optreden van de Japanse drumgroep.",
+          "highlighted": false
+        },
+        {
+          "time": "14:00 - 16:30",
+          "title": "Demonstratie: Alain de Vroo",
+          "description": "Live demonstratie waarbij je stap voor stap ziet welke keuzes er aan een boom worden gemaakt.",
+          "highlighted": true,
+          "image": "images/Alain_demo.webp",
+          "alt": "Alain de Vroo",
+          "width": 1500,
+          "height": 2000
+        },
+        {
+          "time": "16:30 - 17:00",
+          "title": "Prijsuitreiking: Beste Boom, New Talent Contest en Publieksprijs",
+          "highlighted": false
+        }
+      ]
+    },
+    {
+      "id": "nbs-sunday",
+      "label": "Zondag 27 september",
+      "summary": "Demo Yannick Kiggen en grote loterij",
+      "date": "2026-09-27",
+      "startTime": "10:00",
+      "endTime": "17:00",
+      "calendarName": "NBS 2026 - Zondag",
+      "calendarDescription": "Nationale Bonsai Show 2026. Programma: demonstratie Yannick Kiggen en grote loterij.",
+      "published": true,
+      "entries": [
+        {
+          "time": "10:00",
+          "title": "Zaal open",
+          "highlighted": false
+        },
+        {
+          "time": "14:00 - 16:30",
+          "title": "Demonstratie: Yannick Kiggen",
+          "description": "Live demonstratie met aandacht voor vormgeving, materiaalkeuze en de verdere ontwikkeling van de boom.",
+          "highlighted": true,
+          "image": "images/Yannick_demo.webp",
+          "alt": "Yannick Kiggen",
+          "width": 3840,
+          "height": 2160
+        },
+        {
+          "time": "16:30 - 17:00",
+          "title": "Grote loterij",
+          "description": "Trekking van de winnende loten met bonsaiprijzen.",
+          "highlighted": true
+        },
+        {
+          "time": "17:00",
+          "title": "Afsluiting NBS 2026",
+          "highlighted": false
+        }
+      ]
+    }
+  ]
+}
