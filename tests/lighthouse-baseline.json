@@ -1,0 +1,27 @@
+{
+  "index.html": {
+    "performance": 73,
+    "accessibility": 93,
+    "seo": 100
+  },
+  "agenda.html": {
+    "performance": 72,
+    "accessibility": 93,
+    "seo": 100
+  },
+  "galerij.html": {
+    "performance": 71,
+    "accessibility": 96,
+    "seo": 100
+  },
+  "nbs.html": {
+    "performance": 74,
+    "accessibility": 93,
+    "seo": 100
+  },
+  "contact.html": {
+    "performance": 79,
+    "accessibility": 96,
+    "seo": 100
+  }
+}

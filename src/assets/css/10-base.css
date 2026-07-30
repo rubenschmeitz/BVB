@@ -1,0 +1,53 @@
+/* Branded Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-white);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-sand);
+    border-radius: 5px;
+    border: 2px solid var(--color-white);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-sage);
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--color-white);
+    color: var(--color-charcoal);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.8s ease, color 0.8s ease;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: var(--color-bark);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+a:hover {
+    color: var(--color-charcoal);
+}
+
+/* Accessible Focus States */
+:focus-visible {
+    outline: 2px solid var(--color-sage);
+    outline-offset: 4px;
+}
+
+button:focus-visible,
+a:focus-visible {
+    border-radius: 4px;
+}

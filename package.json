@@ -1,0 +1,48 @@
+{
+  "name": "bonsai-vereniging-brabant-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Onderhoudbare broncode voor bonsai-brabant.nl",
+  "engines": {
+    "node": "24.x",
+    "npm": ">=11"
+  },
+  "scripts": {
+    "clean": "node scripts/clean.mjs",
+    "build:assets": "node scripts/build-assets.mjs",
+    "build": "npm run clean && npm run build:assets && eleventy",
+    "baseline:visual": "node scripts/capture-visual-baseline.mjs",
+    "validate:content": "node scripts/validate-content.mjs",
+    "lint:js": "eslint .",
+    "lint:html": "html-validate \"_site/**/*.html\"",
+    "check:links": "node scripts/check-links.mjs",
+    "test:a11y": "playwright test tests/accessibility.spec.mjs",
+    "test:e2e": "playwright test tests/e2e.spec.mjs",
+    "test:visual": "playwright test tests/visual.spec.mjs",
+    "test:lighthouse": "node scripts/check-lighthouse.mjs",
+    "check": "npm run validate:content && npm run build && npm run lint:js && npm run lint:html && npm run check:links && npm run test:a11y"
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11"
+  ],
+  "overrides": {
+    "@11ty/recursive-copy": "5.0.2"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "3.1.6",
+    "@axe-core/playwright": "4.10.2",
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.55.1",
+    "ajv": "8.20.0",
+    "eslint": "10.8.0",
+    "html-validate": "10.4.0",
+    "lighthouse": "12.6.1",
+    "lightningcss": "1.30.2",
+    "pixelmatch": "7.1.0",
+    "pngjs": "7.0.0",
+    "sharp": "0.35.3",
+    "yaml": "2.9.0"
+  }
+}
