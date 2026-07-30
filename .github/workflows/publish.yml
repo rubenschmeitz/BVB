@@ -38,7 +38,6 @@ jobs:
           fetch-depth: 0
 
       - name: Ongewijzigde visuele referentie ophalen
-        if: inputs.payload == ''
         uses: actions/checkout@v7
         with:
           ref: d0a63bcf92fac0efb1b2f71410514c8a4ae9f5ed
@@ -63,7 +62,6 @@ jobs:
           BVB_BASELINE_ROOT: .visual-reference
         run: |
           npm run baseline:visual
-          rm -rf .visual-reference
 
       - name: Bouw, inhoud en toegankelijkheid controleren
         run: npm run check
@@ -74,6 +72,13 @@ jobs:
       - name: Visuele techniek controleren bij onderhoudspublicaties
         if: inputs.payload == ''
         run: npm run test:visual
+
+      - name: Lighthouse-referentie op dezelfde runner meten
+        env:
+          BVB_LIGHTHOUSE_ROOT: .visual-reference
+          BVB_LIGHTHOUSE_REPORT_ONLY: "1"
+          BVB_LIGHTHOUSE_BASELINE_OUTPUT: tests/lighthouse-baseline.json
+        run: npm run test:lighthouse
 
       - name: Lighthouse-grenzen controleren
         run: npm run test:lighthouse

@@ -1,5 +1,5 @@
 import { createServer } from "node:http";
-import { readFile, stat } from "node:fs/promises";
+import { readFile, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import lighthouse from "lighthouse";
 import { chromium } from "@playwright/test";
@@ -62,6 +62,15 @@ try {
 }
 
 if (reportOnly) {
+  const outputPath = process.env.BVB_LIGHTHOUSE_BASELINE_OUTPUT;
+  if (outputPath) {
+    const absoluteOutputPath = path.resolve(outputPath);
+    if (!absoluteOutputPath.startsWith(`${projectRoot}${path.sep}`)) {
+      throw new Error("Lighthouse-referentie moet binnen de projectmap worden opgeslagen.");
+    }
+    await writeFile(absoluteOutputPath, `${JSON.stringify(scores, null, 2)}\n`, "utf8");
+    console.log(`Lighthouse-referentie opgeslagen in ${path.relative(projectRoot, absoluteOutputPath)}.`);
+  }
   console.log(JSON.stringify(scores, null, 2));
   process.exit(0);
 }
