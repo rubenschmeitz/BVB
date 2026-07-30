@@ -1,0 +1,57 @@
+name: Website controleren
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Inhoud, techniek en visuele gelijkheid
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Broncode ophalen
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Node.js 24 instellen
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Vaste afhankelijkheden installeren
+        run: npm ci
+
+      - name: Chromium met systeemafhankelijkheden installeren
+        run: npx playwright install --with-deps chromium
+
+      - name: Bouw, inhoud, HTML, links en toegankelijkheid controleren
+        run: npm run check
+
+      - name: Interactietests uitvoeren
+        run: npm run test:e2e
+
+      - name: Visuele vergelijking uitvoeren
+        run: npm run test:visual
+
+      - name: Lighthouse-grenzen controleren
+        run: npm run test:lighthouse
+
+      - name: Testrapport bewaren bij een fout
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-testresultaten
+          path: |
+            playwright-report/
+            test-results/
+            .lighthouseci/
+          if-no-files-found: ignore
+          retention-days: 14

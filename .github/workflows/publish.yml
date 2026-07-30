@@ -1,0 +1,105 @@
+name: Website publiceren
+
+on:
+  workflow_dispatch:
+    inputs:
+      payload:
+        description: "Pages CMS-context als JSON"
+        required: false
+        type: string
+      ref:
+        description: "Git-ref om te publiceren; leeg gebruikt de gekozen versie"
+        required: false
+        type: string
+      reason:
+        description: "Korte reden voor publicatie of herstel"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-production
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Publicatie volledig controleren
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Gekozen versie ophalen
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref || github.sha }}
+          fetch-depth: 0
+
+      - name: Node.js 24 instellen
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Vaste afhankelijkheden installeren
+        run: npm ci
+
+      - name: Chromium met systeemafhankelijkheden installeren
+        run: npx playwright install --with-deps chromium
+
+      - name: Alle kwaliteitscontroles uitvoeren
+        run: |
+          npm run check
+          npm run test:e2e
+          npm run test:visual
+          npm run test:lighthouse
+
+  build:
+    name: Schone publicatie bouwen
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Gekozen versie opnieuw ophalen
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref || github.sha }}
+          fetch-depth: 0
+
+      - name: Node.js 24 instellen
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Vaste afhankelijkheden installeren
+        run: npm ci
+
+      - name: Inhoud valideren en schone website bouwen
+        run: |
+          npm run validate:content
+          npm run build
+          npm run lint:html
+          npm run check:links
+
+      - name: GitHub Pages instellen
+        uses: actions/configure-pages@v5
+
+      - name: Alleen de gegenereerde website uploaden
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    name: Naar GitHub Pages publiceren
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Laatst goedgekeurde website activeren
+        id: deployment
+        uses: actions/deploy-pages@v4
