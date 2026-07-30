@@ -8,13 +8,20 @@ const projectRoot = path.resolve(".");
 const publicRoot = path.resolve(process.env.BVB_LIGHTHOUSE_ROOT || "_site");
 const externalBaseUrl = process.env.BVB_LIGHTHOUSE_URL || "";
 const reportOnly = process.env.BVB_LIGHTHOUSE_REPORT_ONLY === "1";
-const pages = [
+const defaultPages = [
   "index.html",
   "agenda.html",
   "galerij.html",
   "nbs.html",
   "contact.html"
 ];
+const pages = process.env.BVB_LIGHTHOUSE_PAGES
+  ? process.env.BVB_LIGHTHOUSE_PAGES.split(",").map((pageName) => pageName.trim()).filter(Boolean)
+  : defaultPages;
+const sampleCount = Number.parseInt(process.env.BVB_LIGHTHOUSE_SAMPLES || "3", 10);
+if (!Number.isInteger(sampleCount) || sampleCount < 1 || sampleCount > 10) {
+  throw new Error("BVB_LIGHTHOUSE_SAMPLES moet een geheel getal tussen 1 en 10 zijn.");
+}
 
 const webServer = externalBaseUrl ? null : await startStaticServer(publicRoot);
 const baseUrl = externalBaseUrl || `http://127.0.0.1:${webServer.address().port}`;
@@ -42,7 +49,7 @@ try {
 
   for (const pageName of pages) {
     const measurements = [];
-    for (let sample = 0; sample < 3; sample += 1) {
+    for (let sample = 0; sample < sampleCount; sample += 1) {
       measurements.push(await auditPage(pageName));
     }
     scores[pageName] = Object.fromEntries(
@@ -53,7 +60,8 @@ try {
     );
     console.log(
       `${pageName}: ${formatScores(scores[pageName])}; samples ` +
-      measurements.map((measurement) => measurement.performance).join(", ")
+      measurements.map((measurement) => measurement.performance).join(", ") +
+      `; ${formatPerformanceMetrics(measurements)}`
     );
   }
 } finally {
@@ -169,6 +177,39 @@ function formatScores(value) {
   return `performance ${value.performance}, toegankelijkheid ${value.accessibility}, SEO ${value.seo}`;
 }
 
+function formatPerformanceMetrics(measurements) {
+  const metrics = [
+    ["FCP", "first-contentful-paint"],
+    ["LCP", "largest-contentful-paint"],
+    ["SI", "speed-index"],
+    ["TBT", "total-blocking-time"],
+    ["TTI", "interactive"]
+  ].map(([label, auditId]) => {
+    const values = measurements.map((measurement) => measurement.metrics[auditId].value);
+    const auditScores = measurements.map((measurement) => measurement.metrics[auditId].score);
+    return `${label} ${Math.round(median(values))}ms/${median(auditScores)}`;
+  });
+  const lcpTargets = [
+    ...new Set(measurements.map((measurement) => measurement.lcpTarget).filter(Boolean))
+  ];
+  if (lcpTargets.length) metrics.push(`LCP-element ${lcpTargets.join(" | ")}`);
+  const lcpPhases = measurements
+    .map((measurement) => measurement.lcpPhases)
+    .filter((phases) => phases.length);
+  if (lcpPhases.length) {
+    const phaseNames = [...new Set(lcpPhases.flat().map((phase) => phase.phase))];
+    metrics.push(
+      `LCP-fasen ${phaseNames.map((phaseName) => {
+        const values = lcpPhases.map((phases) =>
+          phases.find((phase) => phase.phase === phaseName)?.duration || 0
+        );
+        return `${phaseName} ${Math.round(median(values))}ms`;
+      }).join(", ")}`
+    );
+  }
+  return metrics.join(", ");
+}
+
 async function auditPage(pageName) {
   const result = await lighthouse(
     new URL(pageName, `${baseUrl}/`).toString(),
@@ -186,15 +227,55 @@ async function auditPage(pageName) {
   );
   if (!result?.lhr) throw new Error(`Geen Lighthouse-resultaat voor ${pageName}`);
 
-  return Object.fromEntries(
+  const categoryScores = Object.fromEntries(
     ["performance", "accessibility", "seo"].map((category) => [
       category,
       Math.round((result.lhr.categories[category]?.score || 0) * 100)
     ])
   );
+  const metricAuditIds = [
+    "first-contentful-paint",
+    "largest-contentful-paint",
+    "speed-index",
+    "total-blocking-time",
+    "interactive"
+  ];
+  const metrics = Object.fromEntries(
+    metricAuditIds.map((auditId) => {
+      const audit = result.lhr.audits[auditId];
+      return [
+        auditId,
+        {
+          value: audit?.numericValue || 0,
+          score: Math.round((audit?.score || 0) * 100)
+        }
+      ];
+    })
+  );
+  const lcpInsight = result.lhr.audits["lcp-phases-insight"]?.details;
+  const lcpTarget = findFirstValue(lcpInsight, (value) => value?.node?.selector)?.node?.selector
+    || findFirstValue(
+      result.lhr.audits["largest-contentful-paint-element"]?.details,
+      (value) => value?.node?.selector
+    )?.node?.selector;
+  const lcpPhases = findFirstValue(
+    lcpInsight,
+    (value) => Array.isArray(value) && value.some((item) => item?.phase && item?.duration)
+  ) || [];
+  return { ...categoryScores, metrics, lcpTarget, lcpPhases };
 }
 
 function median(values) {
   const sorted = [...values].sort((left, right) => left - right);
   return sorted[Math.floor(sorted.length / 2)];
+}
+
+function findFirstValue(value, predicate) {
+  if (predicate(value)) return value;
+  if (!value || typeof value !== "object") return undefined;
+  for (const nestedValue of Object.values(value)) {
+    const match = findFirstValue(nestedValue, predicate);
+    if (match !== undefined) return match;
+  }
+  return undefined;
 }
