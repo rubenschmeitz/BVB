@@ -41,20 +41,20 @@ try {
   await waitForDebugger(debuggingPort);
 
   for (const pageName of pages) {
-    scores[pageName] = await auditPage(pageName);
-    console.log(`${pageName}: ${formatScores(scores[pageName])}`);
-
-    const performanceFloor = baseline?.[pageName]?.performance - 5;
-    if (Number.isFinite(performanceFloor) && scores[pageName].performance < performanceFloor) {
-      const samples = [scores[pageName].performance];
-      for (let retry = 0; retry < 2; retry += 1) {
-        samples.push((await auditPage(pageName)).performance);
-      }
-      scores[pageName].performance = median(samples);
-      console.log(
-        `${pageName}: performance opnieuw gemeten [${samples.join(", ")}], mediaan ${scores[pageName].performance}`
-      );
+    const measurements = [];
+    for (let sample = 0; sample < 3; sample += 1) {
+      measurements.push(await auditPage(pageName));
     }
+    scores[pageName] = Object.fromEntries(
+      ["performance", "accessibility", "seo"].map((category) => [
+        category,
+        median(measurements.map((measurement) => measurement[category]))
+      ])
+    );
+    console.log(
+      `${pageName}: ${formatScores(scores[pageName])}; samples ` +
+      measurements.map((measurement) => measurement.performance).join(", ")
+    );
   }
 } finally {
   await browser.close();
