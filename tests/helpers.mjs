@@ -40,6 +40,11 @@ export async function prepareVisualPage(page, pageName) {
       html {
         scroll-behavior: auto !important;
       }
+      .reveal-on-scroll,
+      .reveal-staggered > * {
+        opacity: 1 !important;
+        transform: none !important;
+      }
       .map-frame,
       .cf-turnstile {
         visibility: hidden !important;
@@ -55,7 +60,7 @@ export async function prepareVisualPage(page, pageName) {
       await new Promise((resolve) => window.requestAnimationFrame(resolve));
       if (!image.complete || image.naturalWidth === 0) {
         await new Promise((resolve) => {
-          const timer = setTimeout(resolve, 1000);
+          const timer = setTimeout(resolve, 5000);
           const finish = () => {
             clearTimeout(timer);
             resolve();
@@ -67,6 +72,8 @@ export async function prepareVisualPage(page, pageName) {
       await image.decode?.().catch(() => {});
     }
 
+    await new Promise((resolve) => window.requestAnimationFrame(resolve));
+
     // Visit the full document once to settle scroll-reveal behavior too.
     const step = Math.max(window.innerHeight * 0.8, 300);
     for (let y = 0; y < document.documentElement.scrollHeight; y += step) {
@@ -75,5 +82,10 @@ export async function prepareVisualPage(page, pageName) {
     }
     window.scrollTo(0, 0);
   });
+  await page.waitForFunction(() =>
+    Array.from(document.images)
+      .filter((image) => image.currentSrc || image.getAttribute("src"))
+      .every((image) => image.complete && image.naturalWidth > 0)
+  );
   await page.waitForTimeout(150);
 }

@@ -5,7 +5,11 @@ export default [
     ignores: [
       "_site/**",
       ".build/**",
+      ".cache/**",
+      ".visual-reference/**",
       "node_modules/**",
+      "playwright-report/**",
+      "test-results/**",
       "tests/visual-baseline/**",
       "src/assets/js/calendar-button.js",
     ],
