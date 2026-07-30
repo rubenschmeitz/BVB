@@ -6,6 +6,9 @@ import { chromium } from "@playwright/test";
 
 const projectRoot = path.resolve(".");
 const publicRoot = path.resolve(process.env.BVB_LIGHTHOUSE_ROOT || "_site");
+const comparisonRoot = process.env.BVB_LIGHTHOUSE_BASELINE_ROOT
+  ? path.resolve(process.env.BVB_LIGHTHOUSE_BASELINE_ROOT)
+  : null;
 const externalBaseUrl = process.env.BVB_LIGHTHOUSE_URL || "";
 const reportOnly = process.env.BVB_LIGHTHOUSE_REPORT_ONLY === "1";
 const defaultPages = [
@@ -25,7 +28,11 @@ if (!Number.isInteger(sampleCount) || sampleCount < 1 || sampleCount > 10) {
 
 const webServer = externalBaseUrl ? null : await startStaticServer(publicRoot);
 const baseUrl = externalBaseUrl || `http://127.0.0.1:${webServer.address().port}`;
-const baseline = reportOnly
+const comparisonServer = comparisonRoot ? await startStaticServer(comparisonRoot) : null;
+const comparisonBaseUrl = comparisonServer
+  ? `http://127.0.0.1:${comparisonServer.address().port}`
+  : "";
+const storedBaseline = reportOnly || comparisonRoot
   ? null
   : JSON.parse(
       await readFile(path.join(projectRoot, "tests", "lighthouse-baseline.json"), "utf8")
@@ -43,30 +50,50 @@ const browser = await chromium.launch({
 });
 
 const scores = {};
+const comparisonScores = {};
 
 try {
   await waitForDebugger(debuggingPort);
 
   for (const pageName of pages) {
     const measurements = [];
+    const comparisonMeasurements = [];
     for (let sample = 0; sample < sampleCount; sample += 1) {
-      measurements.push(await auditPage(pageName));
+      if (!comparisonRoot) {
+        measurements.push(await auditPage(pageName, baseUrl));
+        continue;
+      }
+
+      // Alternate the order so browser warm-up and runner load cannot
+      // consistently favor either the unchanged or generated website.
+      if (sample % 2 === 0) {
+        comparisonMeasurements.push(await auditPage(pageName, comparisonBaseUrl));
+        measurements.push(await auditPage(pageName, baseUrl));
+      } else {
+        measurements.push(await auditPage(pageName, baseUrl));
+        comparisonMeasurements.push(await auditPage(pageName, comparisonBaseUrl));
+      }
     }
-    scores[pageName] = Object.fromEntries(
-      ["performance", "accessibility", "seo"].map((category) => [
-        category,
-        median(measurements.map((measurement) => measurement[category]))
-      ])
-    );
-    console.log(
-      `${pageName}: ${formatScores(scores[pageName])}; samples ` +
-      measurements.map((measurement) => measurement.performance).join(", ") +
-      `; ${formatPerformanceMetrics(measurements)}`
-    );
+    scores[pageName] = summarizeScores(measurements);
+    logMeasurements("huidig", pageName, scores[pageName], measurements);
+
+    if (comparisonMeasurements.length) {
+      comparisonScores[pageName] = summarizeScores(comparisonMeasurements);
+      logMeasurements(
+        "referentie",
+        pageName,
+        comparisonScores[pageName],
+        comparisonMeasurements
+      );
+    }
   }
 } finally {
   await browser.close();
-  if (webServer) await new Promise((resolve) => webServer.close(resolve));
+  await Promise.all(
+    [webServer, comparisonServer]
+      .filter(Boolean)
+      .map((server) => new Promise((resolve) => server.close(resolve)))
+  );
 }
 
 if (reportOnly) {
@@ -83,6 +110,7 @@ if (reportOnly) {
   process.exit(0);
 }
 
+const baseline = comparisonRoot ? comparisonScores : storedBaseline;
 const errors = [];
 for (const pageName of pages) {
   const current = scores[pageName];
@@ -177,6 +205,23 @@ function formatScores(value) {
   return `performance ${value.performance}, toegankelijkheid ${value.accessibility}, SEO ${value.seo}`;
 }
 
+function summarizeScores(measurements) {
+  return Object.fromEntries(
+    ["performance", "accessibility", "seo"].map((category) => [
+      category,
+      median(measurements.map((measurement) => measurement[category]))
+    ])
+  );
+}
+
+function logMeasurements(label, pageName, categoryScores, measurements) {
+  console.log(
+    `${label} ${pageName}: ${formatScores(categoryScores)}; samples ` +
+    measurements.map((measurement) => measurement.performance).join(", ") +
+    `; ${formatPerformanceMetrics(measurements)}`
+  );
+}
+
 function formatPerformanceMetrics(measurements) {
   const metrics = [
     ["FCP", "first-contentful-paint"],
@@ -210,9 +255,9 @@ function formatPerformanceMetrics(measurements) {
   return metrics.join(", ");
 }
 
-async function auditPage(pageName) {
+async function auditPage(pageName, auditBaseUrl) {
   const result = await lighthouse(
-    new URL(pageName, `${baseUrl}/`).toString(),
+    new URL(pageName, `${auditBaseUrl}/`).toString(),
     {
       port: debuggingPort,
       output: "json",
