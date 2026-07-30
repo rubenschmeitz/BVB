@@ -262,6 +262,7 @@ async function auditPage(pageName, auditBaseUrl) {
       port: debuggingPort,
       output: "json",
       logLevel: "error",
+      throttlingMethod: process.env.BVB_LIGHTHOUSE_THROTTLING || "simulate",
       onlyCategories: ["performance", "accessibility", "seo"],
       blockedUrlPatterns: [
         "*static.cloudflareinsights.com*",

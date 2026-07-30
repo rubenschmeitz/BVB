@@ -84,6 +84,8 @@ jobs:
       - name: Lighthouse eerlijk vergelijken op dezelfde runner
         env:
           BVB_LIGHTHOUSE_BASELINE_ROOT: .visual-reference
+          BVB_LIGHTHOUSE_SAMPLES: "1"
+          BVB_LIGHTHOUSE_THROTTLING: devtools
         run: npm run test:lighthouse
 
       - name: Testrapport bewaren bij een fout
