@@ -1,0 +1,838 @@
+media:
+  - name: images
+    label: Afbeeldingen
+    input: images
+    output: /images
+    extensions: [jpg, jpeg, png, webp, svg]
+    rename: safe
+    commit:
+      identity: user
+      templates:
+        create: "media: {filename} toegevoegd door {userName}"
+        update: "media: {filename} bijgewerkt door {userName}"
+        delete: "media: {filename} gearchiveerd door {userName}"
+        rename: "media: {oldFilename} hernoemd naar {newFilename} door {userName}"
+  - name: documents
+    label: Documenten
+    input: docs
+    output: /docs
+    extensions: [pdf]
+    rename: safe
+    commit:
+      identity: user
+      templates:
+        create: "document: {filename} toegevoegd door {userName}"
+        update: "document: {filename} bijgewerkt door {userName}"
+
+components:
+  seo:
+    type: object
+    label: Zoekmachines en delen
+    required: true
+    fields:
+      - name: title
+        label: Paginatitel
+        type: string
+        required: true
+        description: Titel in het browsertabblad en bij Google.
+        options:
+          minlength: 10
+          maxlength: 70
+      - name: socialTitle
+        label: Titel voor sociale media
+        type: string
+        description: Alleen invullen als deze van de paginatitel moet afwijken.
+        options:
+          maxlength: 80
+      - name: description
+        label: Omschrijving
+        type: text
+        required: true
+        description: Korte omschrijving voor zoekmachines, zonder opmaak of HTML.
+        options:
+          minlength: 50
+          maxlength: 170
+      - name: keywords
+        label: Zoekwoorden
+        type: string
+        description: Optioneel; woorden gescheiden door komma's.
+      - name: canonicalPath
+        label: Vast pagina-adres
+        type: string
+        readonly: true
+      - name: socialImage
+        label: Afbeelding bij delen
+        type: image
+        required: true
+        options:
+          media: images
+          rename: safe
+  hero:
+    type: object
+    label: Bovenkant van de pagina
+    required: true
+    fields:
+      - name: eyebrow
+        label: Kleine regel
+        type: string
+        required: true
+        options:
+          maxlength: 80
+      - name: title
+        label: Grote titel
+        type: string
+        required: true
+        options:
+          maxlength: 80
+      - name: className
+        label: Vaste vormgeving
+        type: string
+        readonly: true
+  stable_id:
+    type: uuid
+    label: Vast ID
+    required: true
+    description: Dit ID wordt automatisch gemaakt en mag niet veranderen.
+    options:
+      editable: false
+      generate: false
+
+content:
+  - name: beheer
+    label: Algemene instellingen
+    type: group
+    items:
+      - name: global-settings
+        label: Contact, locatie en navigatie
+        type: file
+        path: src/content/settings/global.json
+        format: json
+        operations:
+          create: false
+          rename: false
+          delete: false
+        commit:
+          identity: user
+          templates:
+            update: "instellingen: contact en navigatie bijgewerkt door {userName}"
+        fields:
+          - name: contact
+            label: Openbare contactgegevens
+            type: object
+            required: true
+            fields:
+              - name: email
+                label: Openbaar e-mailadres
+                type: string
+                required: true
+                pattern:
+                  regex: "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
+                  message: Vul een geldig e-mailadres in.
+          - name: venue
+            label: Club- en evenementenlocatie
+            type: object
+            required: true
+            fields:
+              - name: name
+                label: Naam locatie
+                type: string
+                required: true
+              - name: street
+                label: Straat en huisnummer
+                type: string
+                required: true
+              - name: postalCode
+                label: Postcode
+                type: string
+                required: true
+              - name: city
+                label: Plaats
+                type: string
+                required: true
+              - name: province
+                label: Provincie
+                type: string
+                required: true
+              - name: country
+                label: Landcode
+                type: string
+                required: true
+                readonly: true
+              - name: mapsUrl
+                label: Link naar route
+                type: string
+                required: true
+          - name: social
+            label: Sociale media
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{label}"
+            fields:
+              - name: label
+                label: Naam
+                type: string
+                required: true
+              - name: url
+                label: Link
+                type: string
+                required: true
+              - name: active
+                label: Tonen
+                type: boolean
+                default: true
+          - name: featuredNavigation
+            label: Uitgelichte navigatieknop
+            type: object
+            required: true
+            fields:
+              - name: label
+                label: Tekst
+                type: string
+                required: true
+              - name: url
+                label: Link
+                type: string
+                required: true
+              - name: active
+                label: Tonen
+                type: boolean
+                default: true
+
+  - name: paginas
+    label: Pagina's
+    type: group
+    items:
+      - name: home-page
+        label: Home
+        type: file
+        path: src/content/pages/home.json
+        format: json
+        operations: { create: false, rename: false, delete: false }
+        commit:
+          templates:
+            update: "pagina: home bijgewerkt door {userName}"
+        fields:
+          - name: seo
+            component: seo
+          - name: hero
+            component: hero
+          - name: story
+            label: Introductie
+            type: object
+            required: true
+            fields:
+              - name: lead
+                label: Inleidende tekst
+                type: text
+                required: true
+              - name: paragraphs
+                label: Alinea's
+                type: text
+                required: true
+                list:
+                  min: 1
+                  max: 5
+              - name: buttons
+                label: Knoppen
+                type: object
+                list:
+                  min: 1
+                  max: 3
+                  collapsible:
+                    collapsed: true
+                    summary: "{label}"
+                fields:
+                  - name: label
+                    label: Tekst
+                    type: string
+                    required: true
+                  - name: url
+                    label: Link
+                    type: string
+                    required: true
+                  - name: style
+                    label: Vorm
+                    type: select
+                    required: true
+                    options:
+                      values:
+                        - name: primary
+                          label: Primair
+                        - name: secondary
+                          label: Secundair
+          - name: showcase
+            label: Carrousel na de uitgelichte agenda-activiteit
+            type: object
+            list:
+              min: 1
+              max: 8
+              collapsible:
+                collapsed: true
+                summary: "{title}"
+            fields:
+              - name: title
+                label: Titel
+                type: string
+                required: true
+              - name: description
+                label: Tekst
+                type: text
+                required: true
+              - name: image
+                label: Afbeelding
+                type: image
+                required: true
+                options: { media: images, rename: safe }
+              - name: alt
+                label: Beschrijving van afbeelding
+                type: string
+                required: true
+                description: Beschrijf kort wat op de foto te zien is.
+                options: { minlength: 8, maxlength: 180 }
+              - name: width
+                label: Breedte in pixels
+                type: number
+                readonly: true
+              - name: height
+                label: Hoogte in pixels
+                type: number
+                readonly: true
+              - name: url
+                label: Link
+                type: string
+                required: true
+              - name: linkLabel
+                label: Tekst van link
+                type: string
+                required: true
+              - name: published
+                label: Tonen
+                type: boolean
+                default: true
+
+      - name: agenda-page
+        label: Agenda-pagina
+        type: file
+        path: src/content/pages/agenda.json
+        format: json
+        operations: { create: false, rename: false, delete: false }
+        commit:
+          templates:
+            update: "pagina: agenda-teksten bijgewerkt door {userName}"
+        fields:
+          - name: seo
+            component: seo
+          - name: hero
+            component: hero
+          - name: intro
+            label: Introductie
+            type: object
+            required: true
+            fields:
+              - name: beforeVenue
+                label: Tekst voor locatienaam
+                type: string
+                required: true
+              - name: venueLabel
+                label: Vetgedrukte locatienaam
+                type: string
+                required: true
+              - name: afterVenue
+                label: Tekst na locatienaam
+                type: text
+                required: true
+          - name: filters
+            label: Namen van filters
+            type: object
+            fields:
+              - { name: all, label: Alles, type: string, required: true }
+              - { name: club, label: Club, type: string, required: true }
+              - { name: nbv, label: NBV, type: string, required: true }
+              - { name: event, label: Evenement, type: string, required: true }
+          - { name: syncLabel, label: Tekst agenda-download, type: string, required: true }
+          - { name: locationHeading, label: Titel locatie, type: string, required: true }
+          - { name: parkingText, label: Parkeerinformatie, type: string, required: true }
+
+      - name: gallery-page
+        label: Galerij-pagina
+        type: file
+        path: src/content/pages/gallery.json
+        format: json
+        operations: { create: false, rename: false, delete: false }
+        commit:
+          templates:
+            update: "pagina: galerij-teksten bijgewerkt door {userName}"
+        fields:
+          - name: seo
+            component: seo
+          - name: hero
+            component: hero
+          - name: club
+            label: Clubavondgalerij
+            type: object
+            fields:
+              - { name: tabLabel, label: Naam tab, type: string, required: true }
+              - { name: heading, label: Titel, type: string, required: true }
+              - { name: description, label: Tekst, type: text, required: true }
+          - name: exhibition
+            label: Digitale expositie
+            type: object
+            fields:
+              - { name: tabLabel, label: Naam tab, type: string, required: true }
+              - { name: heading, label: Titel, type: string, required: true }
+              - { name: description, label: Tekst, type: text, required: true }
+              - { name: hint, label: Hulptekst, type: string, required: true }
+
+      - name: about-page
+        label: Over ons
+        type: file
+        path: src/content/pages/about.json
+        format: json
+        operations: { create: false, rename: false, delete: false }
+        commit:
+          templates:
+            update: "pagina: over ons bijgewerkt door {userName}"
+        fields:
+          - name: seo
+            component: seo
+          - name: hero
+            component: hero
+          - { name: lead, label: Inleidende tekst, type: text, required: true }
+          - name: paragraphs
+            label: Alinea's
+            type: text
+            list: { min: 1, max: 6 }
+          - { name: honoraryHeading, label: Titel ereleden, type: string, required: true }
+          - { name: honoraryIntro, label: Introductie ereleden, type: text, required: true }
+
+      - name: associations-page
+        label: Bonsai in Nederland
+        type: file
+        path: src/content/pages/associations.json
+        format: json
+        operations: { create: false, rename: false, delete: false }
+        commit:
+          templates:
+            update: "pagina: verenigingen bijgewerkt door {userName}"
+        fields:
+          - name: seo
+            component: seo
+          - name: hero
+            component: hero
+          - { name: subtitle, label: Kleine titel, type: string, required: true }
+          - name: paragraphs
+            label: Introductie
+            type: text
+            list: { min: 1, max: 4 }
+          - { name: nbvLabel, label: Naam NBV-link, type: string, required: true }
+          - { name: nbvSubLabel, label: Onderschrift NBV-link, type: string, required: true }
+          - { name: nbvUrl, label: Link NBV, type: string, required: true }
+
+      - name: contact-page
+        label: Contact
+        type: file
+        path: src/content/pages/contact.json
+        format: json
+        operations: { create: false, rename: false, delete: false }
+        commit:
+          templates:
+            update: "pagina: contact bijgewerkt door {userName}"
+        fields:
+          - name: seo
+            component: seo
+          - name: hero
+            component: hero
+          - name: paragraphs
+            label: Introductie
+            type: text
+            list: { min: 1, max: 4 }
+          - { name: mailButton, label: Tekst e-mailknop, type: string, required: true }
+          - { name: routeButton, label: Tekst routeknop, type: string, required: true }
+          - name: subjects
+            label: Onderwerpen in formulier
+            type: object
+            list:
+              min: 1
+              collapsible:
+                collapsed: true
+                summary: "{label}"
+            fields:
+              - { name: value, label: Interne waarde, type: string, required: true }
+              - { name: label, label: Zichtbare tekst, type: string, required: true }
+          - { name: submitLabel, label: Tekst verstuurknop, type: string, required: true }
+          - { name: pendingMessage, label: Tekst tijdens versturen, type: string, required: true }
+          - { name: timeoutMessage, label: Tekst bij time-out, type: text, required: true }
+
+  - name: nbs-beheer
+    label: NBS 2026
+    type: group
+    items:
+      - name: nbs-page
+        label: Informatie en programma
+        type: file
+        path: src/content/pages/nbs.json
+        format: json
+        operations: { create: false, rename: false, delete: false }
+        commit:
+          templates:
+            update: "NBS: programma of informatie bijgewerkt door {userName}"
+        fields:
+          - name: seo
+            component: seo
+          - name: hero
+            label: Bovenkant van de pagina
+            type: object
+            fields:
+              - { name: title, label: Titel, type: string, required: true }
+              - { name: className, label: Vaste vormgeving, type: string, readonly: true }
+          - name: intro
+            label: Introductie
+            type: text
+            list: { min: 1, max: 5 }
+          - name: practical
+            label: Praktische knoppen
+            type: object
+            fields:
+              - { name: routeLabel, label: Tekst routeknop, type: string, required: true }
+              - { name: flyerLabel, label: Tekst flyerknop, type: string, required: true }
+              - name: flyer
+                label: Flyer
+                type: file
+                required: true
+                options: { media: documents, extensions: [pdf], rename: safe }
+          - { name: programHeading, label: Titel programma, type: string, required: true }
+          - name: days
+            label: Programmadagen
+            type: object
+            list:
+              min: 1
+              max: 4
+              collapsible:
+                collapsed: true
+                summary: "{label}"
+            fields:
+              - { name: id, label: Vast dag-ID, type: string, required: true, readonly: true }
+              - { name: label, label: Dag en datum, type: string, required: true }
+              - { name: summary, label: Korte samenvatting, type: string, required: true }
+              - { name: date, label: Datum, type: date, required: true }
+              - name: startTime
+                label: Starttijd
+                type: string
+                required: true
+                pattern: "^([01]\\d|2[0-3]):[0-5]\\d$"
+              - name: endTime
+                label: Eindtijd
+                type: string
+                required: true
+                pattern: "^([01]\\d|2[0-3]):[0-5]\\d$"
+              - { name: calendarName, label: Titel agenda-item, type: string, required: true }
+              - { name: calendarDescription, label: Omschrijving agenda-item, type: text, required: true }
+              - { name: published, label: Tonen, type: boolean, default: true }
+              - name: entries
+                label: Programmaonderdelen
+                type: object
+                list:
+                  min: 1
+                  collapsible:
+                    collapsed: true
+                    summary: "{time} — {title}"
+                fields:
+                  - { name: time, label: Tijd, type: string, required: true }
+                  - { name: title, label: Titel, type: string, required: true }
+                  - { name: description, label: Omschrijving, type: text }
+                  - { name: highlighted, label: Uitlichten, type: boolean, default: false }
+                  - name: image
+                    label: Foto demonstrator
+                    type: image
+                    options: { media: images, rename: safe }
+                  - { name: alt, label: Beschrijving van foto, type: string }
+                  - { name: width, label: Breedte in pixels, type: number, readonly: true }
+                  - { name: height, label: Hoogte in pixels, type: number, readonly: true }
+
+  - name: events
+    label: Agenda-items
+    type: collection
+    path: src/content/entries/events
+    format: json
+    filename:
+      template: "{title}.json"
+      field: create
+    subfolders: false
+    operations: { create: true, rename: false, delete: false }
+    view:
+      primary: title
+      fields: [title, startDate, type, published]
+      sort: [startDate, title]
+      search: [title, location, tag]
+      default: { sort: startDate, order: asc }
+    commit:
+      templates:
+        create: "agenda: {name} toegevoegd door {userName}"
+        update: "agenda: {name} bijgewerkt door {userName}"
+    fields:
+      - name: id
+        component: stable_id
+      - { name: title, label: Titel, type: string, required: true }
+      - { name: schemaName, label: Titel voor zoekmachines, type: string }
+      - { name: startDate, label: Startdatum, type: date, required: true }
+      - { name: endDate, label: Einddatum, type: date }
+      - name: startTime
+        label: Starttijd
+        type: string
+        required: true
+        pattern: "^([01]\\d|2[0-3]):[0-5]\\d$"
+      - name: endTime
+        label: Eindtijd
+        type: string
+        required: true
+        pattern: "^([01]\\d|2[0-3]):[0-5]\\d$"
+      - { name: location, label: Locatie, type: string, required: true }
+      - name: type
+        label: Soort
+        type: select
+        required: true
+        options:
+          values:
+            - { name: club, label: Clubavond }
+            - { name: nbv, label: NBV-activiteit }
+            - { name: event, label: Evenement }
+      - { name: tag, label: Kort label, type: string, required: true }
+      - { name: description, label: Omschrijving, type: text, required: true }
+      - { name: extraInfo, label: Optionele mededeling, type: text }
+      - { name: detailsUrl, label: Optionele link, type: string }
+      - { name: published, label: Publiceren, type: boolean, default: false }
+      - { name: includeInCalendar, label: Opnemen in downloadbare agenda, type: boolean, default: false }
+      - { name: featuredOnHome, label: Uitlichten op home, type: boolean, default: false }
+      - name: homePromotion
+        label: Tekst bij uitlichting op home
+        type: object
+        fields:
+          - { name: title, label: Titel, type: string }
+          - { name: copyAfterDate, label: Tekst na de automatisch getoonde datum, type: text }
+          - name: image
+            label: Afbeelding
+            type: image
+            options: { media: images, rename: safe }
+          - { name: alt, label: Beschrijving afbeelding, type: string }
+          - { name: width, label: Breedte in pixels, type: number, readonly: true }
+          - { name: height, label: Hoogte in pixels, type: number, readonly: true }
+          - { name: linkLabel, label: Tekst van link, type: string }
+
+  - name: sponsors
+    label: Sponsors
+    type: collection
+    path: src/content/entries/sponsors
+    format: json
+    filename: { template: "{name}.json", field: create }
+    subfolders: false
+    operations: { create: true, rename: false, delete: false }
+    view:
+      primary: name
+      fields: [name, published]
+      sort: [name]
+    commit:
+      templates:
+        create: "sponsor: {name} toegevoegd door {userName}"
+        update: "sponsor: {name} bijgewerkt door {userName}"
+    fields:
+      - { name: id, component: stable_id }
+      - { name: name, label: Naam, type: string, required: true }
+      - { name: url, label: Website, type: string, required: true }
+      - name: image
+        label: Logo
+        type: image
+        required: true
+        options: { media: images, path: sponsors, rename: safe }
+      - { name: alt, label: Beschrijving logo, type: string, required: true }
+      - { name: width, label: Breedte in pixels, type: number, readonly: true }
+      - { name: height, label: Hoogte in pixels, type: number, readonly: true }
+      - name: variant
+        label: Vorm logo
+        type: select
+        required: true
+        options:
+          values:
+            - { name: landscape, label: Liggend }
+            - { name: portrait, label: Staand }
+      - { name: published, label: Tonen, type: boolean, default: false }
+
+  - name: club-photos
+    label: Clubfoto's
+    type: collection
+    path: src/content/entries/clubGallery
+    format: json
+    filename: { template: "{title}.json", field: create }
+    subfolders: false
+    operations: { create: true, rename: false, delete: false }
+    view:
+      primary: title
+      fields: [title, published]
+      sort: [title]
+    commit:
+      templates:
+        create: "galerij: {name} toegevoegd door {userName}"
+        update: "galerij: {name} bijgewerkt door {userName}"
+    fields:
+      - { name: id, component: stable_id }
+      - { name: title, label: Interne titel, type: string, required: true }
+      - name: src
+        label: Foto
+        type: image
+        required: true
+        options: { media: images, path: club_diverse, rename: safe }
+      - name: alt
+        label: Beschrijving van foto
+        type: string
+        required: true
+        description: Vertel kort wat op de foto gebeurt; niet alleen 'clubfoto'.
+        options: { minlength: 12, maxlength: 180 }
+      - { name: width, label: Breedte in pixels, type: number, readonly: true }
+      - { name: height, label: Hoogte in pixels, type: number, readonly: true }
+      - { name: published, label: Tonen, type: boolean, default: false }
+
+  - name: trees
+    label: Expositiebomen
+    type: collection
+    path: src/content/entries/trees
+    format: json
+    filename: { template: "{species}.json", field: create }
+    subfolders: false
+    operations: { create: true, rename: false, delete: false }
+    view:
+      primary: species
+      fields: [species, style, published]
+      sort: [species]
+    commit:
+      templates:
+        create: "expositie: {name} toegevoegd door {userName}"
+        update: "expositie: {name} bijgewerkt door {userName}"
+    fields:
+      - { name: id, component: stable_id }
+      - { name: species, label: Soortnaam, type: string, required: true }
+      - { name: style, label: Stijl, type: string, required: true }
+      - name: image
+        label: Foto van boom
+        type: image
+        required: true
+        options: { media: images, path: trees, rename: safe }
+      - { name: alt, label: Beschrijving foto, type: string, required: true, options: { minlength: 8 } }
+      - { name: width, label: Breedte in pixels, type: number, readonly: true }
+      - { name: height, label: Hoogte in pixels, type: number, readonly: true }
+      - { name: realHeightCm, label: Werkelijke hoogte in cm, type: number, required: true }
+      - name: background
+        label: Tokonoma-achtergrond
+        type: select
+        required: true
+        options:
+          values:
+            - bg_left_mountain.png
+            - bg_right_calligraphy.png
+            - bg_left_enso.png
+            - bg_right_bamboo.png
+            - bg_left_autumn.png
+            - bg_right_moon_bird.png
+            - bg_left_crane.png
+            - bg_right_pine.png
+            - bg_left_plum_blossom.png
+            - bg_right_river.png
+      - name: scrollSide
+        label: Zijde van wandrol
+        type: select
+        required: true
+        options: { values: [left, right] }
+      - name: treeSide
+        label: Zijde van boom
+        type: select
+        required: true
+        options: { values: [left, right] }
+      - name: positionLeft
+        label: Horizontale positie
+        type: select
+        required: true
+        options:
+          values: ["35%", "39%", "41%", "50%", "60%", "62%", "63%", "65%"]
+      - { name: positionBottom, label: Positie vanaf onderkant in procenten, type: number, required: true }
+      - { name: positionHeight, label: Hoogte in tokonoma in procenten, type: number, required: true }
+      - { name: published, label: Tonen, type: boolean, default: false }
+
+  - name: honorary-members
+    label: Ereleden
+    type: collection
+    path: src/content/entries/honoraryMembers
+    format: json
+    filename: { template: "{name}.json", field: create }
+    subfolders: false
+    operations: { create: true, rename: false, delete: false }
+    view:
+      primary: name
+      fields: [name, active]
+      sort: [name]
+    commit:
+      templates:
+        create: "erelid: {name} toegevoegd door {userName}"
+        update: "erelid: {name} bijgewerkt door {userName}"
+    fields:
+      - { name: id, component: stable_id }
+      - { name: name, label: Naam, type: string, required: true }
+      - { name: label, label: Label, type: string, required: true }
+      - name: image
+        label: Portret
+        type: image
+        required: true
+        options: { media: images, path: ere_leden, rename: safe }
+      - { name: alt, label: Beschrijving portret, type: string, required: true }
+      - { name: width, label: Breedte in pixels, type: number, readonly: true }
+      - { name: height, label: Hoogte in pixels, type: number, readonly: true }
+      - { name: biography, label: Biografie, type: text, required: true }
+      - { name: active, label: Tonen, type: boolean, default: false }
+
+  - name: associations
+    label: Verenigingen op de kaart
+    type: collection
+    path: src/content/entries/associations
+    format: json
+    filename: { template: "{name}.json", field: create }
+    subfolders: false
+    operations: { create: true, rename: false, delete: false }
+    view:
+      primary: name
+      fields: [name, town, active]
+      sort: [name]
+    commit:
+      templates:
+        create: "kaart: {name} toegevoegd door {userName}"
+        update: "kaart: {name} bijgewerkt door {userName}"
+    fields:
+      - { name: id, component: stable_id }
+      - { name: name, label: Naam vereniging, type: string, required: true }
+      - { name: town, label: Plaats, type: string, required: true }
+      - { name: url, label: Website, type: string, required: true }
+      - { name: x, label: Horizontale kaartpositie, type: number, required: true }
+      - { name: y, label: Verticale kaartpositie, type: number, required: true }
+      - { name: featured, label: Dit is BVB, type: boolean, default: false }
+      - { name: active, label: Tonen, type: boolean, default: false }
+
+settings:
+  hide: true
+  content:
+    merge: true
+  commit:
+    identity: user
+    templates:
+      create: "inhoud: {name} toegevoegd door {userName}"
+      update: "inhoud: {name} bijgewerkt door {userName}"
+      delete: "inhoud: {name} gearchiveerd door {userName}"
+      rename: "inhoud: {oldFilename} hernoemd door {userName}"
+
+actions:
+  - name: publish-website
+    label: Website publiceren
+    workflow: publish.yml
+    ref: current
+    cancelable: false
+    confirm:
+      title: Website publiceren?
+      message: Eerst worden alle controles opnieuw uitgevoerd. Alleen als alles slaagt, wordt de website zichtbaar bijgewerkt.
+      button: Website publiceren
