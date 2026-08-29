@@ -3537,6 +3537,7 @@ details[data-mobile-collapsible] > summary {
     border-radius: 12px;
     padding: 1rem 1.5rem;
     width: 100%;
+    height: 106px;
     box-sizing: border-box;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
@@ -3550,7 +3551,9 @@ details[data-mobile-collapsible] > summary {
 }
 
 .sidebar-sponsor-item img {
-    max-width: 100%;
+    width: 100%;
+    height: 72px;
+    max-width: 260px;
     max-height: 72px;
     object-fit: contain;
     filter: drop-shadow(0 1px 1px rgba(0,0,0,0.12)) drop-shadow(0 0 1px rgba(0,0,0,0.55)) grayscale(0%);
@@ -3582,7 +3585,7 @@ details[data-mobile-collapsible] > summary {
 }
 
 .sidebar-sponsor-item--portrait img {
-    max-height: 132px;
+    max-height: 72px;
 }
 
 /* Sidebar Section Divider */
