@@ -2390,6 +2390,15 @@ a:focus-visible {
     border: 2px solid var(--color-bark);
     background: #fdfaf7;
 }
+.agenda-item.club-event {
+    border-left: 4px solid var(--color-sage);
+}
+.agenda-item.external-event:not(.is-highlight) {
+    border-left: 4px solid var(--color-bark);
+}
+.agenda-item.nbv-event {
+    border-left: 4px solid #C29B38;
+}
 .agenda-item:nth-child(1) { z-index: 20; }
 .agenda-item:nth-child(2) { z-index: 19; }
 .agenda-item:nth-child(3) { z-index: 18; }
@@ -2412,6 +2421,13 @@ a:focus-visible {
     border: 3px solid var(--color-sage);
     border-radius: 50%;
     z-index: 2;
+}
+.agenda-item.external-event::before,
+.agenda-item.is-highlight::before {
+    border-color: var(--color-bark);
+}
+.agenda-item.nbv-event::before {
+    border-color: #C29B38;
 }
 .agenda-item:hover,
 .agenda-item:focus-within {
@@ -3588,6 +3604,18 @@ details[data-mobile-collapsible] > summary {
     max-height: 72px;
 }
 
+.sidebar-sponsor-item--goemaat img {
+    max-width: 420px;
+    max-height: 106px;
+    transform: scale(1.55);
+    position: relative;
+    z-index: 1;
+}
+
+.sidebar-sponsor-grid .sidebar-sponsor-item--goemaat:hover img {
+    transform: scale(1.6);
+}
+
 /* Sidebar Section Divider */
 .sidebar-divider {
     display: flex;
@@ -3749,6 +3777,11 @@ details[data-mobile-collapsible] > summary {
     color: white;
 }
 
+.filter-btn.active[data-filter="all"] {
+    background: var(--color-charcoal);
+    color: white;
+}
+
 .filter-btn.active[data-filter="event"] {
     background: var(--color-bark);
 }
@@ -3871,17 +3904,18 @@ details[data-mobile-collapsible] > summary {
 }
 
 .calendar-cell {
-    aspect-ratio: 1;
     background: #fafafa;
     border-radius: 8px;
     padding: 8px;
+    min-height: 112px;
     position: relative;
     cursor: pointer;
     transition: all 0.2s ease;
     border: 1px solid transparent;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 6px;
 }
 
 .calendar-cell:hover {
@@ -3915,29 +3949,41 @@ details[data-mobile-collapsible] > summary {
     background: rgba(93, 123, 81, 0.04);
 }
 
-.calendar-cell-dots {
+.calendar-cell-events {
     display: flex;
-    gap: 4px;
-    justify-content: center;
-    margin-top: auto;
+    flex-direction: column;
+    gap: 3px;
+    width: 100%;
 }
 
-.calendar-cell-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
+.calendar-cell-event {
+    display: -webkit-box;
+    width: 100%;
+    padding: 3px 4px;
+    border-left: 3px solid currentColor;
+    border-radius: 3px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    line-height: 1.15;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
 
-.calendar-cell-dot.club {
-    background: var(--color-sage);
+.calendar-cell-event.club {
+    background: rgba(93, 123, 81, 0.1);
+    color: var(--color-sage);
 }
 
-.calendar-cell-dot.nbv {
-    background: #C29B38;
+.calendar-cell-event.nbv {
+    background: rgba(194, 155, 56, 0.14);
+    color: #927324;
 }
 
-.calendar-cell-dot.event {
-    background: var(--color-bark);
+.calendar-cell-event.event {
+    background: rgba(140, 106, 92, 0.12);
+    color: var(--color-bark);
 }
 
 /* Selected Day popover or dynamic card */
@@ -4983,20 +5029,24 @@ select {
     .calendar-cell {
         min-width: 0;
         padding: 3px;
+        min-height: 70px;
         border-radius: 7px;
+        gap: 4px;
     }
 
     .calendar-day-number {
         font-size: 0.75rem;
     }
 
-    .calendar-cell-dots {
+    .calendar-cell-events {
         gap: 2px;
     }
 
-    .calendar-cell-dot {
-        width: 4px;
-        height: 4px;
+    .calendar-cell-event {
+        padding: 2px 3px;
+        border-left-width: 2px;
+        font-size: 0.54rem;
+        line-height: 1.08;
     }
 
     .calendar-event-popover {

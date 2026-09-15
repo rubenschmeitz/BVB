@@ -211,6 +211,19 @@
             detailsUrl: 'nbs.html'
         },
         {
+            id: 'ext-oct-sakka-ten-autumn-trees',
+            title: 'Sakka Ten Autumn Trees 2026',
+            startDate: '2026-10-16',
+            endDate: '2026-10-18',
+            startTime: '09:00',
+            endTime: '17:00',
+            location: 'Ginkgo Bonsai Center, Laarne, België',
+            type: 'event',
+            tag: 'Internationale Show',
+            description: 'Internationaal bonsai-evenement met tentoonstelling, lezingen en demonstraties. Vrijdag duurt het programma tot 19:00 uur; zaterdag en zondag is de tentoonstelling geopend van 09:00 tot 17:00 uur.',
+            detailsUrl: 'https://www.sakkakyookai-e.com/sakka-ten-autumn-trees-2026/'
+        },
+        {
             id: 'ext-oct-sint-niklaas-biennale',
             title: 'Sint-Niklaas Derde Bonsai Biënnale',
             startDate: '2026-10-17',
@@ -248,6 +261,19 @@
             detailsUrl: 'https://www.bonsaiplaza.com/nl/service/bonsai-exhibitions-events/'
         },
         {
+            id: 'ext-nov-lodder-end-year-sale',
+            title: 'Lodder Bonsai Eindejaar Sale',
+            startDate: '2026-11-28',
+            endDate: '2026-11-29',
+            startTime: '08:00',
+            endTime: '16:00',
+            location: 'Lodder Bonsai, Harmelen',
+            type: 'event',
+            tag: 'Sale',
+            description: 'Grote eindejaarsuitverkoop bij Lodder Bonsai. Zaterdag geopend van 08:00 tot 16:00 uur en zondag van 11:00 tot 16:00 uur.',
+            detailsUrl: 'https://bonsainederland.nl/event/lodder-bonsai-eindejaar-sale/'
+        },
+        {
             id: 'bvb-nov-swap',
             title: 'Ruilbeurs & Jaarafsluiting',
             startDate: '2026-11-30',
@@ -257,6 +283,18 @@
             type: 'club',
             tag: 'Ruilbeurs',
             description: 'Neem bomen, schalen, gereedschap of andere bonsaibenodigdheden mee om te ruilen of te verkopen. We sluiten het jaar samen op een gezellige manier af.'
+        },
+        {
+            id: 'ext-dec-bonsai-wintershow',
+            title: 'Bonsai Wintershow Noord-Holland',
+            startDate: '2026-12-12',
+            startTime: '10:00',
+            endTime: '17:00',
+            location: 'Buitenplaats Elswout, Overveen',
+            type: 'event',
+            tag: 'Expositie',
+            description: 'Openbare wintertentoonstelling met rondleidingen, een demonstratie van Pieter van Uden en een bonsaiverloting.',
+            detailsUrl: 'https://bonsai-nh.nl/bonsaiwintershow/'
         }
 ];
 })();

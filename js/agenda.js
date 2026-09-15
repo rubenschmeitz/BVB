@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const agendaEvents = window.BVB_AGENDA_EVENTS || [];
 
     let currentView = 'list'; // 'list' or 'calendar'
-    let currentFilter = 'club'; // Default filter is set to BVB Activiteiten ('club')
+    let currentFilter = 'all'; // Show all upcoming activities by default.
     
     const firstUpcomingEvent = getUpcomingEventsForFilter(currentFilter)[0] || getUpcomingEvents(agendaEvents)[0] || agendaEvents[0];
     let calendarYear = firstUpcomingEvent ? new Date(firstUpcomingEvent.startDate).getFullYear() : new Date().getFullYear();
@@ -134,12 +134,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Custom border / tag styling for Highlights (NBS)
             const isHighlight = evt.tag === 'Hoogtepunt';
             const tagClass = isHighlight ? 'highlight' : evt.type;
+            const displayTag = evt.type === 'club' ? `BVB-clubavond - ${evt.tag}` : evt.tag;
+            const itemTypeClass = evt.type === 'club' ? 'club-event' : (evt.type === 'nbv' ? 'nbv-event' : 'external-event');
 
             // Construct add to calendar option values
             const calendarEndDate = evt.endDate || evt.startDate;
 
             html += `
-                <div class="agenda-item ${isHighlight ? 'is-highlight' : ''}">
+                <div class="agenda-item ${isHighlight ? 'is-highlight' : ''} ${itemTypeClass}">
                     <div class="agenda-header-flex">
                         <div class="date-box">
                             <span class="day-num">${displayDate}</span>
@@ -148,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <span class="weekday">${displayWeekday}</span>
                             </div>
                         </div>
-                        <span class="event-tag ${tagClass}">${evt.tag}</span>
+                        <span class="event-tag ${tagClass}">${displayTag}</span>
                     </div>
                     <div class="event-details">
                         <h3 class="event-title">${evt.title}</h3>
@@ -255,21 +257,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const isToday = isCurrentMonthYear && day === currentDayNum;
             const todayClass = isToday ? 'today' : '';
             
-            // Build dot indicators
-            let dotsHtml = '';
+            // Show compact event labels directly in each calendar cell.
+            let eventsHtml = '';
             if (events.length > 0) {
-                dotsHtml += '<div class="calendar-cell-dots">';
+                eventsHtml += '<div class="calendar-cell-events">';
                 events.forEach(e => {
-                    const dotClass = e.type === 'club' ? 'club' : (e.type === 'nbv' ? 'nbv' : 'event');
-                    dotsHtml += `<span class="calendar-cell-dot ${dotClass}" title="${e.title}"></span>`;
+                    const eventClass = e.type === 'club' ? 'club' : (e.type === 'nbv' ? 'nbv' : 'event');
+                    eventsHtml += `<span class="calendar-cell-event ${eventClass}" title="${e.title}">${e.title}</span>`;
                 });
-                dotsHtml += '</div>';
+                eventsHtml += '</div>';
             }
 
             html += `
                 <div class="calendar-cell ${todayClass}" data-day="${day}">
                     <span class="calendar-day-number">${day}</span>
-                    ${dotsHtml}
+                    ${eventsHtml}
                 </div>
             `;
         }
@@ -343,11 +345,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         const weekdayStr = startD.toLocaleString('nl-NL', { weekday: 'long' });
                         const weekdayCap = weekdayStr.charAt(0).toUpperCase() + weekdayStr.slice(1);
                         const isHighlight = evt.tag === 'Hoogtepunt';
+                        const displayTag = evt.type === 'club' ? `BVB-clubavond - ${evt.tag}` : evt.tag;
 
                         popoverHtml += `
                             ${idx > 0 ? '<hr class="calendar-divider">' : ''}
                             <div class="calendar-popover-header">
-                                <span class="calendar-popover-tag ${evt.type}">${evt.tag}</span>
+                                <span class="calendar-popover-tag ${evt.type}">${displayTag}</span>
                                 <span class="calendar-popover-date">
                                     ${weekdayCap} ${day} ${dutchMonths[calendarMonth]}
                                 </span>
