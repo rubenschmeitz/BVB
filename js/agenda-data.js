@@ -208,7 +208,7 @@
             type: 'event',
             tag: 'Hoogtepunt',
             description: 'Hét landelijke evenement met grote tentoonstelling, markt en expert demo\'s. Onze vereniging is dit jaar de trotse gastheer.',
-            detailsUrl: 'nbs.html'
+            detailsUrl: 'galerij.html#tentoonstelling'
         },
         {
             id: 'ext-oct-sakka-ten-autumn-trees',

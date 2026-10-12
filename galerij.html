@@ -8,6 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css?v=32">
+    <link rel="stylesheet" href="css/nbs-exhibition.css?v=18">
+    <link rel="stylesheet" href="css/nbs-panorama-table.css?v=18">
+    <link rel="stylesheet" href="css/nbs-tree-info.css?v=19">
     
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; connect-src 'self' https://cloudflareinsights.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com/beacon.min.js; img-src 'self' data: https://*.instagram.com https://*.cdninstagram.com https://www.bonsainederland.nl https://cdn.hollandbonsai.nl; frame-src https://*.instagram.com https://www.google.com; frame-ancestors 'none'; form-action 'self' mailto:;">
 
@@ -51,7 +54,6 @@
             </a>
             <nav class="main-nav" id="main-nav">
                 <a href="index.html">Home</a>
-                <a href="nbs.html" class="nav-special">NBS 2026</a>
                 <a href="galerij.html" class="active">Galerij</a>
                 <a href="agenda.html">Agenda</a>
                 <div class="nav-dropdown">
@@ -74,7 +76,7 @@
     <div class="page-hero">
         <div class="page-hero-bg hero-gallery"></div>
         <div class="page-hero-content">
-            <p>Bomen en clubavonden</p>
+            <p>Tentoonstellingen, bomen en clubavonden</p>
             <h1>Galerij</h1>
         </div>
     </div>
@@ -83,8 +85,143 @@
         <div class="content-container-wide">
             
             <div class="gallery-nav">
+                <button type="button" data-category="tentoonstelling">NBS 2026</button>
                 <button type="button" class="active" data-category="club">Clubavonden</button>
-                <button type="button" data-category="leden">Digitale expositie</button>
+                <button type="button" data-category="leden">Onze bomen</button>
+            </div>
+
+            <div id="tentoonstelling-section" class="gallery-category">
+    <section class="nbs-exhibition" id="tentoonstelling" aria-labelledby="exhibition-heading" data-nbs-exhibition>
+        <div class="ex-intro">
+            <div>
+                <p class="ex-eyebrow">NBS 2026</p>
+                <h2 id="exhibition-heading">Een rondje langs de bomen</h2>
+            </div>
+            <p>Wij organiseerden de Nationale Bonsai Show 2026. Geniet hier nog even na en wandel langs de mooiste opstellingen.</p>
+        </div>
+        <div class="ex-browser">
+            <div class="ex-filters" role="group" aria-label="Filter de tentoonstelling">
+                <button type="button" data-ex-filter="Alle" aria-pressed="true">Alle opstellingen</button>
+                <button type="button" data-ex-filter="Loofbomen" aria-pressed="false">Loofbomen</button>
+                <button type="button" data-ex-filter="Naaldbomen" aria-pressed="false">Naaldbomen</button>
+                <button type="button" data-ex-filter="Shohin" aria-pressed="false">Shohin</button>
+            </div>
+            <label class="ex-search"><span class="ex-sr-only">Zoek op boomnaam, stijl of vereniging</span><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg><input type="search" id="ex-search" placeholder="Zoek een boom of vereniging…" autocomplete="off"></label>
+        </div>
+        <div class="ex-showcase" aria-label="Panorama van de tentoonstelling">
+            <div class="ex-scene">
+                <div class="ex-panorama" id="ex-panorama" tabindex="0" role="region" aria-label="Scrollbare bonsaitentoonstelling" aria-describedby="ex-panorama-help">
+                    <div class="ex-panorama-track" id="ex-panorama-track"></div>
+                </div>
+                <button type="button" class="ex-arrow ex-prev" id="ex-prev" aria-label="Vorige opstelling"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m14 5-7 7 7 7"/></svg></button>
+                <button type="button" class="ex-arrow ex-next" id="ex-next" aria-label="Volgende opstelling"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m10 5 7 7-7 7"/></svg></button>
+                <div class="ex-empty" id="ex-empty" hidden>Geen opstellingen gevonden.</div>
+            </div>
+            <div class="ex-navigation"><span id="ex-position-label">Begin</span><label class="ex-progress"><span class="ex-sr-only">Positie in de tentoonstelling</span><input type="range" id="ex-progress" min="0" max="1000" value="0" aria-label="Positie in de tentoonstelling" aria-valuetext="Begin van de tentoonstelling"></label><span>Einde</span></div>
+            <div class="ex-story">
+                <span class="ex-counter" id="ex-counter">01 / 66</span>
+                <div class="ex-actions">
+                    <button type="button" class="ex-card-button" id="ex-photo"><span aria-hidden="true">↗</span> Bekijk van dichtbij</button>
+                    <div class="ex-playback"><button type="button" id="ex-play" aria-pressed="false"><span id="ex-play-icon" aria-hidden="true">▷</span> <span id="ex-play-label">Speel de rondgang</span></button></div>
+                </div>
+            </div>
+        </div>
+        <p class="ex-status" id="ex-status" role="status" aria-live="polite"></p>
+        <details class="ex-index"><summary>Alle opstellingen <span id="ex-result-count">66 opstellingen</span></summary>
+        <div class="ex-filmstrip" id="ex-filmstrip" role="group" aria-label="Kies een opstelling"></div>
+        </details>
+        <p class="ex-footnote">Beelden gereconstrueerd met AI. <span id="ex-panorama-help">Scroll, sleep of gebruik de pijltjes.</span></p>
+        <noscript><p>Voor de interactieve rondgang is JavaScript nodig. </p></noscript>
+        <dialog class="ex-dialog" id="ex-dialog" aria-labelledby="ex-dialog-title">
+            <div class="ex-dialog-header"><div><p id="ex-dialog-label">NBS 2026 · Van dichtbij</p><h3 id="ex-dialog-title">Chinese jeneverbes kishu</h3></div><div class="ex-dialog-tools"><button type="button" id="ex-dialog-zoom" aria-pressed="false" aria-controls="ex-dialog-image">Inzoomen</button><button type="button" id="ex-dialog-close" aria-label="Vergrote weergave sluiten">✕</button></div></div>
+            <div class="ex-dialog-image-wrap" id="ex-dialog-image-wrap" tabindex="0" aria-label="Foto; na inzoomen kun je scrollen om de details te bekijken."><img id="ex-dialog-image" alt="" decoding="async"></div>
+            <div class="ex-dialog-footer"><button type="button" id="ex-dialog-prev">← Vorige</button><span id="ex-dialog-caption"></span><button type="button" id="ex-dialog-next">Volgende →</button></div>
+        </dialog>
+    </section>
+
+    <section class="ex-sponsors" aria-labelledby="sponsor-heading"><h2 id="sponsor-heading">Met dank aan onze sponsors en partners</h2>
+                        <div class="sidebar-sponsor-grid">
+                            <div class="sidebar-sponsor-item">
+                                <a href="https://www.hollandbonsai.nl/" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/sponsors/logo-holland-bonsai.png" alt="Holland Bonsai" loading="lazy" width="868" height="332" decoding="async">
+                                </a>
+                            </div>
+                            <div class="sidebar-sponsor-item sidebar-sponsor-item--goemaat">
+                                <img src="images/sponsors/G.Goemaat.png" alt="G. Goemaat Bonsai" loading="lazy" width="1536" height="1024" decoding="async">
+                            </div>
+                            <div class="sidebar-sponsor-item">
+                                <a href="https://www.jeroendingemans.nl/" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/sponsors/Jeroen-Dingemans.png" alt="Jeroen Dingemans" loading="lazy" width="2500" height="250" decoding="async">
+                                </a>
+                            </div>
+                            <div class="sidebar-sponsor-item">
+                                <a href="https://www.facebook.com/p/Bonsai-Yume-100077207753616/" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/sponsors/Bonsai-Yume.png" alt="Bonsai Yume" loading="lazy" width="7468" height="1644" decoding="async">
+                                </a>
+                            </div>
+                            <div class="sidebar-sponsor-item">
+                                <a href="https://basbonsai.nl/" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/sponsors/Bas-Bonsai.png" alt="Bas Bonsai" loading="lazy" width="4118" height="2446" decoding="async">
+                                </a>
+                            </div>
+                            <div class="sidebar-sponsor-item">
+                                <a href="https://bonsai-winkel.nl/" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/sponsors/Bonsai-Kwekerij-Iwan-Roos.png" alt="Bonsai Kwekerij Iwan Roos" loading="lazy" width="5712" height="2274" decoding="async">
+                                </a>
+                            </div>
+                            <div class="sidebar-sponsor-item">
+                                <a href="https://carlosvandervaart.com/" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/sponsors/Carlos-van-der-Vaart-light.png" alt="Carlos van der Vaart" loading="lazy" width="2172" height="724" decoding="async">
+                                </a>
+                            </div>
+                            <div class="sidebar-sponsor-item sidebar-sponsor-item--portrait">
+                                <a href="https://www.instagram.com/qishistone/" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/sponsors/Qishi-Stone-Art.png" alt="Qishi Stone Art" loading="lazy" width="3748" height="6623" decoding="async">
+                                </a>
+                            </div>
+                            <div class="sidebar-sponsor-item">
+                                <a href="https://filip-haesen.be/" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/sponsors/USAGI-Bonsai-Pots-Filip-Haesen.png" alt="USAGI Bonsai Pots – Filip Haesen" loading="lazy" width="5756" height="3816" decoding="async">
+                                </a>
+                            </div>
+                            <div class="sidebar-sponsor-item">
+                                <a href="https://www.bonsaiplaza.com/" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/sponsors/Bonsai_plaza_whitebg.webp" alt="Bonsai Plaza" loading="lazy" width="600" height="266" decoding="async">
+                                </a>
+                            </div>
+                            <div class="sidebar-sponsor-item">
+                                <a href="https://lodderbonsai.nl/" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/sponsors/Lodder-Bonsai.png" alt="Lodder Bonsai" loading="lazy" width="4096" height="757" decoding="async">
+                                </a>
+                            </div>
+                            <div class="sidebar-sponsor-item">
+                                <a href="https://nicothe.nl/" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/sponsors/Nicothe.png" alt="Bloemsierkunst Nicothé" loading="lazy" width="2172" height="724" decoding="async">
+                                </a>
+                            </div>
+                            <div class="sidebar-sponsor-item">
+                                <a href="https://tuincentrummeijs.nl/" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/sponsors/tuincentrum_meijs_logo_12k_transparent.png" alt="Tuincentrum Meijs" loading="lazy" width="12000" height="2769" decoding="async">
+                                </a>
+                            </div>
+                            <div class="sidebar-sponsor-item">
+                                <a href="https://www.allebomen.nl/" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/sponsors/Boomkwekerij-Van-den-Berk.png" alt="Boomkwekerij Van den Berk" loading="lazy" width="550" height="549" decoding="async">
+                                </a>
+                            </div>
+                            <div class="sidebar-sponsor-item">
+                                <img src="images/sponsors/Carola_moors.png" alt="Carola Moors" loading="lazy" width="1672" height="941" decoding="async">
+                            </div>
+                            <div class="sidebar-sponsor-item">
+                                <img src="images/sponsors/Hobbelhaen.png" alt="V.O.F. Hobbelhaen" loading="lazy" width="1536" height="1024" decoding="async">
+                            </div>
+                            <div class="sidebar-sponsor-item">
+                                <a href="https://vrbbouw.nl/" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/sponsors/VRB-Bouw-BV.svg" alt="VRB Bouw B.V." loading="lazy" width="310" height="46" decoding="async">
+                                </a>
+                            </div>
+                        </div>
+    </section>
             </div>
 
             <!-- Clubavonden -->
@@ -100,7 +237,7 @@
             <!-- Digitale Expositie -->
             <section id="leden-section" class="gallery-category">
                 <div class="gallery-header reveal-on-scroll">
-                    <h2>Bomen van leden</h2>
+                    <h2>Onze bomen</h2>
                     <p>Onze leden laten hier een aantal van hun bomen zien, in verschillende stijlen en seizoenen. Iedere boom is een momentopname, want bonsai blijft altijd in ontwikkeling.</p>
                 </div>
                 
@@ -132,6 +269,50 @@
                                 <h3 class="exhibition-species">Juniperus Chinensis</h3>
                                 <p class="exhibition-style">Ishisuki (In Rots Verankerd)</p>
                             </div>
+                        </div>
+                        <div class="exhibition-card reveal-on-scroll" role="button" tabindex="0" data-tree-id="nbs-bvb-kishu" data-nbs-cutout="true">
+                            <div class="exhibition-image-box skeleton"><img src="images/trees/nbs-2026-cutouts/bvb-kishu.png" alt="Chinese jeneverbes kishu, vrijstaande boom en pot" loading="lazy" decoding="async"></div>
+                            <div class="exhibition-details"><h3 class="exhibition-species">Chinese jeneverbes kishu</h3><p class="exhibition-style">Moyogi</p></div>
+                        </div>
+                        <div class="exhibition-card reveal-on-scroll" role="button" tabindex="0" data-tree-id="nbs-bvb-watercypres" data-nbs-cutout="true">
+                            <div class="exhibition-image-box skeleton"><img src="images/trees/nbs-2026-cutouts/bvb-watercypres.png" alt="Watercypres, vrijstaande boom en pot" loading="lazy" decoding="async"></div>
+                            <div class="exhibition-details"><h3 class="exhibition-species">Watercypres</h3><p class="exhibition-style">Chokkan</p></div>
+                        </div>
+                        <div class="exhibition-card reveal-on-scroll" role="button" tabindex="0" data-tree-id="nbs-bvb-bougainvillea" data-nbs-cutout="true">
+                            <div class="exhibition-image-box skeleton"><img src="images/trees/nbs-2026-cutouts/bvb-bougainvillea.png" alt="Bougainvillea, vrijstaande boom en pot" loading="lazy" decoding="async"></div>
+                            <div class="exhibition-details"><h3 class="exhibition-species">Bougainvillea</h3><p class="exhibition-style">Cascade</p></div>
+                        </div>
+                        <div class="exhibition-card reveal-on-scroll" role="button" tabindex="0" data-tree-id="nbs-bvb-semi-cascade" data-nbs-cutout="true">
+                            <div class="exhibition-image-box skeleton"><img src="images/trees/nbs-2026-cutouts/bvb-semi-cascade.png" alt="Chinese jeneverbes, vrijstaande boom en pot" loading="lazy" decoding="async"></div>
+                            <div class="exhibition-details"><h3 class="exhibition-species">Chinese jeneverbes</h3><p class="exhibition-style">Semi-cascade</p></div>
+                        </div>
+                        <div class="exhibition-card reveal-on-scroll" role="button" tabindex="0" data-tree-id="nbs-bvb-winterlinde" data-nbs-cutout="true">
+                            <div class="exhibition-image-box skeleton"><img src="images/trees/nbs-2026-cutouts/bvb-winterlinde.png" alt="Winterlinde, vrijstaande boom en pot" loading="lazy" decoding="async"></div>
+                            <div class="exhibition-details"><h3 class="exhibition-species">Winterlinde</h3><p class="exhibition-style">Moyogi</p></div>
+                        </div>
+                        <div class="exhibition-card reveal-on-scroll" role="button" tabindex="0" data-tree-id="nbs-bvb-jeneverbes" data-nbs-cutout="true">
+                            <div class="exhibition-image-box skeleton"><img src="images/trees/nbs-2026-cutouts/bvb-jeneverbes.png" alt="Jeneverbes, vrijstaande boom en pot" loading="lazy" decoding="async"></div>
+                            <div class="exhibition-details"><h3 class="exhibition-species">Jeneverbes</h3><p class="exhibition-style">Cascade</p></div>
+                        </div>
+                        <div class="exhibition-card reveal-on-scroll" role="button" tabindex="0" data-tree-id="nbs-bvb-grove-den" data-nbs-cutout="true">
+                            <div class="exhibition-image-box skeleton"><img src="images/trees/nbs-2026-cutouts/bvb-grove-den.png" alt="Grove den, vrijstaande boom en pot" loading="lazy" decoding="async"></div>
+                            <div class="exhibition-details"><h3 class="exhibition-species">Grove den</h3><p class="exhibition-style">Literati</p></div>
+                        </div>
+                        <div class="exhibition-card reveal-on-scroll" role="button" tabindex="0" data-tree-id="nbs-bvb-boulevard" data-nbs-cutout="true">
+                            <div class="exhibition-image-box skeleton"><img src="images/trees/nbs-2026-cutouts/bvb-boulevard.png" alt="Dwerg/schijncipres, vrijstaande boom en pot" loading="lazy" decoding="async"></div>
+                            <div class="exhibition-details"><h3 class="exhibition-species">Dwerg/schijncipres</h3><p class="exhibition-style">Chokkan</p></div>
+                        </div>
+                        <div class="exhibition-card reveal-on-scroll" role="button" tabindex="0" data-tree-id="nbs-bvb-wilde-peer" data-nbs-cutout="true">
+                            <div class="exhibition-image-box skeleton"><img src="images/trees/nbs-2026-cutouts/bvb-wilde-peer.png" alt="Wilde peer, vrijstaande boom en pot" loading="lazy" decoding="async"></div>
+                            <div class="exhibition-details"><h3 class="exhibition-species">Wilde peer</h3><p class="exhibition-style">Moyogi</p></div>
+                        </div>
+                        <div class="exhibition-card reveal-on-scroll" role="button" tabindex="0" data-tree-id="nbs-bvb-witte-den-45" data-nbs-cutout="true">
+                            <div class="exhibition-image-box skeleton"><img src="images/trees/nbs-2026-cutouts/bvb-witte-den-45.png" alt="Japanse witte den, vrijstaande boom en pot" loading="lazy" decoding="async"></div>
+                            <div class="exhibition-details"><h3 class="exhibition-species">Japanse witte den</h3><p class="exhibition-style">Moyogi</p></div>
+                        </div>
+                        <div class="exhibition-card reveal-on-scroll" role="button" tabindex="0" data-tree-id="nbs-bvb-witte-den-90" data-nbs-cutout="true">
+                            <div class="exhibition-image-box skeleton"><img src="images/trees/nbs-2026-cutouts/bvb-witte-den-90.png" alt="Japanse witte den, vrijstaande boom en pot" loading="lazy" decoding="async"></div>
+                            <div class="exhibition-details"><h3 class="exhibition-species">Japanse witte den</h3><p class="exhibition-style">Moyogi</p></div>
                         </div>
                     </div>
                 </div>
@@ -175,13 +356,13 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
             <span>Galerij</span>
         </a>
-        <a href="nbs.html" class="bottom-nav-item special">
-            <img src="images/nbs-nav-silhouette-white.png?v=3" alt="" class="nbs-nav-icon" aria-hidden="true" width="1024" height="1024" decoding="async">
-            <span>NBS</span>
-        </a>
         <a href="agenda.html" class="bottom-nav-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             <span>Agenda</span>
+        </a>
+        <a href="contact.html" class="bottom-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg>
+            <span>Contact</span>
         </a>
         <button type="button" class="bottom-nav-item bottom-nav-button" id="fs-menu-trigger">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -196,7 +377,6 @@
         </button>
         <div class="fs-menu-links">
             <a href="index.html">Home</a>
-            <a href="nbs.html">NBS 2026</a>
             <a href="galerij.html">Galerij</a>
             <a href="agenda.html">Agenda</a>
             <div class="fs-menu-dropdown">
@@ -212,7 +392,11 @@
 
     <script src="js/app.js?v=26" defer></script>
     <script src="js/club-gallery-data.js?v=25" defer></script>
-    <script src="js/gallery.js?v=28" defer></script>
+    <script src="js/nbs-member-trees.js?v=17" defer></script>
+    <script src="js/gallery.js?v=31" defer></script>
+    <script src="js/nbs-exhibition-data.js?v=13" defer></script>
+    <script src="js/nbs-exhibition.js?v=15" defer></script>
+    <script src="js/nbs-tree-info.js?v=19" defer></script>
     <!-- Cloudflare Web Analytics -->
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"f23664f43fa6471ba9dd5b8ed08e86f6"}'></script>
     <!-- End Cloudflare Web Analytics -->

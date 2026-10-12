@@ -1,0 +1,39 @@
+.ex-tree-info-button {
+    display: inline-flex; align-items: center; gap: 7px;
+    border: 0; background: transparent; color: var(--color-sage);
+    padding: 7px 0; font: inherit; font-size: 12px; cursor: pointer;
+}
+.ex-info-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 18px; height: 18px; border: 1px solid currentColor;
+    border-radius: 50%; font-family: Georgia, serif; font-weight: 700;
+}
+.ex-tree-info-button:hover { color: var(--color-charcoal); }
+.ex-tree-info-button:focus-visible, .ex-tree-info summary:focus-visible {
+    outline: 2px solid var(--color-sage); outline-offset: 5px;
+}
+.ex-tree-info-button:disabled { opacity: .45; cursor: default; }
+.ex-tree-info[hidden] { display: none; }
+.ex-tree-info {
+    margin: 0 24px 20px; padding: 18px 20px; color: var(--color-charcoal);
+    background: var(--color-white); border-radius: 10px;
+    border: 1px solid #5d7b5126;
+}
+.ex-tree-info h3 { margin: 0 0 14px; font-size: 18px; font-weight: 500; }
+.ex-tree-info dl { display: flex; flex-wrap: wrap; gap: 14px 32px; margin: 0; }
+.ex-tree-info dl > div { min-width: 110px; max-width: 100%; }
+.ex-tree-info dt { font-size: 11px; opacity: .7; margin-bottom: 4px; }
+.ex-tree-info dd { margin: 0; font-size: 14px; overflow-wrap: anywhere; }
+.ex-tree-info p { margin: 0; font-size: 13px; }
+.ex-tree-info-dialog {
+    margin: 0 0 16px; padding: 12px 16px; background: #ffffff08;
+    border-color: #a6ba8c3a; color: var(--ex-paper);
+}
+.ex-tree-info summary { font-size: 12px; cursor: pointer; }
+.ex-tree-info-dialog[open] summary { margin-bottom: 12px; }
+.ex-tree-info-dialog dd { font-size: 13px; }
+@media (max-width: 600px) {
+    .ex-tree-info { margin: 0 16px 16px; padding: 15px; }
+    .ex-tree-info-dialog { margin: 0 0 12px; }
+    .ex-tree-info dl { gap: 12px 20px; }
+}

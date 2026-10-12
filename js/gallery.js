@@ -15,9 +15,12 @@
             button.addEventListener('click', () => showCategory(button.dataset.category));
         });
 
-        if (window.location.hash === '#leden-section') {
-            showCategory('leden');
-        }
+        const syncCategory = () => {
+            const category = { '#leden-section': 'leden', '#club-section': 'club', '#tentoonstelling': 'tentoonstelling' }[window.location.hash];
+            showCategory(category || 'club');
+        };
+        syncCategory();
+        window.addEventListener('hashchange', syncCategory);
 
         document.querySelectorAll('.exhibition-card').forEach(card => {
             card.addEventListener('click', () => toggleTree(card));
@@ -113,6 +116,7 @@
 
         lightbox.classList.add('tokonoma-mode');
         tokonomaImg.src = img.src;
+        tokonomaImg.alt = img.alt;
 
         const filename = img.src.substring(img.src.lastIndexOf('/') + 1);
         const treeMetadata = {
@@ -151,11 +155,12 @@
             'juniperus_chinensis_rots.webp': backgrounds.find(bg => bg.src === 'bg_right_bamboo.png')
         };
 
-        const meta = treeMetadata[filename] || { realHeightCm: 50, bottomOffset: 0, scale: 1.0 };
+        const cutout = window.BVB_NBS_CUTOUTS?.[card.dataset.treeId];
+        const meta = cutout || treeMetadata[filename] || { realHeightCm: 50, bottomOffset: 0, scale: 1.0 };
         const hashValue = Array.from(filename).reduce((hash, char) => {
             return ((hash << 5) - hash + char.charCodeAt(0)) >>> 0;
         }, 0);
-        const selectedBg = backgroundByTree[filename] || backgrounds[hashValue % backgrounds.length];
+        const selectedBg = cutout ? backgrounds.find(bg => bg.src === cutout.background) : backgroundByTree[filename] || backgrounds[hashValue % backgrounds.length];
         const treeSide = selectedBg.treeSide;
 
         tokonomaFrame.style.backgroundImage = `url('images/tokonoma/backgrounds/${selectedBg.src}')`;
@@ -167,7 +172,7 @@
                 <div class="tokonoma-caption-content">
                     <span class="tokonoma-caption-species">${species ? species.textContent : ''}</span>
                     <span class="tokonoma-caption-style">${style ? style.textContent : ''}</span>
-                    <span class="tokonoma-caption-size">Formaat: ca. ${meta.realHeightCm} cm</span>
+                    ${meta.realHeightCm ? `<span class="tokonoma-caption-size">Formaat: ca. ${meta.realHeightCm} cm</span>` : ''}
                 </div>
             `;
         }
