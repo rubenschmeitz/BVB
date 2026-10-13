@@ -18,9 +18,9 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-      - run: python -m pip install -r requirements-dev.txt
-      - run: npm ci
-      - run: npx playwright install --with-deps chromium
+      - run: bash scripts/setup.sh
+      - run: node node_modules/playwright/cli.js install-deps chromium
+      - run: .venv/bin/python -c "import PIL, numpy, cv2"
       - run: npm run check
       - run: npm test
       - uses: actions/upload-artifact@v4
