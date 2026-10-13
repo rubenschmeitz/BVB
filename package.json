@@ -1,0 +1,14 @@
+{
+  "name": "bvb-development",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "setup": "bash scripts/setup.sh",
+    "dev": "python3 scripts/preview.py",
+    "check": "python3 scripts/check_site.py",
+    "test": "node scripts/smoke.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.57.0"
+  }
+}

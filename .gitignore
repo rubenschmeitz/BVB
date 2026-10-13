@@ -58,3 +58,14 @@ tekstvoorstel-vernieuwing.md
 # Generated draft images
 images/ChatGPT Image*.png
 images/trees/ChatGPT Image*.png
+
+# Portable development environment
+.venv/
+node_modules/
+.artifacts/
+__pycache__/
+*.pyc
+runtime/
+.env
+.env.*
+!.env.example
