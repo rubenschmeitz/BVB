@@ -3851,14 +3851,14 @@ window.BVB_NBS_EXHIBITION = {
     },
     {
       "id": "zonder-kaart-01",
-      "title": "Shohin-opstelling met vruchten",
-      "botanical": "",
+      "title": "Hedera en Malus",
+      "botanical": "Hedera / Malus cercifera",
       "category": "Shohin",
-      "club": "",
+      "club": "Bonsai Vereniging Zuid-Holland",
       "style": "",
-      "age": "",
+      "age": "15 / 25 jaar",
       "pot": "",
-      "status": "unconfirmed",
+      "status": "matched",
       "badge": "",
       "photos": [
         {
@@ -3897,18 +3897,28 @@ window.BVB_NBS_EXHIBITION = {
           "sourceAlreadyEdited": false
         }
       ],
-      "cards": []
+      "cards": [],
+      "identitySource": {
+        "type": "instagram-highlight",
+        "url": "https://www.instagram.com/stories/highlights/18152146252455656/",
+        "account": "bonsaiverenigingbrabant",
+        "verifiedOn": "2026-10-16",
+        "screenshot": ".local/nbs-exhibition/instagram-review/highlight-2026-10-16-01.png",
+        "sourceId": "R001",
+        "matchingBasis": "Original source photo: pot, stand, trunk/deadwood and accent arrangement. Story text and Zuid-Holland logo read directly.",
+        "transcriptionNote": "Malus cercifera is transcribed literally from the Story; botanical spelling not independently corrected."
+      }
     },
     {
       "id": "zonder-kaart-02",
-      "title": "Naaldboomopstelling",
-      "botanical": "",
+      "title": "Europese lariks",
+      "botanical": "Larix decidua",
       "category": "Naaldbomen",
-      "club": "",
+      "club": "Bonsai Vereniging Zuid-Holland",
       "style": "",
-      "age": "",
+      "age": "15 jaar",
       "pot": "",
-      "status": "unconfirmed",
+      "status": "matched",
       "badge": "",
       "photos": [
         {
@@ -3947,18 +3957,27 @@ window.BVB_NBS_EXHIBITION = {
           "sourceAlreadyEdited": false
         }
       ],
-      "cards": []
+      "cards": [],
+      "identitySource": {
+        "type": "instagram-highlight",
+        "url": "https://www.instagram.com/stories/highlights/18152146252455656/",
+        "account": "bonsaiverenigingbrabant",
+        "verifiedOn": "2026-10-16",
+        "screenshot": ".local/nbs-exhibition/instagram-review/highlight-2026-10-16-02.png",
+        "sourceId": "R002",
+        "matchingBasis": "Original source photo: pot, stand, trunk/deadwood and accent arrangement. Story text and Zuid-Holland logo read directly."
+      }
     },
     {
       "id": "zonder-kaart-03",
-      "title": "Opstelling op hoge tafel",
-      "botanical": "",
+      "title": "Chinese jeneverbes",
+      "botanical": "Juniperus chinensis",
       "category": "Naaldbomen",
-      "club": "",
+      "club": "Bonsai Vereniging Zuid-Holland",
       "style": "",
-      "age": "",
+      "age": "45 jaar",
       "pot": "",
-      "status": "unconfirmed",
+      "status": "matched",
       "badge": "",
       "photos": [
         {
@@ -3997,18 +4016,27 @@ window.BVB_NBS_EXHIBITION = {
           "sourceAlreadyEdited": false
         }
       ],
-      "cards": []
+      "cards": [],
+      "identitySource": {
+        "type": "instagram-highlight",
+        "url": "https://www.instagram.com/stories/highlights/18152146252455656/",
+        "account": "bonsaiverenigingbrabant",
+        "verifiedOn": "2026-10-16",
+        "screenshot": ".local/nbs-exhibition/instagram-review/highlight-2026-10-16-03.png",
+        "sourceId": "R003",
+        "matchingBasis": "Original source photo: pot, stand, trunk/deadwood and accent arrangement. Story text and Zuid-Holland logo read directly."
+      }
     },
     {
       "id": "zonder-kaart-04",
-      "title": "Cascade-opstelling",
-      "botanical": "",
+      "title": "Sabina-jeneverbes",
+      "botanical": "Juniperus sabina",
       "category": "Naaldbomen",
-      "club": "",
+      "club": "Bonsai Vereniging Zuid-Holland",
       "style": "",
-      "age": "",
+      "age": "50 jaar",
       "pot": "",
-      "status": "unconfirmed",
+      "status": "matched",
       "badge": "",
       "photos": [
         {
@@ -4047,18 +4075,27 @@ window.BVB_NBS_EXHIBITION = {
           "sourceAlreadyEdited": false
         }
       ],
-      "cards": []
+      "cards": [],
+      "identitySource": {
+        "type": "instagram-highlight",
+        "url": "https://www.instagram.com/stories/highlights/18152146252455656/",
+        "account": "bonsaiverenigingbrabant",
+        "verifiedOn": "2026-10-16",
+        "screenshot": ".local/nbs-exhibition/instagram-review/highlight-2026-10-16-04.png",
+        "sourceId": "R004",
+        "matchingBasis": "Original source photo: pot, stand, trunk/deadwood and accent arrangement. Story text and Zuid-Holland logo read directly."
+      }
     },
     {
       "id": "zonder-kaart-05",
-      "title": "Shohin op hoge tafel",
-      "botanical": "",
+      "title": "Chinese jeneverbes Itoigawa",
+      "botanical": "Juniperus chinensis ‘Itoigawa’",
       "category": "Shohin",
-      "club": "",
+      "club": "Bonsai Vereniging Zuid-Holland",
       "style": "",
-      "age": "",
+      "age": "20 jaar",
       "pot": "",
-      "status": "unconfirmed",
+      "status": "matched",
       "badge": "",
       "photos": [
         {
@@ -4097,18 +4134,27 @@ window.BVB_NBS_EXHIBITION = {
           "sourceAlreadyEdited": false
         }
       ],
-      "cards": []
+      "cards": [],
+      "identitySource": {
+        "type": "instagram-highlight",
+        "url": "https://www.instagram.com/stories/highlights/18152146252455656/",
+        "account": "bonsaiverenigingbrabant",
+        "verifiedOn": "2026-10-16",
+        "screenshot": ".local/nbs-exhibition/instagram-review/highlight-2026-10-16-05.png",
+        "sourceId": "R005",
+        "matchingBasis": "Original source photo: pot, stand, trunk/deadwood and accent arrangement. Story text and Zuid-Holland logo read directly."
+      }
     },
     {
       "id": "zonder-kaart-06",
-      "title": "Opstelling op hoge siertafel",
-      "botanical": "",
+      "title": "Virginische jeneverbes Grey Owl",
+      "botanical": "Juniperus virginiana ‘Grey Owl’",
       "category": "Naaldbomen",
-      "club": "",
+      "club": "Bonsai Vereniging Zuid-Holland",
       "style": "",
-      "age": "",
+      "age": "50 jaar",
       "pot": "",
-      "status": "unconfirmed",
+      "status": "matched",
       "badge": "",
       "photos": [
         {
@@ -4147,7 +4193,16 @@ window.BVB_NBS_EXHIBITION = {
           "sourceAlreadyEdited": false
         }
       ],
-      "cards": []
+      "cards": [],
+      "identitySource": {
+        "type": "instagram-highlight",
+        "url": "https://www.instagram.com/stories/highlights/18152146252455656/",
+        "account": "bonsaiverenigingbrabant",
+        "verifiedOn": "2026-10-16",
+        "screenshot": ".local/nbs-exhibition/instagram-review/highlight-2026-10-16-06.png",
+        "sourceId": "R006",
+        "matchingBasis": "Original source photo: pot, stand, trunk/deadwood and accent arrangement. Story text and Zuid-Holland logo read directly."
+      }
     }
   ],
   "presentation": {
