@@ -8,7 +8,7 @@ permissions:
   contents: read
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -28,3 +28,4 @@ jobs:
         with:
           name: website-checks
           path: .artifacts/
+
