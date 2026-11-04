@@ -16,7 +16,7 @@
         });
 
         const syncCategory = () => {
-            const category = { '#leden-section': 'leden', '#club-section': 'club', '#tentoonstelling': 'tentoonstelling' }[window.location.hash];
+            const category = { '#leden-section': 'leden', '#club-section': 'club', '#tentoonstelling': 'tentoonstelling', '#nbs-sfeerbeelden': 'tentoonstelling' }[window.location.hash];
             showCategory(category || 'club');
         };
         syncCategory();
@@ -79,6 +79,18 @@
             button.classList.remove('active');
         });
 
+        const atmosphere = window.location.hash === '#nbs-sfeerbeelden';
+        const exhibition = document.querySelector('[data-nbs-exhibition]');
+        const photos = document.getElementById('nbs-sfeerbeelden');
+        if (exhibition) exhibition.hidden = atmosphere;
+        if (photos) photos.hidden = !atmosphere;
+        document.querySelectorAll('[data-nbs-view]').forEach(link => {
+            if ((link.dataset.nbsView === 'atmosphere') === atmosphere) link.setAttribute('aria-current', 'page');
+            else link.removeAttribute('aria-current');
+        });
+        document.querySelectorAll('.gallery-nav [data-category]').forEach(button => {
+            button.setAttribute('aria-pressed', String(button.dataset.category === categoryId));
+        });
         const section = document.getElementById(`${categoryId}-section`);
         if (section) {
             section.classList.add('active');
