@@ -2,10 +2,22 @@
   "credit": "Henk Langens Fotografie",
   "selection": [
     {
-      "source": "DSC09291.jpg",
-      "sha256": "01f894c5e4d410c40b403cb0ed9cf0173e7b8e50caf98a7da0d1af4a9b29c39f",
-      "image": "nbs-2026-sfeer-01.webp",
-      "caption": "Een volle tentoonstellingszaal"
+      "source": "DSC09264.jpg",
+      "sha256": "b04731ea9c0606e6a6521c2e6068760ba12c53c7957e0c55099f04f309ae3642",
+      "image": "nbs-2026-sfeer-dsc09264.webp",
+      "caption": "Een ontmoeting tussen de opstellingen"
+    },
+    {
+      "source": "DSC09266.jpg",
+      "sha256": "466adccb25219989d9dd65232d9c0c51b5b9c68a74ab27104ed0bf2acaa51088",
+      "image": "nbs-2026-sfeer-dsc09266.webp",
+      "caption": "Bloeiende bonsai in de tentoonstelling"
+    },
+    {
+      "source": "DSC09269.jpg",
+      "sha256": "e07d3921b5660bd089acff26e0e49bf79f76963177f3fbbfbc0475096c51f528",
+      "image": "nbs-2026-sfeer-dsc09269.webp",
+      "caption": "Vogelbeelden als accent bij de bonsai"
     },
     {
       "source": "DSC09270.jpg",
@@ -14,10 +26,10 @@
       "caption": "Welkom bij de Nationale Bonsai Show"
     },
     {
-      "source": "DSC09278.jpg",
-      "sha256": "7a510d9dc487c85d198990cfd96d0ba3c1aa61584634c95f1ca732edb96c1ee4",
-      "image": "nbs-2026-sfeer-03.webp",
-      "caption": "Trommelaars bij de opening"
+      "source": "DSC09272.jpg",
+      "sha256": "4ba9b957bc69c2be010cd77f2f146c071585bd63856cc68ca5d0a698b9bf8c5c",
+      "image": "nbs-2026-sfeer-dsc09272.webp",
+      "caption": "Trommelaars bij de feestelijke opening"
     },
     {
       "source": "DSC09274.jpg",
@@ -26,10 +38,64 @@
       "caption": "Samen de show openen"
     },
     {
+      "source": "DSC09278.jpg",
+      "sha256": "7a510d9dc487c85d198990cfd96d0ba3c1aa61584634c95f1ca732edb96c1ee4",
+      "image": "nbs-2026-sfeer-03.webp",
+      "caption": "Trommelaars bij de opening"
+    },
+    {
+      "source": "DSC09280.jpg",
+      "sha256": "058ad50d5fa4f37857bec5b4039bb83d5e3eb14b3fac8dc038b97aee44182eef",
+      "image": "nbs-2026-sfeer-dsc09280.webp",
+      "caption": "Muziek buiten bij de ingang"
+    },
+    {
+      "source": "DSC09283.jpg",
+      "sha256": "0679bd202992a7e19b7e67670b6844a4ea9564afdec34948db2682d23ee734bb",
+      "image": "nbs-2026-sfeer-dsc09283.webp",
+      "caption": "De trommelaars in actie"
+    },
+    {
       "source": "DSC09285.jpg",
       "sha256": "8f3fb1fed76ed4f8f95ab4a4845733e8c836c0143b31b72a534aa4e6b96aadb4",
       "image": "nbs-2026-sfeer-05.webp",
       "caption": "Muziek voor de ingang"
+    },
+    {
+      "source": "DSC09287.jpg",
+      "sha256": "0524daceee76ee8667fadd12989fd410280ce09b2bd09a80347a634676286e1b",
+      "image": "nbs-2026-sfeer-dsc09287.webp",
+      "caption": "Een bezoeker bij een bonsai-opstelling"
+    },
+    {
+      "source": "DSC09291.jpg",
+      "sha256": "01f894c5e4d410c40b403cb0ed9cf0173e7b8e50caf98a7da0d1af4a9b29c39f",
+      "image": "nbs-2026-sfeer-01.webp",
+      "caption": "Een volle tentoonstellingszaal"
+    },
+    {
+      "source": "DSC09296.jpg",
+      "sha256": "81fdf142d469604be2492d0f13c44b817f77d4e0407a0acce2335ace1057d193",
+      "image": "nbs-2026-sfeer-dsc09296.webp",
+      "caption": "Aandachtig luisteren in de tentoonstellingszaal"
+    },
+    {
+      "source": "DSC09297.jpg",
+      "sha256": "940f47f976c07f40e91b0a40d446c5d900437a70405fe742e9a2080343b6bf97",
+      "image": "nbs-2026-sfeer-dsc09297.webp",
+      "caption": "Een certificaat wordt uitgereikt"
+    },
+    {
+      "source": "DSC09299.jpg",
+      "sha256": "f75f42731677a306e9e9389f6e26297836afa1dfe3ce7ce90ab9e18b61a14177",
+      "image": "nbs-2026-sfeer-dsc09299.webp",
+      "caption": "Een bezoeker bij zijn bonsai"
+    },
+    {
+      "source": "DSC09300.jpg",
+      "sha256": "33f0ecf33acb46ff6b0f7a815cc51119e4e0dba59eb3d48edec3675a853e0b92",
+      "image": "nbs-2026-sfeer-dsc09300.webp",
+      "caption": "Samen langs de opstellingen"
     },
     {
       "source": "DSC09301.jpg",
@@ -38,34 +104,64 @@
       "caption": "In gesprek tussen de bonsai"
     },
     {
-      "source": "DSC09323.jpg",
-      "sha256": "4a6ac83a999e1886b2e11cad3977297b59be9964401088a0a5886ec36e038f1c",
-      "image": "nbs-2026-sfeer-07.webp",
-      "caption": "Bomen, potten en gereedschap bij de stands"
+      "source": "DSC09305.jpg",
+      "sha256": "c945451fd018da8f0d9587db0426a65f11d17028f9a23dad996e9f8aaa1973c9",
+      "image": "nbs-2026-sfeer-dsc09305.webp",
+      "caption": "Een bonsai van dichtbij bekijken"
     },
     {
-      "source": "DSC09334.jpg",
-      "sha256": "5e13d1a880372072f2dfe2701355e92f1f6c33b81e05fc3039f4f3cd12932674",
-      "image": "nbs-2026-sfeer-08.webp",
-      "caption": "Bezoekers ontmoeten elkaar"
+      "source": "DSC09306.jpg",
+      "sha256": "35b74764159fbdcc234aeffcdf5460a0612383ae645aa5072686727a6271172a",
+      "image": "nbs-2026-sfeer-dsc09306.webp",
+      "caption": "Een gesprek tijdens de show"
     },
     {
-      "source": "DSC09366.jpg",
-      "sha256": "fd8068b77158bf239b79b2797861825c31e1fe091701797da014bfb8445dae23",
-      "image": "nbs-2026-sfeer-09.webp",
-      "caption": "Even bijpraten op het terras"
+      "source": "DSC09307.jpg",
+      "sha256": "94aa4f23426b587f502b183ee8077472ae5b465180c4aea8954fd25bf7d820a4",
+      "image": "nbs-2026-sfeer-17.webp",
+      "caption": "Uitleg voor een aandachtig publiek"
     },
     {
-      "source": "DSC09320.jpg",
-      "sha256": "ed4ca8375ac0c5a16d2dd8fea360649bf59af31f5ef06a997c79c37b545cf21c",
-      "image": "nbs-2026-sfeer-10.webp",
-      "caption": "Deelnemers aan het werk tijdens de wedstrijd"
+      "source": "DSC09308.jpg",
+      "sha256": "0f864bfc9db7a29fc32335a5b282714f7daf12326daaae629a59ba66904c120c",
+      "image": "nbs-2026-sfeer-dsc09308.webp",
+      "caption": "Publiek bij de bonsaiwedstrijd"
+    },
+    {
+      "source": "DSC09309.jpg",
+      "sha256": "0f75adaed4655abade81827004a0dd2254f3344ad2a92f37cf00781152d1af88",
+      "image": "nbs-2026-sfeer-dsc09309.webp",
+      "caption": "Bezoekers tussen de opstellingen"
+    },
+    {
+      "source": "DSC09312.jpg",
+      "sha256": "198f24e218a3f9a42f7c8644c49248b2749a04be900915d1f7290694f19bb7d0",
+      "image": "nbs-2026-sfeer-dsc09312.webp",
+      "caption": "Aan het werk tijdens de bonsaiwedstrijd"
+    },
+    {
+      "source": "DSC09313.jpg",
+      "sha256": "f6e96db95f272d2f0bfd5422af0d2b27590593a5a55f46dc53c801917df25c32",
+      "image": "nbs-2026-sfeer-dsc09313.webp",
+      "caption": "Samen genieten van de wedstrijd"
     },
     {
       "source": "DSC09314.jpg",
       "sha256": "013681cb5172396eb314fc10df1a6616ac8ae911de67beba7e1410df253d78f3",
       "image": "nbs-2026-sfeer-11.webp",
       "caption": "Aandachtig werken aan de vorm"
+    },
+    {
+      "source": "DSC09315.jpg",
+      "sha256": "67e2d6ccfb84ffd15d8e80a7e32c096cdbe8440892b5faa7df7afcb083070559",
+      "image": "nbs-2026-sfeer-dsc09315.webp",
+      "caption": "Een deelnemer vormt zijn boom"
+    },
+    {
+      "source": "DSC09316.jpg",
+      "sha256": "d30720595b0fdacb4429be62a3194865a320ee4e0ebd32af1e855d6bc0af98d9",
+      "image": "nbs-2026-sfeer-dsc09316.webp",
+      "caption": "Een deelnemer aan het werk"
     },
     {
       "source": "DSC09317.jpg",
@@ -80,10 +176,118 @@
       "caption": "Concentratie tijdens het bedraden"
     },
     {
+      "source": "DSC09320.jpg",
+      "sha256": "ed4ca8375ac0c5a16d2dd8fea360649bf59af31f5ef06a997c79c37b545cf21c",
+      "image": "nbs-2026-sfeer-10.webp",
+      "caption": "Deelnemers aan het werk tijdens de wedstrijd"
+    },
+    {
+      "source": "DSC09321.jpg",
+      "sha256": "76b6e3a7927fd47a81db78a477d6e6d3fea447f2fe00a62a39d528adcdced87d",
+      "image": "nbs-2026-sfeer-dsc09321.webp",
+      "caption": "Een naaldboom in de tentoonstelling"
+    },
+    {
+      "source": "DSC09323.jpg",
+      "sha256": "4a6ac83a999e1886b2e11cad3977297b59be9964401088a0a5886ec36e038f1c",
+      "image": "nbs-2026-sfeer-07.webp",
+      "caption": "Bomen, potten en gereedschap bij de stands"
+    },
+    {
+      "source": "DSC09325.jpg",
+      "sha256": "d26c35c28021703b5ad53bd40bf702f4f01fb29347d7da1482c6282c5cd68295",
+      "image": "nbs-2026-sfeer-dsc09325.webp",
+      "caption": "Een aandachtig publiek"
+    },
+    {
+      "source": "DSC09328.jpg",
+      "sha256": "1b35f14b4f6360bc974a11c54f59eba09c450acba5884b9ce965c8f28ee4d86a",
+      "image": "nbs-2026-sfeer-dsc09328.webp",
+      "caption": "Publiek bij de trommelaars"
+    },
+    {
+      "source": "DSC09329.jpg",
+      "sha256": "737919e9c673e75b4baef9ac10a6c0432b81024cfc87e1101d7fef0699d7436e",
+      "image": "nbs-2026-sfeer-dsc09329.webp",
+      "caption": "Trommelaars bij de ingang"
+    },
+    {
+      "source": "DSC09330.jpg",
+      "sha256": "a020fcb2cce3a3e5e71d7ca807f9917700451614757ac5c6d0dc1fa5e34fd19f",
+      "image": "nbs-2026-sfeer-dsc09330.webp",
+      "caption": "Muziek tijdens de opening"
+    },
+    {
+      "source": "DSC09334.jpg",
+      "sha256": "5e13d1a880372072f2dfe2701355e92f1f6c33b81e05fc3039f4f3cd12932674",
+      "image": "nbs-2026-sfeer-08.webp",
+      "caption": "Bezoekers ontmoeten elkaar"
+    },
+    {
+      "source": "DSC09335.jpg",
+      "sha256": "136476323336ffa88af18785e272970a701fb4250a2c62942c0f571cb8d5cf86",
+      "image": "nbs-2026-sfeer-dsc09335.webp",
+      "caption": "De wedstrijd van dichtbij volgen"
+    },
+    {
+      "source": "DSC09336.jpg",
+      "sha256": "575b136faa05fdbb5bfc6f88330268578dcbd2657240f690593381405ca196ee",
+      "image": "nbs-2026-sfeer-dsc09336.webp",
+      "caption": "Een bonsai-opstelling op de blauwe tafel"
+    },
+    {
+      "source": "DSC09337.jpg",
+      "sha256": "a881c66c3c58e7a51ed50565575444ea3809070e3f9dba780f2b7ca78c1511ea",
+      "image": "nbs-2026-sfeer-dsc09337.webp",
+      "caption": "Een kleine boom op een hoge kast"
+    },
+    {
+      "source": "DSC09338.jpg",
+      "sha256": "6a3154c72405278496870ae5500df58c6161f87d0065457a0ba15e4f90e185f1",
+      "image": "nbs-2026-sfeer-dsc09338.webp",
+      "caption": "Een naaldboom met een karaktervolle stam"
+    },
+    {
+      "source": "DSC09339.jpg",
+      "sha256": "5d7acdb19c2bb440c6b1744a1d441f05b78ddec92ddd9e1a0d24915c4f837640",
+      "image": "nbs-2026-sfeer-dsc09339.webp",
+      "caption": "Een compacte naaldboom in de tentoonstelling"
+    },
+    {
+      "source": "DSC09340.jpg",
+      "sha256": "94b2dea9f22d0086426b0784f8d64666e72b4968b6b31121ecb18633005790e4",
+      "image": "nbs-2026-sfeer-dsc09340.webp",
+      "caption": "Een bonsaibos in de tentoonstelling"
+    },
+    {
+      "source": "DSC09341.jpg",
+      "sha256": "e6aebdaff99ec83c77d55678d191b551ee04db21cdade1168b2f1f4d48ab78e4",
+      "image": "nbs-2026-sfeer-dsc09341.webp",
+      "caption": "Een lichte opstelling met een slanke boom"
+    },
+    {
       "source": "DSC09342.jpg",
       "sha256": "faa4cae42d25fedac482750839ea2e5cd42ae2b6922c5b4c30fb0cf1adfc367a",
       "image": "nbs-2026-sfeer-14.webp",
       "caption": "De laatste verfijningen"
+    },
+    {
+      "source": "DSC09343.jpg",
+      "sha256": "f06a99559720611b536f2cb2196aa673e39df4a4797d4154b6bd0fc9d1a24e43",
+      "image": "nbs-2026-sfeer-dsc09343.webp",
+      "caption": "Een deelnemer toont zijn boom"
+    },
+    {
+      "source": "DSC09344.jpg",
+      "sha256": "8f537796a23c1124416733eb364f476e3802d796e810b3aa792ecccdb1065ff0",
+      "image": "nbs-2026-sfeer-dsc09344.webp",
+      "caption": "Het resultaat van een wedstrijddeelnemer"
+    },
+    {
+      "source": "DSC09345.jpg",
+      "sha256": "c055c495a1e37ea6a9caa914f62f2b22bf75f5b8e3185dba9a05866a571260ed",
+      "image": "nbs-2026-sfeer-dsc09345.webp",
+      "caption": "Een deelnemer bij zijn gevormde bonsai"
     },
     {
       "source": "DSC09346.jpg",
@@ -98,16 +302,244 @@
       "caption": "Een deelnemer met zijn resultaat"
     },
     {
-      "source": "DSC09307.jpg",
-      "sha256": "94aa4f23426b587f502b183ee8077472ae5b465180c4aea8954fd25bf7d820a4",
-      "image": "nbs-2026-sfeer-17.webp",
-      "caption": "Uitleg voor een aandachtig publiek"
+      "source": "DSC09348.jpg",
+      "sha256": "9a0f6c8288ac7a305c4c927fbd4c83bc8e08014ea6337ea4ad48a93db17d5541",
+      "image": "nbs-2026-sfeer-dsc09348.webp",
+      "caption": "Een wedstrijdboom na het vormen"
+    },
+    {
+      "source": "DSC09349.jpg",
+      "sha256": "4db57cff6f3714ad4701a961069b5b23bd5dfba88a3600c688c6af6a0329f622",
+      "image": "nbs-2026-sfeer-dsc09349.webp",
+      "caption": "Een gevormde naaldboom op de wedstrijdtafel"
+    },
+    {
+      "source": "DSC09350.jpg",
+      "sha256": "88f856f6b0f3751aba854d273a383987785c0f4f33e247ae7dfcfd4cb04eb5ba",
+      "image": "nbs-2026-sfeer-dsc09350.webp",
+      "caption": "Een wedstrijdboom in een ronde pot"
+    },
+    {
+      "source": "DSC09351.jpg",
+      "sha256": "4255a32b7798b659f4dce9dcfc839e1624f72a157d67c54ef7083f1e911675b7",
+      "image": "nbs-2026-sfeer-dsc09351.webp",
+      "caption": "Een wedstrijdresultaat op de paarse tafel"
+    },
+    {
+      "source": "DSC09352.jpg",
+      "sha256": "092763188593710affbcbe93d05a715a8f6a22ec095e2a9d7d0e3bed7dfe2790",
+      "image": "nbs-2026-sfeer-dsc09352.webp",
+      "caption": "Een gevormde boom in een schuine pot"
+    },
+    {
+      "source": "DSC09353.jpg",
+      "sha256": "3a911bd8e42e72583bcce40ab51b0f9fb69ead395b7f4283a642742db4e23a6f",
+      "image": "nbs-2026-sfeer-dsc09353.webp",
+      "caption": "Een wedstrijdboom van dichtbij"
+    },
+    {
+      "source": "DSC09355.jpg",
+      "sha256": "45fc75f90a6c230a62fba1cd700a33fd490d2f998c67ff443f23bd49608760d2",
+      "image": "nbs-2026-sfeer-dsc09355.webp",
+      "caption": "Een bonsai met een kleurrijke pot"
+    },
+    {
+      "source": "DSC09356.jpg",
+      "sha256": "4d72622fa44ccd95cc57ba9eed61d55570d5dc2fd46e33c0bf76b3ffaba002a4",
+      "image": "nbs-2026-sfeer-22.webp",
+      "caption": "Kleine bomen in een gezamenlijke opstelling"
+    },
+    {
+      "source": "DSC09358.jpg",
+      "sha256": "acc5a17cde2ba27726d244269c01d445c67f5a7ddc46f43025b1dce625b1a397",
+      "image": "nbs-2026-sfeer-dsc09358.webp",
+      "caption": "Een boom bij een Japanse prent"
+    },
+    {
+      "source": "DSC09361.jpg",
+      "sha256": "080d205077f63a33e4ab299364cc08d08e6b3c1c6fee28954f78731d393a0e0d",
+      "image": "nbs-2026-sfeer-dsc09361.webp",
+      "caption": "Publiek bij een demonstratie"
+    },
+    {
+      "source": "DSC09362.jpg",
+      "sha256": "be812e33059f0a3375b102a3ee62c0b1f2a41c149f5cf475cab7384860b4e978",
+      "image": "nbs-2026-sfeer-dsc09362.webp",
+      "caption": "Uitleg tijdens een bonsaidemonstratie"
     },
     {
       "source": "DSC09364.jpg",
       "sha256": "ecc85556fee2a4ecf0e7ac38971ecb519ef276fd8d96f25bbb0cd0fe78e643be",
       "image": "nbs-2026-sfeer-18.webp",
       "caption": "Een boom van alle kanten bekijken"
+    },
+    {
+      "source": "DSC09366.jpg",
+      "sha256": "fd8068b77158bf239b79b2797861825c31e1fe091701797da014bfb8445dae23",
+      "image": "nbs-2026-sfeer-09.webp",
+      "caption": "Even bijpraten op het terras"
+    },
+    {
+      "source": "DSC09377.jpg",
+      "sha256": "70f6272010e2b1408322374234a1a0319fe559a188d6ed4f5c737614822928f9",
+      "image": "nbs-2026-sfeer-23.webp",
+      "caption": "Een miniatuurlandschap van dichtbij"
+    },
+    {
+      "source": "DSC09378.jpg",
+      "sha256": "b94aa42b23cdbd0294baec442da35870333fb5ec2c4c1cbfef48f4c7b07334a3",
+      "image": "nbs-2026-sfeer-24.webp",
+      "caption": "Detail van oud hout en levende wortels"
+    },
+    {
+      "source": "DSC09379.jpg",
+      "sha256": "81dfeb485d46f6eab2da281d67c30b712258150975a470abcffa80785240458c",
+      "image": "nbs-2026-sfeer-dsc09379.webp",
+      "caption": "Detail van dood hout en mos"
+    },
+    {
+      "source": "DSC09382.jpg",
+      "sha256": "3bc0a2ae1d6e441f73aa723496737603999b1ee2a971e7afe07b7f831bf473d9",
+      "image": "nbs-2026-sfeer-dsc09382.webp",
+      "caption": "Een overzicht van de tentoonstellingszaal"
+    },
+    {
+      "source": "DSC09383.jpg",
+      "sha256": "9bf36658c3ae2341d0af78108f18586fd9f381fed384e355afa1a619003d95ca",
+      "image": "nbs-2026-sfeer-25.webp",
+      "caption": "Een blik door de tentoonstellingszaal"
+    },
+    {
+      "source": "DSC09384.jpg",
+      "sha256": "b7f209bb88cf2c72a58fb7bed80bad0f495d246332f691f383545e572885ed3e",
+      "image": "nbs-2026-sfeer-dsc09384.webp",
+      "caption": "Een grote bonsai op de tentoonstelling"
+    },
+    {
+      "source": "DSC09388.jpg",
+      "sha256": "082d5d13955f958b1f66b662da41b34773e33b2a70495482d98d93feea99cc63",
+      "image": "nbs-2026-sfeer-dsc09388.webp",
+      "caption": "Een dankwoord tijdens de afsluiting"
+    },
+    {
+      "source": "DSC09389.jpg",
+      "sha256": "bf51555fbcc8360f48c8b1bc3559759a239a74035ccb5da752e653027ae75546",
+      "image": "nbs-2026-sfeer-26.webp",
+      "caption": "Bloemen en waardering tijdens de afsluiting"
+    },
+    {
+      "source": "DSC09390.jpg",
+      "sha256": "5e143fd0e0a561c1780ee4aaee6810caedba450e8b0a130b8cb4b508cf639758",
+      "image": "nbs-2026-sfeer-dsc09390.webp",
+      "caption": "Een certificaat wordt overhandigd"
+    },
+    {
+      "source": "DSC09392.jpg",
+      "sha256": "be9d781686e10b7e0a1c08659eeb5e48b9e073b00d6a52896f758257fdb339df",
+      "image": "nbs-2026-sfeer-dsc09392.webp",
+      "caption": "Een deelnemer neemt een certificaat in ontvangst"
+    },
+    {
+      "source": "DSC09393.jpg",
+      "sha256": "7737f32cf6fe2dc4f866b89bae762e25a20ab23c145fc633333b6e3be4d3f599",
+      "image": "nbs-2026-sfeer-dsc09393.webp",
+      "caption": "Een certificaat tijdens de prijsuitreiking"
+    },
+    {
+      "source": "DSC09394.jpg",
+      "sha256": "3ec321edbcec4c94d58612b1d3c45c89d98e87cebd46fb0dc04a08b394a90b7c",
+      "image": "nbs-2026-sfeer-dsc09394.webp",
+      "caption": "Een feestelijk moment voor de deelnemers"
+    },
+    {
+      "source": "DSC09395.jpg",
+      "sha256": "59ad5baa3428bc61cd0e794878ab97030d7468bea2edb46b67b7a5b1950a3a27",
+      "image": "nbs-2026-sfeer-27.webp",
+      "caption": "Een feestelijk moment bij de prijsuitreiking"
+    },
+    {
+      "source": "DSC09396.jpg",
+      "sha256": "a34309989c9e56033d9f8a34e42efe77926128bf34d3030d35febde6588acb17",
+      "image": "nbs-2026-sfeer-dsc09396.webp",
+      "caption": "Een deelnemer met zijn certificaat"
+    },
+    {
+      "source": "DSC09397.jpg",
+      "sha256": "bd91a448c8e59141c0ef759f9783ee0d204bbad105bc82ee9b89372ab8803a13",
+      "image": "nbs-2026-sfeer-dsc09397.webp",
+      "caption": "Samen op de foto na de prijsuitreiking"
+    },
+    {
+      "source": "DSC09398.jpg",
+      "sha256": "b6ff4b71f84d401bf6b6d6297b7605ea1a7f17f60f8dd77a8e410341cf034a68",
+      "image": "nbs-2026-sfeer-dsc09398.webp",
+      "caption": "Een prijs wordt overhandigd"
+    },
+    {
+      "source": "DSC09399.jpg",
+      "sha256": "42d17b7828a4622ab7155cf85eb41f99b56ac81d78c0d0629db7bb6339f665b8",
+      "image": "nbs-2026-sfeer-dsc09399.webp",
+      "caption": "Een certificaat voor een deelnemer"
+    },
+    {
+      "source": "DSC09401.jpg",
+      "sha256": "8b60fec12ec5422743ac48be11483136c2e2ff83f82590bf309eb558af399b9e",
+      "image": "nbs-2026-sfeer-dsc09401.webp",
+      "caption": "Applaus tijdens de afsluiting"
+    },
+    {
+      "source": "DSC09402.jpg",
+      "sha256": "f7f68a9f081d3dd3dde184e847e3c9f7ab8c223af6b9073c6d187c9740897782",
+      "image": "nbs-2026-sfeer-dsc09402.webp",
+      "caption": "Een dankwoord aan een deelnemer"
+    },
+    {
+      "source": "DSC09403.jpg",
+      "sha256": "2c4977e778a442b3dbbcb9ed9c3dff8930fd168d0c5c3018d5f799997630ef01",
+      "image": "nbs-2026-sfeer-dsc09403.webp",
+      "caption": "De overhandiging van een prijs"
+    },
+    {
+      "source": "DSC09405.jpg",
+      "sha256": "3779907e3e8f399d9cae995b86182b941e1b0bc6952b276b4aea993bfab18c88",
+      "image": "nbs-2026-sfeer-28.webp",
+      "caption": "Samen op de foto met een prijs"
+    },
+    {
+      "source": "DSC09407.jpg",
+      "sha256": "8fdcab52a1f35725e4acc3ab903b38341e785fa5f77a4ae8b1276220b83dfcbc",
+      "image": "nbs-2026-sfeer-dsc09407.webp",
+      "caption": "Een wedstrijdboom met certificaat en prijs"
+    },
+    {
+      "source": "DSC09411.jpg",
+      "sha256": "382cc5424e4b4bd507548d50603eb888593646558f8ca39544ed9b13836ccdf3",
+      "image": "nbs-2026-sfeer-29.webp",
+      "caption": "Een herinnering aan een geslaagde show"
+    },
+    {
+      "source": "DSC09413.jpg",
+      "sha256": "449b010e4036d75171c098fd76af23e2dfc56d3869e86fc11a2f2bec0b7d0525",
+      "image": "nbs-2026-sfeer-30.webp",
+      "caption": "Nog een laatste rondje langs de bomen"
+    },
+    {
+      "source": "DSC09415.jpg",
+      "sha256": "237e609b9f7addfb5c987153a4c67daa77d64df8f70322ed950b6387be516b4a",
+      "image": "nbs-2026-sfeer-dsc09415.webp",
+      "caption": "Een bezoeker bij de opstellingen"
+    },
+    {
+      "source": "DSC09418.jpg",
+      "sha256": "1e9a40bd68154dafdd0fe569fd98add84b9c2bec9bae291b66f291b4e3763be7",
+      "image": "nbs-2026-sfeer-dsc09418.webp",
+      "caption": "Uitleg bij een grote bonsai"
+    },
+    {
+      "source": "DSC09419.jpg",
+      "sha256": "2890bd59c4a0b218fed361e8fba125ca0e2cdecfa25f193433d413fac04e5403",
+      "image": "nbs-2026-sfeer-dsc09419.webp",
+      "caption": "Een boom bekijken tijdens de demonstratie"
     },
     {
       "source": "DSC09421.jpg",
@@ -128,58 +560,16 @@
       "caption": "Uitleg bij het resultaat"
     },
     {
-      "source": "DSC09356.jpg",
-      "sha256": "4d72622fa44ccd95cc57ba9eed61d55570d5dc2fd46e33c0bf76b3ffaba002a4",
-      "image": "nbs-2026-sfeer-22.webp",
-      "caption": "Kleine bomen in een gezamenlijke opstelling"
+      "source": "DSC09429.jpg",
+      "sha256": "840cececce5e37c5a38e64be6348a463fd8a452b8ca4b60bff1fed16fed8788a",
+      "image": "nbs-2026-sfeer-dsc09429.webp",
+      "caption": "De demonstrator bespreekt zijn werk"
     },
     {
-      "source": "DSC09377.jpg",
-      "sha256": "70f6272010e2b1408322374234a1a0319fe559a188d6ed4f5c737614822928f9",
-      "image": "nbs-2026-sfeer-23.webp",
-      "caption": "Een miniatuurlandschap van dichtbij"
-    },
-    {
-      "source": "DSC09378.jpg",
-      "sha256": "b94aa42b23cdbd0294baec442da35870333fb5ec2c4c1cbfef48f4c7b07334a3",
-      "image": "nbs-2026-sfeer-24.webp",
-      "caption": "Detail van oud hout en levende wortels"
-    },
-    {
-      "source": "DSC09383.jpg",
-      "sha256": "9bf36658c3ae2341d0af78108f18586fd9f381fed384e355afa1a619003d95ca",
-      "image": "nbs-2026-sfeer-25.webp",
-      "caption": "Een blik door de tentoonstellingszaal"
-    },
-    {
-      "source": "DSC09389.jpg",
-      "sha256": "bf51555fbcc8360f48c8b1bc3559759a239a74035ccb5da752e653027ae75546",
-      "image": "nbs-2026-sfeer-26.webp",
-      "caption": "Bloemen en waardering tijdens de afsluiting"
-    },
-    {
-      "source": "DSC09395.jpg",
-      "sha256": "59ad5baa3428bc61cd0e794878ab97030d7468bea2edb46b67b7a5b1950a3a27",
-      "image": "nbs-2026-sfeer-27.webp",
-      "caption": "Een feestelijk moment bij de prijsuitreiking"
-    },
-    {
-      "source": "DSC09405.jpg",
-      "sha256": "3779907e3e8f399d9cae995b86182b941e1b0bc6952b276b4aea993bfab18c88",
-      "image": "nbs-2026-sfeer-28.webp",
-      "caption": "Samen op de foto met een prijs"
-    },
-    {
-      "source": "DSC09411.jpg",
-      "sha256": "382cc5424e4b4bd507548d50603eb888593646558f8ca39544ed9b13836ccdf3",
-      "image": "nbs-2026-sfeer-29.webp",
-      "caption": "Een herinnering aan een geslaagde show"
-    },
-    {
-      "source": "DSC09413.jpg",
-      "sha256": "449b010e4036d75171c098fd76af23e2dfc56d3869e86fc11a2f2bec0b7d0525",
-      "image": "nbs-2026-sfeer-30.webp",
-      "caption": "Nog een laatste rondje langs de bomen"
+      "source": "DSC09430.jpg",
+      "sha256": "ddf1f27c29e8f5c645b6745575634070472a855601221bfc15ba033a70ecde19",
+      "image": "nbs-2026-sfeer-dsc09430.webp",
+      "caption": "De demonstrator naast zijn gevormde boom"
     }
   ]
 }
